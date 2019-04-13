@@ -1,0 +1,13 @@
+Tabla 2:
+Fuente / saldo 
+-> para conocer en las distintas fuentes cuanto hay, calcular tambien %
+[banco, beneficio esperado, en casas, en juego,paypal]
+
+Tabla 3: id fichero // zen juego XXX
+-> para conocer en que apuestas esta invertido el dinero (y casas)
+
+Tabla 4: id / zz beneficio
+-> para conocer el pendiente de beneficio a obtener
+
+Tabla 5: id / fecha / suma importe apostado.
+fecha de que se resuelve la apuesta y cantidad invertida en ella -> 

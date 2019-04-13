@@ -1,0 +1,4 @@
+' Gambas class file
+
+Public nombre As String
+Public suma As Float

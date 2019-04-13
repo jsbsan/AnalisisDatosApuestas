@@ -1,0 +1,32 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,92,100)
+  Icon = Picture["homepage-scales-min.png"]
+  { PictureBox1 PictureBox
+    MoveScaled(2,-1,12,13)
+    Picture = Picture["homepage-scales-min.png"]
+    Stretch = True
+  }
+  { ButtonAnalizar Button
+    MoveScaled(20,3,22,6)
+    Text = ("Analizar")
+    Picture = Picture["homepage-scales-min32x32.png"]
+  }
+  { TextArea1 TextArea
+    MoveScaled(2,12,46,58)
+    Font = Font["Monospace"]
+  }
+  { TextArea2 TextArea
+    MoveScaled(2,71,46,28)
+    Font = Font["Monospace"]
+  }
+  { TextAreaEnJuego TextArea
+    MoveScaled(51,12,40,87)
+  }
+  { ButtonEditorPluma Button
+    MoveScaled(61,3,25,6)
+    Text = ("Editor Pluma")
+    Picture = Picture["pluma-escritura-png-4-40x40.png"]
+  }
+}

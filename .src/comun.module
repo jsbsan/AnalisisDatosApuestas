@@ -1,0 +1,11 @@
+' Gambas module file
+
+Public Function contiene(texto As String, textoabuscar As String) As Boolean '' devuelve verdadero o falso si un texto contiene textoabuscar
+
+    If String.InStr(texto, textoabuscar) <> 0 Then
+        Return True
+    Else
+        Return False
+    Endif
+
+End

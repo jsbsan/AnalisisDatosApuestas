@@ -1,0 +1,78 @@
+' Gambas class file
+
+Public listaId As ClassIDEnJuego[]
+
+Public Sub _new()
+
+    'creo array donde voy a acumular los datos de las apustas
+    listaId = New ClassIDEnJuego[]
+
+End
+
+Public Sub agrega(id As String, cantidad As Float)
+
+    'aqui  agrego a la lista  los valores
+    'compruebo si existe, en caso de existir solo tengo que sumar el valor
+    Dim tempIdEnJuego As ClassIDEnJuego
+
+    For Each tempIdEnJuego In listaId
+        If tempIdEnJuego.id = id Then
+            tempIdEnJuego.zzBeneficio += Round(cantidad, -2) 'redondeo a 2 decimales
+            Return 'ya he terminado de agregar la información a una id existente
+        Endif
+    Next
+
+    'en caso contrario creo una nueva classIdEnJuego y se lo agrego a la listaId
+    Dim nuevaId As ClassIDEnJuego
+    nuevaId = New ClassIDEnJuego(id, Round(cantidad, -2))
+    listaId.Add(NUEVAid)
+
+End
+
+Public Sub agregaInversion(id As String, cantidad As Float) ''en juego
+
+    'aqui  agrego a la lista  los valores
+    'compruebo si existe, en caso de existir solo tengo que sumar el valor
+    Dim tempIdEnJuego As ClassIDEnJuego
+
+    For Each tempIdEnJuego In listaId
+        If tempIdEnJuego.id = id Then
+            tempIdEnJuego.enjuego += Round(cantidad, -2) 'redondeo a 2 decimales
+            Return 'ya he terminado de agregar la información a una id existente
+        Endif
+    Next
+
+    'en caso contrario creo una nueva classIdEnJuego y se lo agrego a la listaId
+    Dim nuevaId As ClassIDEnJuego
+    nuevaId = New ClassIDEnJuego(id, 0)
+    nuevaId.enjuego = Round(cantidad, -2)
+    listaId.Add(NUEVAid)
+
+End
+
+Public Function listar() As String
+
+    Dim tempIdEnJuego As ClassIDEnJuego
+    Dim cadena As String
+    Dim suma As Float
+    Dim cantidad As Float
+    Dim cantidadEnjuego As Float
+    Dim sumaEnJuego As Float
+
+    For Each tempIdEnJuego In listaId
+        If tempIdEnJuego.zzBeneficio > 0.001 Then
+            cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
+            cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
+
+            cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & "\n"
+            suma += cantidad
+            sumaEnJuego += cantidadEnjuego
+        Endif
+
+    Next
+
+    cadena &= "---------------------\n"
+    cadena &= "Sumas: " & "\n" & "Beneficio Esperado: " & Str$(suma) & gb.CrLf & "En juego: " & Str$(sumaEnJuego)
+    Return cadena
+
+End

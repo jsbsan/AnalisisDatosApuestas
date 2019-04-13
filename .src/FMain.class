@@ -1,0 +1,201 @@
+' Gambas class file
+
+Public listaCuenta As New ClaseCuenta[]
+Public ListaId As New ClaseGestorIdBeneficio
+
+Public Sub Form_Open()
+
+    settings.read(Me)
+
+End
+
+Public Sub Form_Close()
+
+    settings.write(Me)
+
+End
+
+Public Sub Form_Show()
+    '' cat Cuentas | tr [:lower:] [:upper:] >CuentasM.txt
+
+    'datos de CUENTA Y SALDO
+
+    '1º. LEER FICHERO
+    'REPITIR POR LINEA DE FICHERO
+    'SI CUENTA = LINEA, ENTONCES SUMA VALOR
+    'finalmente muestra datos de cuentas y sus acumulados sumados
+
+End
+
+Public Sub ButtonAnalizar_Click()
+    '' id fichero	fecha	Cuenta	Saldo	comentario	fuente	VARIOS
+
+    Dim contenido As String[]
+    Dim l As String
+    Dim dato As String[]
+    Dim nombrecsv As String = User.home & "/informacion.csv" ''indicar nombre del fichro que contiene los datos
+    Dim valor As Float
+    Dim total As Float
+    'crea lista de cuentas de suma...
+    Dim tmpCuenta As ClaseCuenta
+
+    'borrado de datos anteriore...
+    listaCuenta = New ClaseCuenta[]
+    ListaId = New ClaseGestorIdBeneficio
+
+    'crea las cuentas partiendo del fichero de datos CuentasM.txt
+    contenido = Split(File.Load("CuentasM.txt"), "\n")
+    For Each l In contenido
+        tmpcuenta = New ClaseCuenta
+        tmpcuenta.nombre = l
+        tmpcuenta.suma = 0
+        listaCuenta.Add(tmpCuenta)
+        tmpCuenta = Null
+    Next
+
+    'leer fichero de datos...
+    contenido = Split(Upper(File.Load(nombrecsv)), "\n")
+    contenido.Delete(0) ' la primera fila contiene los nombre de los campos
+
+    'borrado de datos que esten en los textAreas
+    TextArea1.text = ""
+    TextArea2.text = ""
+
+    For Each l In contenido
+
+        dato = Split(l, gb.Tab)
+
+        'el dato de la cuenta esta en 2 columna y saldo en la 3
+        Try valor = Val(Replace(Replace(dato[3], ".", ","), " €", ""))
+        If Error Then
+
+        Else
+            '-------------------------------------------------
+            'tabla de datos Cuenta / Saldo
+            '-------------------------------------------------
+            sumasi(dato[2], valor) 'cuenta y saldo
+
+            '-------------------------------------------------
+            'tabla de datos ID / Zzbeneficio
+            '-------------------------------------------------
+            If dato[2] = "ZZ BENEFICIO" Then
+                ListaId.agrega(dato[0], VALOR)
+            Endif
+
+            '-------------------------------------------------
+            'tabla de datos ID / Zzbeneficio /enjuego
+            '-------------------------------------------------
+            If comun.contiene(dato[2], "ZEN ") Then
+                ListaId.agregaInversion(dato[0], VALOR)
+            Endif
+
+        Endif
+
+    Next
+    ' ya he acabado de contar las cuentas y sus sumas
+    ' Print "------------------------------------"
+    ' Print "--        Sumas de cuentas         -"
+    ' Print "------------------------------------"
+    For Each tmpcuenta In ListaCuenta
+        'Print tmpCuenta.nombre, Format(Round(tmpcuenta.suma, -2), "#.##")
+        If Round(tmpcuenta.suma, -2) <> 0 Then
+
+            total += Round(tmpcuenta.suma, -2)
+            TextArea1.text &= cambiaCeros(Format(Round(tmpcuenta.suma, -2), "0###.#0")) & gb.tab & tmpCuenta.nombre & "\n"
+        Endif
+    Next
+
+    TextArea1.text &= "____________________________\n"
+    TextArea1.text &= "Total:" & Format(Round(total, -2), "0###.#0")
+
+    'Calculo de sumas de Banco / Casa Apuestas / En Juego  / Zz Beneficio
+    Dim enbanco As Float
+    Dim enPAYPAL As Float
+    Dim enzen As Float
+    Dim enBeneficioEsperado As Float
+    Dim enCasas As Float
+    For Each tmpcuenta In ListaCuenta
+
+        If comun.contiene(tmpCuenta.nombre, "PAYPAL") Then
+            enPAYPAL += Round(tmpCuenta.suma, -2)
+            Continue
+        Endif
+
+        If comun.contiene(tmpCuenta.nombre, "0 ") Then
+            enbanco += Round(tmpCuenta.suma, -2)
+            Continue
+        Endif
+
+        If comun.contiene(tmpCuenta.nombre, "ZEN ") Then
+            enZEN += Round(tmpCuenta.suma, -2)
+            Continue
+        Endif
+        If comun.contiene(tmpCuenta.nombre, "ZZ ") Then
+            enBeneficioEsperado += Round(tmpCuenta.suma, -2)
+            Continue
+        Endif
+        enCasas += Round(tmpCuenta.suma, -2)
+
+    Next
+    '--------------------------------------
+    'Tabla 2:resultados...
+    '--------------------------------------
+    Dim TotalesRecalculo As Float = Round(enbanco + enPAYPAL + enZEn + enBeneficioEsperado + enCasas, -2)
+
+    TextArea2.text &= "En Banco:         " & gb.tab & cambiaCeros(Format(Round(enbanco, -2), "0####.#0")) & gb.tab & Porcentaje(enbanco, TotalesRecalculo) & "\n"
+
+    TextArea2.text &= "En Paypal:        " & gb.tab & cambiaCeros(Format(Round(enPAYPAL, -2), "0####.#0")) & gb.tab & Porcentaje(enPAYPAL, TotalesRecalculo) & "\n"
+
+    TextArea2.text &= "En Casas:         " & gb.tab & cambiaCeros(Format(Round(enCasas, -2), "0####.#0")) & gb.tab & Porcentaje(enCasas, TotalesRecalculo) & "\n"
+
+    TextArea2.text &= "En Juego:         " & gb.tab & cambiaCeros(Format(Round(enZEn, -2), "0####.#0")) & gb.tab & Porcentaje(enZEN, TotalesRecalculo) & "\n"
+    TextArea2.text &= "En Beneficio Esp.:" & gb.tab & cambiaCeros(Format(Round(enBeneficioEsperado, -2), "0####.#0")) & gb.tab & Porcentaje(enBeneficioEsperado, TotalesRecalculo) & "\n"
+    TextArea2.text &= "__________________" & "\n"
+    TextArea2.text &= "Total: " & gb.tab & Str$(Round(totalesRecalculo, -2)) & "\n"
+
+    '--------------------------------------
+    ' TABLA DE DATOS DE ID
+    '--------------------------------------
+    TextAreaEnJuego.TEXT = ListaId.listar()
+
+End
+
+Public Sub Porcentaje(valor As Float, total As Float) As String
+
+    Return Str$(Round(valor * 100 / total, -2)) & " %"
+
+End
+
+Public Sub sumasi(textocuenta As String, valor As Float)
+
+    Dim t As ClaseCuenta
+
+    For Each t In listaCuenta
+
+        If t.nombre = textocuenta Then
+            t.suma += valor
+            ' If t.nombre = "WILLIAMHILL" Then
+            '     Print "WILLIAMHILL", T.SUMA
+            ' Endif
+        Endif
+    Next
+
+End
+
+Public Function cambiaCeros(dato As String) As String
+
+    If Mid$(dato, 1, 3) = "000" Then Return "   " & Mid$(dato, 4, 10)
+    If Mid$(dato, 1, 2) = "00" Then Return "  " & Mid$(dato, 3, 10)
+    If Mid$(dato, 1, 1) = "0" Then Return " " & Mid$(dato, 2, 10)
+
+    If Mid$(dato, 1, 4) = "-000" Then Return "  -" & Mid$(dato, 5, 10)
+    If Mid$(dato, 1, 3) = "-00" Then Return " -" & Mid$(dato, 4, 10)
+    If Mid$(dato, 1, 2) = "-0" Then Return "-" & Mid$(dato, 3, 10)
+
+End
+
+Public Sub ButtonEditorPluma_Click()
+
+    Exec ["pluma", User.home & "/informacion.csv"]
+
+End
