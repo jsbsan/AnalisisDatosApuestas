@@ -59,7 +59,7 @@ Public Sub ButtonAnalizar_Click()
 
     'borrado de datos que esten en los textAreas
     TextArea1.text = ""
-    TextArea2.text = ""
+    TextAreaResumen.text = ""
 
     For Each l In contenido
 
@@ -142,16 +142,26 @@ Public Sub ButtonAnalizar_Click()
     '--------------------------------------
     Dim TotalesRecalculo As Float = Round(enbanco + enPAYPAL + enZEn + enBeneficioEsperado + enCasas, -2)
 
-    TextArea2.text &= "En Banco:         " & gb.tab & cambiaCeros(Format(Round(enbanco, -2), "0####.#0")) & gb.tab & Porcentaje(enbanco, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "En Banco:         " & gb.tab & cambiaCeros(Format(Round(enbanco, -2), "0####.#0")) & gb.tab & Porcentaje(enbanco, TotalesRecalculo) & "\n"
 
-    TextArea2.text &= "En Paypal:        " & gb.tab & cambiaCeros(Format(Round(enPAYPAL, -2), "0####.#0")) & gb.tab & Porcentaje(enPAYPAL, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "En Paypal:        " & gb.tab & cambiaCeros(Format(Round(enPAYPAL, -2), "0####.#0")) & gb.tab & Porcentaje(enPAYPAL, TotalesRecalculo) & "\n"
 
-    TextArea2.text &= "En Casas:         " & gb.tab & cambiaCeros(Format(Round(enCasas, -2), "0####.#0")) & gb.tab & Porcentaje(enCasas, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "En Casas:         " & gb.tab & cambiaCeros(Format(Round(enCasas, -2), "0####.#0")) & gb.tab & Porcentaje(enCasas, TotalesRecalculo) & "\n"
 
-    TextArea2.text &= "En Juego:         " & gb.tab & cambiaCeros(Format(Round(enZEn, -2), "0####.#0")) & gb.tab & Porcentaje(enZEN, TotalesRecalculo) & "\n"
-    TextArea2.text &= "En Beneficio Esp.:" & gb.tab & cambiaCeros(Format(Round(enBeneficioEsperado, -2), "0####.#0")) & gb.tab & Porcentaje(enBeneficioEsperado, TotalesRecalculo) & "\n"
-    TextArea2.text &= "__________________" & "\n"
-    TextArea2.text &= "Total: " & gb.tab & Str$(Round(totalesRecalculo, -2)) & "\n"
+    TextAreaResumen.text &= "En Juego:         " & gb.tab & cambiaCeros(Format(Round(enZEn, -2), "0####.#0")) & gb.tab & Porcentaje(enZEN, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "En Beneficio Esp.:" & gb.tab & cambiaCeros(Format(Round(enBeneficioEsperado, -2), "0####.#0")) & gb.tab & Porcentaje(enBeneficioEsperado, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "__________________" & "\n"
+    TextAreaResumen.text &= "Total: " & gb.tab & Str$(Round(totalesRecalculo, -2))
+
+    ProgressBarEnJuego.value = enzen / totalesRecalculo
+
+    ProgressBarBenef.value = enBeneficioEsperado / totalesRecalculo
+
+    ProgressBarCasas.value = enCasas / totalesRecalculo
+
+    ProgressBarPaypal.value = enPAYPAL / totalesRecalculo
+
+    ProgressBarBanco.value = enbanco / totalesRecalculo
 
     '--------------------------------------
     ' TABLA DE DATOS DE ID
