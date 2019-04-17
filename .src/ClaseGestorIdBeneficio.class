@@ -52,6 +52,146 @@ Public Sub agregaInversion(id As String, cantidad As Float) ''en juego
 
 End
 
+Public Sub ObtenerOrdenId() As Integer[] 'por ide
+
+    Dim ordenIndice As New Integer[]
+    Dim tempIdEnJuego As ClassIDEnJuego
+    Dim temCadena As String
+    Dim ArrayTemCadena As New String[]
+    Dim fechaAAMMDD As String
+    Dim temFecha As String[]
+    Dim contador As Integer = 0
+    'ordenar....
+
+    For Each tempIdEnJuego In listaId
+
+        temFecha = Split(tempIdEnJuego.fecha, "/")
+        temCadena = tempIdEnJuego.id & temfecha[2] & "/" & temFecha[1] & "/" & temfecha[0] & "/" & "@" & Str$(contador) 'al final añado el contador para luego rescatarlo
+        ArrayTemCadena.Add(temCadena)
+        contador += 1
+
+    Next
+
+    ArrayTemCadena = ArrayTemCadena.Sort() 'ordeno
+    Dim valores As String[]
+    For Each temCadena In ArrayTemCadena
+        valores = Split(temCadena, "@")
+        If valores[1] <> "" Then
+            ordenIndice.Add(Val(valores[1]))
+        Endif
+    Next
+
+    Return ordenIndice
+
+End
+
+
+Public Function listarOrdenID() As String
+
+    Dim listaOrden As Integer[]
+    Dim cadena As String
+    Dim tempIdEnJuego As ClassIDEnJuego
+    Dim cantidad As Float
+    Dim cantidadEnjuego As Float
+    Dim a As Integer
+    Dim suma As Float
+    Dim sumaEnJuego As Float
+
+    listaOrden = ObtenerOrdenId()
+
+    cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
+
+    For a = 0 To listaId.count - 1
+
+        tempIdEnJuego = listaId[listaOrden[a]]
+
+        If tempIdEnJuego.zzBeneficio > 0.001 Then
+            cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
+            cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
+
+            cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & "\n"
+            suma += cantidad
+            sumaEnJuego += cantidadEnjuego
+        Endif
+
+    Next
+
+    cadena &= "---------------------\n"
+    cadena &= "Sumas: " & "\n" & "Beneficio Esperado: " & Str$(suma) & gb.CrLf & "En juego: " & Str$(sumaEnJuego)
+    Return cadena
+
+End
+
+
+Public Sub obtenerOrden() As Integer[] 'por fecha
+
+    Dim ordenIndice As New Integer[]
+    Dim tempIdEnJuego As ClassIDEnJuego
+    Dim temCadena As String
+    Dim ArrayTemCadena As New String[]
+    Dim fechaAAMMDD As String
+    Dim temFecha As String[]
+    Dim contador As Integer = 0
+    'ordenar....
+
+    For Each tempIdEnJuego In listaId
+
+        temFecha = Split(tempIdEnJuego.fecha, "/")
+        temCadena = temfecha[2] & "/" & temFecha[1] & "/" & temfecha[0] & "/" & tempIdEnJuego.id & "@" & Str$(contador) 'al final añado el contador para luego rescatarlo
+        ArrayTemCadena.Add(temCadena)
+        contador += 1
+
+    Next
+
+    ArrayTemCadena = ArrayTemCadena.Sort() 'ordeno
+    Dim valores As String[]
+    For Each temCadena In ArrayTemCadena
+        valores = Split(temCadena, "@")
+        If valores[1] <> "" Then
+            ordenIndice.Add(Val(valores[1]))
+        Endif
+    Next
+
+    Return ordenIndice
+
+End
+
+Public Function listarOrdenFecha() As String
+
+    Dim listaOrden As Integer[]
+    Dim cadena As String
+    Dim tempIdEnJuego As ClassIDEnJuego
+    Dim cantidad As Float
+    Dim cantidadEnjuego As Float
+    Dim a As Integer
+    Dim suma As Float
+    Dim sumaEnJuego As Float
+
+    listaOrden = obtenerOrden()
+
+    cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
+
+    For a = 0 To listaId.count - 1
+
+        tempIdEnJuego = listaId[listaOrden[a]]
+
+        If tempIdEnJuego.zzBeneficio > 0.001 Then
+            cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
+            cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
+
+            cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & "\n"
+            suma += cantidad
+            sumaEnJuego += cantidadEnjuego
+        Endif
+
+    Next
+
+    cadena &= "---------------------\n"
+    cadena &= "Sumas: " & "\n" & "Beneficio Esperado: " & Str$(suma) & gb.CrLf & "En juego: " & Str$(sumaEnJuego)
+    Return cadena
+
+End
+
 Public Function listar() As String
 
     Dim tempIdEnJuego As ClassIDEnJuego
@@ -62,6 +202,7 @@ Public Function listar() As String
     Dim sumaEnJuego As Float
 
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
+
     For Each tempIdEnJuego In listaId
         If tempIdEnJuego.zzBeneficio > 0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2)

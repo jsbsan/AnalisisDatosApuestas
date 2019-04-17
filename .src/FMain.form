@@ -22,7 +22,7 @@
     Font = Font["Monospace"]
   }
   { TextAreaEnJuego TextArea
-    MoveScaled(49,12,59,58)
+    MoveScaled(49,17,59,53)
   }
   { ButtonEditorPluma Button
     MoveScaled(61,3,25,6)
@@ -78,5 +78,17 @@
     MoveScaled(2,96,13,2)
     Text = ("En Juego:")
     Alignment = Align.Right
+  }
+  { ButtonNormalListadoApuestanPendientes Button
+    MoveScaled(50,12,9,4)
+    Text = ("Normal")
+  }
+  { ButtonPorFecha Button
+    MoveScaled(61,12,9,4)
+    Text = ("Por fecha")
+  }
+  { ButtonPorId Button
+    MoveScaled(72,12,9,4)
+    Text = ("Por ID")
   }
 }

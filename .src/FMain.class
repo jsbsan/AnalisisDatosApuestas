@@ -209,3 +209,27 @@ Public Sub ButtonEditorPluma_Click()
     Exec ["pluma", User.home & "/informacion.csv"]
 
 End
+
+Public Sub ButtonPorFecha_Click()
+
+    TextAreaEnJuego.text = ListaId.listarOrdenFecha()
+
+End
+
+Public Sub ButtonNormalListadoApuestanPendientes_Click()
+
+    '--------------------------------------
+    ' TABLA DE DATOS DE ID
+    '--------------------------------------
+    TextAreaEnJuego.TEXT = ListaId.listar()
+
+End
+
+Public Sub ButtonPorId_Click()
+
+    '--------------------------------------
+    ' TABLA DE DATOS DE ID
+    '--------------------------------------
+    TextAreaEnJuego.TEXT = ListaId.listarOrdenID()
+
+End
