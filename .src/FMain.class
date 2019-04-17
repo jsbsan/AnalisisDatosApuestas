@@ -3,6 +3,13 @@
 Public listaCuenta As New ClaseCuenta[]
 Public ListaId As New ClaseGestorIdBeneficio
 
+Public GlobalEnJuego As Float
+Public GlobalTotal As Float
+Public GlogbalCajaPayPalBene As Float
+
+
+
+
 Public Sub Form_Open()
 
     settings.read(Me)
@@ -163,6 +170,12 @@ Public Sub ButtonAnalizar_Click()
 
     ProgressBarBanco.value = enbanco / totalesRecalculo
 
+
+
+GlobalEnJuego = Round(enzen, -2)
+GlobalTotal = Round(totalesRecalculo, -2)
+GlogbalCajaPayPalBene = GlobalTotal - GlobalEnJuego
+
     '--------------------------------------
     ' TABLA DE DATOS DE ID
     '--------------------------------------
@@ -212,7 +225,8 @@ End
 
 Public Sub ButtonPorFecha_Click()
 
-    TextAreaEnJuego.text = ListaId.listarOrdenFecha()
+    TextAreaEnJuego.text = ListaId.listarOrdenFecha(GlobalEnJuego, GlogbalCajaPayPalBene, GlobalTotal)
+
 
 End
 
