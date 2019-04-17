@@ -2,7 +2,7 @@
 Title=AnalisisDatosApuestas
 Startup=FMain
 Icon=analisis.png
-Version=0.0.2
+Version=0.0.3
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form
@@ -12,7 +12,7 @@ Language=en_US
 Maintainer=mint
 Address=mint@mint-SSD
 License=General Public License
-PackageName=analisisdatosapuestas-0.0.2
+PackageName=analisisdatosapuestas-0.0.3
 CreateEachDirectory=1
 Packager=1
 Systems=debian

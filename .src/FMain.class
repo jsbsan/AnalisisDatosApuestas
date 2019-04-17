@@ -79,7 +79,7 @@ Public Sub ButtonAnalizar_Click()
             'tabla de datos ID / Zzbeneficio
             '-------------------------------------------------
             If dato[2] = "ZZ BENEFICIO" Then
-                ListaId.agrega(dato[0], VALOR)
+                ListaId.agrega(dato[0], VALOR, dato[1])
             Endif
 
             '-------------------------------------------------

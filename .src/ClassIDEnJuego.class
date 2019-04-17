@@ -3,6 +3,7 @@
 Public id As String
 Public zzBeneficio As Float 'contador de la cantidad en juego 'suma de ZZbeneficio -> si es 0, ya se ha jugado
 Public enjuego As Float 'cantidad dinero que se invierte en la apuesta
+Public fecha As String ' se guarda la fecha de ZZ beneficio / comentario ="enjuego"
 
 Public Sub _new(hid As String, cantidad As Float)
 

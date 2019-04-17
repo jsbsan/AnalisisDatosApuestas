@@ -9,7 +9,7 @@ Public Sub _new()
 
 End
 
-Public Sub agrega(id As String, cantidad As Float)
+Public Sub agrega(id As String, cantidad As Float, fecha As String)
 
     'aqui  agrego a la lista  los valores
     'compruebo si existe, en caso de existir solo tengo que sumar el valor
@@ -18,6 +18,7 @@ Public Sub agrega(id As String, cantidad As Float)
     For Each tempIdEnJuego In listaId
         If tempIdEnJuego.id = id Then
             tempIdEnJuego.zzBeneficio += Round(cantidad, -2) 'redondeo a 2 decimales
+            tempIdEnJuego.fecha = fecha
             Return 'ya he terminado de agregar la información a una id existente
         Endif
     Next
@@ -25,6 +26,7 @@ Public Sub agrega(id As String, cantidad As Float)
     'en caso contrario creo una nueva classIdEnJuego y se lo agrego a la listaId
     Dim nuevaId As ClassIDEnJuego
     nuevaId = New ClassIDEnJuego(id, Round(cantidad, -2))
+    nuevaId.fecha = fecha
     listaId.Add(NUEVAid)
 
 End
@@ -59,12 +61,13 @@ Public Function listar() As String
     Dim cantidadEnjuego As Float
     Dim sumaEnJuego As Float
 
+    cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
     For Each tempIdEnJuego In listaId
         If tempIdEnJuego.zzBeneficio > 0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
 
-            cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & "\n"
+            cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & "\n"
             suma += cantidad
             sumaEnJuego += cantidadEnjuego
         Endif
