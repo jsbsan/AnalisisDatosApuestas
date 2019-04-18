@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,143,100)
+  MoveScaled(0,0,137,99)
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
     MoveScaled(2,-1,12,13)
@@ -22,7 +22,7 @@
     Font = Font["Monospace"]
   }
   { TextAreaEnJuego TextArea
-    MoveScaled(49,17,92,81)
+    MoveScaled(49,17,87,81)
   }
   { ButtonEditorPluma Button
     MoveScaled(61,3,25,6)
@@ -90,5 +90,10 @@
   { ButtonPorId Button
     MoveScaled(61,12,9,4)
     Text = ("Por ID")
+  }
+  { ButtonFiltrar Button
+    MoveScaled(101,3,23,6)
+    Text = ("Buscar ID")
+    Picture = Picture["icon:/16/find"]
   }
 }

@@ -7,8 +7,7 @@ Public GlobalEnJuego As Float
 Public GlobalTotal As Float
 Public GlogbalCajaPayPalBene As Float
 
-
-
+Public ContenidoFichero As String
 
 Public Sub Form_Open()
 
@@ -61,7 +60,10 @@ Public Sub ButtonAnalizar_Click()
     Next
 
     'leer fichero de datos...
-    contenido = Split(Upper(File.Load(nombrecsv)), "\n")
+
+    ContenidoFichero = File.Load(nombrecsv)
+
+    contenido = Split(Upper(ContenidoFichero), "\n")
     contenido.Delete(0) ' la primera fila contiene los nombre de los campos
 
     'borrado de datos que esten en los textAreas
@@ -170,11 +172,9 @@ Public Sub ButtonAnalizar_Click()
 
     ProgressBarBanco.value = enbanco / totalesRecalculo
 
-
-
-GlobalEnJuego = Round(enzen, -2)
-GlobalTotal = Round(totalesRecalculo, -2)
-GlogbalCajaPayPalBene = GlobalTotal - GlobalEnJuego
+    GlobalEnJuego = Round(enzen, -2)
+    GlobalTotal = Round(totalesRecalculo, -2)
+    GlogbalCajaPayPalBene = GlobalTotal - GlobalEnJuego
 
     '--------------------------------------
     ' TABLA DE DATOS DE ID
@@ -227,7 +227,6 @@ Public Sub ButtonPorFecha_Click()
 
     TextAreaEnJuego.text = ListaId.listarOrdenFecha(GlobalEnJuego, GlogbalCajaPayPalBene, GlobalTotal)
 
-
 End
 
 Public Sub ButtonNormalListadoApuestanPendientes_Click()
@@ -245,5 +244,20 @@ Public Sub ButtonPorId_Click()
     ' TABLA DE DATOS DE ID
     '--------------------------------------
     TextAreaEnJuego.TEXT = ListaId.listarOrdenID()
+
+End
+
+Public Sub ButtonFiltrar_Click()
+
+    Dim mf As New FormFiltro
+    Dim tmplista As New String[]
+
+    If ContenidoFichero <> "" Then
+        tmplista.Add(ContenidoFichero)
+        mf.listado = tmplista
+        mf.Show()
+    Else
+        Message.Info("no hay cargada información")
+    Endif
 
 End

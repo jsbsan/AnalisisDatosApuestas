@@ -1,0 +1,29 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,86,40)
+  Icon = Picture["icon:/16/find"]
+  Arrangement = Arrange.Vertical
+  Margin = True
+  Padding = 2
+  { HBox1 Panel
+    MoveScaled(0,0,84,6)
+    Border = Border.Plain
+    { TextBoxFiltro TextBox
+      MoveScaled(7,0,24,6)
+    }
+    { ButtonBuscar Button
+      MoveScaled(40,0,23,6)
+      Text = ("Buscar")
+      Picture = Picture["icon:/16/find"]
+    }
+  }
+  { HSplit1 VSplit
+    MoveScaled(-1,9,85,30)
+    Expand = True
+    { TextArea1 TextArea
+      MoveScaled(3,2,53,19)
+      Font = Font["Serif"]
+    }
+  }
+}

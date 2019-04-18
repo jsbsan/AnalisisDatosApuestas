@@ -1,0 +1,28 @@
+' Gambas class file
+
+Public listado As String[]
+
+Public Sub ButtonBuscar_Click()
+    ' TextArea1.text = listado[0]
+
+    Dim lineas As String[]
+    Dim a As Integer
+
+    TextArea1.text = ""
+    lineas = Split(listado[0], "\n")
+    Me.Title = "Buscando: " & TextBoxFiltro.text
+    For a = 0 To lineas.count - 1
+        If comun.contiene(lineas[a], TextBoxFiltro.text) Then
+            TextArea1.text &= lineas[a] & "\n"
+        Endif
+    Next
+
+End
+
+Public Sub TextBoxFiltro_KeyPress()
+
+    If Key.code = Key.enter Or Key.code = Key.return Then
+        ButtonBuscar_Click()
+    Endif
+
+End

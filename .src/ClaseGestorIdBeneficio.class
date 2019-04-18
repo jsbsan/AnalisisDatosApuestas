@@ -167,7 +167,7 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
 
     listaOrden = obtenerOrden()
 
-    cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.tab & "En Juego" & gb.tab & "Caja" & gb.tab & "Total" & gb.CrLf
+    cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.tab & "TotalEnJuego" & gb.tab & "Caja" & gb.tab & "Total" & gb.CrLf
 
     For a = 0 To listaId.count - 1
 
