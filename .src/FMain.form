@@ -96,4 +96,16 @@
     Text = ("Buscar ID")
     Picture = Picture["icon:/16/find"]
   }
+  { ButtonCopiaResumen Button
+    MoveScaled(43,12,5,5)
+    Picture = Picture["icon:/16/copy"]
+  }
+  { ButtonCopiaResumenCompactado Button
+    MoveScaled(43,71,5,6)
+    Picture = Picture["icon:/16/copy"]
+  }
+  { ButtonApuestasEnJuego Button
+    MoveScaled(131,17,5,6)
+    Picture = Picture["icon:/16/copy"]
+  }
 }

@@ -270,3 +270,23 @@ Public Sub ButtonFiltrar_Click()
     Endif
 
 End
+
+Public Sub ButtonCopiaResumen_Click()
+
+    Clipboard.Copy(TextArea1.Text)
+
+End
+
+Public Sub ButtonCopiaResumenCompactado_Click()
+
+    Clipboard.Copy(TextAreaResumen.Text)
+
+End
+
+Public Sub ButtonApuestasEnJuego_Click()
+
+    Clipboard.Copy(TextAreaEnJuego.Text)
+
+End
+
+''TODO: BARRAS DE PROGRESO http://ploticus.sourceforge.net/gallery/propbars1.htm
