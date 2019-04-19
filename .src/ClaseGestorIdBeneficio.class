@@ -105,7 +105,7 @@ Public Function listarOrdenID() As String
 
         tempIdEnJuego = listaId[listaOrden[a]]
 
-        If tempIdEnJuego.zzBeneficio > 0.001 Then
+        If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
 
@@ -177,7 +177,7 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
 
         tempIdEnJuego = listaId[listaOrden[a]]
 
-        If tempIdEnJuego.zzBeneficio > 0.001 Then
+        If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2) 'beneficio apuesta
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2) ' en juego
             GlobalEnJuego = GlobalEnJuego - cantidadEnjuego + cantidad
@@ -219,7 +219,7 @@ Public Function listar() As String
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
 
     For Each tempIdEnJuego In listaId
-        If tempIdEnJuego.zzBeneficio > 0.001 Then
+        If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
 
