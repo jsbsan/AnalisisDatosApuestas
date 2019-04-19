@@ -12,6 +12,10 @@ Public ContenidoFichero As String
 Public Sub Form_Open()
 
     settings.read(Me)
+    'hago click en click analizar
+    ButtonAnalizar_Click()
+    'y luego en ordenar por fecha
+    ButtonPorFecha_Click()
 
 End
 
@@ -48,6 +52,11 @@ Public Sub ButtonAnalizar_Click()
     'borrado de datos anteriore...
     listaCuenta = New ClaseCuenta[]
     ListaId = New ClaseGestorIdBeneficio
+
+    If Not Exist(nombrecsv) Then
+        Message.Error("No existe fichero de datos")
+        Quit
+    Endif
 
     'crea las cuentas partiendo del fichero de datos CuentasM.txt
     contenido = Split(File.Load("CuentasM.txt"), "\n")
