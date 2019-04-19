@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,137,99)
+  MoveScaled(0,0,137,98)
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
     MoveScaled(2,-1,12,13)
@@ -22,7 +22,7 @@
     Font = Font["Monospace"]
   }
   { TextAreaEnJuego TextArea
-    MoveScaled(49,17,87,81)
+    MoveScaled(49,17,87,54)
   }
   { ButtonEditorPluma Button
     MoveScaled(61,3,25,6)
@@ -107,5 +107,20 @@
   { ButtonApuestasEnJuego Button
     MoveScaled(131,17,5,6)
     Picture = Picture["icon:/16/copy"]
+  }
+  { ButtonGraficar Button
+    MoveScaled(95,12,7,4)
+    Visible = False
+    Text = ("Graficar")
+  }
+  { ScrollView1 ScrollView
+    MoveScaled(49,74,86,24)
+    Arrangement = Arrange.Fill
+    { HPanelGrafica HPanel
+      MoveScaled(0,1,83,38)
+      Expand = True
+      Spacing = True
+      Padding = 2
+    }
   }
 }

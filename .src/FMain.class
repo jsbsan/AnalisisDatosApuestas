@@ -11,12 +11,6 @@ Public ContenidoFichero As String
 
 Public Sub Form_Open()
 
-    settings.read(Me)
-    'hago click en click analizar
-    ButtonAnalizar_Click()
-    'y luego en ordenar por fecha
-    ButtonPorFecha_Click()
-
 End
 
 Public Sub Form_Close()
@@ -26,14 +20,13 @@ Public Sub Form_Close()
 End
 
 Public Sub Form_Show()
-    '' cat Cuentas | tr [:lower:] [:upper:] >CuentasM.txt
 
-    'datos de CUENTA Y SALDO
+    settings.read(Me)
 
-    '1º. LEER FICHERO
-    'REPITIR POR LINEA DE FICHERO
-    'SI CUENTA = LINEA, ENTONCES SUMA VALOR
-    'finalmente muestra datos de cuentas y sus acumulados sumados
+    'hago click en click analizar
+    ButtonAnalizar_Click()
+    'y luego en ordenar por fecha
+    ButtonPorFecha_Click()
 
 End
 
@@ -51,6 +44,7 @@ Public Sub ButtonAnalizar_Click()
 
     'borrado de datos anteriore...
     listaCuenta = New ClaseCuenta[]
+
     ListaId = New ClaseGestorIdBeneficio
 
     If Not Exist(nombrecsv) Then
@@ -235,6 +229,7 @@ End
 Public Sub ButtonPorFecha_Click()
 
     TextAreaEnJuego.text = ListaId.listarOrdenFecha(GlobalEnJuego, GlogbalCajaPayPalBene, GlobalTotal)
+    ButtonGraficar_Click()
 
 End
 
@@ -290,3 +285,37 @@ Public Sub ButtonApuestasEnJuego_Click()
 End
 
 ''TODO: BARRAS DE PROGRESO http://ploticus.sourceforge.net/gallery/propbars1.htm
+
+Public Sub ButtonGraficar_Click()
+
+    Dim p As Pie
+    Dim a As Integer
+    Dim tmpAreaDrawing As DrawingArea
+
+    Dim child As Control
+
+    For Each child In HPanelGrafica.Children
+        Child.Delete()
+    Next
+
+    For a = 0 To ListaId.listagrafica.count - 1
+        '-----------------------------
+        'añadir grafico
+        '-----------------------------
+        tmpAreaDrawing = New DrawingArea(HPanelGrafica) As "grupoGrafico"
+
+        tmpAreaDrawing.w = 50
+        tmpAreaDrawing.h = 50
+        tmpAreaDrawing.Tooltip = ListaId.listagrafica[a].texto
+        p = New Pie(tmpAreaDrawing, ListaId.listagrafica[a].enjuego, ListaId.listagrafica[a].caja, 0)
+
+        tmpAreaDrawing.tag = p
+    Next
+
+End
+
+Public Sub grupoGrafico_Draw()
+
+    Last.tag.dibujar()
+
+End

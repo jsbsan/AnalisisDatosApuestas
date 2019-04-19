@@ -1,6 +1,7 @@
 ' Gambas class file
 
 Public listaId As ClassIDEnJuego[]
+Public listagrafica As New DatosGraficos[]
 
 Public Sub _new()
 
@@ -165,6 +166,9 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
     Dim suma As Float
     Dim sumaEnJuego As Float
 
+    Dim tmpAreaDrawing As DrawingArea
+    Dim p As Pie
+
     listaOrden = obtenerOrden()
 
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.tab & "TotalEnJuego" & gb.tab & "Caja" & gb.tab & "Total" & gb.CrLf
@@ -180,6 +184,17 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
             GlobalCajaPayPalBene = GlobalTotal - GlobalEnJuego
 
             cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & gb.tab & Str$(Format(GlobalEnJuego, "0###.#0")) & gb.tab & Str$(Format(GlobalCajaPayPalBene, "0###.#0")) & gb.tab & Str$(Format(GlobalTotal, "0###.#0")) & "\n"
+
+            '-----------------------------
+            'añadir grafico
+            '-----------------------------
+            Dim grafica1 As New DatosGraficos
+
+            grafica1.enjuego = GlobalEnJuego
+            grafica1.caja = GlobalCajaPayPalBene
+            grafica1.texto = "Fecha:" & tempIdEnJuego.fecha & "\n" & "Id: " & tempIdEnJuego.id & "\n" & "En juego: " & Str$(grafica1.enjuego) & "\n" & "Diponible: " & grafica1.caja
+            listaGrafica.Add(grafica1)
+
             suma += cantidad
             sumaEnJuego += cantidadEnjuego
         Endif
