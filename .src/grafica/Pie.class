@@ -10,12 +10,15 @@ Private hd As DrawingArea
 Property colorfondo As Integer
 Private hcolorfondo As Integer
 
+Public porcentaje As Integer
+
 Public Sub _new(d As DrawingArea, EnJuego As Float, EnCaja As Float, BeneficiosEsperados As Float)
 
     hvalor1 = enJuego
     hvalor2 = enCaja
     hvalor3 = BeneficiosEsperados
     hd = d
+    porcentaje = (encaja * 100) / (Encaja + Enjuego)
 
 End
 
@@ -74,7 +77,10 @@ Public Sub dibujar()
     Paint.LineWidth = 6.0
     Paint.Brush = Paint.Color(Color.RGB(250, 0.2 * 250, 0.2 * 255)) ', 0.6 * 255))
     Paint.Fill
-    ' Paint.Stroke
+
+    Paint.Brush = Paint.Color(Color.RGB(0, 0, 0))
+    Paint.Text(Str$(porcentaje) & " %", 0, 0, hd.w, hd.h - 10, Align.Center)
+    Paint.Fill
 
 End
 

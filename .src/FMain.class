@@ -180,9 +180,10 @@ Public Sub ButtonAnalizar_Click()
     GlogbalCajaPayPalBene = GlobalTotal - GlobalEnJuego
 
     '--------------------------------------
-    ' TABLA DE DATOS DE ID
+    ' TABLA DE DATOS DE ID -> mejor por fecha
     '--------------------------------------
-    TextAreaEnJuego.TEXT = ListaId.listar()
+    ButtonPorFecha_Click()
+    'TextAreaEnJuego.TEXT = ListaId.listar()
 
 End
 

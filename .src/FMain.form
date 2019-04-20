@@ -31,15 +31,15 @@
     Picture = Picture["pluma-escritura-png-4-40x40.png"]
   }
   { ButtonNormalListadoApuestanPendientes Button
-    MoveScaled(38,2,9,4)
+    MoveScaled(38,1,9,5)
     Text = ("Normal")
   }
   { ButtonPorFecha Button
-    MoveScaled(63,2,21,4)
+    MoveScaled(63,1,21,5)
     Text = ("Por fecha y flujo caja")
   }
   { ButtonPorId Button
-    MoveScaled(50,2,9,4)
+    MoveScaled(50,1,9,5)
     Text = ("Por ID")
   }
   { ButtonFiltrar Button
@@ -60,7 +60,7 @@
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonGraficar Button
-    MoveScaled(85,2,7,4)
+    MoveScaled(85,1,7,5)
     Visible = False
     Text = ("Graficar")
   }
