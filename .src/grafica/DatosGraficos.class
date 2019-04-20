@@ -3,3 +3,4 @@
 Public enjuego As Float
 Public caja As Float
 Public texto As String
+Public fecha As String

@@ -7,6 +7,9 @@ Private hvalor2 As Float
 Private hvalor3 As Float
 Private hd As DrawingArea
 
+Property colorfondo As Integer
+Private hcolorfondo As Integer
+
 Public Sub _new(d As DrawingArea, EnJuego As Float, EnCaja As Float, BeneficiosEsperados As Float)
 
     hvalor1 = enJuego
@@ -34,6 +37,11 @@ Public Sub dibujar()
 
     Dim X, Y As Float
 
+    'dibujar rectangulo de fondo
+    Paint.Brush = Paint.Color(Me.colorfondo)
+    Paint.Rectangle(0, 0, hd.w, hd.h)
+    Paint.Fill
+
     '360 --- valor1+valor2+valor3
     '    --- valor1 -> x=360*valor1/(valor1+valor2+valor3)
 
@@ -41,7 +49,7 @@ Public Sub dibujar()
     angle3 = Rad(360 * hvalor2 / (hvalor1 + hvalor2 + hvalor3)) + angle2
     angle4 = Rad(360)
 
-    Print angle2, angle3, angle4
+    '   Print angle2, angle3, angle4
 
     Paint.LineWidth = 10
 
@@ -49,7 +57,7 @@ Public Sub dibujar()
     Paint.Arc(XC, YC, Radius, 0, angle2, False)
     paint.lineTo(XC, YC)
     Paint.LineWidth = 6.0
-    Paint.Brush = Paint.Color(Color.RGB(255, 255, 0, 0.6 * 255))
+    Paint.Brush = Paint.Color(Color.RGB(255, 255, 0)) '), 0.6 * 255))
     Paint.Fill
     '
     paint.moveTo(XC, YC)
@@ -64,7 +72,7 @@ Public Sub dibujar()
     Paint.Arc(XC, YC, Radius, Angle3, angle4 - angle3, False)
     paint.lineTo(XC, YC)
     Paint.LineWidth = 6.0
-    Paint.Brush = Paint.Color(Color.RGB(250, 0.2 * 250, 0.2 * 255, 0.6 * 255))
+    Paint.Brush = Paint.Color(Color.RGB(250, 0.2 * 250, 0.2 * 255)) ', 0.6 * 255))
     Paint.Fill
     ' Paint.Stroke
 
@@ -109,5 +117,36 @@ End
 Private Sub valor3_Write(Value As Float)
 
     hvalor3 = value
+
+End
+
+Private Function colorfondo_Read() As Integer
+
+    Return hcolorfondo
+
+End
+
+Private Sub colorfondo_Write(Value As Integer)
+
+    Select Case value
+        Case 0
+            hcolorfondo = Color.red
+        Case 1
+            hcolorfondo = Color.cyan
+        Case 2
+            hcolorfondo = Color.Pink
+        Case 3
+            hcolorfondo = Color.orange
+
+        Case 4
+            hcolorfondo = Color.Magenta
+        Case 5
+            hcolorfondo = Color.gray
+        Case 6
+            hcolorfondo = Color.Blue
+        Case Else
+            Me.colorfondo = 0
+
+    End Select
 
 End

@@ -169,9 +169,12 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
     Dim tmpAreaDrawing As DrawingArea
     Dim p As Pie
 
+    Dim fechaAnterior As String
+
     listaOrden = obtenerOrden()
 
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.tab & "TotalEnJuego" & gb.tab & "Caja" & gb.tab & "Total" & gb.CrLf
+
     listaGrafica.Clear() 'borro los datos de las anteriores graficas
     For a = 0 To listaId.count - 1
 
@@ -192,7 +195,8 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
 
             grafica1.enjuego = GlobalEnJuego
             grafica1.caja = GlobalCajaPayPalBene
-            grafica1.texto = "Fecha:" & tempIdEnJuego.fecha & "\n" & "Id: " & tempIdEnJuego.id & "\n" & "En juego: " & Str$(grafica1.enjuego) & "\n" & "Diponible: " & grafica1.caja
+            grafica1.texto = "Fecha:" & tempIdEnJuego.fecha & "\n" & "Id: " & tempIdEnJuego.id & "\n" & "En juego: " & Str$(Format(grafica1.enjuego, "###.#0")) & "\n" & "Diponible: " & Str$(Format(grafica1.caja, "###.#0"))
+            grafica1.fecha = tempIdEnJuego.fecha
             listaGrafica.Add(grafica1)
 
             suma += cantidad

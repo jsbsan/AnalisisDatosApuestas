@@ -293,6 +293,8 @@ Public Sub ButtonGraficar_Click()
     Dim tmpAreaDrawing As DrawingArea
 
     Dim child As Control
+    Dim fechaanterior As String = ""
+    Dim contador As Integer = 0
 
     For Each child In HPanelGrafica.Children
         Child.Delete()
@@ -308,6 +310,14 @@ Public Sub ButtonGraficar_Click()
         tmpAreaDrawing.h = 50
         tmpAreaDrawing.Tooltip = ListaId.listagrafica[a].texto
         p = New Pie(tmpAreaDrawing, ListaId.listagrafica[a].enjuego, ListaId.listagrafica[a].caja, 0)
+        If ListaId.listagrafica[a].fecha = fechaanterior Then
+            p.colorfondo = contador
+        Else
+            contador += 1
+            p.colorfondo = contador
+            fechaanterior = ListaId.listagrafica[a].fecha
+
+        Endif
 
         tmpAreaDrawing.tag = p
     Next
