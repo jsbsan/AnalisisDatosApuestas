@@ -113,7 +113,7 @@ Public Sub ButtonAnalizar_Click()
         If Round(tmpcuenta.suma, -2) <> 0 Then
 
             total += Round(tmpcuenta.suma, -2)
-            TextArea1.text &= cambiaCeros(Format(Round(tmpcuenta.suma, -2), "0###.#0")) & gb.tab & tmpCuenta.nombre & "\n"
+            TextArea1.text &= cambiaCeros(Format(Round(tmpcuenta.suma, -2), "0####.#0")) & gb.tab & tmpCuenta.nombre & "\n"
         Endif
     Next
 
