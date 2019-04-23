@@ -11,6 +11,8 @@ Public ContenidoFichero As String
 
 Public Sub Form_Open()
 
+    Me.Title = "Analisis de Datos. Version " & Application.Version
+
 End
 
 Public Sub Form_Close()
