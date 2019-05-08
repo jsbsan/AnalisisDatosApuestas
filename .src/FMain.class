@@ -9,6 +9,9 @@ Public GlogbalCajaPayPalBene As Float
 
 Public ContenidoFichero As String
 
+Public ImporteApostado As Float
+Public ImporteCaja As Float
+
 Public Sub Form_Open()
 
     Me.Title = "Analisis de Datos. Version " & Application.Version
@@ -72,8 +75,8 @@ Public Sub ButtonAnalizar_Click()
     contenido.Delete(0) ' la primera fila contiene los nombre de los campos
 
     'borrado de datos que esten en los textAreas
-    TextArea1.text = ""
-    TextAreaResumen.text = ""
+    TextAreaLugares.text = ""
+    TextAreaResumen.text = "Lugar" & "\t" & "Importe" & "\t" & "Porcentaje" & "\n"
 
     For Each l In contenido
 
@@ -110,17 +113,18 @@ Public Sub ButtonAnalizar_Click()
     ' Print "------------------------------------"
     ' Print "--        Sumas de cuentas         -"
     ' Print "------------------------------------"
+    TextAreaLugares.text &= "Lugar" & "\t" & "Importe" & "\n"
     For Each tmpcuenta In ListaCuenta
         'Print tmpCuenta.nombre, Format(Round(tmpcuenta.suma, -2), "#.##")
         If Round(tmpcuenta.suma, -2) <> 0 Then
 
             total += Round(tmpcuenta.suma, -2)
-            TextArea1.text &= cambiaCeros(Format(Round(tmpcuenta.suma, -2), "0####.#0")) & gb.tab & tmpCuenta.nombre & "\n"
+            TextAreaLugares.text &= tmpCuenta.nombre & gb.tab & cambiaCeros(Format(Round(tmpcuenta.suma, -2), "0####.#0")) & "\n"
         Endif
     Next
 
-    TextArea1.text &= "____________________________\n"
-    TextArea1.text &= "Total:" & Format(Round(total, -2), "0###.#0")
+    TextAreaLugares.text &= "____________________________\n"
+    TextAreaLugares.text &= "Total:" & Format(Round(total, -2), "0###.#0")
 
     'Calculo de sumas de Banco / Casa Apuestas / En Juego  / Zz Beneficio
     Dim enbanco As Float
@@ -181,11 +185,20 @@ Public Sub ButtonAnalizar_Click()
     GlobalTotal = Round(totalesRecalculo, -2)
     GlogbalCajaPayPalBene = GlobalTotal - GlobalEnJuego
 
+    ImporteApostado = enZen + enBeneficioEsperado
+    ImporteCaja = enCasas + enbanco + enPAYPAL
+
     '--------------------------------------
     ' TABLA DE DATOS DE ID -> mejor por fecha
     '--------------------------------------
     ButtonPorFecha_Click()
     'TextAreaEnJuego.TEXT = ListaId.listar()
+
+    'rellenar gridview
+    rellenaGridview()
+
+    'avance Agenda
+    RellenarAvanceAgenda()
 
 End
 
@@ -271,7 +284,7 @@ End
 
 Public Sub ButtonCopiaResumen_Click()
 
-    Clipboard.Copy(TextArea1.Text)
+    Clipboard.Copy(TextAreaLugares.Text)
 
 End
 
@@ -330,5 +343,90 @@ End
 Public Sub grupoGrafico_Draw()
 
     Last.tag.dibujar()
+
+End
+
+Public Sub rellenaGridview()
+
+    comun.DefinirGrid(GridViewEnJuego, TextAreaEnJuego.text, True)
+    'anchos
+    GridViewEnJuego.Columns[0].width = 150 'nombre del id de apuesta
+    GridViewEnJuego.Columns[3].width = 75 'fecha
+
+    comun.DefinirGrid(GridViewLugares, TextAreaLugares.text)
+    GridViewLugares.Columns[0].width = 150 'nombre del id de apuesta
+
+    comun.DefinirGrid(GridViewResumen, TextAreaResumen.text, 3)
+    GridViewResumen.Columns[0].width = 150 'nombre del id de apuesta
+
+End
+
+Public Sub RellenarAvanceAgenda()
+
+    Dim hoy As String
+    Dim a As Integer
+    Dim fecha As Date
+
+    TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n"
+    'partimos del dato de hoy (desde resumen)
+    TextAreaAgenda.text &= "Actual" & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+
+    'proceso 1 semana (siete dias, a partir de hoy)
+    hoy = Format(Now, "dd/mm/yyyy")
+    Dim resultado As String[]
+    For a = 0 To 7 'miro siete dias
+
+        fecha = Date(Year(Now), Month(Now), Day(Now)) + a
+        resultado = compruebaGridApuesta(fecha)
+
+        If resultado[0] = Null Then
+            fecha = Date(Year(Now), Month(Now), Day(Now)) + a - 1
+            TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+        Else
+            fecha = Date(Year(Now), Month(Now), Day(Now)) + a - 1
+            TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+            ImporteApostado = Val(resultado[1])
+            ImporteCaja = Val(resultado[2])
+
+        Endif
+
+    Next
+
+End
+
+Public Function compruebaGridApuesta(fecha As Date) As String[]
+
+    Dim datos As New String[]
+    Dim a As Integer
+    Dim importeA, importeC As String
+    Dim ndia As Integer
+    Dim nmes As Integer
+    Dim nano As Integer
+
+    Dim datoFechaColumna As Date
+
+    datos.Add(Null) 'primer dato 0
+    datos.Add(Null) 'primer dato 1
+    datos.Add(Null) 'primer dato 2
+    datos[1] = "100000"
+    datos[2] = "0"
+    For a = 0 To GridViewEnJuego.Rows.count - 5
+
+        ndia = Val(Mid(GridViewEnJuego[a, 3].Text, 1, 2))
+        nmes = Val(Mid(GridViewEnJuego[a, 3].Text, 4, 2))
+        nano = Val(Mid(GridViewEnJuego[a, 3].Text, 7, 4))
+
+        datoFechaColumna = Date(nano, nmes, ndia)
+        importeA = GridViewEnJuego[a, 4].Text
+        importeC = GridViewEnJuego[a, 5].Text
+        If DateDiff(datoFechaColumna, fecha, gb.day) = 0 Then
+            datos[0] = True
+            If Val(importeA) < Val(datos[1]) Then datos[1] = importeA
+            If Val(importeC) > Val(datos[2]) Then datos[2] = importeC
+        Endif
+        If DateDiff(datoFechaColumna, fecha, gb.day) < 0 Then Break
+    Next
+
+    Return datos
 
 End

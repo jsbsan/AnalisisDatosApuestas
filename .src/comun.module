@@ -9,3 +9,62 @@ Public Function contiene(texto As String, textoabuscar As String) As Boolean '' 
     Endif
 
 End
+
+Public Function DefinirGrid(OrigenGrid As Gridview, contenido As String, Optional datosApuestas As Integer)
+
+    Dim a, b As Integer
+    Dim lineas As String[]
+    Dim columnas As String[]
+
+    '1º fase: estudia contenido
+    lineas = Split(contenido, "\n") 'separadas por salto de linea
+
+    'la primera linea tiene los datos de nombre de columnas
+    columnas = Split(lineas[0], "\t") 'separadas por tabulador
+
+    'defino grid
+
+    With OrigenGrid
+        .header = 3
+        .columns.count = columnas.Count
+        .rows.count = lineas.count - 1 'le quito la primera linea
+
+        For a = 0 To columnas.count - 1
+            .columns[a].title = columnas[a]
+        Next
+
+        .Font.name = "Sans"
+        .Font.size = 8
+        .Mode = Select.Single
+    End With
+
+    'ahora meto los datos en las filas por cada columna
+
+    For a = 1 To lineas.count - 1
+        columnas = Split(lineas[a], "\t")
+        For b = 0 To columnas.count - 1
+
+            ' If datosApuestas = True Then
+            If b > 0 And InStr(columnas[b], "/") = 0 Then
+                Try OrigenGrid[a - 1, b].text = Format(Val(columnas[b]), "0.#0")
+                Try OrigenGrid[a - 1, b].Alignment = Align.Right
+            Else
+                Try OrigenGrid[a - 1, b].text = columnas[b]
+            Endif
+            ' Else
+            '
+            '     Try OrigenGrid[a - 1, b].text = columnas[b]
+            ' Endif
+            If datosApuestas = 3 Then
+                'caso en que son resumenen
+                Try OrigenGrid[a - 1, b].text = columnas[b]
+
+            Endif
+
+        Next
+
+    Next
+
+    Return
+
+End

@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,143,98)
+  MoveScaled(0,0,151,103)
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
     MoveScaled(2,0,5,5)
@@ -13,16 +13,19 @@
     Text = ("Analizar")
     Picture = Picture["homepage-scales-min32x32.png"]
   }
-  { TextArea1 TextArea
-    MoveScaled(0,7,38,76)
+  { TextAreaLugares TextArea
+    MoveScaled(0,72,38,2)
+    Visible = False
     Font = Font["Monospace"]
   }
   { TextAreaResumen TextArea
-    MoveScaled(0,83,45,15)
+    MoveScaled(45,87,4,15)
+    Visible = False
     Font = Font["Monospace,-1"]
   }
   { TextAreaEnJuego TextArea
-    MoveScaled(38,7,79,76)
+    MoveScaled(38,72,86,2)
+    Visible = False
     Font = Font["-1"]
   }
   { ButtonEditorPluma Button
@@ -47,16 +50,8 @@
     Text = ("Buscar ID")
     Picture = Picture["icon:/16/find"]
   }
-  { ButtonCopiaResumen Button
-    MoveScaled(32,7,5,5)
-    Picture = Picture["icon:/16/copy"]
-  }
   { ButtonCopiaResumenCompactado Button
-    MoveScaled(45,83,5,6)
-    Picture = Picture["icon:/16/copy"]
-  }
-  { ButtonApuestasEnJuego Button
-    MoveScaled(112,7,5,6)
+    MoveScaled(44,74,5,6)
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonGraficar Button
@@ -65,7 +60,7 @@
     Text = ("Graficar")
   }
   { ScrollView1 ScrollView
-    MoveScaled(117,7,26,90)
+    MoveScaled(125,7,26,65)
     Arrangement = Arrange.Fill
     { HPanelGrafica HPanel
       MoveScaled(2,2,22,38)
@@ -75,7 +70,7 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(51,84,49,13)
+    MoveScaled(50,74,49,13)
     { ProgressBarBanco ProgressBar
       MoveScaled(14,1,33,2.1429)
       Background = &H5FAFFF&
@@ -126,5 +121,25 @@
       Text = ("En Juego:")
       Alignment = Align.Right
     }
+  }
+  { GridViewEnJuego GridView
+    MoveScaled(38,7,86,65)
+  }
+  { ButtonApuestasEnJuego Button
+    MoveScaled(115,66,5,6)
+    Picture = Picture["icon:/16/copy"]
+  }
+  { GridViewLugares GridView
+    MoveScaled(0,7,38,65)
+  }
+  { GridViewResumen GridView
+    MoveScaled(0,74,44,29)
+  }
+  { ButtonCopiaResumen Button
+    MoveScaled(30,67,5,5)
+    Picture = Picture["icon:/16/copy"]
+  }
+  { TextAreaAgenda TextArea
+    MoveScaled(100,74,51,29)
   }
 }
