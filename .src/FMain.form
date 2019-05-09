@@ -140,6 +140,10 @@
     Picture = Picture["icon:/16/copy"]
   }
   { TextAreaAgenda TextArea
+    MoveScaled(50,87,49,16)
+    Visible = False
+  }
+  { GridViewAgenda GridView
     MoveScaled(100,74,51,29)
   }
 }

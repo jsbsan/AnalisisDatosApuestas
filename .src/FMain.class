@@ -365,7 +365,7 @@ Public Sub RellenarAvanceAgenda()
 
     Dim hoy As String
     Dim a As Integer
-    Dim fecha As Date
+    Dim fecha, FechaConjuntoApuestas As Date
 
     TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n"
     'partimos del dato de hoy (desde resumen)
@@ -373,10 +373,19 @@ Public Sub RellenarAvanceAgenda()
 
     'proceso 1 semana (siete dias, a partir de hoy)
     hoy = Format(Now, "dd/mm/yyyy")
+
+    FechaConjuntoApuestas = maximafecha(GridViewEnJuego)
+
     Dim resultado As String[]
     For a = 0 To 7 'miro siete dias
 
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
+
+        If DateDiff(FechaConjuntoApuestas, fecha, gb.day) - 1 > 0 Then
+            'salir del bucle
+            Break
+        Endif
+
         resultado = compruebaGridApuesta(fecha)
 
         If resultado[0] = Null Then
@@ -391,6 +400,27 @@ Public Sub RellenarAvanceAgenda()
         Endif
 
     Next
+
+    comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
+    GridViewAgenda.Columns[0].width = 100 'nombre del id de apuesta
+
+End
+
+Public Function maximafecha(GridViewEnJuego As GridView) As Date
+
+    Dim a As Integer
+    Dim ndia, nmes, nano As Integer
+
+    For a = 0 To GridViewEnJuego.Rows.count - 5
+
+        If InStr(GridViewEnJuego[a, 3].Text, "/") <> 0 Then
+            ndia = Val(Mid(GridViewEnJuego[a, 3].Text, 1, 2))
+            nmes = Val(Mid(GridViewEnJuego[a, 3].Text, 4, 2))
+            nano = Val(Mid(GridViewEnJuego[a, 3].Text, 7, 4))
+        Endif
+    Next
+
+    Return Date(nano, nmes, ndia)
 
 End
 
