@@ -183,7 +183,7 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
         If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2) 'beneficio apuesta
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2) ' en juego
-            GlobalEnJuego = GlobalEnJuego - cantidadEnjuego + cantidad
+            GlobalEnJuego = GlobalEnJuego - cantidadEnjuego - cantidad
             GlobalCajaPayPalBene = GlobalTotal - GlobalEnJuego
 
             cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & gb.tab & Str$(Format(GlobalEnJuego, "0###.#0")) & gb.tab & Str$(Format(GlobalCajaPayPalBene, "0###.#0")) & gb.tab & Str$(Format(GlobalTotal, "0###.#0")) & "\n"

@@ -12,6 +12,8 @@ Public ContenidoFichero As String
 Public ImporteApostado As Float
 Public ImporteCaja As Float
 
+Public GlobalBeneficio As Float
+
 Public Sub Form_Open()
 
     Me.Title = "Analisis de Datos. Version " & Application.Version
@@ -188,6 +190,7 @@ Public Sub ButtonAnalizar_Click()
     ImporteApostado = enZen + enBeneficioEsperado
     ImporteCaja = enCasas + enbanco + enPAYPAL
 
+    GlobalBeneficio = enBeneficioEsperado
     '--------------------------------------
     ' TABLA DE DATOS DE ID -> mejor por fecha
     '--------------------------------------
@@ -244,7 +247,7 @@ End
 
 Public Sub ButtonPorFecha_Click()
 
-    TextAreaEnJuego.text = ListaId.listarOrdenFecha(GlobalEnJuego, GlogbalCajaPayPalBene, GlobalTotal)
+    TextAreaEnJuego.text = ListaId.listarOrdenFecha(GlobalEnJuego + GlobalBeneficio, GlogbalCajaPayPalBene - GlobalBeneficio, GlobalTotal)
     ButtonGraficar_Click()
 
 End
@@ -389,10 +392,10 @@ Public Sub RellenarAvanceAgenda()
         resultado = compruebaGridApuesta(fecha)
 
         If resultado[0] = Null Then
-            fecha = Date(Year(Now), Month(Now), Day(Now)) + a - 1
+            fecha = Date(Year(Now), Month(Now), Day(Now)) + a
             TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
         Else
-            fecha = Date(Year(Now), Month(Now), Day(Now)) + a - 1
+            fecha = Date(Year(Now), Month(Now), Day(Now)) + a
             TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
             ImporteApostado = Val(resultado[1])
             ImporteCaja = Val(resultado[2])
