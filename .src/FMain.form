@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,151,103)
+  MoveScaled(0,0,192,107)
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
     MoveScaled(2,0,5,5)
@@ -19,7 +19,7 @@
     Font = Font["Monospace"]
   }
   { TextAreaResumen TextArea
-    MoveScaled(45,87,4,15)
+    MoveScaled(45,80,4,7)
     Visible = False
     Font = Font["Monospace,-1"]
   }
@@ -50,27 +50,24 @@
     Text = ("Buscar ID")
     Picture = Picture["icon:/16/find"]
   }
-  { ButtonCopiaResumenCompactado Button
-    MoveScaled(44,74,5,6)
-    Picture = Picture["icon:/16/copy"]
-  }
   { ButtonGraficar Button
     MoveScaled(85,1,7,5)
     Visible = False
     Text = ("Graficar")
   }
   { ScrollView1 ScrollView
-    MoveScaled(125,7,26,65)
+    MoveScaled(97,74,89,33)
     Arrangement = Arrange.Fill
+    AutoResize = True
     { HPanelGrafica HPanel
-      MoveScaled(2,2,22,38)
+      MoveScaled(1,1,80,26)
       Expand = True
       Spacing = True
       Padding = 2
     }
   }
   { Panel1 Panel
-    MoveScaled(50,74,49,13)
+    MoveScaled(-5,95,49,13)
     { ProgressBarBanco ProgressBar
       MoveScaled(14,1,33,2.1429)
       Background = &H5FAFFF&
@@ -123,27 +120,38 @@
     }
   }
   { GridViewEnJuego GridView
-    MoveScaled(38,7,86,65)
+    MoveScaled(39,6,86,66)
   }
   { ButtonApuestasEnJuego Button
-    MoveScaled(115,66,5,6)
+    MoveScaled(119,66,5,6)
     Picture = Picture["icon:/16/copy"]
   }
   { GridViewLugares GridView
-    MoveScaled(0,7,38,65)
+    MoveScaled(0,6,38,66)
   }
   { GridViewResumen GridView
-    MoveScaled(0,74,44,29)
+    MoveScaled(0,72,44,23)
   }
   { ButtonCopiaResumen Button
     MoveScaled(30,67,5,5)
     Picture = Picture["icon:/16/copy"]
   }
   { TextAreaAgenda TextArea
-    MoveScaled(50,87,49,16)
+    MoveScaled(45,86,11,5)
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(100,74,51,29)
+    MoveScaled(45,72,51,35)
+  }
+  { WebView1 WebView
+    MoveScaled(126,6,66,66)
+  }
+  { ButtonGraficaJS Button
+    MoveScaled(126,69,26,3)
+    Text = ("graficar con javascript")
+  }
+  { ButtonCopiaResumenCompactado Button
+    MoveScaled(39,89,5,6)
+    Picture = Picture["icon:/16/copy"]
   }
 }

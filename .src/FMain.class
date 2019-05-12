@@ -31,9 +31,10 @@ Public Sub Form_Show()
     settings.read(Me)
 
     'hago click en click analizar
+
     ButtonAnalizar_Click()
     'y luego en ordenar por fecha
-    ButtonPorFecha_Click()
+    ' ButtonPorFecha_Click() -> LO DESACTIVO Porque ButtonAnalizar, ya lo hace.
 
 End
 
@@ -202,6 +203,8 @@ Public Sub ButtonAnalizar_Click()
 
     'avance Agenda
     RellenarAvanceAgenda()
+    'graficar agenda
+    ButtonGraficaJS_Click()
 
 End
 
@@ -461,5 +464,11 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
     Next
 
     Return datos
+
+End
+
+Public Sub ButtonGraficaJS_Click()
+
+    GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
 
 End

@@ -68,3 +68,19 @@ Public Function DefinirGrid(OrigenGrid As Gridview, contenido As String, Optiona
     Return
 
 End
+
+Public Sub vaciarDirectorio(ruta As String, Optional patron As String) ''Borrar contenido de un directorio dado un patron de borrado
+    'borrado si existe la ruta
+
+    Dim file As String
+
+    If patron = "" Then patron = "*"
+    If Exist(ruta) Then
+        For Each File In Dir(ruta & "/", patron)
+            Try Kill ruta & "/" & file
+        Next
+    Endif
+Catch
+    Message.Error(("Error al intentar borrar el directorio: ") & ruta)
+
+End
