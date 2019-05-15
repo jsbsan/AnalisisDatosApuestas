@@ -18,12 +18,19 @@
       Picture = Picture["icon:/16/find"]
     }
   }
+  { TextBoxComentario TextBox
+    MoveScaled(1,8,82,4)
+  }
   { HSplit1 VSplit
-    MoveScaled(-1,9,85,30)
+    MoveScaled(-1,13,85,26)
     Expand = True
     { TextArea1 TextArea
       MoveScaled(3,2,53,19)
+      Visible = False
       Font = Font["Serif"]
+    }
+    { GridViewDatos GridView
+      MoveScaled(43,7,30,16)
     }
   }
 }

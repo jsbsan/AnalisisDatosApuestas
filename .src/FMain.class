@@ -279,7 +279,7 @@ Public Sub ButtonFiltrar_Click()
     Dim tmplista As New String[]
 
     If ContenidoFichero <> "" Then
-        tmplista.Add(ContenidoFichero)
+        tmplista.Add(Upper(ContenidoFichero))
         mf.listado = tmplista
         mf.Show()
     Else
@@ -470,5 +470,24 @@ End
 Public Sub ButtonGraficaJS_Click()
 
     GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
+
+End
+
+Public Sub GridViewEnJuego_DblClick()
+
+    Dim fila As Integer
+    Dim tmplista As New String[]
+    Dim FormFiltroTmp As New FormFiltro
+
+    fila = GridViewEnJuego.Rows.Selection[0]
+
+    If ContenidoFichero <> "" Then
+        tmplista.Add(Upper(ContenidoFichero))
+        FormFiltroTmp.listado = tmplista
+        FormFiltroTmp.FiltroDado(GridViewEnJuego[fila, 0].text)
+        FormFiltroTmp.Show()
+    Else
+        Message.Info("no hay cargada información")
+    Endif
 
 End
