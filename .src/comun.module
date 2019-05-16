@@ -22,8 +22,10 @@ Public Function DefinirGridSinFormato(OrigenGrid As Gridview, contenido As Strin
     'la primera linea tiene los datos de nombre de columnas
     columnas = Split(lineas[0], "\t") 'separadas por tabulador
 
-    'defino grid
+    'para borrar todo el contenido....
+    OrigenGrid.Clear()
 
+    'defino grid
     With OrigenGrid
         .header = 3
         .columns.count = columnas.Count
@@ -65,6 +67,9 @@ Public Function DefinirGrid(OrigenGrid As Gridview, contenido As String, Optiona
 
     'la primera linea tiene los datos de nombre de columnas
     columnas = Split(lineas[0], "\t") 'separadas por tabulador
+
+    'para borrar todo el contenido....
+    OrigenGrid.Clear()
 
     'defino grid
 
