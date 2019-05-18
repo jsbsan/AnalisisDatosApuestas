@@ -381,7 +381,7 @@ Public Sub RellenarAvanceAgenda()
 
     TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n"
     'partimos del dato de hoy (desde resumen)
-    TextAreaAgenda.text &= "Actual" & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+    ' TextAreaAgenda.text &= "Actual" & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
 
     'proceso 1 semana (siete dias, a partir de hoy)
     hoy = Format(Now, "dd/mm/yyyy")
