@@ -206,6 +206,12 @@ Public Sub ButtonAnalizar_Click()
     'graficar agenda
     ButtonGraficaJS_Click()
 
+    comun.ColorCeldaNumeroNegativo(GridViewLugares, 1)
+
+    comun.ColorCeldaNumeroNegativo(GridViewEnJuego, 1)
+
+    comun.ColorCeldaNumeroNegativo(GridViewResumen, 1)
+
 End
 
 Public Sub Porcentaje(valor As Float, total As Float) As String
@@ -383,7 +389,7 @@ Public Sub RellenarAvanceAgenda()
     FechaConjuntoApuestas = maximafecha(GridViewEnJuego)
 
     Dim resultado As String[]
-    For a = 0 To 7 'miro siete dias
+    For a = 0 To 15 'miro 30 dias
 
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
 
