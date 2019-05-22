@@ -1,7 +1,5 @@
 ' Gambas class file
 
-' Gambas class file
-
 Private hvalor1 As Float
 Private hvalor2 As Float
 Private hvalor3 As Float

@@ -497,3 +497,58 @@ Public Sub GridViewEnJuego_DblClick()
     Endif
 
 End
+
+Public Sub ButtonComparaLista_Click()
+
+    Dim lista As String[]
+    Dim l As String
+    Dim a, b As Integer = -1
+    Dim listaExistente As String[]
+
+    Dim listalimpia As New String[]
+
+    lista = Split(Clipboard.Paste("text/plain"), "\n")
+
+    For a = 0 To lista.count - 1
+
+        l = lista[a]
+        If l = "" Or Len(l) = 2 Or Len(l) = 1 Then
+            'no la añado
+        Else
+            listalimpia.Add(l)
+        Endif
+    Next
+
+    listaExistente = ListaId.IdexistentesPendientes()
+
+    Dim existe As Boolean
+    Dim contenido As String
+
+    For a = 0 To listaExistente.count - 1
+        existe = False
+        Dim nombreAcomparar As String = Upper$(Replace(Replace(Upper$(listaExistente[a]), " ", ""), "FREEBET", "FREE"))
+        For b = 0 To listalimpia.Count - 1
+            'lo pongo en mayusculas y quito espacios para normalizar los nombres antes de comparar
+            If nombreAComparar = Upper(Replace(Replace(Upper$(listalimpia[b]), " ", ""), "FREEBET", "FREE")) Then
+
+                existe = True
+
+            Endif
+
+        Next
+
+        If existe = False Then
+            contenido &= listaExistente[a] & "\n"
+        Endif
+
+    Next
+
+    If Len(Replace(contenido, "\n", "")) = 0 Then
+        Message.Info("La lista de ID que pasas en el portapapeles, esta incluida en la id pendientes")
+    Else
+        Message.Info("lista:\n" & contenido)
+        Print "lista Id que no estan:\n" & contenido
+
+    Endif
+
+End

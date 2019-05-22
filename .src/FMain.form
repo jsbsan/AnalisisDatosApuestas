@@ -154,4 +154,10 @@
     MoveScaled(39,89,5,6)
     Picture = Picture["icon:/16/copy"]
   }
+  { ButtonComparaLista Button
+    MoveScaled(146,1,17,5)
+    ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
+    Text = ("comparar") & "..."
+    Picture = Picture["Editing-Compare-icon.png"]
+  }
 }

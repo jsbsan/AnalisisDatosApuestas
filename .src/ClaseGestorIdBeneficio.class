@@ -86,6 +86,21 @@ Public Sub ObtenerOrdenId() As Integer[] 'por ide
 
 End
 
+Public Function IdexistentesPendientes() As String[]
+
+    Dim a As Integer
+    Dim listado As New String[]
+
+    For a = 0 To listaId.Count - 1
+        If listaId[a].pendiente = True Then
+            listado.Add(listaId[a].id)
+        Endif
+    Next
+
+    Return listado
+
+End
+
 Public Function listarOrdenID() As String
 
     Dim listaOrden As Integer[]
@@ -187,6 +202,8 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
             GlobalCajaPayPalBene = GlobalTotal - GlobalEnJuego
 
             cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & gb.tab & Str$(Format(GlobalEnJuego, "0###.#0")) & gb.tab & Str$(Format(GlobalCajaPayPalBene, "0###.#0")) & gb.tab & Str$(Format(GlobalTotal, "0###.#0")) & "\n"
+            'indico que es una apuesta pendiente
+            tempIdEnJuego.pendiente = True
 
             '-----------------------------
             'añadir grafico
