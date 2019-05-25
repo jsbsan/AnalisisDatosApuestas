@@ -67,7 +67,7 @@
     }
   }
   { Panel1 Panel
-    MoveScaled(-5,95,49,13)
+    MoveScaled(-3,95,47,13)
     { ProgressBarBanco ProgressBar
       MoveScaled(14,1,33,2.1429)
       Background = &H5FAFFF&

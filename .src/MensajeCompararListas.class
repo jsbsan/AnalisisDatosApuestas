@@ -1,0 +1,15 @@
+' Gambas class file
+
+Public Lista As String[]
+
+Public Sub Form_Open()
+
+    TextArea1.text = Lista[0]
+
+End
+
+Public Sub ButtonSalir_Click()
+
+    Me.Close()
+
+End

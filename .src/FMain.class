@@ -519,14 +519,19 @@ Public Sub ButtonComparaLista_Click()
         Endif
     Next
 
+    ''------------------------------------------------------------------------------------------------
+    '' vamos a comparar las que tengo del portapapeles con las que tengo guadardas en el programa
+    ''------------------------------------------------------------------------------------------------
     listaExistente = ListaId.IdexistentesPendientes()
 
     Dim existe As Boolean
+    Dim nombreAcomparar As String
+
     Dim contenido As String
 
     For a = 0 To listaExistente.count - 1
         existe = False
-        Dim nombreAcomparar As String = Upper$(Replace(Replace(Upper$(listaExistente[a]), " ", ""), "FREEBET", "FREE"))
+        nombreAcomparar = Upper$(Replace(Replace(Upper$(listaExistente[a]), " ", ""), "FREEBET", "FREE"))
         For b = 0 To listalimpia.Count - 1
             'lo pongo en mayusculas y quito espacios para normalizar los nombres antes de comparar
             If nombreAComparar = Upper(Replace(Replace(Upper$(listalimpia[b]), " ", ""), "FREEBET", "FREE")) Then
@@ -538,17 +543,49 @@ Public Sub ButtonComparaLista_Click()
         Next
 
         If existe = False Then
-            contenido &= listaExistente[a] & "\n"
+            contenido &= "\t" & listaExistente[a] & "\n"
         Endif
 
     Next
 
-    If Len(Replace(contenido, "\n", "")) = 0 Then
-        Message.Info("La lista de ID que pasas en el portapapeles, esta incluida en la id pendientes")
-    Else
-        Message.Info("lista:\n" & contenido)
-        Print "lista Id que no estan:\n" & contenido
+    ''------------------------------------------------------------------------------------------------
+    '' Ahora, vamos a comparar las que tengo en el programa con las del portapapeles (por si en el portapapels hay aguna más)
+    ''------------------------------------------------------------------------------------------------
 
+    Dim contenidoFaltaPrograma As String
+
+    For a = 0 To listalimpia.Count - 1
+
+        existe = False
+
+        nombreAcomparar = Upper(Replace(Replace(Upper$(listalimpia[a]), " ", ""), "FREEBET", "FREE"))
+        For b = 0 To listaExistente.count - 1
+            'lo pongo en mayusculas y quito espacios para normalizar los nombres antes de comparar
+            If nombreAComparar = Upper$(Replace(Replace(Upper$(listaExistente[b]), " ", ""), "FREEBET", "FREE")) Then
+
+                existe = True
+
+            Endif
+
+        Next
+
+        If existe = False Then
+            contenidoFaltaPrograma &= "\t" & listalimpia[a] & "\n"
+        Endif
+
+    Next
+
+    If Len(Replace(contenido, "\n", "")) = 0 And Len(Replace(contenidoFaltaPrograma, "\n", "")) = 0 Then
+        Message.Info("ok, estan todas")
+    Else
+        Dim mensaje As New MensajeCompararListas
+
+        Dim texto As New String[]
+
+        texto.Add("lista (comparando Id del programa con las del portapapeles):\n" & contenido & "lista (comparando portapapeles con las Id programa):\n" & contenidoFaltaPrograma)
+
+        mensaje.Lista = texto
+        mensaje.Show()
     Endif
 
 End
