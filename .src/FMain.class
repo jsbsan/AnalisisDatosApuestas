@@ -369,7 +369,8 @@ Public Sub rellenaGridview()
     GridViewLugares.Columns[0].width = 150 'nombre del id de apuesta
 
     comun.DefinirGrid(GridViewResumen, TextAreaResumen.text, 3)
-    GridViewResumen.Columns[0].width = 150 'nombre del id de apuesta
+    GridViewResumen.Columns[0].width = 120 'nombre del id de apuesta
+    GridViewResumen.Columns[1].width = 75 'nombre del id de apuesta
 
 End
 
@@ -495,6 +496,7 @@ Public Sub GridViewEnJuego_DblClick()
     Else
         Message.Info("no hay cargada información")
     Endif
+    marcarfila()
 
 End
 
@@ -587,5 +589,44 @@ Public Sub ButtonComparaLista_Click()
         mensaje.Lista = texto
         mensaje.Show()
     Endif
+
+End
+
+Public Sub GridViewLugares_DblClick()
+
+    ' Dim FILA As Integer
+    '
+    ' fila = Last.Rows.Selection[0]
+    ' 'depende de que boton del raton pulses, se pone un icono OK o un icono NO
+    ' If Mouse.Right = False Then
+    '     Last[fila, 1].Picture = Picture["ok.png"]
+    ' Endif
+    '
+    ' If Mouse.Right = True Then
+    '     Last[fila, 1].Picture = Picture["no.png"]
+    ' Endif
+    marcarfila()
+
+End
+
+Public Sub marcarfila()
+
+    Dim FILA As Integer
+
+    fila = Last.Rows.Selection[0]
+    'depende de que boton del raton pulses, se pone un icono OK o un icono NO
+    If Mouse.Right = False Then
+        Last[fila, 1].Picture = Picture["ok.png"]
+    Endif
+
+    If Mouse.Right = True Then
+        Last[fila, 1].Picture = Picture["no.png"]
+    Endif
+
+End
+
+Public Sub GridViewResumen_DblClick()
+
+    marcarfila()
 
 End

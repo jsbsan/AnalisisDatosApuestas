@@ -2,6 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,192,107)
+  Background = &H6F8BE0&
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
     MoveScaled(2,0,5,5)
