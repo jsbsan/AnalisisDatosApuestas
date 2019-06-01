@@ -17,6 +17,14 @@ Public GlobalBeneficio As Float
 Public Sub Form_Open()
 
     Me.Title = "Analisis de Datos. Version " & Application.Version
+    'inicio los datos cuando abro el formulario (y no cuando cada vez que lo mostraba)
+    settings.read(Me)
+
+    'hago click en click analizar
+
+    ButtonAnalizar_Click()
+    'y luego en ordenar por fecha
+    ' ButtonPorFecha_Click() -> LO DESACTIVO Porque ButtonAnalizar, ya lo hace.
 
 End
 
@@ -27,14 +35,6 @@ Public Sub Form_Close()
 End
 
 Public Sub Form_Show()
-
-    settings.read(Me)
-
-    'hago click en click analizar
-
-    ButtonAnalizar_Click()
-    'y luego en ordenar por fecha
-    ' ButtonPorFecha_Click() -> LO DESACTIVO Porque ButtonAnalizar, ya lo hace.
 
 End
 
