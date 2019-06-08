@@ -29,7 +29,9 @@ Public Sub Form_Open()
 End
 
 Public Sub Form_Close()
+    'guardo los comentarios ultimos...
 
+    ButtonGuardarAnotaciones_Click()
     settings.write(Me)
 
 End
