@@ -667,3 +667,11 @@ Public Sub ButtonRecargar_Click()
     Endif
 
 End
+
+Public Sub ButtonCasas_Click()
+
+    Dim GestorZenJuego As ClassGestorZEnJuego
+
+    GestorZenJuego = New ClassGestorZEnJuego(ListaId.IdexistentesPendientes())
+
+End

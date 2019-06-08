@@ -1,16 +1,16 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,192,107)
+  MoveScaled(0,0,193,111)
   Background = &H6F8BE0&
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
-    MoveScaled(2,0,5,5)
+    MoveScaled(0,1,5,5)
     Picture = Picture["homepage-scales-min.png"]
     Stretch = True
   }
   { ButtonAnalizar Button
-    MoveScaled(9,1,22,5)
+    MoveScaled(6,1,16,5)
     Text = ("Analizar")
     Picture = Picture["homepage-scales-min32x32.png"]
   }
@@ -20,7 +20,7 @@
     Font = Font["Monospace"]
   }
   { TextAreaResumen TextArea
-    MoveScaled(45,80,4,7)
+    MoveScaled(21,108,22,4)
     Visible = False
     Font = Font["Monospace,-1"]
   }
@@ -35,16 +35,16 @@
     Picture = Picture["pluma-escritura-png-4-40x40.png"]
   }
   { ButtonNormalListadoApuestanPendientes Button
-    MoveScaled(57,0,1,5)
+    MoveScaled(108,108,9,5)
     Visible = False
     Text = ("Normal")
   }
   { ButtonPorFecha Button
-    MoveScaled(63,1,21,5)
+    MoveScaled(61,1,21,5)
     Text = ("Por fecha y flujo caja")
   }
   { ButtonPorId Button
-    MoveScaled(58,1,1,5)
+    MoveScaled(101,108,5,5)
     Visible = False
     Text = ("Por ID")
   }
@@ -54,16 +54,16 @@
     Picture = Picture["icon:/16/find"]
   }
   { ButtonGraficar Button
-    MoveScaled(85,1,7,5)
+    MoveScaled(153,104,7,5)
     Visible = False
     Text = ("Graficar")
   }
   { ScrollView1 ScrollView
-    MoveScaled(97,74,55,33)
+    MoveScaled(98,74,55,33)
     Arrangement = Arrange.Fill
     AutoResize = True
     { HPanelGrafica HPanel
-      MoveScaled(1,1,45,26)
+      MoveScaled(0,0,45,26)
       Expand = True
       Spacing = True
       Padding = 2
@@ -140,7 +140,7 @@
     Picture = Picture["icon:/16/copy"]
   }
   { TextAreaAgenda TextArea
-    MoveScaled(45,86,11,5)
+    MoveScaled(48,108,11,5)
     Visible = False
   }
   { GridViewAgenda GridView
@@ -183,12 +183,17 @@
     Picture = Picture["icon:/16/save"]
   }
   { ButtonCalculadora2 Button
-    MoveScaled(38,1,18,5)
+    MoveScaled(39,1,18,5)
     Text = ("Lista Últimas")
     Picture = Picture["icon:/16/view-detail"]
   }
   { ButtonRecargar Button
     MoveScaled(155,73,5,3)
     Picture = Picture["icon:/16/refresh"]
+  }
+  { ButtonCasas Button
+    MoveScaled(23,1,14,5)
+    Text = ("Zen Juego")
+    Picture = Picture["icon:/16/table"]
   }
 }

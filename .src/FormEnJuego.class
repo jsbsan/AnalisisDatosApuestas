@@ -1,0 +1,11 @@
+' Gambas class file
+
+Public contenido As String[]
+
+Public Sub Form_Open()
+
+    TextArea1.text = contenido[0]
+
+    comun.DefinirGridSinFormato(GridView1, contenido[0])
+
+End

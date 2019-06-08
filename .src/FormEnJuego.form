@@ -1,0 +1,15 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Icon = Picture["enjuego.png"]
+  Arrangement = Arrange.Fill
+  { TextArea1 TextArea
+    MoveScaled(6,1,49,7)
+    Visible = False
+    Wrap = True
+  }
+  { GridView1 GridView
+    MoveScaled(3,10,55,42)
+  }
+}
