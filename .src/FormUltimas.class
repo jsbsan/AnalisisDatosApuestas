@@ -1,0 +1,63 @@
+' Gambas class file
+
+Private contenidoUltimo As String
+
+Public Sub Form_Open()
+
+    Shell ("tail -26 " & User.Home & "/informacion.csv > /tmp/ultimas.txt")
+    Wait 0.1
+    contenidoUltimo = File.Load("/tmp/ultimas.txt")
+
+    TextAreaUltimas.text = contenidoUltimo
+
+    rellenaGridview()
+    Me.Title = "últimas lineas del fichero de datos"
+
+End
+
+Public Sub rellenaGridview()
+
+    With GridViewUltimas
+        .Header = 3
+        .Columns.count = 1
+        .Rows.count = 27
+        .Font.name = "Sans"
+        .Font.size = 8
+        .Mode = Select.Single
+    End With
+
+    'descompone informacion
+    Dim listaCadenas As String[]
+    Dim a As Integer
+    listaCadenas = Split(contenidoUltimo, "\n")
+
+    For a = 0 To listaCadenas.count - 1
+
+        If comun.contiene(Upper$(listaCadenas[a]), Upper$("comentario")) Then
+            'poner fondo verde
+            GridViewUltimas[a, 0].Background = Color.Green
+
+        Endif
+        If comun.contiene(Upper$(listaCadenas[a]), Upper$("ajuste")) Then
+            'poner fondo naranja: ajuste
+            GridViewUltimas[a, 0].Background = Color.Orange
+
+        Endif
+
+        If comun.contiene(Upper$(listaCadenas[a]), Upper$("transferencia")) Then
+            'poner fondo rosa: transferencia
+            GridViewUltimas[a, 0].Background = Color.Pink
+
+        Endif
+
+        If Mid$(listaCadenas[a], 1, 1) = "\t" Then
+            'poner fondo rosa: transferencia
+            GridViewUltimas[a, 0].Background = Color.Pink
+
+        Endif
+
+        GridViewUltimas[a, 0].text = listaCadenas[a]
+
+    Next
+
+End

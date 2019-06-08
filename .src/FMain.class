@@ -212,6 +212,10 @@ Public Sub ButtonAnalizar_Click()
 
     comun.ColorCeldaNumeroNegativo(GridViewResumen, 1)
 
+    If Exist(User.Home & "/InformacionNotas.txt") Then
+        TextAreaNotas.text = File.load(User.Home & "/InformacionNotas.txt")
+    Endif
+
 End
 
 Public Sub Porcentaje(valor As Float, total As Float) As String
@@ -628,5 +632,23 @@ End
 Public Sub GridViewResumen_DblClick()
 
     marcarfila()
+
+End
+
+Public Sub ButtonCalculadora_Click()
+
+    Exec ["gnome-calculator"]
+
+End
+
+Public Sub ButtonGuardarAnotaciones_Click()
+
+    File.Save(User.Home & "/InformacionNotas.txt", TextAreaNotas.text)
+
+End
+
+Public Sub ButtonCalculadora2_Click()
+
+    FormUltimas.Show()
 
 End

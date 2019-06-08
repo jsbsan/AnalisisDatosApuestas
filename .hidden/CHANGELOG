@@ -1,3 +1,6 @@
+* Sat Jun 08 2019 jsbsan <jusabejusabe@gmail.com> 0.0.29
+- mejoras anotaciones, calculadora del sistema y muestra ultima lineas de datos
+
 * Sat Jun 01 2019 jsbsan <jusabejusabe@gmail.com> 0.0.28
 - cambio codigo del evento Show al evento Open del formulario principal, para que cuando se minimice y luego se vuelva a mostrar los datos no recargue los gridview y asi no se pierdan los icono ok .
 

@@ -1,0 +1,16 @@
+''POSIBLES MEJORAS
+revisar del programa:
+
+-> apuesta con ganancias 0 -> no emite cual gano aunque quede identificado por <-
+
+-> gridview con datos de apuesta y "zen juego"
+
+-> grafica de casas de apuestas y apostado vs caja apuesta
+
+-> COMPARA: Dado un listado de id de apuestas, ver si estan o no pendientes. <-OK
+
+-> LLAMAR A CALCULADORA DEL SISTEMA (PARA REALIZAR PEQUEÑOS CALCULOS)  <-OK
+
+-> textbox PARA AÑADIR ANOTACIONES  <-OK
+
+-> Ver las ultimas apuestas introducidas en el sistema...  <-OK

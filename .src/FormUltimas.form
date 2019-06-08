@@ -1,0 +1,14 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,96.8571,76.7143)
+  Icon = Picture["icon:/16/text"]
+  Arrangement = Arrange.Fill
+  { TextAreaUltimas TextArea
+    MoveScaled(2,2,57,6)
+    Visible = False
+  }
+  { GridViewUltimas GridView
+    MoveScaled(2,12,53,44)
+  }
+}
