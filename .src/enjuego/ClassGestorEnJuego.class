@@ -1,0 +1,15 @@
+' Gambas class file
+
+Public ListaEnJuego As ClaseEnJuego[]
+
+Public Sub _new()
+
+    ListaEnJuego = New ClaseEnJuego[]
+
+    'leer los datos que nos pasas (lista de Id pendiente)
+
+    'por cada apuesta, buscar en archivo lineas que aparecen
+    'procesar las lineas que aparecen -> "enjuego" -> paso a "enjuego XXX " -> paso id y cantidad
+    ' una vez procesadas todas, obtener informacion: columnas: en juego, y filas : Idapuestas, contenido: importes
+    'rellenar gridview de datos
+End

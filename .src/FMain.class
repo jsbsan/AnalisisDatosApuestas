@@ -16,6 +16,12 @@ Public GlobalBeneficio As Float
 
 Public Sub Form_Open()
 
+    If ModuleMeEjecuto.MeEjecuto() Then
+        'fin de la aplicación...
+        Me.Close()
+        Return
+    Endif
+
     Me.Title = "Analisis de Datos. Version " & Application.Version
     'inicio los datos cuando abro el formulario (y no cuando cada vez que lo mostraba)
     settings.read(Me)
@@ -31,7 +37,6 @@ End
 Public Sub Form_Close()
     'guardo los comentarios ultimos...
 
-    ButtonGuardarAnotaciones_Click()
     settings.write(Me)
 
 End
@@ -652,5 +657,13 @@ End
 Public Sub ButtonCalculadora2_Click()
 
     FormUltimas.Show()
+
+End
+
+Public Sub ButtonRecargar_Click()
+
+    If Exist(User.Home & "/InformacionNotas.txt") Then
+        TextAreaNotas.text = File.load(User.Home & "/InformacionNotas.txt")
+    Endif
 
 End

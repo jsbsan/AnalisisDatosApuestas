@@ -187,4 +187,8 @@
     Text = ("Lista Últimas")
     Picture = Picture["icon:/16/view-detail"]
   }
+  { ButtonRecargar Button
+    MoveScaled(155,73,5,3)
+    Picture = Picture["icon:/16/refresh"]
+  }
 }
