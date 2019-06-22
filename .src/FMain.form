@@ -31,7 +31,7 @@
     Font = Font["-1"]
   }
   { ButtonEditorPluma Button
-    MoveScaled(93,1,25,5)
+    MoveScaled(60,1,22,5)
     Text = ("Editor Pluma")
     Picture = Picture["pluma-escritura-png-4-40x40.png"]
   }
@@ -41,7 +41,8 @@
     Text = ("Normal")
   }
   { ButtonPorFecha Button
-    MoveScaled(61,1,21,5)
+    MoveScaled(190,58,21,5)
+    Visible = False
     Text = ("Por fecha y flujo caja")
   }
   { ButtonPorId Button
@@ -50,21 +51,21 @@
     Text = ("Por ID")
   }
   { ButtonFiltrar Button
-    MoveScaled(120,1,23,5)
+    MoveScaled(86,1,18,5)
     Text = ("Buscar ID")
     Picture = Picture["icon:/16/find"]
   }
   { ButtonGraficar Button
-    MoveScaled(153,104,7,5)
+    MoveScaled(190,51,20,5)
     Visible = False
     Text = ("Graficar")
   }
   { ScrollView1 ScrollView
-    MoveScaled(126,72,52,38)
+    MoveScaled(126,72,56,38)
     Arrangement = Arrange.Fill
     AutoResize = True
     { HPanelGrafica HPanel
-      MoveScaled(2,3,45,26)
+      MoveScaled(8,7,45,26)
       Expand = True
       Spacing = True
       Padding = 2
@@ -159,13 +160,14 @@
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonComparaLista Button
-    MoveScaled(146,1,17,5)
+    MoveScaled(108,1,17,5)
     ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
     Text = ("comparar") & "..."
     Picture = Picture["Editing-Compare-icon.png"]
   }
   { ButtonCalculadora Button
-    MoveScaled(168,1,6,5)
+    MoveScaled(144,1,29,5)
+    Text = ("Calculadora")
     Picture = Picture["icon:/16/calculator"]
   }
   { ButtonCalculadora2 Button
