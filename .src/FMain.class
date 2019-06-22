@@ -219,9 +219,7 @@ Public Sub ButtonAnalizar_Click()
 
     comun.ColorCeldaNumeroNegativo(GridViewResumen, 1)
 
-    If Exist(User.Home & "/InformacionNotas.txt") Then
-        TextAreaNotas.text = File.load(User.Home & "/InformacionNotas.txt")
-    Endif
+    ButtonRecargar_Click()
 
 End
 
@@ -382,6 +380,9 @@ Public Sub rellenaGridview()
     comun.DefinirGrid(GridViewResumen, TextAreaResumen.text, 3)
     GridViewResumen.Columns[0].width = 120 'nombre del id de apuesta
     GridViewResumen.Columns[1].width = 75 'nombre del id de apuesta
+    'marco la fila donde esta la información de "en juego"
+    GridViewResumen[3, 0].Background = Color.Cyan
+    GridViewResumen[3, 1].Background = Color.Cyan
 
 End
 
@@ -651,6 +652,7 @@ End
 Public Sub ButtonGuardarAnotaciones_Click()
 
     File.Save(User.Home & "/InformacionNotas.txt", TextAreaNotas.text)
+    TextAreaNotas.pos = 1
 
 End
 
@@ -664,6 +666,7 @@ Public Sub ButtonRecargar_Click()
 
     If Exist(User.Home & "/InformacionNotas.txt") Then
         TextAreaNotas.text = File.load(User.Home & "/InformacionNotas.txt")
+        TextAreaNotas.pos = 1
     Endif
 
 End

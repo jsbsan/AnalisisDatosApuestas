@@ -6,13 +6,14 @@
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
     MoveScaled(0,1,5,5)
+    Background = &HFFFFFF&
     Picture = Picture["homepage-scales-min.png"]
     Stretch = True
   }
   { ButtonAnalizar Button
     MoveScaled(6,1,16,5)
-    Text = ("Analizar")
-    Picture = Picture["homepage-scales-min32x32.png"]
+    Text = ("Resfrescar")
+    Picture = Picture["icon:/16/refresh"]
   }
   { TextAreaLugares TextArea
     MoveScaled(0,72,38,2)
@@ -59,7 +60,7 @@
     Text = ("Graficar")
   }
   { ScrollView1 ScrollView
-    MoveScaled(98,74,55,33)
+    MoveScaled(136,72,47,35)
     Arrangement = Arrange.Fill
     AutoResize = True
     { HPanelGrafica HPanel
@@ -144,10 +145,10 @@
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(45,72,51,35)
+    MoveScaled(85,73,51,35)
   }
   { WebView1 WebView
-    MoveScaled(126,6,66,66)
+    MoveScaled(126,6,57,66)
   }
   { ButtonGraficaJS Button
     MoveScaled(126,69,26,3)
@@ -168,18 +169,18 @@
     Picture = Picture["icon:/16/calculator"]
   }
   { TextAreaNotas TextArea
-    MoveScaled(153,76,37,28)
+    MoveScaled(44,75,41,33)
     Background = &HFFFF00&
     Wrap = True
   }
   { Label6 Label
-    MoveScaled(153,73,37,3)
+    MoveScaled(44,72,41,3)
     Background = &HE0E000&
     Text = ("Anotaciones")
     Alignment = Align.Center
   }
   { ButtonGuardarAnotaciones Button
-    MoveScaled(183,73,5,3)
+    MoveScaled(80,72,5,3)
     Picture = Picture["icon:/16/save"]
   }
   { ButtonCalculadora2 Button
@@ -188,7 +189,7 @@
     Picture = Picture["icon:/16/view-detail"]
   }
   { ButtonRecargar Button
-    MoveScaled(155,73,5,3)
+    MoveScaled(44,72,5,3)
     Picture = Picture["icon:/16/refresh"]
   }
   { ButtonCasas Button
