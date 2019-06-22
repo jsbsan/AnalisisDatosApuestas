@@ -78,9 +78,9 @@ Public Sub crearGrafica()
     datos1 = Mid$(datos1, 1, Len(datos1) - 1)
     datos2 = Mid$(datos2, 1, Len(datos2) - 1)
 
-    meses = "\"" & GridViewDatos[0, 0].text & "\""
+    meses = "\"" & Mid$(GridViewDatos[0, 0].text, 1, 5) & "\""
     For a = 1 To GridViewDatos.Rows.count - 2
-        meses &= ",\"" & GridViewDatos[a, 0].text & "\""
+        meses &= ",\"" & Mid$(GridViewDatos[a, 0].text, 1, 5) & "\""
     Next
 
     fich = File.Load(User.home & "/.ChartJS" & "/trabajo2/barra.html")

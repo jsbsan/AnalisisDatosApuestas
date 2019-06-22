@@ -1,56 +1,54 @@
 <!doctype html>
 <html>
   <head>
-    <title>Bar Chart</title>
-    <script src="../Chart.js"></script>
-    <script src="../legend.js"></script>
-    <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
-    <style>
-      canvas{
-      }
-    </style>
+    <title>Informe Areas</title>
+    <script src="../Chart.min.js"></script>
+ <!--  <script src="../legend.js"></script>'' -->
+ <!-- <div style="with:100%;">
+  <canvas id="myChart"></canvas>
+</div> -->
   </head>
+
   <body>
 
-  <div>
-    <canvas id="canvas" height="300" width="450"></canvas>
-    <div id="lineLegend"></div>
-  </div>
+<canvas id="myChart"  width="200" height="115"></canvas>
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+  data: {
+    labels: [#meses],
+    datasets: [{
+      label: '#titulo1',
+      yAxisID: 'A',
+      data: [#datos1],
+      borderColor:'rgba(255, 99, 132, 0.2)',
+       backgroundColor: 'rgba(255, 99, 132, 0.2)'
+    }, {
+      label: '#titulo2',
+      yAxisID: 'B',
+      data: [#datos2],
+            borderColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: 'rgba(137, 172, 118, 0.5)'
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        id: 'A',
+        type: 'linear',
+        position: 'left',
+      }, {
+        id: 'B',
+        type: 'linear',
+        position: 'right'
 
-  <script>
-
-    var barChartData = {
-      labels : [#meses],
-      datasets : [
-        {
-          fillColor : "rgba(255,0,0,0.5)",
-          strokeColor : "rgba(250,0,0,1)",
-          data : [#datos1],
-          title: '#titulo1'
-        },
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          data : [#datos2],
-          title: '#titulo2'
-        }
-        /*
-        ,
-        {
-          fillColor : "rgba(255,0,0,0.5)",
-          strokeColor : "rgba(250,0,0,1)",
-          data : [#datos3],
-          title: '#titulo3'
-        }
-        */
-      ]
-
-};
-  var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData);
-  var ctx = document.getElementById("canvas").getContext("2d");
-
-  legend(document.getElementById("lineLegend"), barChartData);
+      }]
+    }
+  }
+});
 
   </script>
+  </div>
   </body>
 </html>

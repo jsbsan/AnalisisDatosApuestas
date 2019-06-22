@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,193,111)
+  MoveScaled(0,0,182,111)
   Background = &H6F8BE0&
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
@@ -60,35 +60,35 @@
     Text = ("Graficar")
   }
   { ScrollView1 ScrollView
-    MoveScaled(136,72,47,35)
+    MoveScaled(126,72,52,38)
     Arrangement = Arrange.Fill
     AutoResize = True
     { HPanelGrafica HPanel
-      MoveScaled(0,0,45,26)
+      MoveScaled(2,3,45,26)
       Expand = True
       Spacing = True
       Padding = 2
     }
   }
   { Panel1 Panel
-    MoveScaled(-3,95,47,13)
+    MoveScaled(-5,97,43,13)
     { ProgressBarBanco ProgressBar
-      MoveScaled(14,1,33,2.1429)
+      MoveScaled(14,1,28,2)
       Background = &H5FAFFF&
       Foreground = Color.Blue
     }
     { ProgressBarPaypal ProgressBar
-      MoveScaled(14,3,33,2.1429)
+      MoveScaled(14,3,28,2)
       Background = &HE08B37&
       Foreground = &HE08B37&
     }
     { ProgressBarCasas ProgressBar
-      MoveScaled(14,5,33,2.1429)
+      MoveScaled(14,5,28,2)
       Background = &HE0E000&
       Foreground = &HFFFF5F&
     }
     { ProgressBarBenef ProgressBar
-      MoveScaled(14,7,33,2.1429)
+      MoveScaled(14,7,28,2)
       Background = &HE03761&
       Foreground = &HFF8F1F&
     }
@@ -113,7 +113,7 @@
       Alignment = Align.Right
     }
     { ProgressBarEnJuego ProgressBar
-      MoveScaled(14,9,33,2.1429)
+      MoveScaled(14,9,28,2)
       Background = &H00E000&
       Foreground = &H00C000&
     }
@@ -124,20 +124,20 @@
     }
   }
   { GridViewEnJuego GridView
-    MoveScaled(39,6,86,66)
+    MoveScaled(39,6,86,52)
   }
   { ButtonApuestasEnJuego Button
-    MoveScaled(119,66,5,6)
+    MoveScaled(120,52,5,6)
     Picture = Picture["icon:/16/copy"]
   }
   { GridViewLugares GridView
     MoveScaled(0,6,38,66)
   }
   { GridViewResumen GridView
-    MoveScaled(0,72,44,23)
+    MoveScaled(0,72,38,23)
   }
   { ButtonCopiaResumen Button
-    MoveScaled(30,67,5,5)
+    MoveScaled(33,67,5,5)
     Picture = Picture["icon:/16/copy"]
   }
   { TextAreaAgenda TextArea
@@ -145,17 +145,17 @@
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(85,73,51,35)
+    MoveScaled(126,6,55,33)
   }
   { WebView1 WebView
-    MoveScaled(126,6,57,66)
+    MoveScaled(39,59,86,51)
   }
   { ButtonGraficaJS Button
-    MoveScaled(126,69,26,3)
+    MoveScaled(68,107,26,3)
     Text = ("graficar con javascript")
   }
   { ButtonCopiaResumenCompactado Button
-    MoveScaled(39,89,5,6)
+    MoveScaled(33,89,5,6)
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonComparaLista Button
@@ -168,33 +168,36 @@
     MoveScaled(168,1,6,5)
     Picture = Picture["icon:/16/calculator"]
   }
-  { TextAreaNotas TextArea
-    MoveScaled(44,75,41,33)
-    Background = &HFFFF00&
-    Wrap = True
-  }
-  { Label6 Label
-    MoveScaled(44,72,41,3)
-    Background = &HE0E000&
-    Text = ("Anotaciones")
-    Alignment = Align.Center
-  }
-  { ButtonGuardarAnotaciones Button
-    MoveScaled(80,72,5,3)
-    Picture = Picture["icon:/16/save"]
-  }
   { ButtonCalculadora2 Button
     MoveScaled(39,1,18,5)
     Text = ("Lista Últimas")
     Picture = Picture["icon:/16/view-detail"]
   }
-  { ButtonRecargar Button
-    MoveScaled(44,72,5,3)
-    Picture = Picture["icon:/16/refresh"]
-  }
   { ButtonCasas Button
     MoveScaled(23,1,14,5)
     Text = ("Zen Juego")
     Picture = Picture["icon:/16/table"]
+  }
+  { Panel2 Panel
+    MoveScaled(126,40,56,31)
+    { TextAreaNotas TextArea
+      MoveScaled(0,3,55,27)
+      Background = &HFFFF00&
+      Wrap = True
+    }
+    { Label6 Label
+      MoveScaled(0,0,55,3)
+      Background = &HE0E000&
+      Text = ("Anotaciones")
+      Alignment = Align.Center
+    }
+    { ButtonGuardarAnotaciones Button
+      MoveScaled(50,0,5,3)
+      Picture = Picture["icon:/16/save"]
+    }
+    { ButtonRecargar Button
+      MoveScaled(0,0,5,3)
+      Picture = Picture["icon:/16/refresh"]
+    }
   }
 }

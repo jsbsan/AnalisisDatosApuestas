@@ -378,11 +378,12 @@ Public Sub rellenaGridview()
     GridViewLugares.Columns[0].width = 150 'nombre del id de apuesta
 
     comun.DefinirGrid(GridViewResumen, TextAreaResumen.text, 3)
-    GridViewResumen.Columns[0].width = 120 'nombre del id de apuesta
-    GridViewResumen.Columns[1].width = 75 'nombre del id de apuesta
+    GridViewResumen.Columns[0].width = 100 'nombre del id de apuesta
+    GridViewResumen.Columns[1].width = 50 'nombre del id de apuesta
     'marco la fila donde esta la información de "en juego"
     GridViewResumen[3, 0].Background = Color.Cyan
     GridViewResumen[3, 1].Background = Color.Cyan
+    GridViewResumen.Font.size = 8
 
 End
 
