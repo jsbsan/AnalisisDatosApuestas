@@ -1,4 +1,7 @@
 * Sat Jun 22 2019 jsbsan <jusabejusabe@gmail.com> 0.0.33
+- agrego un visor de calendario
+
+* Sat Jun 22 2019 jsbsan <jusabejusabe@gmail.com> 0.0.33
 - uso version chartjs 2.8 que permite graficas de doble escala
 
 * Sat Jun 22 2019 jsbsan <jusabejusabe@gmail.com> 0.0.32

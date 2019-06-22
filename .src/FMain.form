@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,182,111)
+  MoveScaled(0,0,218,111)
   Background = &H6F8BE0&
   Icon = Picture["analisis.png"]
   { PictureBox1 PictureBox
@@ -199,5 +199,8 @@
       MoveScaled(0,0,5,3)
       Picture = Picture["icon:/16/refresh"]
     }
+  }
+  { DateChooser1 DateChooser
+    MoveScaled(182,6,36,33)
   }
 }
