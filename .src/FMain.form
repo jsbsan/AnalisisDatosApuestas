@@ -110,6 +110,7 @@
     }
     { Label4 Label
       MoveScaled(1,7,13,2)
+      Font = Font["-2"]
       Text = ("Benef. Esper:")
       Alignment = Align.Right
     }
