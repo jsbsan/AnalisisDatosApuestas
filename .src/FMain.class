@@ -375,7 +375,6 @@ Public Sub rellenaGridview()
     GridViewEnJuego.Columns[3].width = 75 'fecha
     comun.PonerIconoFechaActual(GridViewEnJuego, 3)
 
-
     comun.DefinirGrid(GridViewLugares, TextAreaLugares.text)
     GridViewLugares.Columns[0].width = 150 'nombre del id de apuesta
 
@@ -430,7 +429,11 @@ Public Sub RellenarAvanceAgenda()
     Next
 
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
-    GridViewAgenda.Columns[0].width = 100 'nombre del id de apuesta
+    GridViewAgenda.Columns[0].width = 70 'nombre del id de apuesta
+    GridViewAgenda.Columns[1].width = 60 'nombre del id de apuesta
+    GridViewAgenda.Columns[2].width = 60 'nombre del id de apuesta
+
+    ''TODO: DEFINIR ANCHOS
 
 End
 

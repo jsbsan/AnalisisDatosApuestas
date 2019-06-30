@@ -147,7 +147,7 @@
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(126,6,55,33)
+    MoveScaled(148,6,34,33)
   }
   { WebView1 WebView
     MoveScaled(39,59,86,51)
@@ -167,7 +167,7 @@
     Picture = Picture["Editing-Compare-icon.png"]
   }
   { ButtonCalculadora Button
-    MoveScaled(144,1,29,5)
+    MoveScaled(126,31,21,8)
     Text = ("Calculadora")
     Picture = Picture["icon:/16/calculator"]
   }
@@ -204,6 +204,6 @@
     }
   }
   { DateChooser1 DateChooser
-    MoveScaled(182,6,36,33)
+    MoveScaled(126,6,21,24)
   }
 }
