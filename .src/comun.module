@@ -160,3 +160,21 @@ Public Function Between(Datos As String, Cadena1 As String, Cadena2 As String) A
     Return Mid(Datos, iinf, isup - iinf)
 
 End
+
+Public Function PonerIconoFechaActual(G As GridView, columna As Integer)
+
+    Dim a As Integer
+    Dim fechaActual As String
+    'por defecto:
+    fechaActual = Format$(Now, "dd")
+    fechaActual &= "/" & Format$(Now, "mm")
+    fechaActual &= "/" & Format$(Now, "yyyy")
+    For a = 0 To g.rows.Count - 1
+        If g[a, 3].text = fechaActual Then
+            g[a, 0].picture = Picture["exclamacion20x20.png"]
+
+        Endif
+
+    Next
+
+End
