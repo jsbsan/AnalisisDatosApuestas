@@ -684,3 +684,9 @@ Public Sub ButtonCasas_Click()
     GestorZenJuego = New ClassGestorZEnJuego(ListaId.IdexistentesPendientes())
 
 End
+
+Public Sub DateChooser1_Data(Fecha As Date)
+
+    If WeekDay(Fecha) = 0 Or If WeekDay(Fecha) = 6 Then DateChooser1[fecha].Background = Color.Lighter(Color.cyan) 'siempre que sea sabado o domingo se pondra el fondo en rojo claro
+
+End
