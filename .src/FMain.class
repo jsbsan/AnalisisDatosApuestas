@@ -378,6 +378,8 @@ Public Sub rellenaGridview()
     comun.DefinirGrid(GridViewLugares, TextAreaLugares.text)
     GridViewLugares.Columns[0].width = 150 'nombre del id de apuesta
 
+    cargaIconosEnLugares()
+
     comun.DefinirGrid(GridViewResumen, TextAreaResumen.text, 3)
     GridViewResumen.Columns[0].width = 100 'nombre del id de apuesta
     GridViewResumen.Columns[1].width = 50 'nombre del id de apuesta
@@ -612,18 +614,52 @@ End
 
 Public Sub GridViewLugares_DblClick()
 
-    ' Dim FILA As Integer
-    '
-    ' fila = Last.Rows.Selection[0]
-    ' 'depende de que boton del raton pulses, se pone un icono OK o un icono NO
-    ' If Mouse.Right = False Then
-    '     Last[fila, 1].Picture = Picture["ok.png"]
-    ' Endif
-    '
-    ' If Mouse.Right = True Then
-    '     Last[fila, 1].Picture = Picture["no.png"]
-    ' Endif
-    marcarfila()
+    Dim FILA As Integer
+    Dim lugar As String
+    Dim estado As Integer
+
+    fila = Last.Rows.Selection[0]
+    lugar = Last[fila, 0].text
+
+    Try estado = Settings[lugar, 0]
+    If Error Then estado = 0
+
+    Select Case estado
+        Case 0
+            Settings[lugar] = 1
+            Last[fila, 1].Picture = Picture["ok.png"]
+        Case 1
+            Settings[lugar] = 2
+            Last[fila, 1].Picture = Picture["no.png"]
+        Case 2
+            Settings[lugar] = 0
+            Last[fila, 1].Picture = Picture["interrogacion20x20.png"]
+    End Select
+
+End
+
+Public Sub cargaIconosEnLugares()
+
+    Dim a As Integer
+    Dim estado As Integer
+
+    For a = 0 To GridViewLugares.rows.count - 1
+        If InStr(GridViewLugares[a, 0].text, "Total") <> 0 Or InStr(GridViewLugares[a, 0].text, "_______") <> 0 Then Break
+
+        Try estado = Settings[GridViewLugares[a, 0].text, 0]
+        If Error Then estado = 0
+
+        Select Case estado
+            Case 0
+                gridviewLugares[a, 1].Picture = Picture["interrogacion20x20.png"]
+            Case 1
+                gridviewLugares[a, 1].Picture = Picture["ok.png"]
+
+            Case 2
+                gridviewLugares[a, 1].Picture = Picture["no.png"]
+        End Select
+
+    Next
 
 End
 
