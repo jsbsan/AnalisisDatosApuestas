@@ -693,7 +693,7 @@ End
 
 Public Sub ButtonGuardarAnotaciones_Click()
 
-    File.Save(User.Home & "/InformacionNotas.txt", TextAreaNotas.text)
+    File.Save(User.Home & "/informacionNotas.txt", TextAreaNotas.text)
     TextAreaNotas.pos = 1
 
 End
@@ -706,8 +706,8 @@ End
 
 Public Sub ButtonRecargar_Click()
 
-    If Exist(User.Home & "/InformacionNotas.txt") Then
-        TextAreaNotas.text = File.load(User.Home & "/InformacionNotas.txt")
+    If Exist(User.Home & "/informacionNotas.txt") Then
+        TextAreaNotas.text = File.load(User.Home & "/informacionNotas.txt")
         TextAreaNotas.pos = 1
     Endif
 

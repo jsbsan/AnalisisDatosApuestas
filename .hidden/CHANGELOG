@@ -1,3 +1,6 @@
+* Tue Jul 09 2019 jsbsan <jusabejusabe@gmail.com> 0.0.36
+- uso el nombre en minuscula del archivo informacionNotas.txt
+
 * Sat Jul 06 2019 jsbsan <jusabejusabe@gmail.com> 0.0.36
 - se guarda en settings el estado de comprobacion de lugares
 
