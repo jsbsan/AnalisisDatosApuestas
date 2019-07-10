@@ -23,20 +23,29 @@ Public Sub graficarDatos(w As WebView, gridDatos As GridView)
     GridViewDatos = gridDatos
 
     '  definir()
-    '  If Exist(User.home & "/.ChartJS") Then
-    '  Else
+
     Try Mkdir User.home & "/.ChartJS"
     Try Mkdir User.home & "/.ChartJS/trabajo2"
     'limpieza de archivos
-    Comun.vaciarDirectorio(User.home & "/.ChartJS")
-    Comun.vaciarDirectorio(User.home & "/.ChartJS/trabajo2")
+    '   Comun.vaciarDirectorio(User.home & "/.ChartJS")
+    '  Comun.vaciarDirectorio(User.home & "/.ChartJS/trabajo2")
 
-    archivo = "./Chart.js"
-    copiarArchivos(archivo)
-    archivo = "./Chart.min.js"
-    copiarArchivos(archivo)
-    archivo = "./legend.js"
-    copiarArchivos(archivo)
+    If Not Exist(User.home & "/.ChartJS/Chart.js") Then
+        archivo = "./Chart.js"
+        copiarArchivos(archivo)
+    Endif
+
+    If Not Exist(User.home & "/.ChartJS/Chart.min.js") Then
+        archivo = "./Chart.min.js"
+        copiarArchivos(archivo)
+    Endif
+
+    If Not Exist(User.home & "/.ChartJS/legend.js") Then
+        archivo = "./legend.js"
+        copiarArchivos(archivo)
+    Endif
+
+    Shell "rm " & User.home & "/.ChartJS" & "/trabajo2/barra.html" Wait
 
     archivo = "./barra.html"
     copiarArchivosAtrabajo(archivo)

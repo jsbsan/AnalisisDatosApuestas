@@ -14,6 +14,8 @@ Public ImporteCaja As Float
 
 Public GlobalBeneficio As Float
 
+Public DiasAgenda As Integer = 45
+
 Public Sub Form_Open()
 
     If ModuleMeEjecuto.MeEjecuto() Then
@@ -211,7 +213,7 @@ Public Sub ButtonAnalizar_Click()
     'avance Agenda
     RellenarAvanceAgenda()
     'graficar agenda
-    ButtonGraficaJS_Click()
+    ButtonGraficaJS15_Click()
 
     comun.ColorCeldaNumeroNegativo(GridViewLugares, 1)
 
@@ -406,7 +408,8 @@ Public Sub RellenarAvanceAgenda()
     FechaConjuntoApuestas = maximafecha(GridViewEnJuego)
 
     Dim resultado As String[]
-    For a = 0 To 15 'miro 30 dias
+
+    For a = 0 To DiasAgenda
 
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
 
@@ -494,7 +497,12 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
 
 End
 
-Public Sub ButtonGraficaJS_Click()
+Public Sub ButtonGraficaJS15_Click()
+
+    DiasAgenda = 15
+
+    RellenarAvanceAgenda()
+    comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
 
     GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
 
@@ -724,5 +732,16 @@ End
 Public Sub DateChooser1_Data(Fecha As Date)
 
     If WeekDay(Fecha) = 0 Or If WeekDay(Fecha) = 6 Then DateChooser1[fecha].Background = Color.Lighter(Color.cyan) 'siempre que sea sabado o domingo se pondra el fondo en rojo claro
+
+End
+
+Public Sub ButtonGraficaJS45_Click()
+
+    DiasAgenda = 45
+
+    RellenarAvanceAgenda()
+    comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
+
+    GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
 
 End

@@ -152,9 +152,9 @@
   { WebView1 WebView
     MoveScaled(39,59,86,51)
   }
-  { ButtonGraficaJS Button
-    MoveScaled(68,107,26,3)
-    Text = ("graficar con javascript")
+  { ButtonGraficaJS15 Button
+    MoveScaled(45,107,26,3)
+    Text = ("graficar 15 dias")
   }
   { ButtonCopiaResumenCompactado Button
     MoveScaled(33,89,5,6)
@@ -169,7 +169,7 @@
   { ButtonCalculadora Button
     MoveScaled(126,31,21,8)
     Text = ("Calculadora")
-    Picture = Picture["icon:/16/calculator"]
+    Picture = Picture["icon:/48/calculator"]
   }
   { ButtonCalculadora2 Button
     MoveScaled(39,1,18,5)
@@ -205,5 +205,9 @@
   }
   { DateChooser1 DateChooser
     MoveScaled(126,6,21,24)
+  }
+  { ButtonGraficaJS45 Button
+    MoveScaled(89,107,26,3)
+    Text = ("graficar 45 dias")
   }
 }
