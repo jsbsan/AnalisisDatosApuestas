@@ -745,3 +745,15 @@ Public Sub ButtonGraficaJS45_Click()
     GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
 
 End
+
+Public Sub ButtonCopia_Click()
+    ''Mediante cuenta en dropbox
+    ''https://www.solvetic.com/tutoriales/article/3707-como-hacer-backup-automatica-en-linux-dropbox/
+
+    Dim salida As String
+
+    Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "/informacion* linux-respaldo" To salida
+
+    Message.info("Información:\n" & salida)
+
+End

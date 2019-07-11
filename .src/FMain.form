@@ -210,4 +210,9 @@
     MoveScaled(89,107,26,3)
     Text = ("graficar 45 dias")
   }
+  { ButtonCopia Button
+    MoveScaled(126,1,21,5)
+    Text = ("Copia Seguridad")
+    Picture = Picture["caja fuerte.png"]
+  }
 }
