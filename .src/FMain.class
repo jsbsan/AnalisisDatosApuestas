@@ -409,7 +409,13 @@ Public Sub RellenarAvanceAgenda()
 
     Dim resultado As String[]
 
-    For a = 0 To DiasAgenda
+    ImporteApostado = Val(GridViewResumen[3, 1].text) + Val(GridViewResumen[4, 1].text)
+
+    ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
+
+    TextAreaAgenda.text &= Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+
+    For a = 1 To DiasAgenda
 
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
 
@@ -425,9 +431,10 @@ Public Sub RellenarAvanceAgenda()
             TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
         Else
             fecha = Date(Year(Now), Month(Now), Day(Now)) + a
-            TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
             ImporteApostado = Val(resultado[1])
             ImporteCaja = Val(resultado[2])
+
+            TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
 
         Endif
 
@@ -485,12 +492,19 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
         datoFechaColumna = Date(nano, nmes, ndia)
         importeA = GridViewEnJuego[a, 4].Text
         importeC = GridViewEnJuego[a, 5].Text
+
+        If DateDiff(datoFechaColumna, fecha, gb.day) < 0 Then Break
+
         If DateDiff(datoFechaColumna, fecha, gb.day) = 0 Then
             datos[0] = True
-            If Val(importeA) < Val(datos[1]) Then datos[1] = importeA
-            If Val(importeC) > Val(datos[2]) Then datos[2] = importeC
+            If Val(importeA) < Val(datos[1]) Then
+                datos[1] = importeA
+            Endif
+            If Val(importeC) > Val(datos[2]) Then
+                datos[2] = importeC
+            Endif
         Endif
-        If DateDiff(datoFechaColumna, fecha, gb.day) < 0 Then Break
+
     Next
 
     Return datos
