@@ -765,9 +765,19 @@ Public Sub ButtonCopia_Click()
     ''https://www.solvetic.com/tutoriales/article/3707-como-hacer-backup-automatica-en-linux-dropbox/
 
     Dim salida As String
+    Dim salida2 As String
+    Dim salida3 As String
+
+    Me.Mouse = Mouse.Wait
+
+    Wait 0.01
 
     Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "/informacion* linux-respaldo" To salida
 
-    Message.info("Información:\n" & salida)
+    Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "'/analisis de apuestas/notas_semanales/Plantilla Semanal.ods' linux-respaldo" To salida2
+
+    Me.Mouse = Mouse.Default
+
+    Message.info("Información:\n" & salida & "\n" & salida2)
 
 End
