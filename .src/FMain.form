@@ -185,7 +185,7 @@
     MoveScaled(126,40,56,31)
     { TextAreaNotas TextArea
       MoveScaled(0,3,55,27)
-      Background = &HFFFF00&
+      Background = &HFFFFFF&
       Wrap = True
     }
     { Label6 Label
