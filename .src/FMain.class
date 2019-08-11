@@ -542,7 +542,7 @@ Public Sub GridViewEnJuego_DblClick()
 
 End
 
-Public Sub ButtonComparaLista_Click()
+Public Sub ButtonComparaListaId_Click()
 
     Dim lista As String[]
     Dim l As String
@@ -576,9 +576,10 @@ Public Sub ButtonComparaLista_Click()
     For a = 0 To listaExistente.count - 1
         existe = False
         nombreAcomparar = Upper$(Replace(Replace(Upper$(listaExistente[a]), " ", ""), "FREEBET", "FREE"))
+        nombreAcomparar = Replace(listaExistente[a], "-", " ")
         For b = 0 To listalimpia.Count - 1
             'lo pongo en mayusculas y quito espacios para normalizar los nombres antes de comparar
-            If nombreAComparar = Upper(Replace(Replace(Upper$(listalimpia[b]), " ", ""), "FREEBET", "FREE")) Then
+            If nombreAComparar = Replace(Upper(Replace(Replace(Upper$(listalimpia[b]), " ", ""), "FREEBET", "FREE")), "-", " ") Then
 
                 existe = True
 
@@ -779,5 +780,105 @@ Public Sub ButtonCopia_Click()
     Me.Mouse = Mouse.Default
 
     Message.info("Información:\n" & salida & "\n" & salida2)
+
+End
+
+Public Sub ButtonComparaListaImportes_Click()
+
+    Dim lista As String[]
+    Dim l As String
+    Dim a, b As Integer = -1
+    Dim listaExistente As String[]
+
+    Dim listalimpia As New String[]
+    Dim contenidoFICHERO As String
+
+    ContenidoFichero = Clipboard.Paste("text/plain")
+    ContenidoFichero = Replace(ContenidoFichero, ",", ".")
+    ContenidoFichero = Replace(ContenidoFichero, " ", "")
+    ContenidoFichero = Replace(ContenidoFichero, "€", "")
+
+    lista = Split(ContenidoFichero, "\n")
+
+    For a = 0 To lista.count - 1
+
+        l = lista[a]
+        If l = "" Or Len(l) = 2 Or Len(l) = 1 Then
+            'no la añado
+        Else
+            listalimpia.Add(l)
+        Endif
+    Next
+
+    ''------------------------------------------------------------------------------------------------
+    '' vamos a comparar las que tengo del portapapeles con las que tengo guadardas en el programa
+    ''------------------------------------------------------------------------------------------------
+    listaExistente = ListaId.ImportesExistentesPendientes()
+
+    Dim existe As Boolean
+    Dim nombreAcomparar As String
+
+    Dim contenido As String
+
+    For a = 0 To listaExistente.count - 1
+        existe = False
+        nombreAcomparar = listaExistente[a]
+
+        For b = 0 To listalimpia.Count - 1
+
+            'If Val(nombreAComparar) = Val(listalimpia[b]) Then
+            If nombreAComparar = listalimpia[b] Then
+                existe = True
+
+            Endif
+
+        Next
+
+        If existe = False Then
+            contenido &= "\t" & listaExistente[a] & "\n"
+        Endif
+
+    Next
+
+    ''------------------------------------------------------------------------------------------------
+    '' Ahora, vamos a comparar las que tengo en el programa con las del portapapeles (por si en el portapapels hay aguna más)
+    ''------------------------------------------------------------------------------------------------
+
+    Dim contenidoFaltaPrograma As String
+
+    For a = 0 To listalimpia.Count - 1
+
+        existe = False
+
+        nombreAcomparar = listalimpia[a]
+        For b = 0 To listaExistente.count - 1
+
+            '      If Val(NombreAComparar) = Val(listaExistente[b]) Then
+            If NombreAComparar = listaExistente[b] Then
+
+                existe = True
+
+            Endif
+
+        Next
+
+        If existe = False Then
+            contenidoFaltaPrograma &= "\t" & listalimpia[a] & "\n"
+        Endif
+
+    Next
+
+    If Len(Replace(contenido, "\n", "")) = 0 And Len(Replace(contenidoFaltaPrograma, "\n", "")) = 0 Then
+        Message.Info("ok, estan todas")
+    Else
+        Dim mensaje As New MensajeCompararListas
+
+        Dim texto As New String[]
+
+        texto.Add("lista (comparando Importes del programa con las del portapapeles):\n" & contenido & "lista (comparando portapapeles con las Importe programa):\n" & contenidoFaltaPrograma)
+
+        mensaje.Lista = texto
+        mensaje.Show()
+    Endif
 
 End

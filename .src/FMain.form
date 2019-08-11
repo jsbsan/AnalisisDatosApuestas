@@ -60,17 +60,6 @@
     Visible = False
     Text = ("Graficar")
   }
-  { ScrollView1 ScrollView
-    MoveScaled(126,72,56,38)
-    Arrangement = Arrange.Fill
-    AutoResize = True
-    { HPanelGrafica HPanel
-      MoveScaled(8,7,45,26)
-      Expand = True
-      Spacing = True
-      Padding = 2
-    }
-  }
   { Panel1 Panel
     MoveScaled(-5,97,43,13)
     { ProgressBarBanco ProgressBar
@@ -160,10 +149,10 @@
     MoveScaled(33,89,5,6)
     Picture = Picture["icon:/16/copy"]
   }
-  { ButtonComparaLista Button
-    MoveScaled(108,1,17,5)
+  { ButtonComparaListaId Button
+    MoveScaled(107,1,18,5)
     ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
-    Text = ("comparar") & "..."
+    Text = ("comparar...ID")
     Picture = Picture["Editing-Compare-icon.png"]
   }
   { ButtonCalculadora Button
@@ -181,28 +170,6 @@
     Text = ("Zen Juego")
     Picture = Picture["icon:/16/table"]
   }
-  { Panel2 Panel
-    MoveScaled(126,40,56,31)
-    { TextAreaNotas TextArea
-      MoveScaled(0,3,55,27)
-      Background = &HFFFFFF&
-      Wrap = True
-    }
-    { Label6 Label
-      MoveScaled(0,0,55,3)
-      Background = &HE0E000&
-      Text = ("Anotaciones")
-      Alignment = Align.Center
-    }
-    { ButtonGuardarAnotaciones Button
-      MoveScaled(50,0,5,3)
-      Picture = Picture["icon:/16/save"]
-    }
-    { ButtonRecargar Button
-      MoveScaled(0,0,5,3)
-      Picture = Picture["icon:/16/refresh"]
-    }
-  }
   { DateChooser1 DateChooser
     MoveScaled(126,6,21,24)
   }
@@ -211,8 +178,48 @@
     Text = ("graficar 45 dias")
   }
   { ButtonCopia Button
-    MoveScaled(126,1,21,5)
+    MoveScaled(160,1,21,5)
     Text = ("Copia Seguridad")
     Picture = Picture["caja fuerte.png"]
+  }
+  { VSplit1 VSplit
+    MoveScaled(126,43,56,69)
+    { TextAreaNotas TextArea
+      MoveScaled(0,0,56,27)
+      Background = &HFFFF9F&
+      Wrap = True
+    }
+    { ScrollView1 ScrollView
+      MoveScaled(0,29,56,32)
+      Arrangement = Arrange.Column
+      AutoResize = True
+      { HPanelGrafica HPanel
+        MoveScaled(1,1,54,26)
+        Expand = True
+        AutoResize = True
+        Spacing = True
+        Padding = 2
+      }
+    }
+  }
+  { Label6 Label
+    MoveScaled(126,40,56,3)
+    Background = &HE0E000&
+    Text = ("Anotaciones")
+    Alignment = Align.Center
+  }
+  { ButtonRecargar Button
+    MoveScaled(126,40,5,3)
+    Picture = Picture["icon:/16/refresh"]
+  }
+  { ButtonGuardarAnotaciones Button
+    MoveScaled(177,40,5,3)
+    Picture = Picture["icon:/16/save"]
+  }
+  { ButtonComparaListaImportes Button
+    MoveScaled(126,1,23,5)
+    ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
+    Text = ("comparar...Importes")
+    Picture = Picture["Editing-Compare-icon.png"]
   }
 }

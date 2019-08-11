@@ -101,6 +101,21 @@ Public Function IdexistentesPendientes() As String[]
 
 End
 
+Public Function ImportesExistentesPendientes() As String[]
+
+    Dim a As Integer
+    Dim listado As New String[]
+
+    For a = 0 To listaId.Count - 1
+        If listaId[a].pendiente = True Then
+            listado.Add(listaId[a].enjuego)
+        Endif
+    Next
+
+    Return listado
+
+End
+
 Public Function listarOrdenID() As String
 
     Dim listaOrden As Integer[]
