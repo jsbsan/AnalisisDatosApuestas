@@ -776,10 +776,11 @@ Public Sub ButtonCopia_Click()
     Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "/informacion* linux-respaldo" To salida
 
     Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "'/analisis de apuestas/notas_semanales/Plantilla Semanal.ods' linux-respaldo" To salida2
+    Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "'/analisis de apuestas/00 166 betburger probandolo 16 marzo.ods' linux-respaldo" To salida3
 
     Me.Mouse = Mouse.Default
 
-    Message.info("Información:\n" & salida & "\n" & salida2)
+    Message.info("Información:\n" & salida & "\n" & salida2 & "\n" & salida3)
 
 End
 
