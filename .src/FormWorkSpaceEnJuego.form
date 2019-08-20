@@ -1,0 +1,17 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,128,70)
+  Arrangement = Arrange.Fill
+  { VSplit1 VSplit
+    MoveScaled(7,1,106,65)
+    { Workspace1 Workspace
+      MoveScaled(7,0,46,29)
+      Orientation = Align.Bottom
+    }
+    { Workspace2 Workspace
+      MoveScaled(7,32,46,29)
+      Orientation = Align.Bottom
+    }
+  }
+}

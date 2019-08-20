@@ -56,6 +56,8 @@ Public Sub _new(listaId As String[])
     'rellenar gridview de datos
     Dim a As Integer
     Dim texto As String
+    Dim AreaEnJuego As New FormWorkSpaceEnJuego
+
     For a = 0 To ListaEnJuego.count - 1
         texto &= "En juego: " & ListaEnJuego[a].Casa & "\t" & "Importe" & "\n"
         texto &= ListaEnJuego[a].Contenido() & "\n"
@@ -67,18 +69,13 @@ Public Sub _new(listaId As String[])
             Dim ftmp As New FormEnJuego
             ftmp.Title = ListaEnJuego[a].Casa
             ftmp.contenido = t
-            ftmp.Show()
+            'ftmp.Show()
+            AreaEnJuego.agrega(ftmp)
         Endif
         texto = ""
     Next
 
-    ' Dim t As New String[]
-    '
-    ' t.Add(texto)
-    '
-    ' FormEnJuego.contenido = t
-    '
-    ' FormEnJuego.Show()
+    AreaEnJuego.Show()
 
 End
 
