@@ -534,7 +534,8 @@ Public Sub GridViewEnJuego_DblClick()
         tmplista.Add(Upper(ContenidoFichero))
         FormFiltroTmp.listado = tmplista
         FormFiltroTmp.FiltroDado(GridViewEnJuego[fila, 0].text)
-        FormFiltroTmp.Show()
+        FormWorkSpaceApu.agrega(FormFiltroTmp)
+        FormWorkSpaceApu.Show()
     Else
         Message.Info("no hay cargada información")
     Endif
@@ -881,5 +882,17 @@ Public Sub ButtonComparaListaImportes_Click()
         mensaje.Lista = texto
         mensaje.Show()
     Endif
+
+End
+
+Public Sub ButtonBuscadorArchivos_Click()
+
+    Exec ["abrirAnalisis"]
+
+End
+
+Public Sub ButtonHerramientaBalance_Click()
+
+    Exec ["TraductorBalance"]
 
 End

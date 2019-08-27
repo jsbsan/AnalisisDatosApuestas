@@ -11,7 +11,7 @@
     Stretch = True
   }
   { ButtonAnalizar Button
-    MoveScaled(6,1,16,5)
+    MoveScaled(6,1,14,5)
     Text = ("Resfrescar")
     Picture = Picture["icon:/16/refresh"]
   }
@@ -31,7 +31,7 @@
     Font = Font["-1"]
   }
   { ButtonEditorPluma Button
-    MoveScaled(60,1,22,5)
+    MoveScaled(53,1,18,5)
     Text = ("Editor Pluma")
     Picture = Picture["pluma-escritura-png-4-40x40.png"]
   }
@@ -51,7 +51,7 @@
     Text = ("Por ID")
   }
   { ButtonFiltrar Button
-    MoveScaled(86,1,18,5)
+    MoveScaled(72,1,18,5)
     Text = ("Buscar ID")
     Picture = Picture["icon:/16/find"]
   }
@@ -136,7 +136,7 @@
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(148,6,34,33)
+    MoveScaled(148,6,36,33)
   }
   { WebView1 WebView
     MoveScaled(39,59,86,51)
@@ -150,7 +150,7 @@
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonComparaListaId Button
-    MoveScaled(107,1,18,5)
+    MoveScaled(91,1,18,5)
     ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
     Text = ("comparar...ID")
     Picture = Picture["Editing-Compare-icon.png"]
@@ -161,12 +161,12 @@
     Picture = Picture["icon:/48/calculator"]
   }
   { ButtonCalculadora2 Button
-    MoveScaled(39,1,18,5)
+    MoveScaled(36,1,16,5)
     Text = ("Lista Últimas")
     Picture = Picture["icon:/16/view-detail"]
   }
   { ButtonCasas Button
-    MoveScaled(23,1,14,5)
+    MoveScaled(22,1,13,5)
     Text = ("Zen Juego")
     Picture = Picture["icon:/16/table"]
   }
@@ -178,19 +178,19 @@
     Text = ("graficar 45 dias")
   }
   { ButtonCopia Button
-    MoveScaled(160,1,21,5)
+    MoveScaled(163,1,21,5)
     Text = ("Copia Seguridad")
     Picture = Picture["caja fuerte.png"]
   }
   { VSplit1 VSplit
-    MoveScaled(126,43,56,69)
+    MoveScaled(126,43,58,69)
     { TextAreaNotas TextArea
-      MoveScaled(0,0,56,27)
+      MoveScaled(0,0,58,27)
       Background = &HFFFF9F&
       Wrap = True
     }
     { ScrollView1 ScrollView
-      MoveScaled(0,29,56,32)
+      MoveScaled(-2,30,56,32)
       Arrangement = Arrange.Column
       AutoResize = True
       { HPanelGrafica HPanel
@@ -203,7 +203,7 @@
     }
   }
   { Label6 Label
-    MoveScaled(126,40,56,3)
+    MoveScaled(126,40,58,3)
     Background = &HE0E000&
     Text = ("Anotaciones")
     Alignment = Align.Center
@@ -213,13 +213,23 @@
     Picture = Picture["icon:/16/refresh"]
   }
   { ButtonGuardarAnotaciones Button
-    MoveScaled(177,40,5,3)
+    MoveScaled(179,40,5,3)
     Picture = Picture["icon:/16/save"]
   }
   { ButtonComparaListaImportes Button
-    MoveScaled(126,1,23,5)
+    MoveScaled(110,1,23,5)
     ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
     Text = ("comparar...Importes")
     Picture = Picture["Editing-Compare-icon.png"]
+  }
+  { ButtonHerramientaBalance Button
+    MoveScaled(134,1,15,5)
+    Text = ("Traductor")
+    Picture = Picture["balanza.png"]
+  }
+  { ButtonBuscadorArchivos Button
+    MoveScaled(150,1,12,5)
+    Text = ("Buscar")
+    Picture = Picture["buscar en analisis.png"]
   }
 }
