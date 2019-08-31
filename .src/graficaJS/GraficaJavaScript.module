@@ -12,12 +12,14 @@ Private titulo2 As String
 Private titulo3 As String
 Private WebView1 As WebView
 Private GridViewDatos As GridView
+Private ValorBanco As Float
 
-Public Sub graficarDatos(w As WebView, gridDatos As GridView)
+Public Sub graficarDatos(w As WebView, gridDatos As GridView, Optional datosBanco As Float)
 
     Dim archivo As String
     Dim n As Integer
     'preparo entorno de trabajo...
+    ValorBanco = datosBanco
 
     WebView1 = w
     GridViewDatos = gridDatos
@@ -74,13 +76,19 @@ Public Sub crearGrafica()
     titulo1 = "En Juego"
     titulo2 = "En Caja"
 
+    If ValorBanco <> 0 Then
+        titulo2 = "En Caja (sin banca)"
+    Else
+        titulo2 = "En Caja"
+    Endif
+
     datos1 = Replace(GridViewDatos[0, 1].text, ",", ".")
-    datos2 = Replace(GridViewDatos[0, 2].text, ",", ".")
+    datos2 = Replace(Str$(Val(GridViewDatos[0, 2].text) - ValorBanco), ",", ".")
     '    datos3 = GridViewDatos[0, 3].text
 
     For a = 1 To GridViewDatos.Rows.count - 1
         datos1 &= "," & Replace(GridViewDatos[a, 1].text, ",", ".")
-        datos2 &= "," & Replace(GridViewDatos[a, 2].text, ",", ".")
+        Try datos2 &= "," & Replace(Str$(Val(GridViewDatos[a, 2].text) - ValorBanco), ",", ".")
         'datos3 &= "," & GridViewDatos[a, 3].text
     Next
 

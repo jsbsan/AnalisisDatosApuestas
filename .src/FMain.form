@@ -232,4 +232,9 @@
     Text = ("Buscar")
     Picture = Picture["buscar en analisis.png"]
   }
+  { ButtonBanco Button
+    MoveScaled(119,105,6,5)
+    Tag = "con"
+    Picture = Picture["banca.png"]
+  }
 }

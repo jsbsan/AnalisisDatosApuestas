@@ -10,12 +10,17 @@
     MoveScaled(0,0,84,6)
     Border = Border.Plain
     { TextBoxFiltro TextBox
-      MoveScaled(7,0,24,6)
+      MoveScaled(2,0,24,6)
     }
     { ButtonBuscar Button
-      MoveScaled(40,0,23,6)
+      MoveScaled(27,0,15,6)
       Text = ("Buscar")
       Picture = Picture["icon:/16/find"]
+    }
+    { HBoxCasas HBox
+      MoveScaled(43,0,41,6)
+      Expand = True
+      AutoResize = True
     }
   }
   { TextBoxComentario TextBox

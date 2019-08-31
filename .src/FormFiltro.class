@@ -15,8 +15,10 @@ Public Sub ButtonBuscar_Click()
         If comun.contiene(lineas[a], TextBoxFiltro.text) Then
             If InStr(Upper(lineas[a]), Upper("comentario:")) = 0 Then
                 TextArea1.text &= lineas[a] & "\n"
+                agregaIcono(lineas[a])
             Else
                 TextBoxComentario.text = lineas[a]
+
             Endif
         Endif
 
@@ -55,5 +57,77 @@ Public Sub FiltroDado(Idtexto As String)
     TextBoxFiltro.text = Idtexto
 
     ButtonBuscar_Click()
+
+End
+
+Public Sub agregaIcono(texto As String)
+
+    Dim CASAS As New String[]
+
+    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL"]
+
+    Dim valor As Integer = -1
+    Dim a As Integer
+
+    For a = 0 To CASAS.count - 1
+        If comun.contiene(Upper$(texto), CASAS[a]) Then
+            valor = a
+            Break
+        Endif
+
+    Next
+    If valor = -1 Then Return 'no encontrado
+
+    ' casavalor = 0 '"BET365"
+    ' casavalor = 1 ' "BETFAIR"
+    ' casavalor = 2 ' "BETSTARS"
+    ' casavalor = 3 ' "BOTEMANIA"
+    ' casavalor = 4 ' "BWIN"
+    ' casavalor = 5 ' "CIRCUS"
+    ' casavalor = 6 ' "CODERE"
+    ' casavalor = 7 ' "GOLDENPARK"
+    ' casavalor = 8 ' "LUCKIA"
+    ' casavalor = 9 ' "MBET"
+    ' casavalor = 10 ' "PAF"
+    ' casavalor = 11 ' "PASTON"
+    ' casavalor = 12 ' "SPORTIUM"
+    ' casavalor = 13 ' "WANABET"
+    ' casavalor = 14 ' "WILLIAMHILL"
+
+    Dim hpic As New PictureBox(HBoxCasas)
+    Select Case valor
+        Case 0
+
+            hpic.h = 40
+            hpic.w = 80
+            hpic.Picture = Picture["iconos/bet365.png"]
+
+        Case 2
+
+            hpic.h = 40
+            hpic.w = 80
+            hpic.Picture = Picture["iconos/betstars.png"]
+
+        Case 8
+            hpic.h = 40
+            hpic.w = 80
+            hpic.Picture = Picture["iconos/luckia.png"]
+
+        Case 9
+            hpic.h = 40
+            hpic.w = 80
+            hpic.Picture = Picture["iconos/marathon bet.png"]
+
+        Case 12
+            hpic.h = 40
+            hpic.w = 80
+            hpic.Picture = Picture["iconos/sportium.png"]
+
+        Case 14
+            hpic.h = 40
+            hpic.w = 80
+            hpic.Picture = Picture["iconos/williamhill.png"]
+
+    End Select
 
 End

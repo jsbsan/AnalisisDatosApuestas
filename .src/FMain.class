@@ -387,7 +387,7 @@ Public Sub rellenaGridview()
     GridViewResumen.Columns[1].width = 50 'nombre del id de apuesta
     'marco la fila donde esta la información de "en juego"
     GridViewResumen[3, 0].Background = Color.Cyan
-    GridViewResumen[3, 1].Background = Color.Cyan
+    GridViewResumen[3, 1].Background = Color.Cyan 'valor de lo jugado actualmente
     GridViewResumen.Font.size = 8
 
 End
@@ -894,5 +894,28 @@ End
 Public Sub ButtonHerramientaBalance_Click()
 
     Exec ["TraductorBalance"]
+
+End
+
+Public Sub ButtonBanco_Click()
+
+    'graficar con datos de banca
+    RellenarAvanceAgenda()
+    comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
+
+    If Last.tag = "con" Then
+        Last.Picture = Picture["bancaSin.png"]
+        Last.tag = "sin"
+        'graficar sin datos de banca
+
+        GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda, Val(GridViewResumen[0, 1].text))
+
+    Else
+        Last.Picture = Picture["banca.png"]
+        Last.tag = "con"
+
+        GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
+
+    Endif
 
 End
