@@ -8,6 +8,9 @@ Public Sub ButtonBuscar_Click()
     Dim lineas As String[]
     Dim a As Integer
 
+    HBoxCasas.Children.Clear() 'limpio
+    HBoxCasas.Tag = ""
+
     TextArea1.text = ""
     lineas = Split(listado[0], "\n")
     Me.Title = "Buscando: " & TextBoxFiltro.text
@@ -98,36 +101,53 @@ Public Sub agregaIcono(texto As String)
     Select Case valor
         Case 0
 
-            hpic.h = 40
-            hpic.w = 80
-            hpic.Picture = Picture["iconos/bet365.png"]
-
+            If comun.contiene(HBoxCasas.Tag, "bet365.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/bet365.png"]
+                HBoxCasas.Tag &= ",bet365.png"
+            Endif
         Case 2
-
-            hpic.h = 40
-            hpic.w = 80
-            hpic.Picture = Picture["iconos/betstars.png"]
-
+            If comun.contiene(HBoxCasas.Tag, "betstars.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/betstars.png"]
+                HBoxCasas.Tag &= ",betstars.png"
+            Endif
         Case 8
-            hpic.h = 40
-            hpic.w = 80
-            hpic.Picture = Picture["iconos/luckia.png"]
-
+            If comun.contiene(HBoxCasas.Tag, "luckia.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/luckia.png"]
+                HBoxCasas.Tag &= ",luckia.png"
+            Endif
         Case 9
-            hpic.h = 40
-            hpic.w = 80
-            hpic.Picture = Picture["iconos/marathon bet.png"]
-
+            If comun.contiene(HBoxCasas.Tag, "marathon bet.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/marathon bet.png"]
+                HBoxCasas.Tag &= ",marathon bet.png"
+            Endif
         Case 12
-            hpic.h = 40
-            hpic.w = 80
-            hpic.Picture = Picture["iconos/sportium.png"]
-
+            If comun.contiene(HBoxCasas.Tag, "sportium.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/sportium.png"]
+                HBoxCasas.Tag &= ",sportium.png"
+            Endif
         Case 14
-            hpic.h = 40
-            hpic.w = 80
-            hpic.Picture = Picture["iconos/williamhill.png"]
-
+            If comun.contiene(HBoxCasas.Tag, "williamhill.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/williamhill.png"]
+                HBoxCasas.Tag &= ",williamhill.png"
+            Endif
     End Select
 
 End
