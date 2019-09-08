@@ -5,9 +5,9 @@
   Icon = Picture["icon:/16/text"]
   Arrangement = Arrange.Fill
   { TabStrip1 TabStrip
-    MoveScaled(3,3,68,37)
+    MoveScaled(4,4,68,37)
     Arrangement = Arrange.Fill
-    Count = 2
+    Count = 3
     Index = 0
     Text = ("0-25")
     { GridViewUltimas GridView
@@ -25,6 +25,41 @@
     }
     { GridViewUltimas2 GridView
       MoveScaled(1,10,53,44)
+    }
+    Index = 2
+    Text = ("Buscador")
+    { VBox1 VBox
+      MoveScaled(2,1,61,28)
+      { HBox1 HBox
+        MoveScaled(0,2,60,5)
+        { Label1 Label
+          MoveScaled(2,1,7,3)
+          Text = ("Filtar:")
+        }
+        { TextBoxFiltrar TextBox
+          MoveScaled(9,1,24,3)
+        }
+        { ButtonFiltrar Button
+          MoveScaled(34,0,14,5)
+          Text = ("Filtrar")
+          Picture = Picture["icon:/22/filter"]
+        }
+        { LabelBuscando Label
+          MoveScaled(49,1,16,3)
+          Visible = False
+          Background = &HFFFF00&
+          Text = ("  buscando") & "..."
+        }
+      }
+      { GridViewDatosFiltrado GridView
+        MoveScaled(24,9,25,17)
+        Expand = True
+      }
+      { TextAreaFiltrado TextArea
+        MoveScaled(7,12,12,12)
+        Visible = False
+        Expand = True
+      }
     }
     Index = 0
   }

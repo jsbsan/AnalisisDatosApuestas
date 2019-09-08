@@ -117,3 +117,31 @@ Public Sub rellenaGridview2()
     Next
 
 End
+
+Public Sub ButtonFiltrar_Click()
+
+    Me.mouse = Mouse.Wait
+    LabelBuscando.visible = True
+    Wait 0.01
+    Shell ("grep \"" & TextBoxFiltrar.text & "\" " & User.Home & "/informacion.csv > /tmp/ultimas.txt") Wait
+
+    TextAreaFiltrado.text = File.Load("/tmp/ultimas.txt")
+
+    TextAreaFiltrado.text = "ID" & "\t" & "fecha" & "\t" & "Movimiento" & "\t" & "Importe" & "\t" & "Nota" & "\n" & TextAreaFiltrado.text
+    comun.DefinirGridSinFormato(GridViewDatosFiltrado, TextAreaFiltrado.text)
+
+    GridViewDatosFiltrado.Columns[0].width = 110 'nombre del id de apuesta
+    GridViewDatosFiltrado.Columns[1].width = 100
+    GridViewDatosFiltrado.Columns[2].width = 110
+    Me.Mouse = Mouse.Default
+    LabelBuscando.visible = False
+
+End
+
+Public Sub TextBoxFiltrar_KeyPress()
+
+    If Key.code = Key.Return Or Key.code = Key.enter Then
+        ButtonFiltrar_Click()
+    Endif
+
+End

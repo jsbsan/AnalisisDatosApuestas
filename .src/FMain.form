@@ -11,7 +11,9 @@
     Stretch = True
   }
   { ButtonAnalizar Button
-    MoveScaled(6,1,14,5)
+    MoveScaled(7,1,18,5)
+    Background = &H00FFFF&
+    ToolTip = ("Actualizar datos, importe apostado")
     Text = ("Resfrescar")
     Picture = Picture["icon:/16/refresh"]
   }
@@ -30,10 +32,10 @@
     Visible = False
     Font = Font["-1"]
   }
-  { ButtonEditorPluma Button
-    MoveScaled(53,1,18,5)
-    Text = ("Editor Pluma")
-    Picture = Picture["pluma-escritura-png-4-40x40.png"]
+  { ButtonEditor Button
+    MoveScaled(59,1,12,5)
+    Text = ("Editor")
+    Picture = Picture["icon:/32/edit"]
   }
   { ButtonNormalListadoApuestanPendientes Button
     MoveScaled(108,108,9,5)
@@ -161,12 +163,12 @@
     Picture = Picture["icon:/48/calculator"]
   }
   { ButtonCalculadora2 Button
-    MoveScaled(36,1,16,5)
+    MoveScaled(42,1,16,5)
     Text = ("Lista Últimas")
     Picture = Picture["icon:/16/view-detail"]
   }
   { ButtonCasas Button
-    MoveScaled(22,1,13,5)
+    MoveScaled(28,1,13,5)
     Text = ("Zen Juego")
     Picture = Picture["icon:/16/table"]
   }

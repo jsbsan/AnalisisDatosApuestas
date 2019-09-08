@@ -259,9 +259,9 @@ Public Function cambiaCeros(dato As String) As String
 
 End
 
-Public Sub ButtonEditorPluma_Click()
+Public Sub ButtonEditor_Click()
 
-    Exec ["pluma", User.home & "/informacion.csv"]
+    Exec ["featherpad", User.home & "/informacion.csv"]
 
 End
 
@@ -410,6 +410,9 @@ Public Sub RellenarAvanceAgenda()
     Dim resultado As String[]
 
     ImporteApostado = Val(GridViewResumen[3, 1].text) + Val(GridViewResumen[4, 1].text)
+
+    'actualizo boton Actualizar (refrescar)
+    ButtonAnalizar.text = GridViewResumen[3, 1].text & " €"
 
     ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
 
