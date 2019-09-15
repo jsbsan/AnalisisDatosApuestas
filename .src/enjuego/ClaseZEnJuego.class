@@ -4,6 +4,7 @@ Public Casa As String 'nombre de la casa de apuesta
 
 Public ListaIdapuesta As String[]
 Public ListaCantidadIdApuesta As Float[]
+Public ListaFechaIdApuesta As String[]
 Public suma As Float
 
 Public Sub _new(nombre As String)
@@ -11,11 +12,12 @@ Public Sub _new(nombre As String)
     casa = nombre
     ListaIdapuesta = New String[]
     ListaCantidadIdApuesta = New Float[]
+    ListaFechaIdApuesta = New String[]
     suma = 0
 
 End
 
-Public Sub agrega(id As String, cantidad As Float)
+Public Sub agrega(id As String, cantidad As Float, fecha As String)
 
     Dim a As Integer
 
@@ -24,6 +26,7 @@ Public Sub agrega(id As String, cantidad As Float)
             'hay una apuesta, que tiene asociado a varias veces la misma casa
             ListacantidadIdApuesta[a] += cantidad
             Me.suma += cantidad
+
             Return 'salgo la subrutina
         Endif
     Next
@@ -32,6 +35,8 @@ Public Sub agrega(id As String, cantidad As Float)
 
     ListaIdapuesta.Add(id)
     ListacantidadIdApuesta.Add(cantidad)
+    ListaFechaIdApuesta.Add(fecha)
+
     Me.suma += cantidad
 
 End
@@ -42,7 +47,7 @@ Public Sub Contenido() As String
     Dim contenido As String
 
     For a = 0 To ListaIdapuesta.count - 1
-        contenido &= ListaIdapuesta[a] & "\t" & ListaCantidadIdApuesta[a] & "\n"
+        contenido &= ListaIdapuesta[a] & "\t" & ListaCantidadIdApuesta[a] & "\t" & ListaFechaIdApuesta[a] & "\n"
 
     Next
     contenido &= "--------------" "\t" & "--------------" & "\n"

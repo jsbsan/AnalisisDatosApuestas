@@ -398,13 +398,13 @@ Public Sub RellenarAvanceAgenda()
     Dim a As Integer
     Dim fecha, FechaConjuntoApuestas As Date
 
-    TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n"
+    '   TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n"
     'partimos del dato de hoy (desde resumen)
     ' TextAreaAgenda.text &= "Actual" & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
 
     'proceso 1 semana (siete dias, a partir de hoy)
     hoy = Format(Now, "dd/mm/yyyy")
-
+    TextAreaAgenda.text = ""
     FechaConjuntoApuestas = maximafecha(GridViewEnJuego)
 
     Dim resultado As String[]
@@ -416,32 +416,47 @@ Public Sub RellenarAvanceAgenda()
 
     ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
 
-    TextAreaAgenda.text &= Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
-
-    For a = 1 To DiasAgenda
+    'TextAreaAgenda.text &= Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+    Dim activadocontador As Boolean = False
+    Dim valormaximo As String
+    Dim valorimportecaja As String
+    'For a = 1 To DiasAgenda
+    For a = DiasAgenda To 0 Step -1
 
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
 
-        If DateDiff(FechaConjuntoApuestas, fecha, gb.day) - 1 > 0 Then
-            'salir del bucle
-            Break
-        Endif
+        '   If DateDiff(FechaConjuntoApuestas, fecha, gb.day) - 1 < 0 Then
+        'salir del bucle
+        '        Break
+        '   Endif
 
         resultado = compruebaGridApuesta(fecha)
 
         If resultado[0] = Null Then
-            fecha = Date(Year(Now), Month(Now), Day(Now)) + a
-            TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+            If activadocontador = True Then
+                fecha = Date(Year(Now), Month(Now), Day(Now)) + a
+                TextAreaAgenda.text = Format(fecha, "dd/mm/yyyy") & "\t" & valormaximo & "\t" & valorimportecaja & "\n" & TextAreaAgenda.text
+            Else
+                'no pongo nada
+            Endif
+
         Else
             fecha = Date(Year(Now), Month(Now), Day(Now)) + a
             ImporteApostado = Val(resultado[1])
             ImporteCaja = Val(resultado[2])
 
-            TextAreaAgenda.text &= Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
+            TextAreaAgenda.text = Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n" & TextAreaAgenda.text
+            valormaximo = resultado[3]
+            valorimportecaja = resultado[4]
+            activadocontador = True
 
         Endif
 
     Next
+
+    '  TextAreaAgenda.text = Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n" & TextAreaAgenda.text
+
+    TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n" & TextAreaAgenda.text
 
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
     GridViewAgenda.Columns[0].width = 70 'nombre del id de apuesta
@@ -484,8 +499,12 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
     datos.Add(Null) 'primer dato 0
     datos.Add(Null) 'primer dato 1
     datos.Add(Null) 'primer dato 2
-    datos[1] = "100000"
-    datos[2] = "0"
+    datos.Add(Null) 'primer dato 3 'auardo el valor maximo de apuestas en un dia
+    datos.Add(Null) 'primer dato 4 'guadardo el valor minimo de caja en un dia
+    datos[1] = "100000" 'guarda importe apostado
+    datos[2] = "0" 'guarda importe de caja
+    datos[3] = "0" 'guarda importe maximo del dia apostado
+    datos[4] = "100000" 'guarda importe apostado
     For a = 0 To GridViewEnJuego.Rows.count - 5
 
         ndia = Val(Mid(GridViewEnJuego[a, 3].Text, 1, 2))
@@ -502,13 +521,19 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
             datos[0] = True
             If Val(importeA) < Val(datos[1]) Then
                 datos[1] = importeA
+                datos[3] = Max(Val(Replace(datos[3], ".", ",")), Val(Replace(importeA, ".", ",")))
+
             Endif
             If Val(importeC) > Val(datos[2]) Then
+                datos[4] = Str$(Min(Val(importeC), Val(datos[2])))
                 datos[2] = importeC
+
             Endif
         Endif
 
     Next
+
+    If datos[4] = 0 Then datos[4] = datos[2]
 
     Return datos
 

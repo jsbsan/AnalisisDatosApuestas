@@ -138,7 +138,7 @@
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(148,6,36,33)
+    MoveScaled(148,6,59,33)
   }
   { WebView1 WebView
     MoveScaled(39,59,86,51)
