@@ -8,6 +8,7 @@ Public Sub ButtonBuscar_Click()
     Dim lineas As String[]
     Dim a As Integer
 
+    TextBoxComentario.text = ""
     HBoxCasas.Children.Clear() 'limpio
     HBoxCasas.Tag = ""
 
@@ -99,8 +100,15 @@ Public Sub agregaIcono(texto As String)
 
     Dim hpic As New PictureBox(HBoxCasas)
     Select Case valor
+        Case 6
+            If comun.contiene(HBoxCasas.Tag, "codere.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/codere.png"]
+                HBoxCasas.Tag &= ",codere.png"
+            Endif
         Case 0
-
             If comun.contiene(HBoxCasas.Tag, "bet365.png") Then
             Else
                 hpic.h = 40
@@ -148,6 +156,15 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/williamhill.png"]
                 HBoxCasas.Tag &= ",williamhill.png"
             Endif
+        Case 10
+            If comun.contiene(HBoxCasas.Tag, "paf.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/paf.png"]
+                HBoxCasas.Tag &= ",paf.png"
+            Endif
+
     End Select
 
 End
