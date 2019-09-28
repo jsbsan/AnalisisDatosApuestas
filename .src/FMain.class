@@ -323,8 +323,6 @@ Public Sub ButtonApuestasEnJuego_Click()
 
 End
 
-''TODO: BARRAS DE PROGRESO http://ploticus.sourceforge.net/gallery/propbars1.htm
-
 Public Sub ButtonGraficar_Click()
 
     Dim p As Pie
@@ -420,8 +418,11 @@ Public Sub RellenarAvanceAgenda()
     Dim activadocontador As Boolean = False
     Dim valormaximo As String
     Dim valorimportecaja As String
-    'For a = 1 To DiasAgenda
-    For a = DiasAgenda To 0 Step -1
+
+    ''TODO: RESOLVIENDO GRAFICA ERRORES EN LOS ULTIMOS DIAS
+
+    For a = 0 To DiasAgenda
+        ' For a = DiasAgenda To 0 Step -1
 
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
 
@@ -456,14 +457,22 @@ Public Sub RellenarAvanceAgenda()
 
     '  TextAreaAgenda.text = Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n" & TextAreaAgenda.text
 
+    'INVERTIR ORDEN DE TEXTAREAAGENDA.TEXT
+    Dim original As String[]
+    Dim final As String[]
+
+    original = Split(TextAreaAgenda.text, "\n")
+
+    final = original.Reverse()
+    final.Remove(0)
+    TextAreaAgenda.text = final.Join("\n")
+
     TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n" & TextAreaAgenda.text
 
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
     GridViewAgenda.Columns[0].width = 70 'nombre del id de apuesta
     GridViewAgenda.Columns[1].width = 60 'nombre del id de apuesta
     GridViewAgenda.Columns[2].width = 60 'nombre del id de apuesta
-
-    ''TODO: DEFINIR ANCHOS
 
 End
 
