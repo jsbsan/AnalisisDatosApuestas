@@ -433,22 +433,26 @@ Public Sub RellenarAvanceAgenda()
 
         resultado = compruebaGridApuesta(fecha)
 
-        If resultado[0] = Null Then
+        If IsNull(resultado) Then
             If activadocontador = True Then
                 fecha = Date(Year(Now), Month(Now), Day(Now)) + a
+                'FIN DEL DIA...
+                ' valormaximo =
+                ' valorimportecaja =
                 TextAreaAgenda.text = Format(fecha, "dd/mm/yyyy") & "\t" & valormaximo & "\t" & valorimportecaja & "\n" & TextAreaAgenda.text
+                Continue
             Else
                 'no pongo nada
             Endif
 
         Else
             fecha = Date(Year(Now), Month(Now), Day(Now)) + a
-            ImporteApostado = Val(resultado[1])
-            ImporteCaja = Val(resultado[2])
+            ImporteApostado = Val(resultado[1]) 'INICIO DEL DIA
+            ImporteCaja = Val(resultado[2]) 'INICIO DEL DIA
 
             TextAreaAgenda.text = Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n" & TextAreaAgenda.text
-            valormaximo = resultado[3]
-            valorimportecaja = resultado[4]
+            valormaximo = resultado[1] 'FINAL DEL DIA
+            valorimportecaja = resultado[2] 'FINAL DEL DIA
             activadocontador = True
 
         Endif
@@ -510,10 +514,10 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
     datos.Add(Null) 'primer dato 2
     datos.Add(Null) 'primer dato 3 'auardo el valor maximo de apuestas en un dia
     datos.Add(Null) 'primer dato 4 'guadardo el valor minimo de caja en un dia
-    datos[1] = "100000" 'guarda importe apostado
-    datos[2] = "0" 'guarda importe de caja
-    datos[3] = "0" 'guarda importe maximo del dia apostado
-    datos[4] = "100000" 'guarda importe apostado
+    datos[1] = "100000000" 'guarda MIN importe apostado
+    datos[2] = "0" 'guarda MIN importe de caja
+    datos[3] = "-100000" 'guarda importe maximo del dia apostado
+    datos[4] = "-100000" 'guarda MAXIMO importe apostado
     For a = 0 To GridViewEnJuego.Rows.count - 5
 
         ndia = Val(Mid(GridViewEnJuego[a, 3].Text, 1, 2))
@@ -528,22 +532,24 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
 
         If DateDiff(datoFechaColumna, fecha, gb.day) = 0 Then
             datos[0] = True
-            If Val(importeA) < Val(datos[1]) Then
-                datos[1] = importeA
-                datos[3] = Max(Val(Replace(datos[3], ".", ",")), Val(Replace(importeA, ".", ",")))
 
+            If Val(Replace(DATOS[1], ".", ",")) > Val(Replace(importeA, ".", ",")) Then
+                datos[1] = importeA
+                datos[2] = IMPORTEc
             Endif
-            If Val(importeC) > Val(datos[2]) Then
-                datos[4] = Str$(Min(Val(importeC), Val(datos[2])))
-                datos[2] = importeC
+
+            If Val(Replace(datos[3], ".", ",")) < Val(Replace(importeA, ".", ",")) Then
+                datos[3] = importeA
+                datos[4] = IMPORTEc
 
             Endif
         Endif
 
     Next
 
-    If datos[4] = 0 Then datos[4] = datos[2]
-
+    If datos[4] = "-100000" Then
+        datos = Null
+    Endif
     Return datos
 
 End
@@ -555,6 +561,7 @@ Public Sub ButtonGraficaJS15_Click()
     RellenarAvanceAgenda()
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
 
+    ''FIXME: ARREGLAR GRAFICA
     GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
 
 End

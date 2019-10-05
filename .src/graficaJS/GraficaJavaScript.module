@@ -82,8 +82,8 @@ Public Sub crearGrafica()
         titulo2 = "En Caja"
     Endif
 
-    datos1 = Replace(GridViewDatos[0, 1].text, ",", ".")
-    datos2 = Replace(Str$(Val(GridViewDatos[0, 2].text) - ValorBanco), ",", ".")
+    Try datos1 = Replace(GridViewDatos[0, 1].text, ",", ".")
+    Try datos2 = Replace(Str$(Val(GridViewDatos[0, 2].text) - ValorBanco), ",", ".")
     '    datos3 = GridViewDatos[0, 3].text
 
     For a = 1 To GridViewDatos.Rows.count - 1
