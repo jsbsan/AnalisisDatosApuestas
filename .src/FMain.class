@@ -411,6 +411,7 @@ Public Sub RellenarAvanceAgenda()
 
     'actualizo boton Actualizar (refrescar)
     ButtonAnalizar.text = GridViewResumen[3, 1].text & " €"
+    Me.Title = "En juego: " & ButtonAnalizar.text
 
     ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
 
@@ -471,7 +472,7 @@ Public Sub RellenarAvanceAgenda()
     final.Remove(0)
     TextAreaAgenda.text = final.Join("\n")
 
-    TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n" & TextAreaAgenda.text
+    TextAreaAgenda.text = "Dia" & "\t" & "Apost+Bene" & "\t" & "Casas+Banco" & "\n" & TextAreaAgenda.text
 
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
     GridViewAgenda.Columns[0].width = 70 'nombre del id de apuesta

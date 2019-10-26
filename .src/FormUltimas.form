@@ -5,7 +5,7 @@
   Icon = Picture["icon:/16/text"]
   Arrangement = Arrange.Fill
   { TabStrip1 TabStrip
-    MoveScaled(4,4,68,37)
+    MoveScaled(4,4,81,45)
     Arrangement = Arrange.Fill
     Count = 3
     Index = 0
@@ -27,11 +27,11 @@
       MoveScaled(1,10,53,44)
     }
     Index = 2
-    Text = ("Buscador")
+    Text = ("Buscador en Archivo de Datos")
     { VBox1 VBox
-      MoveScaled(2,1,61,28)
+      MoveScaled(1,1,75,36)
       { HBox1 HBox
-        MoveScaled(0,2,60,5)
+        MoveScaled(0,2,75,6)
         { Label1 Label
           MoveScaled(2,1,7,3)
           Text = ("Filtar:")
@@ -44,11 +44,17 @@
           Text = ("Filtrar")
           Picture = Picture["icon:/22/filter"]
         }
+        { ButtonCopiar Button
+          MoveScaled(48,0,7,5)
+          Picture = Picture["icon:/32/copy"]
+        }
         { LabelBuscando Label
-          MoveScaled(49,1,16,3)
+          MoveScaled(55,1,16,3)
           Visible = False
           Background = &HFFFF00&
+          Expand = True
           Text = ("  buscando") & "..."
+          Alignment = Align.Center
         }
       }
       { GridViewDatosFiltrado GridView

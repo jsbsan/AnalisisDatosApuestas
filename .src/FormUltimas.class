@@ -145,3 +145,9 @@ Public Sub TextBoxFiltrar_KeyPress()
     Endif
 
 End
+
+Public Sub ButtonCopiar_Click()
+
+    Clipboard.Copy(TextAreaFiltrado.Text)
+
+End
