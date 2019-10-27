@@ -151,3 +151,27 @@ Public Sub ButtonCopiar_Click()
     Clipboard.Copy(TextAreaFiltrado.Text)
 
 End
+
+Public Sub GridViewUltimas_DblClick()
+
+End
+
+Public Sub GridViewDatosFiltrado_DblClick()
+
+    Dim fila As Integer
+    Dim tmplista As New String[]
+    Dim FormFiltroTmp As New FormFiltro
+
+    fila = GridViewDatosFiltrado.Rows.Selection[0]
+
+    If FMain.ContenidoFichero <> "" Then
+        tmplista.Add(Upper(FMain.ContenidoFichero))
+        FormFiltroTmp.listado = tmplista
+        FormFiltroTmp.FiltroDado(GridViewDatosFiltrado[fila, 0].text)
+        FormWorkSpaceApu.agrega(FormFiltroTmp)
+        FormWorkSpaceApu.Show()
+    Else
+        Message.Info("no hay cargada información")
+    Endif
+
+End

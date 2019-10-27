@@ -36,6 +36,7 @@
     }
     { GridViewDatos GridView
       MoveScaled(43,7,30,16)
+      Mode = Select.Multiple
     }
   }
 }

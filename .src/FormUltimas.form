@@ -12,6 +12,7 @@
     Text = ("0-25")
     { GridViewUltimas GridView
       MoveScaled(3,11,53,44)
+      Mode = Select.Multiple
     }
     { TextAreaUltimas TextArea
       MoveScaled(2,1,57,6)
@@ -25,6 +26,7 @@
     }
     { GridViewUltimas2 GridView
       MoveScaled(1,10,53,44)
+      Mode = Select.Multiple
     }
     Index = 2
     Text = ("Buscador en Archivo de Datos")
@@ -60,6 +62,7 @@
       { GridViewDatosFiltrado GridView
         MoveScaled(24,9,25,17)
         Expand = True
+        Mode = Select.Multiple
       }
       { TextAreaFiltrado TextArea
         MoveScaled(7,12,12,12)

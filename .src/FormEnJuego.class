@@ -9,3 +9,23 @@ Public Sub Form_Open()
     comun.DefinirGridSinFormato(GridView1, contenido[0])
 
 End
+
+Public Sub GridView1_DblClick()
+
+    Dim fila As Integer
+    Dim tmplista As New String[]
+    Dim FormFiltroTmp As New FormFiltro
+
+    fila = GridView1.Rows.Selection[0]
+
+    If FMain.ContenidoFichero <> "" Then
+        tmplista.Add(Upper(FMain.ContenidoFichero))
+        FormFiltroTmp.listado = tmplista
+        FormFiltroTmp.FiltroDado(GridView1[fila, 0].text)
+        FormWorkSpaceApu.agrega(FormFiltroTmp)
+        FormWorkSpaceApu.Show()
+    Else
+        Message.Info("no hay cargada información")
+    Endif
+
+End

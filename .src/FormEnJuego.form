@@ -11,5 +11,6 @@
   }
   { GridView1 GridView
     MoveScaled(3,10,55,42)
+    Mode = Select.Multiple
   }
 }
