@@ -732,6 +732,24 @@ Public Sub cargaIconosEnLugares()
 
 End
 
+Public Sub borradoIconosEnLugares()
+
+    Dim a As Integer
+    Dim estado As Integer
+
+    For a = 0 To GridViewLugares.rows.count - 1
+        If InStr(GridViewLugares[a, 0].text, "Total") <> 0 Or InStr(GridViewLugares[a, 0].text, "_______") <> 0 Then Break
+
+        Try Settings[GridViewLugares[a, 0].text] = 0
+        If Error Then estado = 0
+
+        estado = 0
+        gridviewLugares[a, 1].Picture = Picture["interrogacion20x20.png"]
+
+    Next
+
+End
+
 Public Sub marcarfila()
 
     Dim FILA As Integer
@@ -962,5 +980,11 @@ Public Sub ButtonBanco_Click()
         GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
 
     Endif
+
+End
+
+Public Sub ButtonDesactivar_Click()
+
+    borradoIconosEnLugares()
 
 End
