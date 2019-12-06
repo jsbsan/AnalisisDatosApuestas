@@ -1,0 +1,15 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,80,20)
+  Background = &H7FFF00&
+  { TextLabel1 TextLabel
+    MoveScaled(6,5,68,10)
+    Font = Font["Italic,+10"]
+    Text = ("Existe una copia en ejecución")
+  }
+  { Timer1 #Timer
+    #MoveScaled(69,12)
+    Delay = 5000
+  }
+}

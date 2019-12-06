@@ -19,6 +19,7 @@ Public DiasAgenda As Integer = 45
 Public Sub Form_Open()
 
     If ModuleMeEjecuto.MeEjecuto() Then
+        FormMensajesUnosSegundos.Show()
         'fin de la aplicación...
         Me.Close()
         Return

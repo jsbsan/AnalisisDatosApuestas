@@ -1,3 +1,6 @@
+* Fri Dec 06 2019 jsbsan <jusabejusabe@gmail.com> 0.0.55
+- mejora si existe una copia ejecutandose muestra un mensaje
+
 * Sun Nov 03 2019 jsbsan <jusabejusabe@gmail.com> 0.0.54
 - boton de reinicio comprobaciones saldos
 
