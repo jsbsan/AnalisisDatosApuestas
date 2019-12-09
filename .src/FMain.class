@@ -46,6 +46,8 @@ End
 
 Public Sub Form_Show()
 
+    ButtonCopiaSeguridad.text = Settings["CopiaSeguridad", "N/A"]
+
 End
 
 Public Sub ButtonAnalizar_Click()
@@ -826,7 +828,7 @@ Public Sub ButtonGraficaJS45_Click()
 
 End
 
-Public Sub ButtonCopia_Click()
+Public Sub ButtonCopiaSeguridad_Click()
     ''Mediante cuenta en dropbox
     ''https://www.solvetic.com/tutoriales/article/3707-como-hacer-backup-automatica-en-linux-dropbox/
 
@@ -846,6 +848,9 @@ Public Sub ButtonCopia_Click()
     Me.Mouse = Mouse.Default
 
     Message.info("Información:\n" & salida & "\n" & salida2 & "\n" & salida3)
+
+    Settings["CopiaSeguridad"] = Now
+    ButtonCopiaSeguridad.text = Settings["CopiaSeguridad"]
 
 End
 

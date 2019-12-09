@@ -179,8 +179,10 @@
     MoveScaled(88,119,26,3)
     Text = ("graficar 45 dias")
   }
-  { ButtonCopia Button
+  { ButtonCopiaSeguridad Button
     MoveScaled(163,1,21,5)
+    Font = Font["-2"]
+    ToolTip = ("Hacer Copia de Seguridad")
     Text = ("Copia Seguridad")
     Picture = Picture["caja fuerte.png"]
   }
