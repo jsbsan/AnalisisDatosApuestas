@@ -187,18 +187,19 @@
     Picture = Picture["caja fuerte.png"]
   }
   { VSplit1 VSplit
-    MoveScaled(126,43,58,69)
+    MoveScaled(126,43,58,79)
     { TextAreaNotas TextArea
-      MoveScaled(0,0,58,27)
+      MoveScaled(0,0,58,54)
       Background = &HFFFF9F&
+      Expand = True
       Wrap = True
     }
     { ScrollView1 ScrollView
-      MoveScaled(-2,30,56,32)
+      MoveScaled(1,55,56,23)
       Arrangement = Arrange.Column
       AutoResize = True
       { HPanelGrafica HPanel
-        MoveScaled(1,1,54,26)
+        MoveScaled(1,1,54,19)
         Expand = True
         AutoResize = True
         Spacing = True

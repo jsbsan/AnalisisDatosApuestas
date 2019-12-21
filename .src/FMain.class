@@ -849,7 +849,7 @@ Public Sub ButtonCopiaSeguridad_Click()
 
     Message.info("Información:\n" & salida & "\n" & salida2 & "\n" & salida3)
 
-    Settings["CopiaSeguridad"] = Now
+    Settings["CopiaSeguridad"] = Format(Now, "ddd dd/mmm/yyyy hh/nn")
     ButtonCopiaSeguridad.text = Settings["CopiaSeguridad"]
 
 End
