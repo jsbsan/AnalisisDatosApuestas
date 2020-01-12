@@ -8,7 +8,7 @@
 0 PAYPAL
 0 PAYPAL EVA
 1 PrevisionGastos
-2 Ahoros
+2 Ahorros
 BET365
 BETFAIR
 BETSTARS

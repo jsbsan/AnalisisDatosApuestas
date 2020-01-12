@@ -254,7 +254,7 @@ Public Sub sumasi(textocuenta As String, valor As Float)
 
     For Each t In listaCuenta
 
-        If t.nombre = textocuenta Then
+        If Upper$(t.nombre) = Upper$(textocuenta) Then
             t.suma += valor
             ' If t.nombre = "WILLIAMHILL" Then
             '     Print "WILLIAMHILL", T.SUMA
