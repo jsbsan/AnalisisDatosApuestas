@@ -23,7 +23,7 @@
     Font = Font["Monospace"]
   }
   { TextAreaResumen TextArea
-    MoveScaled(21,120,22,4)
+    MoveScaled(66,122,22,2)
     Visible = False
     Font = Font["Monospace,-1"]
   }
@@ -63,7 +63,7 @@
     Text = ("Graficar")
   }
   { Panel1 Panel
-    MoveScaled(-5,109,45,13)
+    MoveScaled(-5,112,45,12)
     { ProgressBarBanco ProgressBar
       MoveScaled(14,1,30,2)
       Background = &H5FAFFF&
@@ -127,10 +127,11 @@
     MoveScaled(0,6,40,77)
   }
   { GridViewResumen GridView
-    MoveScaled(0,84,40,23)
+    MoveScaled(0,83,40,29)
+    Font = Font["-1"]
   }
   { ButtonCopiaResumen Button
-    MoveScaled(35,78,5,5)
+    MoveScaled(36,79,4,4)
     Picture = Picture["icon:/16/copy"]
   }
   { TextAreaAgenda TextArea
@@ -148,7 +149,7 @@
     Text = ("graficar 15 dias")
   }
   { ButtonCopiaResumenCompactado Button
-    MoveScaled(35,101,5,6)
+    MoveScaled(36,108,4,4)
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonComparaListaId Button

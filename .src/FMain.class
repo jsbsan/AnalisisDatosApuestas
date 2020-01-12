@@ -144,6 +144,8 @@ Public Sub ButtonAnalizar_Click()
     'Calculo de sumas de Banco / Casa Apuestas / En Juego  / Zz Beneficio
     Dim enbanco As Float
     Dim enPAYPAL As Float
+    Dim enPreGastos As Float
+    Dim enAhorros As Float
     Dim enzen As Float
     Dim enBeneficioEsperado As Float
     Dim enCasas As Float
@@ -156,6 +158,16 @@ Public Sub ButtonAnalizar_Click()
 
         If comun.contiene(tmpCuenta.nombre, "0 ") Then
             enbanco += Round(tmpCuenta.suma, -2)
+            Continue
+        Endif
+
+        If comun.contiene(tmpCuenta.nombre, "1 ") Then
+            enPreGastos += Round(tmpCuenta.suma, -2)
+            Continue
+        Endif
+
+        If comun.contiene(tmpCuenta.nombre, "2 ") Then
+            enAhorros += Round(tmpCuenta.suma, -2)
             Continue
         Endif
 
@@ -173,9 +185,11 @@ Public Sub ButtonAnalizar_Click()
     '--------------------------------------
     'Tabla 2:resultados...
     '--------------------------------------
-    Dim TotalesRecalculo As Float = Round(enbanco + enPAYPAL + enZEn + enBeneficioEsperado + enCasas, -2)
+    Dim TotalesRecalculo As Float = Round(enbanco + enPreGastos + enAhorros + enPAYPAL + enZEn + enBeneficioEsperado + enCasas, -2)
 
     TextAreaResumen.text &= "En Banco:         " & gb.tab & cambiaCeros(Format(Round(enbanco, -2), "0####.#0")) & gb.tab & Porcentaje(enbanco, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "En Prev.Gastos:        " & gb.tab & cambiaCeros(Format(Round(enPreGastos, -2), "0####.#0")) & gb.tab & Porcentaje(enPreGastos, TotalesRecalculo) & "\n"
+    TextAreaResumen.text &= "En Ahorros:        " & gb.tab & cambiaCeros(Format(Round(enAhorros, -2), "0####.#0")) & gb.tab & Porcentaje(enAhorros, TotalesRecalculo) & "\n"
 
     TextAreaResumen.text &= "En Paypal:        " & gb.tab & cambiaCeros(Format(Round(enPAYPAL, -2), "0####.#0")) & gb.tab & Porcentaje(enPAYPAL, TotalesRecalculo) & "\n"
 
@@ -387,8 +401,8 @@ Public Sub rellenaGridview()
     GridViewResumen.Columns[0].width = 100 'nombre del id de apuesta
     GridViewResumen.Columns[1].width = 50 'nombre del id de apuesta
     'marco la fila donde esta la información de "en juego"
-    GridViewResumen[3, 0].Background = Color.Cyan
-    GridViewResumen[3, 1].Background = Color.Cyan 'valor de lo jugado actualmente
+    GridViewResumen[5, 0].Background = Color.Cyan
+    GridViewResumen[5, 1].Background = Color.Cyan 'valor de lo jugado actualmente
     GridViewResumen.Font.size = 8
 
 End
@@ -410,10 +424,10 @@ Public Sub RellenarAvanceAgenda()
 
     Dim resultado As String[]
 
-    ImporteApostado = Val(GridViewResumen[3, 1].text) + Val(GridViewResumen[4, 1].text)
+    ImporteApostado = Val(GridViewResumen[5, 1].text) + Val(GridViewResumen[6, 1].text) '
 
     'actualizo boton Actualizar (refrescar)
-    ButtonAnalizar.text = GridViewResumen[3, 1].text & " €"
+    ButtonAnalizar.text = GridViewResumen[5, 1].text & " €"
     Me.Title = "En juego: " & ButtonAnalizar.text
 
     ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
