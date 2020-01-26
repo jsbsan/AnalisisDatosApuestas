@@ -63,10 +63,10 @@
     Text = ("Graficar")
   }
   { GridViewEnJuego GridView
-    MoveScaled(40,6,86,64)
+    MoveScaled(40,6,86,63)
   }
   { ButtonApuestasEnJuego Button
-    MoveScaled(121,64,5,6)
+    MoveScaled(123,66,3,3)
     Picture = Picture["icon:/16/copy"]
   }
   { GridViewLugares GridView
@@ -85,14 +85,14 @@
     Visible = False
   }
   { GridViewAgenda GridView
-    MoveScaled(145,6,39,33)
+    MoveScaled(185,88,35,33)
   }
   { WebView1 WebView
-    MoveScaled(40,71,86,51)
+    MoveScaled(40,70,86,52)
   }
   { ButtonGraficaJS15 Button
-    MoveScaled(45,119,26,3)
-    Text = ("graficar 15 dias")
+    MoveScaled(40,71,7,3)
+    Text = ("15 dias")
   }
   { ButtonCopiaResumenCompactado Button
     MoveScaled(36,108,4,4)
@@ -105,7 +105,7 @@
     Picture = Picture["Editing-Compare-icon.png"]
   }
   { ButtonCalculadora Button
-    MoveScaled(126,31,19,8)
+    MoveScaled(145,63,39,8)
     Text = ("Calculadora")
     Picture = Picture["icon:/48/calculator"]
   }
@@ -120,11 +120,11 @@
     Picture = Picture["icon:/16/table"]
   }
   { DateChooser1 DateChooser
-    MoveScaled(126,6,19,24)
+    MoveScaled(126,63,19,26)
   }
   { ButtonGraficaJS45 Button
-    MoveScaled(88,119,26,3)
-    Text = ("graficar 45 dias")
+    MoveScaled(48,71,8,3)
+    Text = ("45 dias")
   }
   { ButtonCopiaSeguridad Button
     MoveScaled(163,1,21,5)
@@ -134,13 +134,7 @@
     Picture = Picture["caja fuerte.png"]
   }
   { VSplit1 VSplit
-    MoveScaled(126,54,58,79)
-    { TextAreaNotas TextArea
-      MoveScaled(0,0,56,64)
-      Background = &HFFFF9F&
-      Expand = True
-      Wrap = True
-    }
+    MoveScaled(126,89,58,33)
     { ScrollView1 ScrollView
       MoveScaled(1,50,56,23)
       Arrangement = Arrange.Column
@@ -155,17 +149,17 @@
     }
   }
   { Label6 Label
-    MoveScaled(126,51,58,3)
+    MoveScaled(126,7,58,3)
     Background = &HE0E000&
     Text = ("Anotaciones")
     Alignment = Align.Center
   }
   { ButtonRecargar Button
-    MoveScaled(126,51,5,3)
+    MoveScaled(126,7,5,3)
     Picture = Picture["icon:/16/refresh"]
   }
   { ButtonGuardarAnotaciones Button
-    MoveScaled(179,51,5,3)
+    MoveScaled(179,7,5,3)
     Picture = Picture["icon:/16/save"]
   }
   { ButtonComparaListaImportes Button
@@ -185,7 +179,7 @@
     Picture = Picture["buscar en analisis.png"]
   }
   { ButtonBanco Button
-    MoveScaled(120,117,6,5)
+    MoveScaled(121,71,5,4)
     Tag = "con"
     Picture = Picture["banca.png"]
   }
@@ -195,57 +189,63 @@
     Picture = Picture["interrogacion20x20.png"]
   }
   { Panel1 Panel
-    MoveScaled(133,39,45,12)
+    MoveScaled(145,77,39,12)
     { ProgressBarBanco ProgressBar
-      MoveScaled(14,1,30,2)
+      MoveScaled(12,1,30,2)
       Background = &H5FAFFF&
       Foreground = Color.Blue
     }
     { ProgressBarPaypal ProgressBar
-      MoveScaled(14,3,30,2)
+      MoveScaled(12,3,30,2)
       Background = &HE08B37&
       Foreground = &HE08B37&
     }
     { ProgressBarCasas ProgressBar
-      MoveScaled(14,5,30,2)
+      MoveScaled(12,5,30,2)
       Background = &HE0E000&
       Foreground = &HFFFF5F&
     }
     { ProgressBarBenef ProgressBar
-      MoveScaled(14,7,30,2)
+      MoveScaled(12,7,30,2)
       Background = &HE03761&
       Foreground = &HFF8F1F&
     }
     { Label1 Label
-      MoveScaled(1,1,13,2)
+      MoveScaled(1,1,11,2)
       Text = ("En Banco:")
       Alignment = Align.Right
     }
     { Label2 Label
-      MoveScaled(1,3,13,2)
+      MoveScaled(1,3,11,2)
       Text = ("En PayPal:")
       Alignment = Align.Right
     }
     { Label3 Label
-      MoveScaled(1,5,13,2)
+      MoveScaled(1,5,11,2)
       Text = ("En Casas:")
       Alignment = Align.Right
     }
     { Label4 Label
-      MoveScaled(1,7,13,2)
+      MoveScaled(1,7,11,2)
       Font = Font["-2"]
       Text = ("Benef. Esper:")
       Alignment = Align.Right
     }
     { ProgressBarEnJuego ProgressBar
-      MoveScaled(14,9,30,2)
+      MoveScaled(12,9,30,2)
       Background = &H00E000&
       Foreground = &H00C000&
     }
     { Label5 Label
-      MoveScaled(1,9,13,2)
+      MoveScaled(5,30,13,2)
       Text = ("En Juego:")
       Alignment = Align.Right
     }
+  }
+  { TextAreaNotas TextArea
+    MoveScaled(126,10,58,53)
+    Background = &HFFFF9F&
+    Expand = True
+    Wrap = True
   }
 }
