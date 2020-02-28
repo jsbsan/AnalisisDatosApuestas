@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,195,98)
+  MoveScaled(0,0,195,101)
   Background = &H6F8BE0&
   Icon = Picture["analisis.png"]
   Arrangement = Arrange.Fill
@@ -52,9 +52,9 @@
     }
   }
   { ScrollView3 ScrollView
-    MoveScaled(0,0,190,88)
+    MoveScaled(-4,-1,195,100)
     { HBoxBarraBotones HBox
-      MoveScaled(0,0,187,6)
+      MoveScaled(0,0,189,5)
       Padding = 2
       { PictureBox1 PictureBox
         MoveScaled(0,0,5,5)
@@ -139,7 +139,7 @@
       }
     }
     { ScrollViewPrincipal ScrollView
-      MoveScaled(0,6,189,104)
+      MoveScaled(0,6,191,104)
       Padding = 2
       { VSplit1 VSplit
         MoveScaled(129,84,58,31)
@@ -280,20 +280,20 @@
           Font = Font["-1"]
         }
         { ButtonCopiaResumenCompactado Button
-          MoveScaled(36,102,4,4)
-          Picture = Picture["icon:/16/copy"]
-        }
-        { ButtonCopiaResumen Button
-          MoveScaled(36,73,4,4)
+          MoveScaled(36,112,4,4)
           Picture = Picture["icon:/16/copy"]
         }
         { GridViewLugares GridView
-          MoveScaled(0,0,40,82)
+          MoveScaled(0,0,40,81)
         }
         { ButtonDesactivar Button
           MoveScaled(0,0,4,3)
           ToolTip = ("desactivar iconos de comprobación")
           Picture = Picture["interrogacion20x20.png"]
+        }
+        { ButtonCopiaResumen Button
+          MoveScaled(36,77,4,4)
+          Picture = Picture["icon:/16/copy"]
         }
       }
     }
