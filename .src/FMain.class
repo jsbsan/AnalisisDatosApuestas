@@ -1008,3 +1008,23 @@ Public Sub ButtonDesactivar_Click()
     borradoIconosEnLugares()
 
 End
+
+Public Sub ButtonCompactar_Click()
+
+    Dim nombre As String 'nombre del archivo de datos
+    Dim copia As String 'variable donde se almacena el contenido del archivo
+    'hacer copia de seguridad del fichero de datos...
+    nombre = User.home & "/informacion.csv"
+    copia = File.Load(nombre)
+    File.Save(Replace(nombre, ".csv", Format(Now, "yyyymmddhhnnss.bak")), copia)
+    Wait 1 'espero 1 segundo para la copia de seguridad
+
+    ModuleCompactar.paso1(TextAreaLugares.text)
+    ModuleCompactar.paso2(TextAreaEnJuego.text)
+    file.Save(nombre, moduleCompactar.PASO3())
+
+    'reiniciar los datos...
+
+    ButtonAnalizar_Click()
+
+End

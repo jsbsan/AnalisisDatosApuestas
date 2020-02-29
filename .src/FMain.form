@@ -72,35 +72,35 @@
         Picture = Picture["icon:/16/refresh"]
       }
       { ButtonCasas Button
-        MoveScaled(28,0,13,5)
+        MoveScaled(20,0,13,5)
         Font = Font["-2"]
         AutoResize = True
         Text = ("Zen Juego")
         Picture = Picture["icon:/16/table"]
       }
       { ButtonCalculadora2 Button
-        MoveScaled(42,0,16,5)
+        MoveScaled(35,0,16,5)
         Font = Font["-2"]
         AutoResize = True
         Text = ("Lista Últimas")
         Picture = Picture["icon:/16/view-detail"]
       }
       { ButtonEditor Button
-        MoveScaled(59,0,12,5)
+        MoveScaled(52,0,12,5)
         Font = Font["-2"]
         AutoResize = True
         Text = ("Editor")
         Picture = Picture["icon:/32/edit"]
       }
       { ButtonFiltrar Button
-        MoveScaled(72,0,13,5)
+        MoveScaled(66,0,13,5)
         Font = Font["-2"]
         AutoResize = True
         Text = ("Buscar ID")
         Picture = Picture["icon:/16/find"]
       }
       { ButtonComparaListaId Button
-        MoveScaled(91,0,18,5)
+        MoveScaled(80,0,16,5)
         Font = Font["-2"]
         ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
         AutoResize = True
@@ -108,12 +108,19 @@
         Picture = Picture["Editing-Compare-icon.png"]
       }
       { ButtonComparaListaImportes Button
-        MoveScaled(110,0,23,5)
+        MoveScaled(97,0,19,5)
         Font = Font["-2"]
         ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
         AutoResize = True
         Text = ("comparar...Importes")
         Picture = Picture["Editing-Compare-icon.png"]
+      }
+      { ButtonCompactar Button
+        MoveScaled(116,1,17,4)
+        Font = Font["-2"]
+        AutoResize = True
+        Text = ("Compactar")
+        Picture = Picture["comprimir.png"]
       }
       { ButtonHerramientaBalance Button
         MoveScaled(134,0,15,5)
