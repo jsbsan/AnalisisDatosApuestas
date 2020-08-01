@@ -1029,3 +1029,14 @@ Public Sub ButtonCompactar_Click()
     ButtonAnalizar_Click()
 
 End
+
+Public Sub GridViewEnJuego_MouseDown()
+
+    Dim idapuesta As String
+
+    If Mouse.Right = True Then
+        idapuesta = gridviewenjuego[GridViewEnJuego.row, 0].text
+        comun.abrirIdApuesta(idapuesta)
+    Endif
+
+End

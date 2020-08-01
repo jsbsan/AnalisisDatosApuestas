@@ -125,7 +125,7 @@
       { PanelGraficaEvolucion Panel
         MoveScaled(42,60,87,52)
         { WebView1 WebView
-          MoveScaled(0,0,86,56)
+          MoveScaled(-1,0,87,56)
         }
         { ButtonGraficaJS15 Button
           MoveScaled(0,1,7,3)
@@ -165,52 +165,52 @@
         }
       }
       { Panel2 Panel
-        MoveScaled(129,68,59,26)
+        MoveScaled(129,68,60,26)
         { Panel1 Panel
-          MoveScaled(20,8,37,12)
+          MoveScaled(29,8,31,12)
           { ProgressBarBanco ProgressBar
-            MoveScaled(13,1,21,2)
+            MoveScaled(9,1,21,2)
             Background = &H5FAFFF&
             Foreground = Color.Blue
           }
           { ProgressBarPaypal ProgressBar
-            MoveScaled(13,3,21,2)
+            MoveScaled(9,3,21,2)
             Background = &HE08B37&
             Foreground = &HE08B37&
           }
           { ProgressBarCasas ProgressBar
-            MoveScaled(13,5,21,2)
+            MoveScaled(9,5,21,2)
             Background = &HE0E000&
             Foreground = &HFFFF5F&
           }
           { ProgressBarBenef ProgressBar
-            MoveScaled(13,7,21,2)
+            MoveScaled(9,7,21,2)
             Background = &HE03761&
             Foreground = &HFF8F1F&
           }
           { Label1 Label
-            MoveScaled(2,1,11,2)
+            MoveScaled(-2,1,11,2)
             Text = ("En Banco:")
             Alignment = Align.Right
           }
           { Label2 Label
-            MoveScaled(2,3,11,2)
+            MoveScaled(-2,3,11,2)
             Text = ("En PayPal:")
             Alignment = Align.Right
           }
           { Label3 Label
-            MoveScaled(2,5,11,2)
+            MoveScaled(-2,5,11,2)
             Text = ("En Casas:")
             Alignment = Align.Right
           }
           { Label4 Label
-            MoveScaled(2,7,11,2)
+            MoveScaled(-2,7,11,2)
             Font = Font["-2"]
             Text = ("Benef. Esper:")
             Alignment = Align.Right
           }
           { ProgressBarEnJuego ProgressBar
-            MoveScaled(13,9,21,2)
+            MoveScaled(9,9,21,2)
             Background = &H00E000&
             Foreground = &H00C000&
           }
@@ -220,25 +220,26 @@
             Alignment = Align.Right
           }
           { Label7 Label
-            MoveScaled(2,9,11,2)
+            MoveScaled(-2,9,11,2)
             Font = Font["-2"]
             Text = ("En Juego:")
             Alignment = Align.Right
           }
         }
         { DateChooser1 DateChooser
-          MoveScaled(0,0,24,26)
+          MoveScaled(0,0,29,26)
         }
         { ButtonCalculadora Button
-          MoveScaled(24,0,34,8)
+          MoveScaled(29,0,29,8)
           Text = ("Calculadora")
           Picture = Picture["icon:/48/calculator"]
         }
       }
       { Panel3 Panel
-        MoveScaled(42,0,87,64)
+        MoveScaled(42,0,87,60)
         { GridViewEnJuego GridView
           MoveScaled(0,0,86,60)
+          ToolTip = ("Pulse boton derecho para abrir Hoja de Calculo relacionada con la ID")
         }
         { ButtonApuestasEnJuego Button
           MoveScaled(83,57,3,3)

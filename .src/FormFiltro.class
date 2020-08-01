@@ -195,3 +195,45 @@ Public Sub agregaIcono(texto As String)
     End Select
 
 End
+
+Public Sub ButtonAbrir_Click()
+
+comun.abrirIdApuesta(TextBoxFiltro.text)
+    '
+    '
+    ' Dim textobusqueda As String
+    ' Dim encontrada As New String[]
+    ' Dim arrayfichero As String[]
+    ' Dim nombrefile As String
+    ' Dim rutabusqueda As String = Settings["rutaDirectorio", "/home/hdd/home/mint/analisis de apuestas"]
+    '
+    ' If Len(TextBoxFiltro.Text) = 5 Then
+    '     TextoBusqueda = Mid$(TextBoxFiltro.Text, 1, 2) & " " & Mid$(TextBoxFiltro.Text, 3, 5)
+    ' Else
+    '     If InStr(TextBoxFiltro.text, "-") = 0 Then
+    '         TextoBusqueda = Mid$(TextBoxFiltro.Text, 1, 6) 'limito la busqueda hasta el sexto caracter
+    '     Else
+    '         TextoBusqueda = Mid$(TextBoxFiltro.Text, 1, InStr(TextBoxFiltro.text, "-") - 1) 'limito la busqueda hasta el "-" en el nombre
+    '         If Len(TextoBusqueda) = 5 Then
+    '             TextoBusqueda = Mid$(TextoBusqueda, 1, 2) & " " & Mid$(TextoBusqueda, 3, 5)
+    '         Endif
+    '     Endif
+    '
+    ' Endif
+    '
+    ' arrayfichero = Dir(rutaBusqueda, "*" & TextoBusqueda & "*", gb.File)
+    ' For Each nombrefile In arrayfichero
+    '     encontrada.add(nombrefile)
+    '
+    ' Next
+    '
+    ' For Each nombrefile In encontrada
+    '     If InStr(nombrefile, "lock") = 0 Then
+    '         'lo puedo abrir
+    '         Desktop.Open(rutabusqueda & "/" & nombrefile)
+    '
+    '         Break ''solo abrir el primero
+    '     Endif
+    ' Next
+
+End

@@ -18,9 +18,13 @@
       Picture = Picture["icon:/16/find"]
     }
     { HBoxCasas HBox
-      MoveScaled(43,0,41,6)
+      MoveScaled(51,0,33,6)
       Expand = True
       AutoResize = True
+    }
+    { ButtonAbrir Button
+      MoveScaled(43,0,7,6)
+      Picture = Picture["icon:/32/open"]
     }
   }
   { TextBoxComentario TextBox

@@ -165,16 +165,64 @@ Public Function PonerIconoFechaActual(G As GridView, columna As Integer)
 
     Dim a As Integer
     Dim fechaActual As String
+    Dim fechaDiaAnterior As String
+
     'por defecto:
     fechaActual = Format$(Now, "dd")
     fechaActual &= "/" & Format$(Now, "mm")
     fechaActual &= "/" & Format$(Now, "yyyy")
+    'fecha dia anterior
+    fechaDiaAnterior = Format$(DateAdd(Now, gb.day, -1), "dd")
+    fechaDiaAnterior &= "/" & Format$(DateAdd(Now, gb.day, -1), "mm")
+    fechaDiaAnterior &= "/" & Format$(DateAdd(Now, gb.day, -1), "yyyy")
+
     For a = 0 To g.rows.Count - 1
         If g[a, 3].text = fechaActual Then
             g[a, 0].picture = Picture["exclamacion20x20.png"]
-
+        Endif
+        If g[a, 3].text = fechaDiaAnterior Then
+            g[a, 0].picture = Picture["Icono_alarmaTriangulo20x20.jpg"]
         Endif
 
+    Next
+
+End
+
+Public Function abrirIdApuesta(idapuesta As String)
+
+    Dim textobusqueda As String
+    Dim encontrada As New String[]
+    Dim arrayfichero As String[]
+    Dim nombrefile As String
+    Dim rutabusqueda As String = Settings["rutaDirectorio", "/home/hdd/home/mint/analisis de apuestas"]
+
+    If Len(idapuesta) = 5 Then
+        TextoBusqueda = Mid$(idapuesta, 1, 2) & " " & Mid$(idapuesta, 3, 5)
+    Else
+        If InStr(idapuesta, "-") = 0 Then
+            TextoBusqueda = Mid$(idapuesta, 1, 6) 'limito la busqueda hasta el sexto caracter
+        Else
+            TextoBusqueda = Mid$(idapuesta, 1, InStr(idapuesta, "-") - 1) 'limito la busqueda hasta el "-" en el nombre
+            If Len(TextoBusqueda) = 5 Then
+                TextoBusqueda = Mid$(TextoBusqueda, 1, 2) & " " & Mid$(TextoBusqueda, 3, 5)
+            Endif
+        Endif
+
+    Endif
+
+    arrayfichero = Dir(rutaBusqueda, "*" & TextoBusqueda & "*", gb.File)
+    For Each nombrefile In arrayfichero
+        encontrada.add(nombrefile)
+
+    Next
+
+    For Each nombrefile In encontrada
+        If InStr(nombrefile, "lock") = 0 Then
+            'lo puedo abrir
+            Desktop.Open(rutabusqueda & "/" & nombrefile)
+
+            Break ''solo abrir el primero
+        Endif
     Next
 
 End
