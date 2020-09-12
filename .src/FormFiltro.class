@@ -100,6 +100,14 @@ Public Sub agregaIcono(texto As String)
     ' casavalor = 15 ' "BETWAY"
     Dim hpic As New PictureBox(HBoxCasas)
     Select Case valor
+        Case 13
+            If comun.contiene(HBoxCasas.Tag, "wanabet.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/wanabet.png"]
+                HBoxCasas.Tag &= ",wanabet.png"
+            Endif
         Case 15
             If comun.contiene(HBoxCasas.Tag, "betway.png") Then
             Else
@@ -141,6 +149,14 @@ Public Sub agregaIcono(texto As String)
                 hpic.w = 80
                 hpic.Picture = Picture["iconos/betstars.png"]
                 HBoxCasas.Tag &= ",betstars.png"
+            Endif
+        Case 7
+            If comun.contiene(HBoxCasas.Tag, "goldenpark.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/goldenpark.png"]
+                HBoxCasas.Tag &= ",goldenpark.png"
             Endif
         Case 8
             If comun.contiene(HBoxCasas.Tag, "luckia.png") Then
@@ -198,7 +214,7 @@ End
 
 Public Sub ButtonAbrir_Click()
 
-comun.abrirIdApuesta(TextBoxFiltro.text)
+    comun.abrirIdApuesta(TextBoxFiltro.text)
     '
     '
     ' Dim textobusqueda As String
