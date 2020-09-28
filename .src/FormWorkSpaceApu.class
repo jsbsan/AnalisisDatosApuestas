@@ -4,6 +4,8 @@ Public contador As Integer
 
 Public Sub Form_Open()
 
+    FMain.ControlVentanas.agrega(Me)
+
 End
 
 Public Sub agrega(formulario As Form)

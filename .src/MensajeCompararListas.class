@@ -5,6 +5,7 @@ Public Lista As String[]
 Public Sub Form_Open()
 
     TextArea1.text = Lista[0]
+    FMain.ControlVentanas.agrega(Me)
 
 End
 

@@ -1,0 +1,23 @@
+' Gambas class file
+
+Public ListaVentanas As New Variant[]
+
+Public Sub agrega(ventana As Variant)
+
+    ListaVentanas.Add(ventana)
+
+End
+
+Public Sub cerrar()
+
+    Dim vtmp As Variant
+
+    For Each vtmp In ListaVentanas
+
+        Try vtmp.kill 'mato si es un proceso
+
+        Try vtmp.Close() 'cierro si es una ventana
+
+    Next
+
+End

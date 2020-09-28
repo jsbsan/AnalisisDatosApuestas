@@ -35,7 +35,7 @@
         Text = ("Zen Juego")
         Picture = Picture["icon:/16/table"]
       }
-      { ButtonCalculadora2 Button
+      { ButtonListaUltimas Button
         MoveScaled(35,0,16,5)
         Font = Font["-2"]
         AutoResize = True

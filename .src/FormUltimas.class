@@ -22,6 +22,8 @@ Public Sub Form_Open()
     rellenaGridview2()
     Me.Title = "últimas lineas del fichero de datos"
 
+    FMain.ControlVentanas.agrega(Me)
+
 End
 
 Public Sub rellenaGridview()

@@ -75,6 +75,8 @@ Public Sub _new(listaId As String[])
         texto = ""
     Next
 
+    FMain.ControlVentanas.agrega(AreaEnJuego)
+
     AreaEnJuego.Show()
 
 End

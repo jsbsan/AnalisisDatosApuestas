@@ -1,3 +1,6 @@
+* Mon Sep 28 2020 jsbsan <jusabejusabe@gmail.com> 0.0.71
+- cerrar aplicaciones y ventanas si se cierra la ventana principal
+
 * Sun Sep 27 2020 jsbsan <jusabejusabe@gmail.com> 0.0.70
 - corregido hacer click en fila no seleccinada
 

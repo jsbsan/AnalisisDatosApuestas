@@ -16,6 +16,8 @@ Public GlobalBeneficio As Float
 
 Public DiasAgenda As Integer = 45
 
+Public ControlVentanas As New ClassControlVentanas
+
 Public Sub Form_Open()
 
     If ModuleMeEjecuto.MeEjecuto() Then
@@ -39,6 +41,8 @@ End
 
 Public Sub Form_Close()
     'guardo los comentarios ultimos...
+
+    ControlVentanas.cerrar()
 
     settings.write(Me)
 
@@ -278,7 +282,11 @@ End
 
 Public Sub ButtonEditor_Click()
 
-    Exec ["featherpad", User.home & "/informacion.csv"]
+    Dim p As Process
+
+    p = Exec ["featherpad", User.home & "/informacion.csv"]
+
+    ControlVentanas.agrega(p)
 
 End
 
@@ -791,7 +799,10 @@ End
 
 Public Sub ButtonCalculadora_Click()
 
-    Exec ["gnome-calculator"]
+    Dim p As Process
+
+    P = Exec ["gnome-calculator"]
+    ControlVentanas.agrega(p)
 
 End
 
@@ -802,7 +813,7 @@ Public Sub ButtonGuardarAnotaciones_Click()
 
 End
 
-Public Sub ButtonCalculadora2_Click()
+Public Sub ButtonListaUltimas_Click()
 
     FormUltimas.Show()
 
@@ -971,13 +982,20 @@ End
 
 Public Sub ButtonBuscadorArchivos_Click()
 
-    Exec ["abrirAnalisis"]
+    Dim p As Process
+
+    p = Exec ["abrirAnalisis"]
+    ControlVentanas.agrega(p)
 
 End
 
 Public Sub ButtonHerramientaBalance_Click()
 
-    Exec ["TraductorBalance"]
+    Dim p As Process
+
+    p = Exec ["TraductorBalance"]
+
+    ControlVentanas.agrega(p)
 
 End
 
