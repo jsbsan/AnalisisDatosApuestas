@@ -1048,7 +1048,7 @@ Public Sub ButtonCompactar_Click()
 
 End
 
-Public Sub GridViewEnJuego_MouseDown()
+Public Sub GridViewEnJuego_MouseUp()
 
     Dim idapuesta As String
 
