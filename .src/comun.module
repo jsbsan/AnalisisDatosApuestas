@@ -141,7 +141,7 @@ Public Sub ColorCeldaNumeroNegativo(g As GridView, c As Integer)
     'por defecto:
 
     For a = 0 To g.rows.Count - 1
-        g[a, c].Foreground = Color.black
+        ' g[a, c].Foreground = Color.black
         If Not g[a, c].text = "" And If Val(g[a, c].text) < 0 Then
             g[a, c].Foreground = Color.Red
         Endif

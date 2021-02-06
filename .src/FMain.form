@@ -146,6 +146,7 @@
         { TextAreaNotas TextArea
           MoveScaled(0,3,58,64)
           Background = &HFFFF9F&
+          Foreground = &H000000&
           Expand = True
           Wrap = True
         }

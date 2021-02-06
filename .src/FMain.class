@@ -42,9 +42,8 @@ End
 Public Sub Form_Close()
     'guardo los comentarios ultimos...
 
-    ControlVentanas.cerrar()
-
     settings.write(Me)
+    ControlVentanas.cerrar()
 
 End
 
@@ -411,6 +410,9 @@ Public Sub rellenaGridview()
     'marco la fila donde esta la información de "en juego"
     GridViewResumen[5, 0].Background = Color.Cyan
     GridViewResumen[5, 1].Background = Color.Cyan 'valor de lo jugado actualmente
+    GridViewResumen[5, 1].Foreground = Color.Black
+    GridViewResumen[5, 0].Foreground = Color.Black
+
     GridViewResumen.Font.size = 8
 
 End
