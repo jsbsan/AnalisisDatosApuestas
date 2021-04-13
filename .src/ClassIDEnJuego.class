@@ -7,10 +7,10 @@ Public fecha As String ' se guarda la fecha de ZZ beneficio / comentario ="enjue
 Public pendiente As Boolean
 
 Public Sub _new(hid As String, cantidad As Float)
-
+    
     id = hid
     zzBeneficio = cantidad
     enjuego = 0
     pendiente = False
-
+    
 End

@@ -4,14 +4,14 @@ Public listado As String[]
 
 Public Sub ButtonBuscar_Click()
     ' TextArea1.text = listado[0]
-
+    
     Dim lineas As String[]
     Dim a As Integer
-
+    
     TextBoxComentario.text = ""
     HBoxCasas.Children.Clear() 'limpio
     HBoxCasas.Tag = ""
-
+    
     TextArea1.text = ""
     lineas = Split(listado[0], "\n")
     Me.Title = "Buscando: " & TextBoxFiltro.text
@@ -22,68 +22,68 @@ Public Sub ButtonBuscar_Click()
                 agregaIcono(lineas[a])
             Else
                 TextBoxComentario.text = lineas[a]
-
+                
             Endif
         Endif
-
+        
     Next
     TextArea1.text = Lower(TextArea1.text)
     TextArea1.text = "ID" & "\t" & "fecha" & "\t" & "Movimiento" & "\t" & "Importe" & "\t" & "Nota" & "\n" & TextArea1.text
     comun.DefinirGridSinFormato(GridViewDatos, TextArea1.text)
-
+    
     'aplico formato al gridview de datos.
     GridViewDatos.Columns[0].width = 110 'nombre del id de apuesta
     GridViewDatos.Columns[1].width = 80
     GridViewDatos.Columns[2].width = 110
     GridViewDatos.Columns[3].Alignment = Align.Right
-
+    
     For a = 0 To GridViewDatos.Rows.count - 1
         GridViewDatos[a, 3].Alignment = Align.Right
-
+        
     Next
-
+    
 End
 
 Public Sub TextBoxFiltro_KeyPress()
-
+    
     If Key.code = Key.enter Or Key.code = Key.return Then
         ButtonBuscar_Click()
     Endif
-
+    
 End
 
 Public Sub Form_Open()
-
+    
     FMain.ControlVentanas.agrega(Me)
-
+    
 End
 
 Public Sub FiltroDado(Idtexto As String)
-
+    
     TextBoxFiltro.text = Idtexto
-
+    
     ButtonBuscar_Click()
-
+    
 End
 
 Public Sub agregaIcono(texto As String)
-
+    
     Dim CASAS As New String[]
-
+    
     CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA"]
-
+    
     Dim valor As Integer = -1
     Dim a As Integer
-
+    
     For a = 0 To CASAS.count - 1
         If comun.contiene(Upper$(texto), CASAS[a]) Then
             valor = a
             Break
         Endif
-
+        
     Next
     If valor = -1 Then Return 'no encontrado
-
+    
     ' casavalor = 0 '"BET365"
     ' casavalor = 1 ' "BETFAIR"
     ' casavalor = 2 ' "BETSTARS"
@@ -136,7 +136,7 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/betway.png"]
                 HBoxCasas.Tag &= ",betway.png"
             Endif
-
+            
         Case 5
             If comun.contiene(HBoxCasas.Tag, "circus.png") Then
             Else
@@ -145,7 +145,7 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/circus.png"]
                 HBoxCasas.Tag &= ",circus.png"
             Endif
-
+            
         Case 6
             If comun.contiene(HBoxCasas.Tag, "codere.png") Then
             Else
@@ -202,7 +202,7 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/paston.png"]
                 HBoxCasas.Tag &= ",paston.png"
             Endif
-
+            
         Case 12
             If comun.contiene(HBoxCasas.Tag, "sportium.png") Then
             Else
@@ -227,13 +227,13 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/paf.png"]
                 HBoxCasas.Tag &= ",paf.png"
             Endif
-
+            
     End Select
-
+    
 End
 
 Public Sub ButtonAbrir_Click()
-
+    
     comun.abrirIdApuesta(TextBoxFiltro.text)
     '
     '
@@ -271,5 +271,5 @@ Public Sub ButtonAbrir_Click()
     '         Break ''solo abrir el primero
     '     Endif
     ' Next
-
+    
 End

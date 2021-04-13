@@ -19,43 +19,43 @@ Public DiasAgenda As Integer = 45
 Public ControlVentanas As New ClassControlVentanas
 
 Public Sub Form_Open()
-
+    
     If ModuleMeEjecuto.MeEjecuto() Then
         FormMensajesUnosSegundos.Show()
         'fin de la aplicación...
         Me.Close()
         Return
     Endif
-
+    
     Me.Title = "Analisis de Datos. Version " & Application.Version
     'inicio los datos cuando abro el formulario (y no cuando cada vez que lo mostraba)
     settings.read(Me)
-
+    
     'hago click en click analizar
-
+    
     ButtonAnalizar_Click()
     'y luego en ordenar por fecha
     ' ButtonPorFecha_Click() -> LO DESACTIVO Porque ButtonAnalizar, ya lo hace.
-
+    
 End
 
 Public Sub Form_Close()
     'guardo los comentarios ultimos...
-
+    
     settings.write(Me)
     ControlVentanas.cerrar()
-
+    
 End
 
 Public Sub Form_Show()
-
+    
     ButtonCopiaSeguridad.text = Settings["CopiaSeguridad", "N/A"]
-
+    
 End
 
 Public Sub ButtonAnalizar_Click()
     '' id fichero	fecha	Cuenta	Saldo	comentario	fuente	VARIOS
-
+    
     Dim contenido As String[]
     Dim l As String
     Dim dato As String[]
@@ -64,17 +64,17 @@ Public Sub ButtonAnalizar_Click()
     Dim total As Float
     'crea lista de cuentas de suma...
     Dim tmpCuenta As ClaseCuenta
-
+    
     'borrado de datos anteriore...
     listaCuenta = New ClaseCuenta[]
-
+    
     ListaId = New ClaseGestorIdBeneficio
-
+    
     If Not Exist(nombrecsv) Then
         Message.Error("No existe fichero de datos")
         Quit
     Endif
-
+    
     'crea las cuentas partiendo del fichero de datos CuentasM.txt
     contenido = Split(File.Load("CuentasM.txt"), "\n")
     For Each l In contenido
@@ -84,48 +84,48 @@ Public Sub ButtonAnalizar_Click()
         listaCuenta.Add(tmpCuenta)
         tmpCuenta = Null
     Next
-
+    
     'leer fichero de datos...
-
+    
     ContenidoFichero = File.Load(nombrecsv)
-
+    
     contenido = Split(Upper(ContenidoFichero), "\n")
     contenido.Delete(0) ' la primera fila contiene los nombre de los campos
-
+    
     'borrado de datos que esten en los textAreas
     TextAreaLugares.text = ""
     TextAreaResumen.text = "Lugar" & "\t" & "Importe" & "\t" & "Porcentaje" & "\n"
-
+    
     For Each l In contenido
-
+        
         dato = Split(l, gb.Tab)
-
+        
         'el dato de la cuenta esta en 2 columna y saldo en la 3
         Try valor = Val(Replace(Replace(dato[3], ".", ","), " €", ""))
         If Error Then
-
+            
         Else
             '-------------------------------------------------
             'tabla de datos Cuenta / Saldo
             '-------------------------------------------------
             sumasi(dato[2], valor) 'cuenta y saldo
-
+            
             '-------------------------------------------------
             'tabla de datos ID / Zzbeneficio
             '-------------------------------------------------
             If dato[2] = "ZZ BENEFICIO" Then
                 ListaId.agrega(dato[0], VALOR, dato[1])
             Endif
-
+            
             '-------------------------------------------------
             'tabla de datos ID / Zzbeneficio /enjuego
             '-------------------------------------------------
             If comun.contiene(dato[2], "ZEN ") Then
                 ListaId.agregaInversion(dato[0], VALOR)
             Endif
-
+            
         Endif
-
+        
     Next
     ' ya he acabado de contar las cuentas y sus sumas
     ' Print "------------------------------------"
@@ -135,15 +135,15 @@ Public Sub ButtonAnalizar_Click()
     For Each tmpcuenta In ListaCuenta
         'Print tmpCuenta.nombre, Format(Round(tmpcuenta.suma, -2), "#.##")
         If Round(tmpcuenta.suma, -2) <> 0 Then
-
+            
             total += Round(tmpcuenta.suma, -2)
             TextAreaLugares.text &= tmpCuenta.nombre & gb.tab & cambiaCeros(Format(Round(tmpcuenta.suma, -2), "0####.#0")) & "\n"
         Endif
     Next
-
+    
     TextAreaLugares.text &= "____________________________\n"
     TextAreaLugares.text &= "Total:" & Format(Round(total, -2), "0###.#0")
-
+    
     'Calculo de sumas de Banco / Casa Apuestas / En Juego  / Zz Beneficio
     Dim enbanco As Float
     Dim enPAYPAL As Float
@@ -153,27 +153,27 @@ Public Sub ButtonAnalizar_Click()
     Dim enBeneficioEsperado As Float
     Dim enCasas As Float
     For Each tmpcuenta In ListaCuenta
-
+        
         If comun.contiene(tmpCuenta.nombre, "PAYPAL") Then
             enPAYPAL += Round(tmpCuenta.suma, -2)
             Continue
         Endif
-
+        
         If comun.contiene(tmpCuenta.nombre, "0 ") Then
             enbanco += Round(tmpCuenta.suma, -2)
             Continue
         Endif
-
+        
         If comun.contiene(tmpCuenta.nombre, "1 ") Then
             enPreGastos += Round(tmpCuenta.suma, -2)
             Continue
         Endif
-
+        
         If comun.contiene(tmpCuenta.nombre, "2 ") Then
             enAhorros += Round(tmpCuenta.suma, -2)
             Continue
         Endif
-
+        
         If comun.contiene(tmpCuenta.nombre, "ZEN ") Then
             enZEN += Round(tmpCuenta.suma, -2)
             Continue
@@ -183,80 +183,80 @@ Public Sub ButtonAnalizar_Click()
             Continue
         Endif
         enCasas += Round(tmpCuenta.suma, -2)
-
+        
     Next
     '--------------------------------------
     'Tabla 2:resultados...
     '--------------------------------------
     Dim TotalesRecalculo As Float = Round(enbanco + enPreGastos + enAhorros + enPAYPAL + enZEn + enBeneficioEsperado + enCasas, -2)
-
+    
     TextAreaResumen.text &= "En Banco:         " & gb.tab & cambiaCeros(Format(Round(enbanco, -2), "0####.#0")) & gb.tab & Porcentaje(enbanco, TotalesRecalculo) & "\n"
     TextAreaResumen.text &= "En Prev.Gastos:        " & gb.tab & cambiaCeros(Format(Round(enPreGastos, -2), "0####.#0")) & gb.tab & Porcentaje(enPreGastos, TotalesRecalculo) & "\n"
     TextAreaResumen.text &= "En Ahorros:        " & gb.tab & cambiaCeros(Format(Round(enAhorros, -2), "0####.#0")) & gb.tab & Porcentaje(enAhorros, TotalesRecalculo) & "\n"
-
+    
     TextAreaResumen.text &= "En Paypal:        " & gb.tab & cambiaCeros(Format(Round(enPAYPAL, -2), "0####.#0")) & gb.tab & Porcentaje(enPAYPAL, TotalesRecalculo) & "\n"
-
+    
     TextAreaResumen.text &= "En Casas:         " & gb.tab & cambiaCeros(Format(Round(enCasas, -2), "0####.#0")) & gb.tab & Porcentaje(enCasas, TotalesRecalculo) & "\n"
-
+    
     TextAreaResumen.text &= "En Juego:         " & gb.tab & cambiaCeros(Format(Round(enZEn, -2), "0####.#0")) & gb.tab & Porcentaje(enZEN, TotalesRecalculo) & "\n"
     TextAreaResumen.text &= "En Beneficio Esp.:" & gb.tab & cambiaCeros(Format(Round(enBeneficioEsperado, -2), "0####.#0")) & gb.tab & Porcentaje(enBeneficioEsperado, TotalesRecalculo) & "\n"
     TextAreaResumen.text &= "__________________" & "\n"
     TextAreaResumen.text &= "Total: " & gb.tab & Str$(Round(totalesRecalculo, -2))
-
+    
     ProgressBarEnJuego.value = enzen / totalesRecalculo
-
+    
     ProgressBarBenef.value = enBeneficioEsperado / totalesRecalculo
-
+    
     ProgressBarCasas.value = enCasas / totalesRecalculo
-
+    
     ProgressBarPaypal.value = enPAYPAL / totalesRecalculo
-
+    
     ProgressBarBanco.value = enbanco / totalesRecalculo
-
+    
     GlobalEnJuego = Round(enzen, -2)
     GlobalTotal = Round(totalesRecalculo, -2)
     GlogbalCajaPayPalBene = GlobalTotal - GlobalEnJuego
-
+    
     ImporteApostado = enZen + enBeneficioEsperado
     ImporteCaja = enCasas + enbanco + enPAYPAL
-
+    
     GlobalBeneficio = enBeneficioEsperado
     '--------------------------------------
     ' TABLA DE DATOS DE ID -> mejor por fecha
     '--------------------------------------
     ButtonPorFecha_Click()
     'TextAreaEnJuego.TEXT = ListaId.listar()
-
+    
     'rellenar gridview
     rellenaGridview()
-
+    
     'avance Agenda
     RellenarAvanceAgenda()
     'graficar agenda
     ButtonGraficaJS15_Click()
-
+    
     comun.ColorCeldaNumeroNegativo(GridViewLugares, 1)
-
+    
     comun.ColorCeldaNumeroNegativo(GridViewEnJuego, 1)
-
+    
     comun.ColorCeldaNumeroNegativo(GridViewResumen, 1)
-
+    
     ButtonRecargar_Click()
-
+    
 End
 
 Public Sub Porcentaje(valor As Float, total As Float) As String
-
+    
     Return Str$(Round(valor * 100 / total, -2)) & " %"
-
+    
 End
 
 Public Sub sumasi(textocuenta As String, valor As Float)
-
+    
     Dim t As ClaseCuenta
-
+    
     For Each t In listaCuenta
-
+        
         If Upper$(t.nombre) = Upper$(textocuenta) Then
             t.suma += valor
             ' If t.nombre = "WILLIAMHILL" Then
@@ -264,61 +264,61 @@ Public Sub sumasi(textocuenta As String, valor As Float)
             ' Endif
         Endif
     Next
-
+    
 End
 
 Public Function cambiaCeros(dato As String) As String
-
+    
     If Mid$(dato, 1, 3) = "000" Then Return "   " & Mid$(dato, 4, 10)
     If Mid$(dato, 1, 2) = "00" Then Return "  " & Mid$(dato, 3, 10)
     If Mid$(dato, 1, 1) = "0" Then Return " " & Mid$(dato, 2, 10)
-
+    
     If Mid$(dato, 1, 4) = "-000" Then Return "  -" & Mid$(dato, 5, 10)
     If Mid$(dato, 1, 3) = "-00" Then Return " -" & Mid$(dato, 4, 10)
     If Mid$(dato, 1, 2) = "-0" Then Return "-" & Mid$(dato, 3, 10)
-
+    
 End
 
 Public Sub ButtonEditor_Click()
-
+    
     Dim p As Process
-
+    
     p = Exec ["featherpad", User.home & "/informacion.csv"]
-
+    
     ControlVentanas.agrega(p)
-
+    
 End
 
 Public Sub ButtonPorFecha_Click()
-
+    
     TextAreaEnJuego.text = ListaId.listarOrdenFecha(GlobalEnJuego + GlobalBeneficio, GlogbalCajaPayPalBene - GlobalBeneficio, GlobalTotal)
     ButtonGraficar_Click()
-
+    
 End
 
 Public Sub ButtonNormalListadoApuestanPendientes_Click()
-
+    
     '--------------------------------------
     ' TABLA DE DATOS DE ID
     '--------------------------------------
     TextAreaEnJuego.TEXT = ListaId.listar()
-
+    
 End
 
 Public Sub ButtonPorId_Click()
-
+    
     '--------------------------------------
     ' TABLA DE DATOS DE ID
     '--------------------------------------
     TextAreaEnJuego.TEXT = ListaId.listarOrdenID()
-
+    
 End
 
 Public Sub ButtonFiltrar_Click()
-
+    
     Dim mf As New FormFiltro
     Dim tmplista As New String[]
-
+    
     If ContenidoFichero <> "" Then
         tmplista.Add(Upper(ContenidoFichero))
         mf.listado = tmplista
@@ -326,47 +326,47 @@ Public Sub ButtonFiltrar_Click()
     Else
         Message.Info("no hay cargada información")
     Endif
-
+    
 End
 
 Public Sub ButtonCopiaResumen_Click()
-
+    
     Clipboard.Copy(TextAreaLugares.Text)
-
+    
 End
 
 Public Sub ButtonCopiaResumenCompactado_Click()
-
+    
     Clipboard.Copy(TextAreaResumen.Text)
-
+    
 End
 
 Public Sub ButtonApuestasEnJuego_Click()
-
+    
     Clipboard.Copy(TextAreaEnJuego.Text)
-
+    
 End
 
 Public Sub ButtonGraficar_Click()
-
+    
     Dim p As Pie
     Dim a As Integer
     Dim tmpAreaDrawing As DrawingArea
-
+    
     Dim child As Control
     Dim fechaanterior As String = ""
     Dim contador As Integer = 0
-
+    
     For Each child In HPanelGrafica.Children
         Child.Delete()
     Next
-
+    
     For a = 0 To ListaId.listagrafica.count - 1
         '-----------------------------
         'añadir grafico
         '-----------------------------
         tmpAreaDrawing = New DrawingArea(HPanelGrafica) As "grupoGrafico"
-
+        
         tmpAreaDrawing.w = 50
         tmpAreaDrawing.h = 50
         tmpAreaDrawing.Tooltip = ListaId.listagrafica[a].texto
@@ -377,33 +377,33 @@ Public Sub ButtonGraficar_Click()
             contador += 1
             p.colorfondo = contador
             fechaanterior = ListaId.listagrafica[a].fecha
-
+            
         Endif
-
+        
         tmpAreaDrawing.tag = p
     Next
-
+    
 End
 
 Public Sub grupoGrafico_Draw()
-
+    
     Last.tag.dibujar()
-
+    
 End
 
 Public Sub rellenaGridview()
-
+    
     comun.DefinirGrid(GridViewEnJuego, TextAreaEnJuego.text, True)
     'anchos
     GridViewEnJuego.Columns[0].width = 150 'nombre del id de apuesta
     GridViewEnJuego.Columns[3].width = 75 'fecha
     comun.PonerIconoFechaActual(GridViewEnJuego, 3)
-
+    
     comun.DefinirGrid(GridViewLugares, TextAreaLugares.text)
     GridViewLugares.Columns[0].width = 150 'nombre del id de apuesta
-
+    
     cargaIconosEnLugares()
-
+    
     comun.DefinirGrid(GridViewResumen, TextAreaResumen.text, 3)
     GridViewResumen.Columns[0].width = 100 'nombre del id de apuesta
     GridViewResumen.Columns[1].width = 50 'nombre del id de apuesta
@@ -412,55 +412,55 @@ Public Sub rellenaGridview()
     GridViewResumen[5, 1].Background = Color.Cyan 'valor de lo jugado actualmente
     GridViewResumen[5, 1].Foreground = Color.Black
     GridViewResumen[5, 0].Foreground = Color.Black
-
+    
     GridViewResumen.Font.size = 8
-
+    
 End
 
 Public Sub RellenarAvanceAgenda()
-
+    
     Dim hoy As String
     Dim a As Integer
     Dim fecha, FechaConjuntoApuestas As Date
-
+    
     '   TextAreaAgenda.text = "Dia" & "\t" & "Apostado/Ben Esp." & "\t" & "En Casas/Banco" & "\n"
     'partimos del dato de hoy (desde resumen)
     ' TextAreaAgenda.text &= "Actual" & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
-
+    
     'proceso 1 semana (siete dias, a partir de hoy)
     hoy = Format(Now, "dd/mm/yyyy")
     TextAreaAgenda.text = ""
     FechaConjuntoApuestas = maximafecha(GridViewEnJuego)
-
+    
     Dim resultado As String[]
-
+    
     ImporteApostado = Val(GridViewResumen[5, 1].text) + Val(GridViewResumen[6, 1].text) '
-
+    
     'actualizo boton Actualizar (refrescar)
     ButtonAnalizar.text = GridViewResumen[5, 1].text & " €"
     Me.Title = "En juego: " & ButtonAnalizar.text
-
+    
     ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
-
+    
     'TextAreaAgenda.text &= Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n"
     Dim activadocontador As Boolean = False
     Dim valormaximo As String
     Dim valorimportecaja As String
-
+    
     ''TODO: RESOLVIENDO GRAFICA ERRORES EN LOS ULTIMOS DIAS
-
+    
     For a = 0 To DiasAgenda
         ' For a = DiasAgenda To 0 Step -1
-
+        
         fecha = Date(Year(Now), Month(Now), Day(Now)) + a
-
+        
         '   If DateDiff(FechaConjuntoApuestas, fecha, gb.day) - 1 < 0 Then
         'salir del bucle
         '        Break
         '   Endif
-
+        
         resultado = compruebaGridApuesta(fecha)
-
+        
         If IsNull(resultado) Then
             If activadocontador = True Then
                 fecha = Date(Year(Now), Month(Now), Day(Now)) + a
@@ -472,71 +472,71 @@ Public Sub RellenarAvanceAgenda()
             Else
                 'no pongo nada
             Endif
-
+            
         Else
             fecha = Date(Year(Now), Month(Now), Day(Now)) + a
             ImporteApostado = Val(resultado[1]) 'INICIO DEL DIA
             ImporteCaja = Val(resultado[2]) 'INICIO DEL DIA
-
+            
             TextAreaAgenda.text = Format(fecha, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n" & TextAreaAgenda.text
             valormaximo = resultado[1] 'FINAL DEL DIA
             valorimportecaja = resultado[2] 'FINAL DEL DIA
             activadocontador = True
-
+            
         Endif
-
+        
     Next
-
+    
     '  TextAreaAgenda.text = Format(Now, "dd/mm/yyyy") & "\t" & ImporteApostado & "\t" & ImporteCaja & "\n" & TextAreaAgenda.text
-
+    
     'INVERTIR ORDEN DE TEXTAREAAGENDA.TEXT
     Dim original As String[]
     Dim final As String[]
-
+    
     original = Split(TextAreaAgenda.text, "\n")
-
+    
     final = original.Reverse()
     final.Remove(0)
     TextAreaAgenda.text = final.Join("\n")
-
+    
     TextAreaAgenda.text = "Dia" & "\t" & "Apost+Bene" & "\t" & "Casas+Banco" & "\n" & TextAreaAgenda.text
-
+    
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
     GridViewAgenda.Columns[0].width = 70 'nombre del id de apuesta
     GridViewAgenda.Columns[1].width = 60 'nombre del id de apuesta
     GridViewAgenda.Columns[2].width = 60 'nombre del id de apuesta
-
+    
 End
 
 Public Function maximafecha(GridViewEnJuego As GridView) As Date
-
+    
     Dim a As Integer
     Dim ndia, nmes, nano As Integer
-
+    
     For a = 0 To GridViewEnJuego.Rows.count - 5
-
+        
         If InStr(GridViewEnJuego[a, 3].Text, "/") <> 0 Then
             ndia = Val(Mid(GridViewEnJuego[a, 3].Text, 1, 2))
             nmes = Val(Mid(GridViewEnJuego[a, 3].Text, 4, 2))
             nano = Val(Mid(GridViewEnJuego[a, 3].Text, 7, 4))
         Endif
     Next
-
+    
     Return Date(nano, nmes, ndia)
-
+    
 End
 
 Public Function compruebaGridApuesta(fecha As Date) As String[]
-
+    
     Dim datos As New String[]
     Dim a As Integer
     Dim importeA, importeC As String
     Dim ndia As Integer
     Dim nmes As Integer
     Dim nano As Integer
-
+    
     Dim datoFechaColumna As Date
-
+    
     datos.Add(Null) 'primer dato 0
     datos.Add(Null) 'primer dato 1
     datos.Add(Null) 'primer dato 2
@@ -547,61 +547,61 @@ Public Function compruebaGridApuesta(fecha As Date) As String[]
     datos[3] = "-100000" 'guarda importe maximo del dia apostado
     datos[4] = "-100000" 'guarda MAXIMO importe apostado
     For a = 0 To GridViewEnJuego.Rows.count - 5
-
+        
         ndia = Val(Mid(GridViewEnJuego[a, 3].Text, 1, 2))
         nmes = Val(Mid(GridViewEnJuego[a, 3].Text, 4, 2))
         nano = Val(Mid(GridViewEnJuego[a, 3].Text, 7, 4))
-
+        
         datoFechaColumna = Date(nano, nmes, ndia)
         importeA = GridViewEnJuego[a, 4].Text
         importeC = GridViewEnJuego[a, 5].Text
-
+        
         If DateDiff(datoFechaColumna, fecha, gb.day) < 0 Then Break
-
+        
         If DateDiff(datoFechaColumna, fecha, gb.day) = 0 Then
             datos[0] = True
-
+            
             If Val(Replace(DATOS[1], ".", ",")) > Val(Replace(importeA, ".", ",")) Then
                 datos[1] = importeA
                 datos[2] = IMPORTEc
             Endif
-
+            
             If Val(Replace(datos[3], ".", ",")) < Val(Replace(importeA, ".", ",")) Then
                 datos[3] = importeA
                 datos[4] = IMPORTEc
-
+                
             Endif
         Endif
-
+        
     Next
-
+    
     If datos[4] = "-100000" Then
         datos = Null
     Endif
     Return datos
-
+    
 End
 
 Public Sub ButtonGraficaJS15_Click()
-
+    
     DiasAgenda = 15
-
+    
     RellenarAvanceAgenda()
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
-
+    
     ''FIXME: ARREGLAR GRAFICA
     GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
-
+    
 End
 
 Public Sub GridViewEnJuego_DblClick()
-
+    
     Dim fila As Integer
     Dim tmplista As New String[]
     Dim FormFiltroTmp As New FormFiltro
-
+    
     fila = GridViewEnJuego.Rows.Selection[0]
-
+    
     If ContenidoFichero <> "" Then
         tmplista.Add(Upper(ContenidoFichero))
         FormFiltroTmp.listado = tmplista
@@ -612,22 +612,22 @@ Public Sub GridViewEnJuego_DblClick()
         Message.Info("no hay cargada información")
     Endif
     marcarfila()
-
+    
 End
 
 Public Sub ButtonComparaListaId_Click()
-
+    
     Dim lista As String[]
     Dim l As String
     Dim a, b As Integer = -1
     Dim listaExistente As String[]
-
+    
     Dim listalimpia As New String[]
-
+    
     lista = Split(Clipboard.Paste("text/plain"), "\n")
-
+    
     For a = 0 To lista.count - 1
-
+        
         l = lista[a]
         If l = "" Or Len(l) = 2 Or Len(l) = 1 Then
             'no la añado
@@ -635,17 +635,17 @@ Public Sub ButtonComparaListaId_Click()
             listalimpia.Add(l)
         Endif
     Next
-
+    
     ''------------------------------------------------------------------------------------------------
     '' vamos a comparar las que tengo del portapapeles con las que tengo guadardas en el programa
     ''------------------------------------------------------------------------------------------------
     listaExistente = ListaId.IdexistentesPendientes()
-
+    
     Dim existe As Boolean
     Dim nombreAcomparar As String
-
+    
     Dim contenido As String
-
+    
     For a = 0 To listaExistente.count - 1
         existe = False
         nombreAcomparar = Upper$(Replace(Replace(Upper$(listaExistente[a]), " ", ""), "FREEBET", "FREE"))
@@ -653,73 +653,73 @@ Public Sub ButtonComparaListaId_Click()
         For b = 0 To listalimpia.Count - 1
             'lo pongo en mayusculas y quito espacios para normalizar los nombres antes de comparar
             If nombreAComparar = Replace(Upper(Replace(Replace(Upper$(listalimpia[b]), " ", ""), "FREEBET", "FREE")), "-", " ") Then
-
+                
                 existe = True
-
+                
             Endif
-
+            
         Next
-
+        
         If existe = False Then
             contenido &= "\t" & listaExistente[a] & "\n"
         Endif
-
+        
     Next
-
+    
     ''------------------------------------------------------------------------------------------------
     '' Ahora, vamos a comparar las que tengo en el programa con las del portapapeles (por si en el portapapels hay aguna más)
     ''------------------------------------------------------------------------------------------------
-
+    
     Dim contenidoFaltaPrograma As String
-
+    
     For a = 0 To listalimpia.Count - 1
-
+        
         existe = False
-
+        
         nombreAcomparar = Upper(Replace(Replace(Upper$(listalimpia[a]), " ", ""), "FREEBET", "FREE"))
         For b = 0 To listaExistente.count - 1
             'lo pongo en mayusculas y quito espacios para normalizar los nombres antes de comparar
             If nombreAComparar = Upper$(Replace(Replace(Upper$(listaExistente[b]), " ", ""), "FREEBET", "FREE")) Then
-
+                
                 existe = True
-
+                
             Endif
-
+            
         Next
-
+        
         If existe = False Then
             contenidoFaltaPrograma &= "\t" & listalimpia[a] & "\n"
         Endif
-
+        
     Next
-
+    
     If Len(Replace(contenido, "\n", "")) = 0 And Len(Replace(contenidoFaltaPrograma, "\n", "")) = 0 Then
         Message.Info("ok, estan todas")
     Else
         Dim mensaje As New MensajeCompararListas
-
+        
         Dim texto As New String[]
-
+        
         texto.Add("lista (comparando Id del programa con las del portapapeles):\n" & contenido & "lista (comparando portapapeles con las Id programa):\n" & contenidoFaltaPrograma)
-
+        
         mensaje.Lista = texto
         mensaje.Show()
     Endif
-
+    
 End
 
 Public Sub GridViewLugares_DblClick()
-
+    
     Dim FILA As Integer
     Dim lugar As String
     Dim estado As Integer
-
+    
     fila = Last.Rows.Selection[0]
     lugar = Last[fila, 0].text
-
+    
     Try estado = Settings[lugar, 0]
     If Error Then estado = 0
-
+    
     Select Case estado
         Case 0
             Settings[lugar] = 1
@@ -731,176 +731,176 @@ Public Sub GridViewLugares_DblClick()
             Settings[lugar] = 0
             Last[fila, 1].Picture = Picture["interrogacion20x20.png"]
     End Select
-
+    
 End
 
 Public Sub cargaIconosEnLugares()
-
+    
     Dim a As Integer
     Dim estado As Integer
-
+    
     For a = 0 To GridViewLugares.rows.count - 1
         If InStr(GridViewLugares[a, 0].text, "Total") <> 0 Or InStr(GridViewLugares[a, 0].text, "_______") <> 0 Then Break
-
+        
         Try estado = Settings[GridViewLugares[a, 0].text, 0]
         If Error Then estado = 0
-
+        
         Select Case estado
             Case 0
                 gridviewLugares[a, 1].Picture = Picture["interrogacion20x20.png"]
             Case 1
                 gridviewLugares[a, 1].Picture = Picture["ok.png"]
-
+                
             Case 2
                 gridviewLugares[a, 1].Picture = Picture["no.png"]
         End Select
-
+        
     Next
-
+    
 End
 
 Public Sub borradoIconosEnLugares()
-
+    
     Dim a As Integer
     Dim estado As Integer
-
+    
     For a = 0 To GridViewLugares.rows.count - 1
         If InStr(GridViewLugares[a, 0].text, "Total") <> 0 Or InStr(GridViewLugares[a, 0].text, "_______") <> 0 Then Break
-
+        
         Try Settings[GridViewLugares[a, 0].text] = 0
         If Error Then estado = 0
-
+        
         estado = 0
         gridviewLugares[a, 1].Picture = Picture["interrogacion20x20.png"]
-
+        
     Next
-
+    
 End
 
 Public Sub marcarfila()
-
+    
     Dim FILA As Integer
-
+    
     fila = Last.Rows.Selection[0]
     'depende de que boton del raton pulses, se pone un icono OK o un icono NO
     If Mouse.Right = False Then
         Last[fila, 1].Picture = Picture["ok.png"]
     Endif
-
+    
     If Mouse.Right = True Then
         Last[fila, 1].Picture = Picture["no.png"]
     Endif
-
+    
 End
 
 Public Sub GridViewResumen_DblClick()
-
+    
     marcarfila()
-
+    
 End
 
 Public Sub ButtonCalculadora_Click()
-
+    
     Dim p As Process
-
+    
     P = Exec ["gnome-calculator"]
     ControlVentanas.agrega(p)
-
+    
 End
 
 Public Sub ButtonGuardarAnotaciones_Click()
-
+    
     File.Save(User.Home & "/informacionNotas.txt", TextAreaNotas.text)
     TextAreaNotas.pos = 1
-
+    
 End
 
 Public Sub ButtonListaUltimas_Click()
-
+    
     FormUltimas.Show()
-
+    
 End
 
 Public Sub ButtonRecargar_Click()
-
+    
     If Exist(User.Home & "/informacionNotas.txt") Then
         TextAreaNotas.text = File.load(User.Home & "/informacionNotas.txt")
         TextAreaNotas.pos = 1
     Endif
-
+    
 End
 
 Public Sub ButtonCasas_Click()
-
+    
     Dim GestorZenJuego As ClassGestorZEnJuego
-
+    
     GestorZenJuego = New ClassGestorZEnJuego(ListaId.IdexistentesPendientes())
-
+    
 End
 
 Public Sub DateChooser1_Data(Fecha As Date)
-
+    
     If WeekDay(Fecha) = 0 Or If WeekDay(Fecha) = 6 Then DateChooser1[fecha].Background = Color.Lighter(Color.cyan) 'siempre que sea sabado o domingo se pondra el fondo en rojo claro
     DateChooser1[fecha].Font = Font["Arial,5"]
-
+    
 End
 
 Public Sub ButtonGraficaJS45_Click()
-
+    
     DiasAgenda = 45
-
+    
     RellenarAvanceAgenda()
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
-
+    
     GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
-
+    
 End
 
 Public Sub ButtonCopiaSeguridad_Click()
     ''Mediante cuenta en dropbox
     ''https://www.solvetic.com/tutoriales/article/3707-como-hacer-backup-automatica-en-linux-dropbox/
-
+    
     Dim salida As String
     Dim salida2 As String
     Dim salida3 As String
-
+    
     Me.Mouse = Mouse.Wait
-
+    
     Wait 0.01
-
+    
     Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "/informacion* linux-respaldo" To salida
-
+    
     Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "'/analisis de apuestas/notas_semanales/Plantilla Semanal.ods' linux-respaldo" To salida2
     Shell User.home & "/Dropbox-Uploader/dropbox_uploader.sh upload " & User.home & "'/analisis de apuestas/00 166 betburger probandolo 16 marzo.ods' linux-respaldo" To salida3
-
+    
     Me.Mouse = Mouse.Default
-
+    
     Message.info("Información:\n" & salida & "\n" & salida2 & "\n" & salida3)
-
+    
     Settings["CopiaSeguridad"] = Format(Now, "ddd dd/mmm/yyyy hh/nn")
     ButtonCopiaSeguridad.text = Settings["CopiaSeguridad"]
-
+    
 End
 
 Public Sub ButtonComparaListaImportes_Click()
-
+    
     Dim lista As String[]
     Dim l As String
     Dim a, b As Integer = -1
     Dim listaExistente As String[]
-
+    
     Dim listalimpia As New String[]
     Dim contenidoFICHERO As String
-
+    
     ContenidoFichero = Clipboard.Paste("text/plain")
     ContenidoFichero = Replace(ContenidoFichero, ",", ".")
     ContenidoFichero = Replace(ContenidoFichero, " ", "")
     ContenidoFichero = Replace(ContenidoFichero, "€", "")
-
+    
     lista = Split(ContenidoFichero, "\n")
-
+    
     For a = 0 To lista.count - 1
-
+        
         l = lista[a]
         If l = "" Or Len(l) = 2 Or Len(l) = 1 Then
             'no la añado
@@ -908,130 +908,130 @@ Public Sub ButtonComparaListaImportes_Click()
             listalimpia.Add(l)
         Endif
     Next
-
+    
     ''------------------------------------------------------------------------------------------------
     '' vamos a comparar las que tengo del portapapeles con las que tengo guadardas en el programa
     ''------------------------------------------------------------------------------------------------
     listaExistente = ListaId.ImportesExistentesPendientes()
-
+    
     Dim existe As Boolean
     Dim nombreAcomparar As String
-
+    
     Dim contenido As String
-
+    
     For a = 0 To listaExistente.count - 1
         existe = False
         nombreAcomparar = listaExistente[a]
-
+        
         For b = 0 To listalimpia.Count - 1
-
+            
             'If Val(nombreAComparar) = Val(listalimpia[b]) Then
             If nombreAComparar = listalimpia[b] Then
                 existe = True
-
+                
             Endif
-
+            
         Next
-
+        
         If existe = False Then
             contenido &= "\t" & listaExistente[a] & "\n"
         Endif
-
+        
     Next
-
+    
     ''------------------------------------------------------------------------------------------------
     '' Ahora, vamos a comparar las que tengo en el programa con las del portapapeles (por si en el portapapels hay aguna más)
     ''------------------------------------------------------------------------------------------------
-
+    
     Dim contenidoFaltaPrograma As String
-
+    
     For a = 0 To listalimpia.Count - 1
-
+        
         existe = False
-
+        
         nombreAcomparar = listalimpia[a]
         For b = 0 To listaExistente.count - 1
-
+            
             '      If Val(NombreAComparar) = Val(listaExistente[b]) Then
             If NombreAComparar = listaExistente[b] Then
-
+                
                 existe = True
-
+                
             Endif
-
+            
         Next
-
+        
         If existe = False Then
             contenidoFaltaPrograma &= "\t" & listalimpia[a] & "\n"
         Endif
-
+        
     Next
-
+    
     If Len(Replace(contenido, "\n", "")) = 0 And Len(Replace(contenidoFaltaPrograma, "\n", "")) = 0 Then
         Message.Info("ok, estan todas")
     Else
         Dim mensaje As New MensajeCompararListas
-
+        
         Dim texto As New String[]
-
+        
         texto.Add("lista (comparando Importes del programa con las del portapapeles):\n" & contenido & "lista (comparando portapapeles con las Importe programa):\n" & contenidoFaltaPrograma)
-
+        
         mensaje.Lista = texto
         mensaje.Show()
     Endif
-
+    
 End
 
 Public Sub ButtonBuscadorArchivos_Click()
-
+    
     Dim p As Process
-
+    
     p = Exec ["abrirAnalisis"]
     ControlVentanas.agrega(p)
-
+    
 End
 
 Public Sub ButtonHerramientaBalance_Click()
-
+    
     Dim p As Process
-
+    
     p = Exec ["TraductorBalance"]
-
+    
     ControlVentanas.agrega(p)
-
+    
 End
 
 Public Sub ButtonBanco_Click()
-
+    
     'graficar con datos de banca
     RellenarAvanceAgenda()
     comun.DefinirGrid(GridViewAgenda, Replace(TextAreaAgenda.text, ".", ","), False)
-
+    
     If Last.tag = "con" Then
         Last.Picture = Picture["bancaSin.png"]
         Last.tag = "sin"
         'graficar sin datos de banca
-
+        
         GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda, Val(GridViewResumen[0, 1].text))
-
+        
     Else
         Last.Picture = Picture["banca.png"]
         Last.tag = "con"
-
+        
         GraficaJavaScript.graficarDatos(WebView1, GridViewAgenda)
-
+        
     Endif
-
+    
 End
 
 Public Sub ButtonDesactivar_Click()
-
+    
     borradoIconosEnLugares()
-
+    
 End
 
 Public Sub ButtonCompactar_Click()
-
+    
     Dim nombre As String 'nombre del archivo de datos
     Dim copia As String 'variable donde se almacena el contenido del archivo
     'hacer copia de seguridad del fichero de datos...
@@ -1039,29 +1039,29 @@ Public Sub ButtonCompactar_Click()
     copia = File.Load(nombre)
     File.Save(Replace(nombre, ".csv", Format(Now, "yyyymmddhhnnss.bak")), copia)
     Wait 1 'espero 1 segundo para la copia de seguridad
-
+    
     ModuleCompactar.paso1(TextAreaLugares.text)
     ModuleCompactar.paso2(TextAreaEnJuego.text)
     file.Save(nombre, moduleCompactar.PASO3())
-
+    
     'reiniciar los datos...
-
+    
     ButtonAnalizar_Click()
-
+    
 End
 
 Public Sub GridViewEnJuego_MouseUp()
-
+    
     Dim idapuesta As String
-
+    
     If Mouse.Right = True Then
         Try idapuesta = gridviewenjuego[GridViewEnJuego.row, 0].text
         If Error Then
             Message.Info("Selecciona la fila del gridview")
         Else
-
+            
             comun.abrirIdApuesta(idapuesta)
         Endif
     Endif
-
+    
 End

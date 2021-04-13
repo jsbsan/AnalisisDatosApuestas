@@ -11,49 +11,49 @@ Private hcolorfondo As Integer
 Public porcentaje As Integer
 
 Public Sub _new(d As DrawingArea, EnJuego As Float, EnCaja As Float, BeneficiosEsperados As Float)
-
+    
     hvalor1 = enJuego
     hvalor2 = enCaja
     hvalor3 = BeneficiosEsperados
     hd = d
     porcentaje = (encaja * 100) / (Encaja + Enjuego)
-
+    
 End
 
 Public Sub dibujar()
-
+    
     Dim XC As Float = hd.w / 2
     Dim YC As Float = hd.h / 2
     Dim Radius As Float = hd.w / 2
     Dim Angle1 As Float = Rad(0)
     Dim Angle2 As Float = Rad(-180)
-
+    
     Dim angle3 As Float = Rad(-275)
     Dim angle4 As Float = Rad(-360)
-
+    
     Dim long2 As Float
-
+    
     Dim long3 As Float
     Dim long4 As Float
-
+    
     Dim X, Y As Float
-
+    
     'dibujar rectangulo de fondo
     Paint.Brush = Paint.Color(Me.colorfondo)
     Paint.Rectangle(0, 0, hd.w, hd.h)
     Paint.Fill
-
+    
     '360 --- valor1+valor2+valor3
     '    --- valor1 -> x=360*valor1/(valor1+valor2+valor3)
-
+    
     angle2 = Rad(360 * hvalor1 / (hvalor1 + hvalor2 + hvalor3))
     angle3 = Rad(360 * hvalor2 / (hvalor1 + hvalor2 + hvalor3)) + angle2
     angle4 = Rad(360)
-
+    
     '   Print angle2, angle3, angle4
-
+    
     Paint.LineWidth = 10
-
+    
     paint.moveTo(XC, YC)
     Paint.Arc(XC, YC, Radius, 0, angle2, False)
     paint.lineTo(XC, YC)
@@ -67,7 +67,7 @@ Public Sub dibujar()
     Paint.LineWidth = 6.0
     Paint.Brush = Paint.Color(Color.RGB(0, 255, 0, 0.6 * 255))
     Paint.Fill
-
+    
     '
     paint.moveTo(XC, YC)
     Paint.Arc(XC, YC, Radius, Angle3, angle4 - angle3, False)
@@ -75,63 +75,63 @@ Public Sub dibujar()
     Paint.LineWidth = 6.0
     Paint.Brush = Paint.Color(Color.RGB(250, 0.2 * 250, 0.2 * 255)) ', 0.6 * 255))
     Paint.Fill
-
+    
     Paint.Brush = Paint.Color(Color.RGB(0, 0, 0))
     Paint.Text(Str$(porcentaje) & " %", 0, 0, hd.w, hd.h - 10, Align.Center)
     Paint.Fill
-
+    
 End
 
 Property valor1 As Float
 
 Private Function valor1_Read() As Float
-
+    
     Return hvalor1
-
+    
 End
 
 Private Sub valor1_Write(Value As Float)
-
+    
     hvalor1 = value
-
+    
 End
 
 Property valor2 As Float
 
 Private Function valor2_Read() As Float
-
+    
     Return hvalor2
-
+    
 End
 
 Private Sub valor2_Write(Value As Float)
-
+    
     hvalor2 = value
-
+    
 End
 
 Property valor3 As Float
 
 Private Function valor3_Read() As Float
-
+    
     Return hvalor3
-
+    
 End
 
 Private Sub valor3_Write(Value As Float)
-
+    
     hvalor3 = value
-
+    
 End
 
 Private Function colorfondo_Read() As Integer
-
+    
     Return hcolorfondo
-
+    
 End
 
 Private Sub colorfondo_Write(Value As Integer)
-
+    
     Select Case value
         Case 0
             hcolorfondo = Color.red
@@ -141,7 +141,7 @@ Private Sub colorfondo_Write(Value As Integer)
             hcolorfondo = Color.Pink
         Case 3
             hcolorfondo = Color.orange
-
+            
         Case 4
             hcolorfondo = Color.Magenta
         Case 5
@@ -150,7 +150,7 @@ Private Sub colorfondo_Write(Value As Integer)
             hcolorfondo = Color.Blue
         Case Else
             Me.colorfondo = 0
-
+            
     End Select
-
+    
 End

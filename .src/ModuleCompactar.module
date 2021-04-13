@@ -4,82 +4,87 @@ Public TextoLugares As String
 Public lineasApuestas As String
 
 Public Sub paso1(lugar As String) 'extraigo valores de lugares
-
+    
     Dim palabras As String[]
     Dim casatmp As String
     Dim importtmp As String
     Dim lineas As New String[]
     Dim ltmp As String
-
+    
     lineas = Split(lugar, "\n")
-
+    
     lineas.Delete(0) 'borro la primera linea que es la cabecera
-
+    
     textolugares = ""
-
+    
     For Each ltmp In lineas
         If InStr(ltmp, "ZEN JUEGO ") <> 0 Then
             'en juego, que luego descuento en apuestas realizadas...
             palabras = Split(ltmp, gb.tab)
             casatmp = Mid$(palabras[0], Len("ZEN JUEGO ") + 1, Len(palabras[0]))
             importtmp = Replace(palabras[1], " ", "")
-
+            
             textolugares &= gb.tab & Format(Now, "dd/mm/yyyy") & gb.tab & casatmp & gb.tab & importtmp & "\n"
             Continue 'CONTINUAR CON EL BUCLE
         Endif
-
+        
         If InStr(ltmp, "ZZ BENE") <> 0 Then Break 'SALIR DEL BUCLE hemos llegado a la linea de beneficios esperados...
-
+        
         palabras = Split(ltmp, gb.tab)
-
+        
+        If InStr(palabras[0], "____") = 0 Then
+        If InStr(palabras[0], "Total") = 0 Then 
         CasaTmp = palabras[0]
         importtmp = Replace(palabras[1], " ", "")
-
+        
         textolugares &= gb.tab & Format(Now, "dd/mm/yyyy") & gb.tab & casatmp & gb.tab & importtmp & "\n"
+        Endif
+        Endif
+        
     Next
-
+    
 End
 
 Public Sub paso2(ListaApuestas As String) ' de las id de apuesta, saco los descompuestos y los voy acumulando
-
+    
     Dim lineas As String[]
     Dim palabras As String[]
     Dim ltmp As String
     Dim idapuesta As String
-
+    
     lineas = Split(ListaApuestas, "\n")
-
+    
     'primera linea se borra
     lineas.Delete(0)
     lineasApuestas = ""
     For Each ltmp In lineas
-
+        
         If InStr(ltmp, "-----------------") Then Break 'sale del bucle
         palabras = Split(ltmp, gb.tab)
         idapuesta = palabras[0]
         lineasApuestas &= grep(idapuesta)
-
+        
     Next
-
+    
 End
 
 Public Function grep(id As String) As String
-
+    
     Dim salida As String
     Dim comando As String
-
+    
     comando = "grep" & " -i" & " " & "'" & id & "'" & " " & User.home & "/informacion.csv"
     Shell comando To salida '-i para no tener en cuenta mayusculas y minusculas
     Return salida
-
+    
 End
 
 Public Function PASO3() As String 'uno la cabecera, junto a los datos de apuestas y los datos de lugares
-
+    
     Dim INICIO As String
-
+    
     INICIO = "id fichero	fecha	Cuenta	Saldo	comentario	fuente	VARIOS\n"
-
+    
     Return inicio & lineasApuestas & textolugares
-
+    
 End
