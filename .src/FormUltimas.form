@@ -20,13 +20,13 @@
     }
     Index = 1
     Text = ("0-50")
-    { TextAreaUltimas2 TextArea
-      MoveScaled(0,0,57,6)
-      Visible = False
-    }
     { GridViewUltimas2 GridView
       MoveScaled(1,10,53,44)
       Mode = Select.Multiple
+    }
+    { TextAreaUltimas2 TextArea
+      MoveScaled(0,0,57,6)
+      Visible = False
     }
     Index = 2
     Text = ("Buscador en Archivo de Datos")
@@ -55,8 +55,8 @@
           Visible = False
           Background = &HFFFF00&
           Expand = True
-          Text = ("  buscando") & "..."
           Alignment = Align.Center
+          Text = ("  buscando") & "..."
         }
       }
       { GridViewDatosFiltrado GridView

@@ -1,3 +1,6 @@
+* Fri Apr 16 2021 jsbsan <jusabejusabe@gmail.com> 0.0.76
+- corrigo para que se ejecute en 3.16
+
 * Tue Apr 13 2021 jsbsan <jusabejusabe@gmail.com> 0.0.73
 - bug al compactar filas Total o ____ corregido
 

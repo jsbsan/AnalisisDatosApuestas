@@ -2,13 +2,14 @@ FMain
 AnalisisDatosApuestas
 0
 0
-0.0.73
+0.0.76
 
 gb.image
-gb.gui.qt
+gb.qt4
 gb.form
 gb.desktop
 gb.settings
 gb.form.mdi
-gb.gui.qt.webkit
+gb.qt4.ext
+gb.qt4.webkit
 

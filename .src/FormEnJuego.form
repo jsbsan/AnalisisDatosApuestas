@@ -4,13 +4,13 @@
   MoveScaled(0,0,64,64)
   Icon = Picture["enjuego.png"]
   Arrangement = Arrange.Fill
+  { GridView1 GridView
+    MoveScaled(3,10,55,42)
+    Mode = Select.Multiple
+  }
   { TextArea1 TextArea
     MoveScaled(6,1,49,7)
     Visible = False
     Wrap = True
-  }
-  { GridView1 GridView
-    MoveScaled(3,10,55,42)
-    Mode = Select.Multiple
   }
 }

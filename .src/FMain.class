@@ -36,7 +36,7 @@ Public Sub Form_Open()
     ButtonAnalizar_Click()
     'y luego en ordenar por fecha
     ' ButtonPorFecha_Click() -> LO DESACTIVO Porque ButtonAnalizar, ya lo hace.
-    
+  ' Me.Close()
 End
 
 Public Sub Form_Close()
@@ -132,6 +132,9 @@ Public Sub ButtonAnalizar_Click()
     ' Print "--        Sumas de cuentas         -"
     ' Print "------------------------------------"
     TextAreaLugares.text &= "Lugar" & "\t" & "Importe" & "\n"
+    
+
+    
     For Each tmpcuenta In ListaCuenta
         'Print tmpCuenta.nombre, Format(Round(tmpcuenta.suma, -2), "#.##")
         If Round(tmpcuenta.suma, -2) <> 0 Then
@@ -143,6 +146,8 @@ Public Sub ButtonAnalizar_Click()
     
     TextAreaLugares.text &= "____________________________\n"
     TextAreaLugares.text &= "Total:" & Format(Round(total, -2), "0###.#0")
+    
+        Print TextAreaLugares.text
     
     'Calculo de sumas de Banco / Casa Apuestas / En Juego  / Zz Beneficio
     Dim enbanco As Float
@@ -203,6 +208,9 @@ Public Sub ButtonAnalizar_Click()
     TextAreaResumen.text &= "__________________" & "\n"
     TextAreaResumen.text &= "Total: " & gb.tab & Str$(Round(totalesRecalculo, -2))
     
+    Print TextAreaResumen.text
+    
+    
     ProgressBarEnJuego.value = enzen / totalesRecalculo
     
     ProgressBarBenef.value = enBeneficioEsperado / totalesRecalculo
@@ -229,11 +237,11 @@ Public Sub ButtonAnalizar_Click()
     
     'rellenar gridview
     rellenaGridview()
-    
+    ''TODO:  pendiente de revisar
     'avance Agenda
-    RellenarAvanceAgenda()
+     RellenarAvanceAgenda()
     'graficar agenda
-    ButtonGraficaJS15_Click()
+     ButtonGraficaJS15_Click()
     
     comun.ColorCeldaNumeroNegativo(GridViewLugares, 1)
     
@@ -393,6 +401,7 @@ End
 
 Public Sub rellenaGridview()
     
+    Print TextAreaEnJuego.text
     comun.DefinirGrid(GridViewEnJuego, TextAreaEnJuego.text, True)
     'anchos
     GridViewEnJuego.Columns[0].width = 150 'nombre del id de apuesta
@@ -1065,3 +1074,5 @@ Public Sub GridViewEnJuego_MouseUp()
     Endif
     
 End
+
+

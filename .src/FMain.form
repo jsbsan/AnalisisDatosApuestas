@@ -1,306 +1,35 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,193,121)
+  MoveScaled(0,0,387,121)
   Background = &H6F8BE0&
   Expand = True
   Icon = Picture["analisis.png"]
-  Arrangement = Arrange.Horizontal
-  { ScrollView3 ScrollView
-    MoveScaled(-4,-1,196,121)
-    Expand = True
-    AutoResize = True
-    { HBoxBarraBotones HBox
-      MoveScaled(0,0,189,5)
-      Padding = 2
-      { PictureBox1 PictureBox
-        MoveScaled(0,0,5,5)
-        Background = &HFFFFFF&
-        Picture = Picture["homepage-scales-min.png"]
-        Stretch = True
-      }
-      { ButtonAnalizar Button
-        MoveScaled(7,0,12,5)
-        Font = Font["-2"]
-        Background = &H00FFFF&
-        ToolTip = ("Actualizar datos, importe apostado")
-        AutoResize = True
-        Text = ("Resfrescar")
-        Picture = Picture["icon:/16/refresh"]
-      }
-      { ButtonCasas Button
-        MoveScaled(20,0,13,5)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Zen Juego")
-        Picture = Picture["icon:/16/table"]
-      }
-      { ButtonListaUltimas Button
-        MoveScaled(35,0,16,5)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Lista Últimas")
-        Picture = Picture["icon:/16/view-detail"]
-      }
-      { ButtonEditor Button
-        MoveScaled(52,0,12,5)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Editor")
-        Picture = Picture["icon:/32/edit"]
-      }
-      { ButtonFiltrar Button
-        MoveScaled(66,0,13,5)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Buscar ID")
-        Picture = Picture["icon:/16/find"]
-      }
-      { ButtonComparaListaId Button
-        MoveScaled(80,0,16,5)
-        Font = Font["-2"]
-        ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
-        AutoResize = True
-        Text = ("comparar...ID")
-        Picture = Picture["Editing-Compare-icon.png"]
-      }
-      { ButtonComparaListaImportes Button
-        MoveScaled(97,0,19,5)
-        Font = Font["-2"]
-        ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
-        AutoResize = True
-        Text = ("comparar...Importes")
-        Picture = Picture["Editing-Compare-icon.png"]
-      }
-      { ButtonCompactar Button
-        MoveScaled(116,1,17,4)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Compactar")
-        Picture = Picture["comprimir.png"]
-      }
-      { ButtonHerramientaBalance Button
-        MoveScaled(134,0,15,5)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Traductor")
-        Picture = Picture["balanza.png"]
-      }
-      { ButtonBuscadorArchivos Button
-        MoveScaled(150,0,12,5)
-        Font = Font["-2"]
-        AutoResize = True
-        Text = ("Buscar")
-        Picture = Picture["buscar en analisis.png"]
-      }
-      { ButtonCopiaSeguridad Button
-        MoveScaled(163,0,23,5)
-        Font = Font["-2"]
-        ToolTip = ("Hacer Copia de Seguridad")
-        AutoResize = True
-        Text = ("Copia Seguridad")
-        Picture = Picture["caja fuerte.png"]
-      }
-    }
-    { ScrollViewPrincipal ScrollView
-      MoveScaled(0,5,191,113)
-      Expand = True
-      AutoResize = True
-      Padding = 2
-      { VSplit1 VSplit
-        MoveScaled(129,95,58,17)
-        { ScrollView1 ScrollView
-          MoveScaled(1,50,56,23)
-          Arrangement = Arrange.Column
-          AutoResize = True
-          { HPanelGrafica HPanel
-            MoveScaled(1,1,54,19)
-            Expand = True
-            AutoResize = True
-            Spacing = True
-            Padding = 2
-          }
-        }
-      }
-      { PanelGraficaEvolucion Panel
-        MoveScaled(42,60,87,52)
-        { WebView1 WebView
-          MoveScaled(-1,0,87,56)
-        }
-        { ButtonGraficaJS15 Button
-          MoveScaled(0,1,7,3)
-          Text = ("15 dias")
-        }
-        { ButtonGraficaJS45 Button
-          MoveScaled(8,1,8,3)
-          Text = ("45 dias")
-        }
-        { ButtonBanco Button
-          MoveScaled(81,1,5,4)
-          Tag = "con"
-          Picture = Picture["banca.png"]
-        }
-      }
-      { PanelAnotaciones Panel
-        MoveScaled(129,0,59,67)
-        { TextAreaNotas TextArea
-          MoveScaled(0,3,58,64)
-          Background = &HFFFF9F&
-          Foreground = &H000000&
-          Expand = True
-          Wrap = True
-        }
-        { ButtonRecargar Button
-          MoveScaled(0,0,5,3)
-          Picture = Picture["icon:/16/refresh"]
-        }
-        { Label6 Label
-          MoveScaled(5,0,48,3)
-          Background = &HE0E000&
-          Text = ("Anotaciones")
-          Alignment = Align.Center
-        }
-        { ButtonGuardarAnotaciones Button
-          MoveScaled(53,0,5,3)
-          Picture = Picture["icon:/16/save"]
-        }
-      }
-      { Panel2 Panel
-        MoveScaled(129,68,60,26)
-        { Panel1 Panel
-          MoveScaled(29,8,31,12)
-          { ProgressBarBanco ProgressBar
-            MoveScaled(9,1,21,2)
-            Background = &H5FAFFF&
-            Foreground = Color.Blue
-          }
-          { ProgressBarPaypal ProgressBar
-            MoveScaled(9,3,21,2)
-            Background = &HE08B37&
-            Foreground = &HE08B37&
-          }
-          { ProgressBarCasas ProgressBar
-            MoveScaled(9,5,21,2)
-            Background = &HE0E000&
-            Foreground = &HFFFF5F&
-          }
-          { ProgressBarBenef ProgressBar
-            MoveScaled(9,7,21,2)
-            Background = &HE03761&
-            Foreground = &HFF8F1F&
-          }
-          { Label1 Label
-            MoveScaled(-2,1,11,2)
-            Text = ("En Banco:")
-            Alignment = Align.Right
-          }
-          { Label2 Label
-            MoveScaled(-2,3,11,2)
-            Text = ("En PayPal:")
-            Alignment = Align.Right
-          }
-          { Label3 Label
-            MoveScaled(-2,5,11,2)
-            Text = ("En Casas:")
-            Alignment = Align.Right
-          }
-          { Label4 Label
-            MoveScaled(-2,7,11,2)
-            Font = Font["-2"]
-            Text = ("Benef. Esper:")
-            Alignment = Align.Right
-          }
-          { ProgressBarEnJuego ProgressBar
-            MoveScaled(9,9,21,2)
-            Background = &H00E000&
-            Foreground = &H00C000&
-          }
-          { Label5 Label
-            MoveScaled(5,30,13,2)
-            Text = ("En Juego:")
-            Alignment = Align.Right
-          }
-          { Label7 Label
-            MoveScaled(-2,9,11,2)
-            Font = Font["-2"]
-            Text = ("En Juego:")
-            Alignment = Align.Right
-          }
-        }
-        { DateChooser1 DateChooser
-          MoveScaled(0,0,29,26)
-        }
-        { ButtonCalculadora Button
-          MoveScaled(29,0,29,8)
-          Text = ("Calculadora")
-          Picture = Picture["icon:/48/calculator"]
-        }
-      }
-      { Panel3 Panel
-        MoveScaled(42,0,87,60)
-        { GridViewEnJuego GridView
-          MoveScaled(0,0,86,60)
-          ToolTip = ("Pulse boton derecho para abrir Hoja de Calculo relacionada con la ID")
-        }
-        { ButtonApuestasEnJuego Button
-          MoveScaled(83,57,3,3)
-          Picture = Picture["icon:/16/copy"]
-        }
-      }
-      { PanelCasasyResumen Panel
-        MoveScaled(1,0,41,112)
-        { GridViewResumen GridView
-          MoveScaled(0,78,40,34)
-          Font = Font["-1"]
-        }
-        { ButtonCopiaResumenCompactado Button
-          MoveScaled(36,108,4,4)
-          Picture = Picture["icon:/16/copy"]
-        }
-        { GridViewLugares GridView
-          MoveScaled(0,0,40,78)
-        }
-        { ButtonDesactivar Button
-          MoveScaled(0,0,4,3)
-          ToolTip = ("desactivar iconos de comprobación")
-          Picture = Picture["interrogacion20x20.png"]
-        }
-        { ButtonCopiaResumen Button
-          MoveScaled(36,74,4,4)
-          Picture = Picture["icon:/16/copy"]
-        }
-      }
-    }
-  }
   { ScrollView2 ScrollView
-    MoveScaled(193,1,37,38)
+    MoveScaled(222,2,37,38)
     Visible = False
-    { ButtonGraficar Button
-      MoveScaled(0,0,20,5)
+    Arrangement = Arrange.Horizontal
+    { TextAreaAgenda TextArea
+      MoveScaled(2,76,11,5)
       Visible = False
-      Text = ("Graficar")
     }
     { ButtonPorFecha Button
       MoveScaled(-1,5,21,5)
       Visible = False
       Text = ("Por fecha y flujo caja")
     }
+    { ButtonGraficar Button
+      MoveScaled(0,0,20,5)
+      Visible = False
+      Text = ("Graficar")
+    }
     { GridViewAgenda GridView
       MoveScaled(0,10,24,17)
     }
-    { ButtonNormalListadoApuestanPendientes Button
-      MoveScaled(62,76,9,5)
+    { TextAreaLugares TextArea
+      MoveScaled(0,0,38,2)
       Visible = False
-      Text = ("Normal")
-    }
-    { ButtonPorId Button
-      MoveScaled(55,76,5,5)
-      Visible = False
-      Text = ("Por ID")
-    }
-    { TextAreaAgenda TextArea
-      MoveScaled(2,76,11,5)
-      Visible = False
+      Font = Font["Monospace"]
     }
     { TextAreaResumen TextArea
       MoveScaled(8,47,22,2)
@@ -312,10 +41,287 @@
       Visible = False
       Font = Font["-1"]
     }
-    { TextAreaLugares TextArea
-      MoveScaled(0,0,38,2)
+    { ButtonPorId Button
+      MoveScaled(55,76,5,5)
       Visible = False
-      Font = Font["Monospace"]
+      Text = ("Por ID")
+    }
+    { ButtonNormalListadoApuestanPendientes Button
+      MoveScaled(62,76,9,5)
+      Visible = False
+      Text = ("Normal")
+    }
+  }
+  { ScrollView3 ScrollView
+    MoveScaled(274,9,34,21)
+    Visible = False
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    AutoResize = True
+  }
+  { HBoxBarraBotones HBox
+    MoveScaled(1,0,189,5)
+    Spacing = True
+    Padding = 2
+    { PictureBox1 PictureBox
+      MoveScaled(3,1,5,5)
+      Background = &HFFFFFF&
+      Picture = Picture["homepage-scales-min.png"]
+      Stretch = True
+    }
+    { ButtonAnalizar Button
+      MoveScaled(9,0,12,5)
+      Font = Font["-2"]
+      Background = &H00FFFF&
+      ToolTip = ("Actualizar datos, importe apostado")
+      AutoResize = True
+      Text = ("Resfrescar")
+      Picture = Picture["icon:/16/refresh"]
+    }
+    { ButtonCasas Button
+      MoveScaled(21,0,13,5)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Zen Juego")
+      Picture = Picture["icon:/16/table"]
+    }
+    { ButtonListaUltimas Button
+      MoveScaled(37,0,16,5)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Lista Últimas")
+      Picture = Picture["icon:/16/view-detail"]
+    }
+    { ButtonEditor Button
+      MoveScaled(53,0,12,5)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Editor")
+      Picture = Picture["icon:/32/edit"]
+    }
+    { ButtonFiltrar Button
+      MoveScaled(66,0,13,5)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Buscar ID")
+      Picture = Picture["icon:/16/find"]
+    }
+    { ButtonComparaListaId Button
+      MoveScaled(80,0,16,5)
+      Font = Font["-2"]
+      ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
+      AutoResize = True
+      Text = ("comparar...ID")
+      Picture = Picture["Editing-Compare-icon.png"]
+    }
+    { ButtonComparaListaImportes Button
+      MoveScaled(97,0,19,5)
+      Font = Font["-2"]
+      ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
+      AutoResize = True
+      Text = ("comparar...Importes")
+      Picture = Picture["Editing-Compare-icon.png"]
+    }
+    { ButtonCompactar Button
+      MoveScaled(116,1,17,4)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Compactar")
+      Picture = Picture["comprimir.png"]
+    }
+    { ButtonHerramientaBalance Button
+      MoveScaled(134,0,15,5)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Traductor")
+      Picture = Picture["balanza.png"]
+    }
+    { ButtonBuscadorArchivos Button
+      MoveScaled(150,0,12,5)
+      Font = Font["-2"]
+      AutoResize = True
+      Text = ("Buscar")
+      Picture = Picture["buscar en analisis.png"]
+    }
+    { ButtonCopiaSeguridad Button
+      MoveScaled(163,0,23,5)
+      Font = Font["-2"]
+      ToolTip = ("Hacer Copia de Seguridad")
+      AutoResize = True
+      Text = ("Copia Seguridad")
+      Picture = Picture["caja fuerte.png"]
+    }
+  }
+  { PanelCasasyResumen Panel
+    MoveScaled(0,6,41,114)
+    { GridViewResumen GridView
+      MoveScaled(1,79,40,34)
+      Font = Font["-1"]
+    }
+    { ButtonCopiaResumenCompactado Button
+      MoveScaled(36,108,4,4)
+      Picture = Picture["icon:/16/copy"]
+    }
+    { GridViewLugares GridView
+      MoveScaled(1,0,40,78)
+    }
+    { ButtonDesactivar Button
+      MoveScaled(0,0,4,3)
+      ToolTip = ("desactivar iconos de comprobación")
+      Picture = Picture["interrogacion20x20.png"]
+    }
+    { ButtonCopiaResumen Button
+      MoveScaled(36,74,4,4)
+      Picture = Picture["icon:/16/copy"]
+    }
+  }
+  { Panel3 Panel
+    MoveScaled(42,6,87,60)
+    { GridViewEnJuego GridView
+      MoveScaled(0,1,86,60)
+      ToolTip = ("Pulse boton derecho para abrir Hoja de Calculo relacionada con la ID")
+    }
+    { ButtonApuestasEnJuego Button
+      MoveScaled(83,57,3,3)
+      Picture = Picture["icon:/16/copy"]
+    }
+  }
+  { PanelGraficaEvolucion Panel
+    MoveScaled(42,67,87,52)
+    { WebView1 WebView
+      MoveScaled(0,0,87,56)
+    }
+    { ButtonGraficaJS15 Button
+      MoveScaled(0,1,7,3)
+      Text = ("15 dias")
+    }
+    { ButtonGraficaJS45 Button
+      MoveScaled(8,1,8,3)
+      Text = ("45 dias")
+    }
+    { ButtonBanco Button
+      MoveScaled(81,1,5,4)
+      Tag = "con"
+      Picture = Picture["banca.png"]
+    }
+  }
+  { ScrollViewPrincipal ScrollArea
+    MoveScaled(273,34,21,11)
+    Visible = False
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    AutoResize = True
+    Padding = 2
+  }
+  { PanelAnotaciones Panel
+    MoveScaled(131,6,59,67)
+    { TextAreaNotas TextArea
+      MoveScaled(0,3,58,64)
+      Background = &HFFFF9F&
+      Foreground = &H000000&
+      Expand = True
+      Wrap = True
+    }
+    { ButtonRecargar Button
+      MoveScaled(0,0,5,3)
+      Picture = Picture["icon:/16/refresh"]
+    }
+    { Label6 Label
+      MoveScaled(4,0,48,3)
+      Background = &HE0E000&
+      Alignment = Align.Center
+      Text = ("Anotaciones")
+    }
+    { ButtonGuardarAnotaciones Button
+      MoveScaled(53,0,5,3)
+      Picture = Picture["icon:/16/save"]
+    }
+  }
+  { Panel2 Panel
+    MoveScaled(131,74,60,26)
+    { Panel1 Panel
+      MoveScaled(29,8,31,12)
+      { ProgressBarBanco ProgressBar
+        MoveScaled(9,1,21,2)
+        Background = &H5FAFFF&
+        Foreground = Color.Blue
+      }
+      { ProgressBarPaypal ProgressBar
+        MoveScaled(9,3,21,2)
+        Background = &HE08B37&
+        Foreground = &HE08B37&
+      }
+      { ProgressBarCasas ProgressBar
+        MoveScaled(9,5,21,2)
+        Background = &HE0E000&
+        Foreground = &HFFFF5F&
+      }
+      { ProgressBarBenef ProgressBar
+        MoveScaled(9,7,21,2)
+        Background = &HE03761&
+        Foreground = &HFF8F1F&
+      }
+      { Label1 Label
+        MoveScaled(-2,1,11,2)
+        Alignment = Align.Right
+        Text = ("En Banco:")
+      }
+      { Label2 Label
+        MoveScaled(-2,3,11,2)
+        Alignment = Align.Right
+        Text = ("En PayPal:")
+      }
+      { Label3 Label
+        MoveScaled(-2,5,11,2)
+        Alignment = Align.Right
+        Text = ("En Casas:")
+      }
+      { Label4 Label
+        MoveScaled(-2,7,11,2)
+        Font = Font["-2"]
+        Alignment = Align.Right
+        Text = ("Benef. Esper:")
+      }
+      { ProgressBarEnJuego ProgressBar
+        MoveScaled(9,9,21,2)
+        Background = &H00E000&
+        Foreground = &H00C000&
+      }
+      { Label5 Label
+        MoveScaled(5,30,13,2)
+        Alignment = Align.Right
+        Text = ("En Juego:")
+      }
+      { Label7 Label
+        MoveScaled(-2,9,11,2)
+        Font = Font["-2"]
+        Alignment = Align.Right
+        Text = ("En Juego:")
+      }
+    }
+    { DateChooser1 DateChooser
+      MoveScaled(0,0,29,26)
+    }
+    { ButtonCalculadora Button
+      MoveScaled(29,0,29,8)
+      Text = ("Calculadora")
+      Picture = Picture["icon:/48/calculator"]
+    }
+  }
+  { VSplit1 HBox
+    MoveScaled(132,102,58,17)
+    Visible = False
+    { ScrollView1 ScrollView
+      MoveScaled(1,50,56,23)
+      Arrangement = Arrange.Column
+      AutoResize = True
+      { HPanelGrafica HPanel
+        MoveScaled(1,1,54,19)
+        Expand = True
+        AutoResize = True
+        Spacing = True
+        Padding = 2
+      }
     }
   }
 }
