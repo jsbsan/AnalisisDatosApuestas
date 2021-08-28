@@ -3,20 +3,20 @@
 'Sirver para saber si se esta ejecutando la aplicación y si es asi devuelve true, en caso contrario devuelve false
 
 Public Function MeEjecuto() As Boolean
-    
+
     Dim contenido As String
     Dim lineas As String[]
-    
+
     Shell "ps -aux | grep " & Application.Name To contenido
-    
+
     lineas = Split(contenido, "\n")
-    
+
     If lineas.count > 4 Then
-        
-        Print "hay una copia en ejecucion"
+
+        'Print "hay una copia en ejecucion"
         Return True
     Endif
-    
+
     Return False
-    
+
 End

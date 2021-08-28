@@ -60,7 +60,7 @@
     AutoResize = True
   }
   { HBoxBarraBotones HBox
-    MoveScaled(1,0,189,5)
+    MoveScaled(1,0,215,5)
     Spacing = True
     Padding = 2
     { PictureBox1 PictureBox
@@ -150,6 +150,9 @@
       AutoResize = True
       Text = ("Copia Seguridad")
       Picture = Picture["caja fuerte.png"]
+    }
+    { LabelVersion Label
+      MoveScaled(189,1,23,3)
     }
   }
   { PanelCasasyResumen Panel
