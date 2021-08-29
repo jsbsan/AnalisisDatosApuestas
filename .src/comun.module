@@ -1,98 +1,98 @@
 ' Gambas module file
 
 Public Function contiene(texto As String, textoabuscar As String) As Boolean '' devuelve verdadero o falso si un texto contiene textoabuscar
-    
+
     If String.InStr(texto, textoabuscar) <> 0 Then
         Return True
     Else
         Return False
     Endif
-    
+
 End
 
 Public Function DefinirGridSinFormato(OrigenGrid As Gridview, contenido As String)
-    
+
     Dim a, b As Integer
     Dim lineas As String[]
     Dim columnas As String[]
-    
+
     '1º fase: estudia contenido
     lineas = Split(contenido, "\n") 'separadas por salto de linea
-    
+
     'la primera linea tiene los datos de nombre de columnas
     columnas = Split(lineas[0], "\t") 'separadas por tabulador
-    
+
     'para borrar todo el contenido....
     OrigenGrid.Clear()
-    
+
     'defino grid
     With OrigenGrid
         .header = 3
         .columns.count = columnas.Count
         .rows.count = lineas.count - 1 'le quito la primera linea
-        
+
         For a = 0 To columnas.count - 1
             .columns[a].title = columnas[a]
         Next
-        
+
         .Font.name = "Sans"
         .Font.size = 8
         .Mode = Select.Single
     End With
-    
+
     'ahora meto los datos en las filas por cada columna
-    
+
     For a = 1 To lineas.count - 1
         columnas = Split(lineas[a], "\t")
         For b = 0 To columnas.count - 1
-            
+
             Try OrigenGrid[a - 1, b].text = columnas[b]
-            
+
         Next
-        
+
     Next
-    
+
     Return
-    
+
 End
 
 Public Function DefinirGrid(OrigenGrid As Gridview, contenido As String, Optional datosApuestas As Integer)
-    
+
     Dim a, b As Integer
     Dim lineas As String[]
     Dim columnas As String[]
-    
+
     '1º fase: estudia contenido
     lineas = Split(contenido, "\n") 'separadas por salto de linea
-    
+
     'la primera linea tiene los datos de nombre de columnas
     columnas = Split(lineas[0], "\t") 'separadas por tabulador
-    
+
     'para borrar todo el contenido....
     OrigenGrid.Clear()
-    
+
     'defino grid
-    
+
     With OrigenGrid
         .header = 3
         .columns.count = columnas.Count
         .rows.count = lineas.count - 1 'le quito la primera linea
-        
+
         For a = 0 To columnas.count - 1
             .columns[a].title = columnas[a]
         Next
-        
+
         .Font.name = "Sans"
         .Font.size = 8
         .Mode = Select.Single
     End With
-    
+
     'ahora meto los datos en las filas por cada columna
-    
+
     For a = 1 To lineas.count - 1
         columnas = Split(lineas[a], "\t")
         For b = 0 To columnas.count - 1
-            
+
             ' If datosApuestas = True Then
             If b > 0 And InStr(columnas[b], "/") = 0 Then
                 Try OrigenGrid[a - 1, b].text = Format(Val(columnas[b]), "0.#0")
@@ -107,22 +107,22 @@ Public Function DefinirGrid(OrigenGrid As Gridview, contenido As String, Optiona
             If datosApuestas = 3 Then
                 'caso en que son resumenen
                 Try OrigenGrid[a - 1, b].text = columnas[b]
-                
+
             Endif
-            
+
         Next
-        
+
     Next
-    
+
     Return
-    
+
 End
 
 Public Sub vaciarDirectorio(ruta As String, Optional patron As String) ''Borrar contenido de un directorio dado un patron de borrado
     'borrado si existe la ruta
-    
+
     Dim file As String
-    
+
     If patron = "" Then patron = "*"
     If Exist(ruta) Then
         For Each File In Dir(ruta & "/", patron)
@@ -131,42 +131,42 @@ Public Sub vaciarDirectorio(ruta As String, Optional patron As String) ''Borrar 
     Endif
 Catch
     Message.Error(("Error al intentar borrar el directorio: ") & ruta)
-    
+
 End
 
 Public Sub ColorCeldaNumeroNegativo(g As GridView, c As Integer)
-    
+
     Dim a As Integer
-    
+
     'por defecto:
-    
+
     For a = 0 To g.rows.Count - 1
         ' g[a, c].Foreground = Color.black
         If Not g[a, c].text = "" And If Val(g[a, c].text) < 0 Then
             g[a, c].Foreground = Color.Red
         Endif
-        
+
     Next
-    
+
 End
 
 Public Function Between(Datos As String, Cadena1 As String, Cadena2 As String) As String
-    
+
     Dim iinf As Integer
     Dim isup As Integer
-    
+
     iinf = InStr(Datos, Cadena1) + Len(Cadena1)
     isup = InStr(Datos, Cadena2, iinf)
     Return Mid(Datos, iinf, isup - iinf)
-    
+
 End
 
 Public Function PonerIconoFechaActual(G As GridView, columna As Integer)
-    
+
     Dim a As Integer
     Dim fechaActual As String
     Dim fechaDiaAnterior As String
-    
+
     'por defecto:
     fechaActual = Format$(Now, "dd")
     fechaActual &= "/" & Format$(Now, "mm")
@@ -175,7 +175,7 @@ Public Function PonerIconoFechaActual(G As GridView, columna As Integer)
     fechaDiaAnterior = Format$(DateAdd(Now, gb.day, -1), "dd")
     fechaDiaAnterior &= "/" & Format$(DateAdd(Now, gb.day, -1), "mm")
     fechaDiaAnterior &= "/" & Format$(DateAdd(Now, gb.day, -1), "yyyy")
-    
+
     For a = 0 To g.rows.Count - 1
         If g[a, 3].text = fechaActual Then
             g[a, 0].picture = Picture["exclamacion20x20.png"]
@@ -183,19 +183,19 @@ Public Function PonerIconoFechaActual(G As GridView, columna As Integer)
         If g[a, 3].text = fechaDiaAnterior Then
             g[a, 0].picture = Picture["Icono_alarmaTriangulo20x20.jpg"]
         Endif
-        
+
     Next
-    
+
 End
 
 Public Function abrirIdApuesta(idapuesta As String)
-    
+
     Dim textobusqueda As String
     Dim encontrada As New String[]
     Dim arrayfichero As String[]
     Dim nombrefile As String
-    Dim rutabusqueda As String = Settings["rutaDirectorio", "/home/hdd/home/mint/analisis de apuestas"]
-    
+    Dim rutabusqueda As String = Settings["rutaDirectorio", "/home/hdd/mint/Documentos/00 analisis apuestas"]
+
     If Len(idapuesta) = 5 Then
         TextoBusqueda = Mid$(idapuesta, 1, 2) & " " & Mid$(idapuesta, 3, 5)
     Else
@@ -207,22 +207,22 @@ Public Function abrirIdApuesta(idapuesta As String)
                 TextoBusqueda = Mid$(TextoBusqueda, 1, 2) & " " & Mid$(TextoBusqueda, 3, 5)
             Endif
         Endif
-        
+
     Endif
-    
+
     arrayfichero = Dir(rutaBusqueda, "*" & TextoBusqueda & "*", gb.File)
     For Each nombrefile In arrayfichero
         encontrada.add(nombrefile)
-        
+
     Next
-    
+
     For Each nombrefile In encontrada
         If InStr(nombrefile, "lock") = 0 Then
             'lo puedo abrir
             Desktop.Open(rutabusqueda & "/" & nombrefile)
-            
+
             Break ''solo abrir el primero
         Endif
     Next
-    
+
 End
