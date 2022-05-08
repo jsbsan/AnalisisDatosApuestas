@@ -1,0 +1,334 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,110,98)
+  ToolTip = ("Fichero de Trabajo:  User.home & \"/informacion.csv\"")
+  Text = ("Traductor a Balance")
+  Icon = Picture["balanza2.png"]
+  Resizable = False
+  { ButtonCopiaralPortapapeles Button
+    MoveScaled(102,57,7,7)
+    Picture = Picture["icon:/16/copy"]
+  }
+  { ButtonLimpiar Button
+    MoveScaled(102,48,7,7)
+    Picture = Picture["icon:/16/clear"]
+  }
+  { LabelComentarios Label
+    MoveScaled(2,94,105,3)
+    Text = ("Comentarios.") & "..."
+  }
+  { TabStrip1 TabStrip
+    MoveScaled(1,1,108,46)
+    Count = 2
+    Index = 0
+    Text = ("Apuesta")
+    Picture = Picture["apu48.png"]
+    { ButtonPegar Button
+      MoveScaled(81,5,5,6)
+      ToolTip = ("pegar contenido, traducirlo y copiarlo")
+      Text = Shortcut(("v"), "v")
+      Picture = Picture["icon:/16/paste"]
+    }
+    { TextAreaApuesta TextArea
+      MoveScaled(1,15,105,15)
+      ReadOnly = True
+      Wrap = True
+    }
+    { ButtonTraducir Button
+      MoveScaled(94,32,12,5)
+      Text = ("Traducir")
+      Picture = Picture["icon:/16/exec"]
+    }
+    { Frame2 Frame
+      MoveScaled(30,30,32,7)
+      Enabled = False
+      Font = Font["-2"]
+      Text = ("Estado")
+      { RadioButtonPrepartido RadioButton
+        MoveScaled(2,2,20,6)
+        Text = ("Prepartido")
+        Value = True
+      }
+      { RadioButtonResuelta RadioButton
+        MoveScaled(18,2,20,6)
+        Text = ("Resuelta")
+      }
+    }
+    { Label1 Label
+      MoveScaled(1,11,80,4)
+      Font = Font["+1"]
+      Alignment = Align.TopNormal
+      Text = ("Casa | Mercado | Cantidad | cuota | premio | beneficio | resultado\n")
+    }
+    { PanelIdApuesta Panel
+      MoveScaled(2,4,35,7)
+      Border = Border.Plain
+      { TextBoxId TextBox
+        MoveScaled(16,3,14,4)
+        Font = Font["-1"]
+        Alignment = Align.Center
+      }
+      { TextLabel1 TextLabel
+        MoveScaled(0,0,11,3)
+        Text = ("Id Apuesta:")
+      }
+      { ButtonPegaId Button
+        MoveScaled(31,3,4,4)
+        Picture = Picture["icon:/16/paste"]
+      }
+      { ButtonDecena Button cifras
+        Name = "ButtonDecena"
+        MoveScaled(10,3,3,4)
+        Text = ("0")
+      }
+      { ButtonUnidad Button cifras
+        Name = "ButtonUnidad"
+        MoveScaled(13,3,3,4)
+        Text = ("0")
+      }
+      { Buttoncentena Button cifras
+        Name = "Buttoncentena"
+        MoveScaled(7,3,3,4)
+        Text = ("0")
+      }
+      { ButtonDecenaMillar Button cifras
+        Name = "ButtonDecenaMillar"
+        MoveScaled(0,3,3,4)
+        Text = ("0")
+      }
+      { ButtonUnidadMillar Button cifras
+        Name = "ButtonUnidadMillar"
+        MoveScaled(3,3,3,4)
+        Text = ("0")
+      }
+    }
+    { TextLabel5 TextLabel
+      MoveScaled(2.8571,38.8571,72,3)
+      Text = ("Nota: en la columna de resultado el signo ← indica que apuesta gano.")
+    }
+    { ButtonLimpiarInicio Button
+      MoveScaled(101,5,6,6)
+      Text = Shortcut(("c"), "c")
+      Picture = Picture["icon:/16/clear"]
+    }
+    { ButtonPegar2 Button
+      MoveScaled(95,5,5,6)
+      Enabled = False
+      ToolTip = ("pega el contenido original antes de traduccion")
+      Text = ("2")
+      Picture = Picture["icon:/16/paste"]
+    }
+    { Frame1 Frame
+      MoveScaled(7,30,19,7)
+      Enabled = False
+      Font = Font["-2"]
+      Text = ("Tipo")
+      { RadioButtonFree RadioButton
+        MoveScaled(5,4,11,3)
+        Text = ("Freebet")
+      }
+      { RadioButtonNormal RadioButton
+        MoveScaled(5,1,10,3)
+        Text = ("Normal")
+        Value = True
+      }
+    }
+    { TextBoxComentarioApuesta TextBox
+      MoveScaled(26,0,79,4)
+      Font = Font["-1"]
+      ToolTip = ("Si el codigo pegado contiene en la primera linea un apostrofe o empieza por  \"apu\"  \"pro\" o \"com\", se traduce como comentario automaticamente. \nSi contiene la etiqueta \"Fecha:\", lee los sigueintes 6 caracteres y lo convierte en fecha, ejemplo fecha: 12/05 -> leerá la fecha 12/05/2019.\nAdemas si al final se le pone ID: y el codigo id lo reconoce y lo incorpora a la traduccion.")
+    }
+    { TextLabel6 TextLabel
+      MoveScaled(2,0,19,4)
+      Text = ("Comentario Apuesta:")
+      Alignment = Align.Center
+    }
+    { ButtonPegaComentarioApuesta Button
+      MoveScaled(21,0,4,4)
+      Picture = Picture["icon:/16/paste"]
+    }
+    { Panel1 Panel
+      MoveScaled(37,4,43,7)
+      Border = Border.Plain
+      { DateBoxFechaHora DateBox
+        MoveScaled(0,3,24,4)
+      }
+      { ButtonCalcula Button
+        MoveScaled(36,1,5,6)
+        ToolTip = ("calcula lo pegado")
+        Picture = Picture["icon:/16/calculator"]
+      }
+      { Label2 Label
+        MoveScaled(1,0,14,3)
+        Text = ("Fecha final:")
+      }
+    }
+    Index = 1
+    Text = ("Transferencia")
+    Picture = Picture["frecladoble32x32.png"]
+    { ValueBox1 ValueBox
+      MoveScaled(34,33,13,6)
+    }
+    { ButtonRealizarTransferencia Button
+      MoveScaled(61,32,18,7)
+      Text = ("Transferencia")
+      Picture = Picture["icon:/16/apply"]
+    }
+    { TextLabel2 TextLabel
+      MoveScaled(15,34,16,4)
+      Text = ("Cantidad:")
+      Alignment = Align.Right
+    }
+    { TextLabel3 TextLabel
+      MoveScaled(1,4,10,4)
+      Text = ("Desde:")
+      Alignment = Align.Center
+    }
+    { TextLabel4 TextLabel
+      MoveScaled(42,3,6,4)
+      Text = ("A:")
+      Alignment = Align.Center
+    }
+    { ComboBoxDE ComboBox
+      MoveScaled(11,3,26,4)
+    }
+    { ComboBoxA ComboBox
+      MoveScaled(50,3,25,4)
+    }
+    { Label3 Label
+      MoveScaled(4,13,15,4)
+      Text = ("Comentario:")
+    }
+    { TextBoxComentarioTransferencia TextBox
+      MoveScaled(3,18,64,4)
+    }
+    { Label4 Label
+      MoveScaled(45,9,35,3)
+      Text = ("(usar este combo para realizar ajustes)")
+    }
+    { Label5 Label
+      MoveScaled(0,25,8,5)
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("suma:")
+    }
+    { Label6 Label cantidades
+      Name = "Label6"
+      MoveScaled(9,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("1")
+    }
+    { Label7 Label cantidades
+      Name = "Label7"
+      MoveScaled(18,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("5")
+    }
+    { Label8 Label cantidades
+      Name = "Label8"
+      MoveScaled(27,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("10")
+    }
+    { Label9 Label cantidades
+      Name = "Label9"
+      MoveScaled(37,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("15")
+    }
+    { Label10 Label cantidades
+      Name = "Label10"
+      MoveScaled(46,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("20")
+    }
+    { Label11 Label cantidades
+      Name = "Label11"
+      MoveScaled(55,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("25")
+    }
+    { Label12 Label cantidades
+      Name = "Label12"
+      MoveScaled(64,25,7,5)
+      ToolTip = ("haga click para sumar a la cantidad")
+      Alignment = Align.Center
+      Border = Border.Plain
+      Text = ("50")
+    }
+    { LabelAjuste Label
+      MoveScaled(69,18,11,4)
+      Tag = "ajuste"
+      ToolTip = ("añade la palabra ajuste al comentario")
+      Alignment = Align.Center
+      Border = Border.Raised
+      Text = ("+ \"ajuste\"")
+    }
+    { LabelSlot Label
+      MoveScaled(81,18,11,4)
+      Tag = "slot "
+      ToolTip = ("añade la palabra ajuste al comentario")
+      Alignment = Align.Center
+      Border = Border.Raised
+      Text = ("+ \"slot\"")
+    }
+    { LabelSemana Label
+      MoveScaled(93,18,11,4)
+      Tag = "semana del __ al __"
+      ToolTip = ("añade la palabra ajuste al comentario")
+      Alignment = Align.Center
+      Border = Border.Raised
+      Text = ("+ \"semana \"")
+    }
+    { ButtonComboboxGraficoDesde Button
+      MoveScaled(38,3,4,4)
+      Text = ("CBG")
+    }
+    { ButtonComboboxGraficoA Button
+      MoveScaled(76,3,4,4)
+      Text = ("CBG")
+    }
+    Index = 0
+  }
+  { TextAreaBalance TextArea
+    MoveScaled(1,48,100,26)
+    Font = Font["-1"]
+    ReadOnly = True
+  }
+  { PictureBoxImagen PictureBox
+    MoveScaled(2,75,105,18)
+    Border = Border.Plain
+    Mode = PictureBox.Contain
+  }
+  { ButtonEditor Button
+    MoveScaled(83,1,23,4)
+    Font = Font["-2"]
+    Text = ("Editor Fichero Datos")
+    Picture = Picture["icon:/22/text"]
+  }
+  { ButtonVerhoy Button
+    MoveScaled(58,1,22,4)
+    Text = ("Ver Guardadas Hoy")
+    Picture = Picture["icon:/22/user"]
+  }
+  { BotonAlmacen Button
+    MoveScaled(88,10,7,6)
+    Tag = "flechaAzul"
+    ToolTip = ("Almacén")
+    Text = Shortcut(("a"), "a")
+    Picture = Picture["flechaazul16x16.png"]
+  }
+}

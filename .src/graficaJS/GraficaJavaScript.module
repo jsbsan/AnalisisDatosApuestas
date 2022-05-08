@@ -15,93 +15,93 @@ Private GridViewDatos As GridView
 Private ValorBanco As Float
 
 Public Sub graficarDatos(w As WebView, gridDatos As GridView, Optional datosBanco As Float)
-    
+
     Dim archivo As String
     Dim n As Integer
     'preparo entorno de trabajo...
     ValorBanco = datosBanco
-    
+
     WebView1 = w
     GridViewDatos = gridDatos
-    
+
     '  definir()
-    
+
     Try Mkdir User.home & "/.ChartJS"
     Try Mkdir User.home & "/.ChartJS/trabajo2"
     'limpieza de archivos
     '   Comun.vaciarDirectorio(User.home & "/.ChartJS")
     '  Comun.vaciarDirectorio(User.home & "/.ChartJS/trabajo2")
-    
+
     If Not Exist(User.home & "/.ChartJS/Chart.js") Then
         archivo = "./Chart.js"
         copiarArchivos(archivo)
     Endif
-    
+
     If Not Exist(User.home & "/.ChartJS/Chart.min.js") Then
         archivo = "./Chart.min.js"
         copiarArchivos(archivo)
     Endif
-    
+
     If Not Exist(User.home & "/.ChartJS/legend.js") Then
         archivo = "./legend.js"
         copiarArchivos(archivo)
     Endif
-    
+
     Shell "rm " & User.home & "/.ChartJS" & "/trabajo2/barra.html" Wait
-    
+
     archivo = "./barra.html"
     copiarArchivosAtrabajo(archivo)
-    
+
     crearGrafica()
-    
+
 End
 
 Public Sub copiarArchivos(nombre As String)
-    
+
     Copy nombre To User.home & "/.ChartJS" & "/" & nombre
-    
+
 End
 
 Public Sub copiarArchivosAtrabajo(nombre As String)
-    
+
     Copy nombre To User.home & "/.ChartJS" & "/trabajo2/" & nombre
-    
+
 End
 
 Public Sub crearGrafica()
-    
+
     Dim a As Integer
     Dim fich As String
-    
+
     titulo1 = "En Juego"
     titulo2 = "En Caja"
-    
+
     If ValorBanco <> 0 Then
         titulo2 = "En Caja (sin banca)"
     Else
         titulo2 = "En Caja"
     Endif
-    
+
     Try datos1 = Replace(GridViewDatos[0, 1].text, ",", ".")
     Try datos2 = Replace(Str$(Val(GridViewDatos[0, 2].text) - ValorBanco), ",", ".")
     '    datos3 = GridViewDatos[0, 3].text
-    
+
     For a = 1 To GridViewDatos.Rows.count - 1
         datos1 &= "," & Replace(GridViewDatos[a, 1].text, ",", ".")
         Try datos2 &= "," & Replace(Str$(Val(GridViewDatos[a, 2].text) - ValorBanco), ",", ".")
         'datos3 &= "," & GridViewDatos[a, 3].text
     Next
-    
+
     datos1 = Mid$(datos1, 1, Len(datos1) - 1)
     datos2 = Mid$(datos2, 1, Len(datos2) - 1)
-    
+
     meses = "\"" & Mid$(GridViewDatos[0, 0].text, 1, 5) & "\""
     For a = 1 To GridViewDatos.Rows.count - 2
         meses &= ",\"" & Mid$(GridViewDatos[a, 0].text, 1, 5) & "\""
     Next
-    
+
     fich = File.Load(User.home & "/.ChartJS" & "/trabajo2/barra.html")
-    
+
     fich = Replace$(fich, "#meses", meses) 'datos del dia
     fich = Replace$(fich, "#datos1", datos1) ' en juego
     fich = Replace$(fich, "#titulo1", titulo1) 'en juego
@@ -109,9 +109,9 @@ Public Sub crearGrafica()
     fich = Replace$(fich, "#titulo2", titulo2) 'en caja
     'fich = Replace$(fich, "#datos3", datos3) '-> no es necesario
     'fich = Replace$(fich, "#titulo3", titulo3) '-> no es necesario
-    
+
     File.Save(User.home & "/.ChartJS" & "/trabajo2/barra.html", fich)
-    
+
     WebView1.Url = "file:///" & User.home & "/.ChartJS" & "/trabajo2/barra.html"
-    
+
 End

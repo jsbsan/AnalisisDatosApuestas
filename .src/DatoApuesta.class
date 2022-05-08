@@ -1,0 +1,25 @@
+' Gambas class file
+
+Property casa As String
+Private hcasa As String
+Public mercado As String
+Public importe As Float
+Public cuota As Float
+Public premio As Float
+Public tipo As String '' normal o gratis
+Public resuelta As Boolean '' si, no
+Public beneficio As Float ''contiene el valor del beneficio neto que se obtiene
+Public comentario As String
+Public ganada As Boolean = False 'si es la ganadora: true
+
+Private Function casa_Read() As String
+
+    Return hcasa
+
+End
+
+Private Sub casa_Write(Value As String)
+
+    hcasa = value
+
+End

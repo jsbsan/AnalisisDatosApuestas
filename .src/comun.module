@@ -226,3 +226,125 @@ Public Function abrirIdApuesta(idapuesta As String)
     Next
 
 End
+
+'----------------------------------------------------------------------------
+Public Function BorraLinea(lineas As String[], l As String) '''borra una linea del array Lineas que sea igual a la dada "l"
+
+    Dim a As Integer
+
+    For a = 0 To lineas.count - 1
+        If lineas[a] = l Then
+            lineas.Delete(a)
+            Return
+        Endif
+    Next
+
+End
+
+Public Function valorar(l As String) As Float ''quita espacio, signo de moneda y convierte de punto a coma el texto dado para devolver un numero
+
+    Dim valor As Float
+
+    l = Replace(l, " ", "")
+    l = Replace(l, "€", "")
+    l = Replace(l, ".", ",")
+    Try valor = Val(l) 'prueba por si hay un error
+    If Error Then
+
+        Return 0
+    Endif
+    Return Val(l)
+
+End
+
+Public Function similar(casa As String) As String
+
+    casa = Lower(casa)
+
+    If casa = "" Then
+        Message.Info("Error: falta definir casa de apuesta")
+        Return "ERROR_CASA"
+        Return ""
+    Endif
+
+    If contiene(casa, "fai") Then Return "betfair"
+
+    If contiene(casa, "77") Then Return "777"
+    If contiene(casa, "leo") Then Return "leovegas"
+    If contiene(casa, "ovega") Then Return "leovegas"
+    If contiene(casa, "starve") Then Return "starvegas"
+    If contiene(casa, "arvega") Then Return "starvegas"
+
+    If contiene(casa, "mondo") Then Return "mondobets"
+    If contiene(casa, "mon") Then Return "mondobets"
+    If contiene(casa, "mondobet") Then Return "mondobets"
+
+    If contiene(casa, "racha") Then Return "enracha"
+    If contiene(casa, "enra") Then Return "enracha"
+
+    If contiene(casa, "way") Then Return "betway"
+    If contiene(casa, "betway") Then Return "betway"
+    If contiene(casa, "betw") Then Return "betway"
+
+    If contiene(casa, "pas") Then Return "paston"
+    If contiene(casa, "paston") Then Return "paston"
+    If contiene(casa, "tón") Then Return "paston"
+    If Len(casa) = 1 And casa = "p" Then Return "paston" '
+
+    If contiene(casa, "f") Then Return "paf"
+    If contiene(casa, "uni") Then Return "paf" 'unibet
+
+    If contiene(casa, "co") Then Return "codere"
+
+    If contiene(casa, "ci") Then Return "circus"
+    If contiene(casa, "cu") Then Return "circus"
+    If contiene(casa, "circu") Then Return "circus"
+
+    If contiene(casa, "go") Then Return "goldenpark"
+
+    If contiene(casa, "8") Then Return "888"
+
+    If contiene(casa, "bw") Then Return "bwin"
+
+    If contiene(casa, "wi") Then Return "williamhill"
+    If contiene(casa, "w ") Then Return "williamhill"
+
+    If contiene(casa, "w+c") Then Return "williamhill"
+    If contiene(casa, "w.c") Then Return "williamhill"
+    If contiene(casa, "wc") Then Return "williamhill"
+
+    If contiene(casa, "wan") Then Return "wanabet"
+
+    If contiene(casa, "lu") Then Return "luckia"
+    If contiene(casa, "ck") Then Return "luckia"
+    If contiene(casa, "10") Then Return "luckia" '10bet
+
+    If contiene(casa, "sp") Then Return "sportium"
+    If contiene(casa, "lad") Then Return "sportium" 'ladbrokes
+
+    If contiene(casa, "mb") Then Return "mbet"
+    If contiene(casa, "mat") Then Return "mbet"
+    If contiene(casa, "tho") Then Return "mbet"
+    If contiene(casa, "mara") Then Return "mbet"
+    If contiene(casa, "met") Then Return "mbet"
+
+    If contiene(casa, "3") Then Return "bet365"
+    If contiene(casa, "6") Then Return "bet365"
+    If contiene(casa, "5") Then Return "bet365"
+
+    If contiene(casa, "88") Then Return "888sport"
+    If contiene(casa, "8s") Then Return "888sport"
+
+    If contiene(casa, "betsta") Then Return "betstars"
+    If contiene(casa, "st") Then Return "betstars"
+    If contiene(casa, "tar") Then Return "betstars"
+    If contiene(casa, "poke") Then Return "betstars"
+
+    If Len(casa) = 1 And casa = "w" Then Return "williamhill" 'por defecto si es de longitud 1 caracter, y si es w ponew willianhilll
+
+    '  If contiene(casa, "casa") Then
+    Message.Error("Casa de apuesta no indicada correctamente: " & CASA)
+    Return "ERROR_CASA"
+    '
+
+End

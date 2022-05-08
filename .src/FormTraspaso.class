@@ -1,0 +1,17 @@
+' Gambas class file
+
+Public contenido As String[]
+
+Public Sub Form_Open()
+
+    Timer1.Delay = 2000
+    Timer1.Start
+    TextAreaContenido.text = contenido[0]
+
+End
+
+Public Sub Timer1_Timer()
+
+    Me.close
+
+End

@@ -1,0 +1,27 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,63,19)
+  Background = &H47C0C0&
+  { Label1 Label
+    MoveScaled(23,0,38,6)
+    Font = Font["+4"]
+    AutoResize = True
+    Text = ("Datos pasados al Almacén") & "..."
+    Alignment = Align.Center
+  }
+  { Timer1 #Timer
+    #MoveScaled(56,12)
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(2,3,17,15)
+    Picture = Picture["almacen100x100.png"]
+  }
+  { TextAreaContenido TextArea
+    MoveScaled(17,5,45,12)
+    Font = Font["-2"]
+    Background = &H00FFBF&
+    ReadOnly = True
+    Wrap = True
+  }
+}

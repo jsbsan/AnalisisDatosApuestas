@@ -1,0 +1,19 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+    Me.Title = "Guardadas hoy...."
+
+End
+
+Public Sub Form_Show()
+
+    Dim contenido As String
+    Dim cadenabusqueda As String
+
+    cadenabusqueda = "Guardado:" & Format(Now, "dd/mm/yy")
+    Shell ("grep \"" & cadenabusqueda & "\" " & User.home & "/informacion.csv") To contenido
+
+    TextArea1.text = contenido
+
+End

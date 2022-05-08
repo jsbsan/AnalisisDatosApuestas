@@ -1,0 +1,57 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,84,58)
+  Arrangement = Arrange.Vertical
+  { HBox2 HBox
+    MoveScaled(9,3,58,3)
+    { Spring4 Spring
+      MoveScaled(4,0,12,3)
+    }
+    { Label1 Label
+      MoveScaled(19,0,21,3)
+      Font = Font["+2"]
+      Alignment = Align.Center
+      Border = Border.Sunken
+    }
+    { Spring5 Spring
+      MoveScaled(41,-1,18,5)
+    }
+  }
+  { Separator1 Separator
+    MoveScaled(8,8,73,2)
+  }
+  { HPanel1 HPanel
+    MoveScaled(13,13,33,4)
+    Expand = True
+  }
+  { Separator2 Separator
+    MoveScaled(4,25,76,1)
+  }
+  { HPanel2 HPanel
+    MoveScaled(14,28,33,3)
+    Expand = True
+  }
+  { HBox1 HBox
+    MoveScaled(-2,43,84,4)
+    { Spring2 Spring
+      MoveScaled(5,0,12,4)
+    }
+    { ButtonCancelar Button
+      MoveScaled(18,0,15,4)
+      Text = ("Cancelar")
+      Picture = Picture["icon:/32/cancel"]
+    }
+    { Spring1 Spring
+      MoveScaled(35,0,10,4)
+    }
+    { ButtonAceptar Button
+      MoveScaled(49,0,17,4)
+      Text = ("Aceptar")
+      Picture = Picture["icon:/32/ok"]
+    }
+    { Spring3 Spring
+      MoveScaled(68,0,18,4)
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,73,39)
+  Arrangement = Arrange.Fill
+  { TextArea1 TextArea
+    MoveScaled(8,5,57,27)
+    Font = Font["Noto Kufi Arabic"]
+    Background = &H1FFFC7&
+  }
+}

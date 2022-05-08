@@ -1,0 +1,781 @@
+' Gambas class file
+
+Public decena As Integer = 1
+Public listaApuesta As New DatoApuesta[]
+Public Dtmp As New DatoApuesta
+Public datoBeneficio As Float
+Public traduccionErronea As Boolean = False
+Public tabActual As String
+
+Public Sub CalcularPegado()
+    'calculo principal
+
+    Dim a As Integer
+    Dim l As String
+    Dim lineas As String[]
+    Dim lineascopia As New String[]
+
+    If TextAreaApuesta.text = "" Then
+        Message.Error("No hay nada que traducir, pegue datos")
+        Return
+    Else
+        TextAreaBalance.TEXT = ""
+        listaApuesta.Clear()
+
+    Endif
+
+    If comun.contiene(TextAreaApuesta.text, "←") Then
+        RadioButtonResuelta.value = True
+    Else
+        RadioButtonPrepartido.value = True
+    Endif
+
+    'borrar lineas en blanco
+    lineas = Split(TextAreaApuesta.text, "\n")
+
+    'por si el codigo pegado contiene en la 1º linea un comentari0
+    ' con apostrofe
+    'con palabra de inicio "pro" -> promocion
+    'con palabra de inicio "apu" -> apuesta
+    If Mid$(lineas[0], 1, 1) = "'" Or Upper$(Mid$(lineas[0], 1, 3)) = Upper$("pro") Or Upper$(Mid$(lineas[0], 1, 3)) = Upper$("apu") Or Upper$(Mid$(lineas[0], 1, 3)) = Upper$("com") Then
+        'apendice de comentario, pro de promocion o apu de apuesta, com de comentario
+        'se trata de un comentario
+        TextBoxComentarioApuesta.text = Replace(lineas[0], "\t", " ")
+
+        'comprobacion de id dentro de comentario "id:"
+        Dim existeId As Integer = InStr(Upper(TextBoxComentarioApuesta.text), Upper("ID:"))
+        If existeID <> 0 Then
+            TextBoxId.text = LTrim(RTrim(Mid$(TextBoxComentarioApuesta.text, existeId + 3, Len(TextBoxComentarioApuesta.text))))
+            TextBoxComentarioApuesta.text = Mid$(TextBoxComentarioApuesta.text, 1, existeId - 1) & " [Guardado:" & Format(Now, "dd/mm/yy_hh:nn") & "] " & Mid$(TextBoxComentarioApuesta.text, existeId, Len(TextBoxComentarioApuesta.text))
+        Endif
+
+        'comprobacion de fecha: dentro de comentario "fecha:" , fecha como "dd/mm"
+        Dim existeFecha As Integer = InStr(Upper(TextBoxComentarioApuesta.text), Upper("FECHA:"))
+        If existeFecha <> 0 Then
+            Dim comentariofecha As String 'contiene la fecha extraida del comentario
+
+            comentariofecha = LTrim(RTrim(Mid$(TextBoxComentarioApuesta.text, existeFecha + 6, 6)))
+            If InStr(Upper$(comentariofecha), "XX") <> 0 Then
+                Message.Info("Error: la fecha no ha sido bien introducida. Pone XX/XX")
+                LabelComentarios.text = "Error: la fecha no ha sido bien introducida. Pone XX/XX"
+                LabelComentarios.Background = Color.Yellow
+
+                traduccionErronea = True
+
+            Else
+                Try DateBoxFechaHora.Value = Date(Year(Now), Val(Mid$(comentariofecha, 4, 2)), Val(Mid$(comentariofecha, 1, 2)))
+                If Error Then
+                    Message.Info("Error: la fecha no ha sido bien introducida. No la puedo traducir")
+                    LabelComentarios.text = "Error: la fecha no ha sido bien introducida. No la puedo traducir"
+                    LabelComentarios.Background = Color.Yellow
+
+                    traduccionErronea = True
+                Endif
+            Endif
+
+        Endif
+
+        TextBoxComentarioApuesta.pos = 1
+        lineas.Delete(0)
+    Endif
+
+    'copio las lineas
+    For a = 0 To lineas.Max
+        lineascopia.add(lineas[a])
+    Next
+
+    For Each l In lineas
+        If Replace(l, "\t", "") = "" Then comun.BorraLinea(lineascopia, l)
+    Next
+
+    TextAreaApuesta.text = lineascopia.Join("\n")
+
+    If traduccionErronea <> True Then
+        'procesar información
+        procesar(TextAreaApuesta.text)
+
+        If traduccionErronea <> True Then
+            'sigo traducción...pulsar al boton de traducir
+            TextAreaBalance.text = ""
+            ButtonTraducir_Click()
+        Else
+            LabelComentarios.text = "Comentario: Error en detectar casa de apuesta"
+            LabelComentarios.Background = Color.Yellow
+        Endif
+    Endif
+    'si no hay error lo copia al portapapeles
+
+    If TraduccionErronea = False Then
+        'pulsar el boton de copiar al portapapeles
+        ButtonCopiaralPortapapeles_Click()
+        BotonAlmacen.Picture = Picture["flechaRojo16x16.png"]
+        BotonAlmacen.tag = "flechaRojo"
+        LabelComentarios.Background = Color.Background
+        LabelComentarios.text = "Comentario: OK, traducción realizada"
+    Endif
+
+End
+
+Public Sub ButtonPegar_Click()
+
+    Try PictureBoxImagen.Picture = Clipboard.Paste("image/png").picture
+
+    If BotonAlmacen.Tag <> "flechaAzul" Then
+        'cuando tengo el en modo feclaRoja, lo indico
+        Dim val As Integer = Message.Question("Hay pendiente traducción para guardar...", "Cancelar Traducción", "Continuar")
+        If val = 1 Then
+            LabelComentarios.text = "Comentario: Hay pendiente traducción para guardar"
+            LabelComentarios.Background = Color.Yellow
+            Return 'no hacer nada,cancelo la traducción
+        Endif
+    Endif
+
+    'activo boton secundario para pegar contenido original
+
+    TextBoxComentarioApuesta.text = ""
+    ButtonPegar2.tag = Clipboard.Paste("text/plain")
+    ButtonPegar2.enabled = True
+
+    TextAreaApuesta.text = Clipboard.Paste("text/plain")
+
+    'si contiene el signo ← se trata de una apuesta resuelta
+    traduccionErronea = False 'reinicio la traducción
+
+    calcularPegado()
+
+End
+
+Public Sub procesar(texto As String)
+
+    Dim larray As String[]
+    Dim l As String
+    Dim palabras As String[]
+    Dim premio As Float
+    Dim beneficio As Float
+    Dim contador As Integer
+
+    If texto = "" Then Return
+
+    'obtener datos de las lienas
+    larray = Split(texto, "\n")
+
+    'determinar si se encuentra en una freebet en la 1º linea
+    palabras = Split(larray[0], "\t")
+
+    If palabras.count = 7 Or palabras.count = 6 Then
+        LabelComentarios.text = "Comentarios sobre traducción..."
+        LabelComentarios.Background = Color.Background
+
+    Else
+
+        'indico que se ha producido un error
+        'faltan columnas
+        LabelComentarios.text = "Error: Faltan columnas de datos, deben de haber 6 o 7 columnas"
+        LabelComentarios.Background = Color.Yellow
+
+        traduccionErronea = True
+        Return
+    Endif
+
+    Try premio = comun.valorar(palabras[4])
+
+    If Error Then
+        'indico que se ha producido un error
+
+        'no es una linea de apuesta con premio
+        LabelComentarios.text = "Error: la primera linea no contiene datos de apuesta reconocible, deben de haber 6 o 7 columnas"
+        traduccionErronea = True
+
+        Return
+    Endif
+
+    LabelComentarios.text = "Comentarios sobre traducción..."
+    'nota añado un rango para tene encuenta decimales
+    'rango admisible un 2%
+
+    If (Round((comun.valorar(palabras[2]) * comun.valorar(palabras[3])) * 100, -2) / 100 >= Round(premio * 100, -2) / 100 - 0.02 * (comun.valorar(palabras[2]))) And (Round((comun.valorar(palabras[2]) * comun.valorar(palabras[3])) * 100, -2) / 100 <= Round(premio * 100, -2) / 100 + 0.02 * (comun.valorar(palabras[2]))) Then
+        'se trata de una apuesta normal
+        RadioButtonNormal.value = True
+    Else
+        RadioButtonFree.Value = True
+
+    Endif
+
+    ''apuesta
+    '
+    ' Dtmp.casa = palabras[0]
+    ' Dtmp.mercado = palabras[1]
+    ' Dtmp.importe = comun.valorar(palabras[2])
+    ' Dtmp.cuota = comun.valorar(palabras[3])
+    ' Dtmp.premio = comun.valorar(palabras[4])
+    ' dtmp.resuelta = IIf(RadioButtonResuelta.value, True, False)
+    ' dtmp.tipo = IIf(RadioButtonFree.value, "gratis", "normal")
+
+    ' listaApuesta.Add(dtmp)
+    dtmp = New DatoApuesta
+
+    ''leer datos
+    contador = 0
+    For Each l In larray
+        contador += 1
+        palabras = Split(l, "\t")
+        Dtmp.casa = comun.similar(palabras[0])
+        If dtmp.casa = "ERROR_CASA" Then
+            'ha habido  error de traduccion
+            TraduccionErronea = True
+            Return
+        Endif
+        Dtmp.mercado = palabras[1]
+        Dtmp.importe = comun.valorar(palabras[2])
+        Dtmp.cuota = comun.valorar(palabras[3])
+        Dtmp.premio = comun.valorar(palabras[4])
+        dtmp.resuelta = IIf(RadioButtonResuelta.value, True, False)
+
+        If InStr(l, "←") <> 0 Then
+            'es la apuesta ganadora
+            dtmp.ganada = True
+            LabelComentarios.text &= ".. apuesta resuelta y terminada (con ganador <-)"
+        Endif
+
+        If contador = 1 Then
+            'la prmera apuesta es la que pongo siempre el freebet
+
+            dtmp.tipo = IIf(RadioButtonFree.value, "gratis", "normal")
+            datoBeneficio = comun.valorar(palabras[5]) 'la priemra apueta tiene el beneficio
+        Else
+            dtmp.tipo = "normal"
+        Endif
+
+        If palabras[5] <> "" Then
+            Try beneficio = IIf(comun.valorar(palabras[5]) = 0, 0, comun.valorar(palabras[5]))
+        Endif
+
+        If Error Then
+            'no hay datos
+        Else
+
+            If RadioButtonResuelta.value = True And palabras.count = 7 Then
+
+                If comun.contiene(palabras[6], "←") Then
+                    dtmp.beneficio = beneficio 'tiene la fecha y se le asigna el beneficio
+                Endif
+            Endif
+        Endif
+
+        listaApuesta.Add(dtmp)
+        dtmp = New DatoApuesta
+
+    Next
+
+    'no ha habido ningun error de traduccion
+    TraduccionErronea = False
+
+End
+
+Public Sub ButtonPegaId_Click()
+    'solo copia los 7 primeros caracteres, para evitar errores de pegar otras cosas que no sean el id de identificacion
+
+    TextBoxId.text = Mid$(Clipboard.Paste("text/plain"), 1, 12) 'solo lee el dato en formato texto
+    If Len(TextBoxId.text) < 6 Then
+        'separo por 2 espacio y luego 3
+        TextBoxId.text = Mid(textBoxId.text, 1, 2) & " " & Mid(TextBoxId.text, 3, 3)
+
+    Endif
+
+End
+
+Public Sub ButtonTraducir_Click()
+
+    Dim dtmp As DatoApuesta
+
+    Dim terminadaApuesta As Boolean = False 'por si hay dos apuestas con ganadas en la misma promocion, poner un solo terminada
+
+    If DateBoxFechaHora.Value = Null Then
+        DateBoxFechaHora.value = Now
+    Endif
+
+    'limpio texto traducido y lo dejo en blanco
+
+    TextAreaBalance.text = ""
+
+    If TextBoxComentarioApuesta.text <> "" Then
+        TextAreaBalance.text = "Comentario: " & TextBoxComentarioApuesta.text & "\n"
+        LabelComentarios.Background = Color.Background
+    Endif
+
+    If TextBoxId.text = "" Then
+        TextBoxId.text = ButtonDecenaMillar.text & ButtonUnidadMillar.text & " " & Buttoncentena.text & ButtonDecena.text & ButtonUnidad.Text
+
+        settings["decenamillar"] = ButtonDecenaMillar.Text
+        settings["unidadmillar"] = ButtonUnidadMillar.Text
+
+    Endif
+
+    'comprobación id
+    If TextBoxId.text = "00 000" Then
+        Message.Error("Codigo ID " & TextBoxId.text & " de la apuesta es incorrecto")
+        TextAreaBalance.text = ""
+        textAreaBalance.text = "Comentario: Error en el código Id de la apuesta"
+        LabelComentarios.Background = Color.Yellow
+        TraduccionErronea = True
+        Return
+    Endif
+
+    'traduccion
+
+    If RadioButtonNormal.value = True And RadioButtonPrepartido.value = True Then
+
+        For Each dtmp In listaApuesta
+            TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+            TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+            TextAreaBalance.text &= dtmp.casa & "\t"
+            TextAreaBalance.text &= Str$(-dtmp.importe) & "\n"
+
+            TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+            TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+            TextAreaBalance.text &= "zen juego " & dtmp.casa & "\t"
+            TextAreaBalance.text &= Str$(dtmp.importe) & "\t" & dtmp.mercado & "|" & Str$(DateBoxFechaHora.Value) & "\n"
+            'añadir apunte Zz beneficio
+        Next
+
+        TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+        TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+        TextAreaBalance.text &= "Zz beneficio" & "\t"
+        TextAreaBalance.text &= Str$(datoBeneficio) & "\t" & "enjuego" & "\n"
+
+    Endif
+
+    If RadioButtonNormal.value = True And RadioButtonResuelta.value = True Then
+        For Each dtmp In listaApuesta
+            TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+            TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+
+            TextAreaBalance.text &= "zen juego " & dtmp.casa & "\t"
+            TextAreaBalance.text &= Str$(-dtmp.importe) & "\n"
+
+            'añadir apunte Zz beneficio
+            If dtmp.beneficio <> 0 Then
+
+                TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                TextAreaBalance.text &= dtmp.casa & "\t"
+                TextAreaBalance.text &= Str$(dtmp.premio) & "\t" & dtmp.mercado & "\n"
+
+                'solo pone la resta del beneficio una vez...
+                If terminadaApuesta = False Then
+                    TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                    TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                    TextAreaBalance.text &= "Zz beneficio" & "\t"
+
+                    TextAreaBalance.text &= Str$(-datoBeneficio) & "\t" & "terminada" & "\n"
+                    terminadaApuesta = True
+                Endif
+
+            Endif
+
+        Next
+    Endif
+
+    If RadioButtonFree.value = True And RadioButtonPrepartido.value = True Then
+        'apuesta gratis, prepartido..
+
+        For Each dtmp In listaApuesta
+            If dtmp.tipo = "normal" Then
+                TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                TextAreaBalance.text &= dtmp.casa & "\t"
+                TextAreaBalance.text &= Str$(-dtmp.importe) & "\n"
+
+                TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                TextAreaBalance.text &= "zen juego " & dtmp.casa & "\t"
+                TextAreaBalance.text &= Str$(dtmp.importe) & "\t" & dtmp.mercado & "|" & Str$(DateBoxFechaHora.Value) & "\n"
+                'añadir apunte Zz beneficio
+                ' If dtmp.beneficio <> 0 Then
+                '     TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                '     TextAreaBalance.text &= Format(Now, "dd/mm/yyyy") & "\t"
+                '     TextAreaBalance.text &= "Zz beneficio" & "\t"
+                '     TextAreaBalance.text &= Str$(datoBeneficio) & "\n"
+                ' Endif
+            Else
+                'tipo freebet
+                'no pongo nada (tengo jugado freebet pero sin ningun valor)
+                TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                TextAreaBalance.text &= dtmp.casa & "\t"
+                TextAreaBalance.text &= Str$(0) & "\t" & dtmp.mercado & " (freebet de valor " & Str$(dtmp.importe) & "€)" & "\n"
+
+            Endif
+
+        Next
+
+        TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+        TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+        TextAreaBalance.text &= "Zz beneficio" & "\t"
+        TextAreaBalance.text &= Str$(datoBeneficio) & "\t" & "enjuego" & "\n"
+
+    Endif
+
+    If RadioButtonNormal.value = False And RadioButtonResuelta.value = True Then
+        'apuesta gratis resuelta
+
+        For Each dtmp In listaApuesta
+            If dtmp.tipo <> "gratis" Then
+                TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+
+                TextAreaBalance.text &= "zen juego " & dtmp.casa & "\t"
+                TextAreaBalance.text &= Str$(-dtmp.importe) & "\n"
+
+                'añadir apunte Zz beneficio
+                If dtmp.beneficio <> 0 Or dtmp.ganada = True Then
+                    TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                    TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                    TextAreaBalance.text &= dtmp.casa & "\t"
+                    TextAreaBalance.text &= Str$(dtmp.premio) & "\t" & dtmp.mercado & "\n"
+
+                    If terminadaApuesta = False Then
+                        TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                        TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                        TextAreaBalance.text &= "Zz beneficio" & "\t"
+
+                        TextAreaBalance.text &= Str$(-datoBeneficio) & "\t" & "terminada" & "\n"
+                        terminadaApuesta = True
+                    Endif
+
+                Endif
+
+            Else
+                If dtmp.beneficio <> 0 Or dtmp.ganada = True Then
+                    TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+                    TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                    TextAreaBalance.text &= dtmp.casa & "\t"
+                    TextAreaBalance.text &= Str$(dtmp.premio) & "\t" & dtmp.mercado & "\n"
+                    TextAreaBalance.text &= Replace(TextBoxId.text, "\n", "") & "\t"
+
+                    'solo pone la resta del beneficio una vez...
+                    If terminadaApuesta = False Then
+                        TextAreaBalance.text &= Format(DateBoxFechaHora.value, "dd/mm/yyyy") & "\t"
+                        TextAreaBalance.text &= "Zz beneficio" & "\t"
+                        TextAreaBalance.text &= Str$(-datoBeneficio) & "\t" & "terminada" & "\n"
+
+                        terminadaApuesta = True
+                    Endif
+
+                Endif
+            Endif
+
+        Next
+    Endif
+
+End
+
+Public Sub Form_Open()
+
+    If ModuleMeEjecuto.MeEjecuto() Then
+        'fin de la aplicación...
+        Me.Close()
+        Return
+    Endif
+
+    ComboBoxA.list = ["0 paypal", "bet365", "betstars", "betway", "botemania", "bwin", "circus", "codere", "goldenpark", "luckia", "mbet", "paf", "paston", "circus", "sportium", "wanabet", "williamhill", "888", "enracha", "mondobets", "777", "starvegas", "leovegas", "betfair", "0 caixa", "0 bankia eva", "0 openbank eva", "0 openbank julio", "0 paypal eva", "1 PrevisionGastos", "2 Ahorros", " "]
+
+    ComboBoxDE.list = ComboBoxA.list 'lo mismo que la anterior
+
+    Me.Title = "Traductor a Balance vesion " & Application.Version
+
+    LabelComentarios.text = "Comentarios sobre traducción..."
+    LabelComentarios.Background = Color.Background
+
+    ButtonDecenaMillar.Text = IIf(settings["decenamillar"] = "", "0", settings["decenamillar"])
+    ButtonUnidadMillar.Text = IIf(settings["unidadmillar"] = "", "0", settings["decenamillar"])
+    Settings.Read(Me)
+
+End
+
+Public Sub ButtonCopiaralPortapapeles_Click()
+
+    Clipboard.Copy(TextAreaBalance.text)
+
+End
+
+Public Sub ButtonLimpiar_Click()
+
+    TextAreaBalance.text = ""
+    TextBoxComentarioTransferencia.text = ""
+
+End
+
+Public Sub TabStrip1_Click()
+
+End
+
+Public Sub ButtonRealizarTransferencia_Click()
+
+    TextAreaBalance.text = ""
+
+    If Not Replace(ComboBoxDE.text, " ", "") = "" Then
+        TextAreaBalance.text &= TextBoxComentarioTransferencia.text & "\t"
+        TextAreaBalance.text &= Format(Now, "dd/mm/yyyy") & "\t"
+        TextAreaBalance.text &= ComboBoxDE.text & "\t"
+        TextAreaBalance.text &= Str$(-ValueBox1.value) & "\n"
+    Endif
+
+    If Not ComboBoxA.text = "" Then
+        TextAreaBalance.text &= TextBoxComentarioTransferencia.text & "\t"
+        TextAreaBalance.text &= Format(Now, "dd/mm/yyyy") & "\t"
+        TextAreaBalance.text &= ComboBoxA.text & "\t"
+        TextAreaBalance.text &= Str$(ValueBox1.value) & "\n"
+    Endif
+    Clipboard.Copy(TextAreaBalance.text)
+    BotonAlmacen.Picture = Picture["flechaRojo16x16.png"]
+    BotonAlmacen.tag = "flechaRojo"
+
+End
+
+' Public Sub ButtonEstructuraFreebet_Click()
+'
+'     Clipboard.Copy("Casa\tMercado\tCantidad\tCuota\tPremio\tBeneficio\tResultado")
+'
+' End
+'
+' Public Sub ButtonEstructuraFreebet2_Click()
+'
+'     Clipboard.Copy("Casa\tMercado\tCantidad\tCuota\tPremio\tBeneficio\tResultado")
+'
+' End
+
+Public Sub ButtonLimpiarInicio_Click()
+
+    TextAreaApuesta.text = ""
+    listaApuesta = New DatoApuesta[]
+    Dtmp = New DatoApuesta
+    datoBeneficio = 0
+    TextAreaBalance.text = ""
+    TextBoxId.text = ""
+    LabelComentarios.text = ""
+    LabelComentarios.Background = Color.rgb(255, 255, 255)
+    ButtonPegar2.enabled = False
+    DateBoxFechaHora.value = Date(0, 0, 0)
+
+    LabelComentarios.text = "Comentarios sobre traducción..."
+    LabelComentarios.Background = Color.Background
+
+    ButtonDecenaMillar.Text = IIf(settings["decenamillar"] = "", "0", settings["decenamillar"])
+    ButtonUnidadMillar.Text = IIf(settings["unidadmillar"] = "", "0", settings["decenamillar"])
+    'corrado de comentario de apuesta
+    TextBoxComentarioApuesta.text = ""
+    traduccionErronea = False 'reinicio la traducción
+    'borro icono de almacen
+    BotonAlmacen.Picture = Picture["flechaazul16x16.png"]
+    BotonAlmacen.tag = "flechaAzul"
+
+End
+
+Public Sub cifras_MouseUp()
+    'hacer click izquierdo aumenta un valor hasta llegar al 9 al siguiente cambia a 0
+
+    If Mouse.left Then
+        If Val(Last.text) > 8 Then
+            Last.text = "0"
+        Else
+
+            Last.text = Str$(Val(Last.text) + 1)
+        Endif
+    Endif
+
+    'hacer click derecho disminuye el valor hasta llegar al 0 al siguiente pasa al 9
+    If Mouse.Right Then
+        If Val(Last.text) > 0 Then
+            Last.text = Str$(Val(Last.text) - 1)
+        Else
+            Last.text = Str$(9)
+
+        Endif
+    Endif
+
+End
+''TODO: POR HACER
+''NOTE: COMENTARIOS
+''FIXME: ARREGLAME
+
+Public Sub ButtonPegar2_Click()
+
+    ButtonPegar2.enabled = False
+    Clipboard.Copy(ButtonPegar2.tag)
+    ButtonPegar_Click()
+
+End
+
+Public Sub ButtonPegaComentarioApuesta_Click()
+
+    TextBoxComentarioApuesta.text = Clipboard.Paste()
+
+End
+
+Public Sub TextBoxId_KeyPress()
+
+    If Key.code = Key.enter Or Key.code = Key.return Then
+        comprobarIdTexto(textboxid)
+    Endif
+
+End
+
+Public Sub TextBoxId_LostFocus()
+
+    comprobarIdTexto(textboxid)
+
+End
+
+''comprobacion de codigo id de textobox
+
+Public Function comprobarIdTexto(t As Textbox)
+
+    If Len(T.text) < 6 Then
+        'separo por 2 espacio y luego 3
+        T.text = Mid(t.text, 1, 2) & " " & Mid(T.text, 3, 3)
+
+    Endif
+
+End
+
+Public Sub BotonAlmacen_Click()
+
+    Dim hfile As File
+    Dim sline As String
+
+    If BotonAlmacen.tag = "flechaAzul" Then
+        'ya ha pasado informacion al almacen
+        Message.Info("La información ya esta pasada al almacen")
+        Return
+    Endif
+
+    If TextAreaBalance.Text <> "" Then
+        Dim nombrefichero As String = User.home & "/informacion.csv"
+
+        hfile = Open nombrefichero For Append
+
+        Write #hfile, TextAreaBalance.Text
+
+        Close hfile
+
+        'paso el contenido de textarea al formulario para que lo muestre...
+        Dim contenidoPaso As New String[]
+        contenidoPaso.add(TextAreaBalance.Text)
+        FormTraspaso.contenido = contenidoPaso
+        FormTraspaso.Show()
+        BotonAlmacen.Picture = Picture["flechaazul16x16.png"]
+        BotonAlmacen.tag = "flechaAzul"
+    Else
+        Message.Info("No hay contido a almacenar")
+    Endif
+
+    'pongo el foco en text balance (para imperidr que si darme cuenta le de al boton de almacenar dos veces)
+    TextAreaBalance.SetFocus()
+
+End
+
+Public Sub ButtonCalcula_Click()
+
+    CalcularPegado()
+
+End
+
+Public Sub cantidades_MouseDown()
+
+    ValueBox1.value += Val(Last.Text)
+
+End
+
+Public Sub LabelAjuste_MouseDown()
+
+    TextBoxComentarioTransferencia.text &= LabelAjuste.Tag
+
+End
+
+Public Sub ButtonEditor_Click()
+
+    Exec ["featherpad", User.home & "/informacion.csv"]
+
+End
+
+Public Sub Form_KeyPress()
+
+    ' Print Key.code
+    If tabActual = "Apuesta" Then
+        If Key.code = 86 Then
+            'si pulsa boton key.code=86 then pegar datos del portapapele "techa v"
+            ButtonPegar_Click()
+        Endif
+
+        If Key.code = 65 Then
+            'almacenar informacion tecla a
+            If traduccionErronea = True Then
+                Message.Info("No se puede traducir, hay un error")
+            Else
+                BotonAlmacen_Click()
+            Endif
+        Endif
+
+        If Key.code = 67 Then
+            'limpia contenido
+            ButtonLimpiarInicio_Click()
+        Endif
+    Endif
+
+End
+
+Public Sub ButtonVerhoy_Click()
+
+    FormHoy.Show()
+
+End
+
+Public Sub LabelSlot_MouseDown()
+
+    TextBoxComentarioTransferencia.text &= LabelSlot.Tag
+
+End
+
+Public Sub LabelSemana_MouseDown()
+
+    TextBoxComentarioTransferencia.text &= LabelSemana.Tag
+
+End
+
+Public Sub TabStrip1_Arrange()
+
+    Print TabStrip1.Current.Text
+    If TabStrip1.Current.Text = "Apuesta" Then
+        tabActual = "Apuesta"
+        PictureBoxImagen.visible = True
+    Else
+        tabActual = "Otra Tab"
+    Endif
+
+    If TabStrip1.Current.Text = "Transferencia" Then
+        'oculta imagen
+        PictureBoxImagen.visible = False
+    Endif
+
+End
+
+Public Sub ButtonComboboxGraficoDesde_Click()
+
+    FormComboBoxGrafico.lista = ComboBoxA.list
+    FormComboBoxGrafico.abrir(ComboBoxDe)
+
+End
+
+Public Sub ButtonComboboxGraficoA_Click()
+
+    FormComboBoxGrafico.lista = ComboBoxA.list
+    FormComboBoxGrafico.abrir(ComboBoxA)
+
+End
+
+Public Sub Form_Close()
+
+    Settings.write(Me)
+
+End
