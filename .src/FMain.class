@@ -38,6 +38,9 @@ Public Sub Form_Open()
     'y luego en ordenar por fecha
     ' ButtonPorFecha_Click() -> LO DESACTIVO Porque ButtonAnalizar, ya lo hace.
     ' Me.Close()
+    Dim ftraductor As Form
+    ftraductor = New FMainTraductor(HBoxContenedorSlider)
+    ftraductor.Show()
 
 End
 

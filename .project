@@ -2,7 +2,7 @@
 Title=AnalisisDatosApuestas
 Startup=FMain
 Icon=analisis.png
-Version=0.0.78
+Version=0.0.79
 Component=gb.image
 Component=gb.qt4
 Component=gb.form
@@ -19,7 +19,7 @@ Maintainer=jsbsan
 Address=jusabejusabe@gmail.com
 Url=https://jsbsan.blogspot.com/
 License=General Public License
-PackageName=analisisdatosapuestas-0.0.78
+PackageName=analisisdatosapuestas-0.0.79
 CreateEachDirectory=1
 Packager=1
 Systems=debian

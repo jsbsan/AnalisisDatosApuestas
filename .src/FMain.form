@@ -328,12 +328,17 @@
     }
   }
   { SidePanel1 SidePanel
-    MoveScaled(63,6,130,113)
+    MoveScaled(75,6,118,113)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
     Arrangement = Arrange.Fill
     Centered = True
     Orientation = Align.Left
     Border = True
+    { HBoxContenedorSlider HBox
+      MoveScaled(1,1,115,109)
+      Expand = True
+      AutoResize = True
+    }
   }
 }
