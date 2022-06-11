@@ -24,6 +24,9 @@ Public Sub graficarDatos(w As WebView, gridDatos As GridView, Optional datosBanc
     WebView1 = w
     GridViewDatos = gridDatos
 
+    'anulo sistema de grafica
+    Return
+
     '  definir()
 
     Try Mkdir User.home & "/.ChartJS"

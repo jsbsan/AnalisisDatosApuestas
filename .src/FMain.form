@@ -64,14 +64,13 @@
     Spacing = True
     Padding = 2
     { PictureBox1 PictureBox
-      MoveScaled(3,1,5,5)
+      MoveScaled(1,0,5,5)
       Background = &HFFFFFF&
       Picture = Picture.Load("homepage-scales-min.png")
       Stretch = True
     }
     { ButtonAnalizar Button
-      MoveScaled(9,0,12,5)
-      Font = Font["-2"]
+      MoveScaled(7,0,12,5)
       Background = &H00FFFF&
       ToolTip = ("Actualizar datos, importe apostado")
       AutoResize = True
@@ -79,35 +78,40 @@
       Picture = Picture["icon:/16/refresh"]
     }
     { ButtonCasas Button
-      MoveScaled(21,0,13,5)
+      MoveScaled(18,0,13,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Zen Juego")
       Picture = Picture["icon:/16/table"]
     }
     { ButtonListaUltimas Button
-      MoveScaled(37,0,16,5)
+      MoveScaled(31,0,16,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Lista Últimas")
       Picture = Picture["icon:/16/view-detail"]
     }
     { ButtonEditor Button
-      MoveScaled(53,0,12,5)
+      MoveScaled(48,0,12,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Editor")
       Picture = Picture["icon:/32/edit"]
     }
+    { ButtonCalculadora Button
+      MoveScaled(61,0,16,5)
+      Text = ("Calculadora")
+      Picture = Picture["icon:/24/calculator"]
+    }
     { ButtonFiltrar Button
-      MoveScaled(66,0,13,5)
+      MoveScaled(77,0,13,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Buscar ID")
       Picture = Picture["icon:/16/find"]
     }
     { ButtonComparaListaId Button
-      MoveScaled(80,0,16,5)
+      MoveScaled(91,0,16,5)
       Font = Font["-2"]
       ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
       AutoResize = True
@@ -115,7 +119,7 @@
       Picture = Picture["Editing-Compare-icon.png"]
     }
     { ButtonComparaListaImportes Button
-      MoveScaled(97,0,19,5)
+      MoveScaled(108,0,19,5)
       Font = Font["-2"]
       ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
       AutoResize = True
@@ -123,28 +127,28 @@
       Picture = Picture["Editing-Compare-icon.png"]
     }
     { ButtonCompactar Button
-      MoveScaled(116,1,17,4)
+      MoveScaled(128,0,17,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Compactar")
       Picture = Picture["comprimir.png"]
     }
     { ButtonHerramientaBalance Button
-      MoveScaled(134,0,15,5)
+      MoveScaled(146,0,15,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Traductor")
       Picture = Picture["balanza.png"]
     }
     { ButtonBuscadorArchivos Button
-      MoveScaled(150,0,12,5)
+      MoveScaled(163,0,12,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Buscar")
       Picture = Picture["buscar en analisis.png"]
     }
     { ButtonCopiaSeguridad Button
-      MoveScaled(163,0,23,5)
+      MoveScaled(176,0,23,5)
       Font = Font["-2"]
       ToolTip = ("Hacer Copia de Seguridad")
       AutoResize = True
@@ -152,7 +156,7 @@
       Picture = Picture["caja fuerte.png"]
     }
     { LabelVersion Label
-      MoveScaled(189,1,23,3)
+      MoveScaled(204,2,23,3)
     }
   }
   { PanelCasasyResumen Panel
@@ -179,9 +183,9 @@
     }
   }
   { Panel3 Panel
-    MoveScaled(42,6,87,60)
+    MoveScaled(42,6,88,60)
     { GridViewEnJuego GridView
-      MoveScaled(0,1,86,60)
+      MoveScaled(0,0,87,60)
       ToolTip = ("Pulse boton derecho para abrir Hoja de Calculo relacionada con la ID")
     }
     { ButtonApuestasEnJuego Button
@@ -190,9 +194,9 @@
     }
   }
   { PanelGraficaEvolucion Panel
-    MoveScaled(42,67,87,52)
+    MoveScaled(229,57,87,52)
     { WebView1 WebView
-      MoveScaled(0,0,87,56)
+      MoveScaled(1,4,87,56)
     }
     { ButtonGraficaJS15 Button
       MoveScaled(0,1,7,3)
@@ -217,9 +221,9 @@
     Padding = 2
   }
   { PanelAnotaciones Panel
-    MoveScaled(131,6,59,67)
+    MoveScaled(42,67,59,53)
     { TextAreaNotas TextArea
-      MoveScaled(0,3,58,64)
+      MoveScaled(0,3,58,49)
       Background = &HFFFF9F&
       Foreground = &H000000&
       Expand = True
@@ -241,9 +245,9 @@
     }
   }
   { Panel2 Panel
-    MoveScaled(131,74,60,26)
+    MoveScaled(101,67,29,52)
     { Panel1 Panel
-      MoveScaled(29,8,31,12)
+      MoveScaled(0,40,31,12)
       { ProgressBarBanco ProgressBar
         MoveScaled(9,1,21,2)
         Background = &H5FAFFF&
@@ -305,14 +309,9 @@
     { DateChooser1 DateChooser
       MoveScaled(0,0,29,26)
     }
-    { ButtonCalculadora Button
-      MoveScaled(29,0,29,8)
-      Text = ("Calculadora")
-      Picture = Picture["icon:/48/calculator"]
-    }
   }
   { VSplit1 HBox
-    MoveScaled(132,102,58,17)
+    MoveScaled(169,48,58,17)
     Visible = False
     { ScrollView1 ScrollView
       MoveScaled(1,50,56,23)
@@ -328,7 +327,7 @@
     }
   }
   { SidePanel1 SidePanel
-    MoveScaled(75,6,118,113)
+    MoveScaled(86,6,118,113)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
     Arrangement = Arrange.Fill
@@ -336,7 +335,7 @@
     Orientation = Align.Left
     Border = True
     { HBoxContenedorSlider HBox
-      MoveScaled(1,1,115,109)
+      MoveScaled(2,1,115,109)
       Expand = True
       AutoResize = True
     }
