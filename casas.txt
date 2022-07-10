@@ -1,5 +1,3 @@
-0 bankia eva
-0 bankia julio
 0 openbank eva
 0 openbank julio
 0 paypal

@@ -4,6 +4,7 @@ Public elegido As String
 Public lista As String[]
 Public lista2 As String[]
 Public origen As Variant
+Public abiertoya As Boolean = False
 
 Public Sub Form_Open()
 
@@ -21,37 +22,11 @@ Public Sub abrir(procede As Variant)
 
     Dim l As String
 
-    origen = procede
-    For Each l In lista
-        btmp = New Button(contenedor) As "obs"
+    If abiertoya = False Then
 
-        'icono
-        btmp.h = 45
-        btmp.w = 90
-
-        If IsNull(Picture["iconos/" & l & ".png"]) Then
-            btmp.Text = l
-        Else
-            btmp.Picture = Picture["iconos/" & l & ".png"]
-        Endif
-
-        btmp.Tag = l
-
-    Next
-
-    'listado 2:
-    If IsNull(lista2) Then
-        'no hacer nada
-        HPanel2.visible = False
-
-        Separator2.visible = False
-    Else
-        HPanel2.visible = True
-
-        Separator2.visible = True
-
-        For Each l In lista2
-            btmp = New Button(contenedor2) As "obs"
+        origen = procede
+        For Each l In lista
+            btmp = New Button(contenedor) As "obs"
 
             'icono
             btmp.h = 45
@@ -66,8 +41,38 @@ Public Sub abrir(procede As Variant)
             btmp.Tag = l
 
         Next
-    Endif
 
+        'listado 2:
+        If IsNull(lista2) Then
+            'no hacer nada
+            HPanel2.visible = False
+
+            Separator2.visible = False
+        Else
+            HPanel2.visible = True
+
+            Separator2.visible = True
+
+            For Each l In lista2
+                btmp = New Button(contenedor2) As "obs"
+
+                'icono
+                btmp.h = 45
+                btmp.w = 90
+
+                If IsNull(Picture["iconos/" & l & ".png"]) Then
+                    btmp.Text = l
+                Else
+                    btmp.Picture = Picture["iconos/" & l & ".png"]
+                Endif
+
+                btmp.Tag = l
+
+            Next
+        Endif
+
+        abiertoya = True
+    Endif
     Me.Show()
 
 End
