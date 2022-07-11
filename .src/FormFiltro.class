@@ -70,7 +70,7 @@ Public Sub agregaIcono(texto As String)
 
     Dim CASAS As New String[]
 
-    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA"]
+    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA", "1xbet"]
 
     Dim valor As Integer = -1
     Dim a As Integer
@@ -102,6 +102,8 @@ Public Sub agregaIcono(texto As String)
     ' casavalor = 15 ' "BETWAY"
     ' casavalor = 16 ' "MONDOBETS"
     ' casavalor = 17 ' "ENRACHA"
+    'casavalor=18 '1xbet
+
     Dim hpic As New PictureBox(HBoxCasas)
     Select Case valor
         Case 16
@@ -226,6 +228,14 @@ Public Sub agregaIcono(texto As String)
                 hpic.w = 80
                 hpic.Picture = Picture["iconos/paf.png"]
                 HBoxCasas.Tag &= ",paf.png"
+            Endif
+        Case 18
+            If comun.contiene(HBoxCasas.Tag, "1xbet.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/1xbet.png"]
+                HBoxCasas.Tag &= ",1xbet.png"
             Endif
 
     End Select
