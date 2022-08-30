@@ -267,6 +267,12 @@ Public Function similar(casa As String) As String
         Return ""
     Endif
 
+    If contiene(casa, "vers") Then Return "versus"
+    If contiene(casa, "sus") Then Return "versus"
+
+    If contiene(casa, "gging") Then Return "juegging"
+    If contiene(casa, "jueg") Then Return "juegging"
+
     If contiene(casa, "fai") Then Return "betfair"
 
     If contiene(casa, "77") Then Return "777"

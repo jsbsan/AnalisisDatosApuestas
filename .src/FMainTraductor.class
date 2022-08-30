@@ -478,7 +478,7 @@ Public Sub Form_Open()
         Return
     Endif
 
-    ComboBoxA.list = ["0 paypal", "bet365", "betstars", "betway", "botemania", "bwin", "circus", "codere", "goldenpark", "luckia", "mbet", "paf", "1xbet", "paston", "1xbet", "circus", "sportium", "wanabet", "williamhill", "888", "enracha", "mondobets", "777", "starvegas", "leovegas", "betfair", "0 caixa", "0 openbank eva", "0 openbank julio", "0 paypal eva", "1 PrevisionGastos", "2 Ahorros", " "]
+    ComboBoxA.list = leerOpciones()
 
     ComboBoxDE.list = ComboBoxA.list 'lo mismo que la anterior
 
@@ -490,6 +490,12 @@ Public Sub Form_Open()
     ButtonDecenaMillar.Text = IIf(settings["decenamillar"] = "", "0", settings["decenamillar"])
     ButtonUnidadMillar.Text = IIf(settings["unidadmillar"] = "", "0", settings["decenamillar"])
     Settings.Read(Me)
+
+End
+
+Public Function leerOpciones() As String[]
+
+    Return Split(File.Load("lista_opciones.txt"), gb.CrLf)
 
 End
 
