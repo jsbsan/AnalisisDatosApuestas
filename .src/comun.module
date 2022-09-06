@@ -267,6 +267,9 @@ Public Function similar(casa As String) As String
         Return ""
     Endif
 
+    If contiene(casa, "Sisa") Then Return "sisal"
+    If contiene(casa, "mrgre") Then Return "mrgreen"
+
     If contiene(casa, "vers") Then Return "versus"
     If contiene(casa, "sus") Then Return "versus"
 
@@ -278,8 +281,9 @@ Public Function similar(casa As String) As String
     If contiene(casa, "77") Then Return "777"
     If contiene(casa, "leo") Then Return "leovegas"
     If contiene(casa, "ovega") Then Return "leovegas"
-    If contiene(casa, "starve") Then Return "starvegas"
-    If contiene(casa, "arvega") Then Return "starvegas"
+    If contiene(casa, "starve") Then Return "admiralbet"
+    If contiene(casa, "arvega") Then Return "admiralbet"
+    If contiene(casa, "admiral") Then Return "admiralbet"
 
     If contiene(casa, "mondo") Then Return "mondobets"
     If contiene(casa, "mon") Then Return "mondobets"
