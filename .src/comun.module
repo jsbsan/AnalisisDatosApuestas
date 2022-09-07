@@ -267,6 +267,8 @@ Public Function similar(casa As String) As String
         Return ""
     Endif
 
+    If contiene(casa, "winama") Then Return "winamax"
+
     If contiene(casa, "Sisa") Then Return "sisal"
     If contiene(casa, "mrgre") Then Return "mrgreen"
 
