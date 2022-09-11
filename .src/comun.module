@@ -268,6 +268,9 @@ Public Function similar(casa As String) As String
     Endif
 
     If contiene(casa, "winama") Then Return "winamax"
+    If contiene(casa, "winima") Then Return "winamax"
+    If contiene(casa, "max") Then Return "winamax"
+    If contiene(casa, "win") Then Return "winamax"
 
     If contiene(casa, "Sisa") Then Return "sisal"
     If contiene(casa, "mrgre") Then Return "mrgreen"
@@ -318,12 +321,10 @@ Public Function similar(casa As String) As String
 
     If contiene(casa, "bw") Then Return "bwin"
 
-    If contiene(casa, "wi") Then Return "williamhill"
-    If contiene(casa, "w ") Then Return "williamhill"
-
     If contiene(casa, "w+c") Then Return "williamhill"
     If contiene(casa, "w.c") Then Return "williamhill"
     If contiene(casa, "wc") Then Return "williamhill"
+    If Len(casa) = 1 And casa = "w" Then Return "williamhill" 'por defecto si es de longitud 1 caracter, y si es w ponew willianhilll
 
     If contiene(casa, "wan") Then Return "wanabet"
 
@@ -351,8 +352,6 @@ Public Function similar(casa As String) As String
     If contiene(casa, "st") Then Return "betstars"
     If contiene(casa, "tar") Then Return "betstars"
     If contiene(casa, "poke") Then Return "betstars"
-
-    If Len(casa) = 1 And casa = "w" Then Return "williamhill" 'por defecto si es de longitud 1 caracter, y si es w ponew willianhilll
 
     '  If contiene(casa, "casa") Then
     Message.Error("Casa de apuesta no indicada correctamente: " & CASA)
