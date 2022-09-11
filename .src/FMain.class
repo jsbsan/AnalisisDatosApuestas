@@ -1076,3 +1076,24 @@ Public Sub GridViewEnJuego_MouseUp()
     Endif
 
 End
+
+Public Sub ButtonFiltradoPorPalabra_Click()
+
+    Dim p As Process
+    Dim salida As String
+    Dim mensaje As String
+
+    mensaje = InputBox("Palabra a Buscar:", "Filtrado por palabra")
+
+    If mensaje = "" Then Return
+
+    Shell "grep -i " & mensaje & " " & User.home & "/informacion.csv" To salida
+
+    Wait 0.1
+    File.Save(User.Home & "/filtrado.txt", salida)
+    Wait 0.1
+
+    p = Exec ["featherpad", User.home & "/filtrado.txt"]
+    ControlVentanas.agrega(p)
+
+End

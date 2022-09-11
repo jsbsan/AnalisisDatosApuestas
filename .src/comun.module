@@ -269,6 +269,7 @@ Public Function similar(casa As String) As String
 
     If contiene(casa, "madrid") Then Return "CGM"
     If contiene(casa, "gran") Then Return "CGM"
+    If contiene(casa, "cgm") Then Return "CGM"
 
     If contiene(casa, "winama") Then Return "winamax"
     If contiene(casa, "winima") Then Return "winamax"

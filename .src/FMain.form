@@ -92,11 +92,18 @@
       Picture = Picture["icon:/16/view-detail"]
     }
     { ButtonEditor Button
-      MoveScaled(48,0,12,5)
+      MoveScaled(48,0,7,5)
       Font = Font["-2"]
+      ToolTip = ("EDITAR FICHERO")
       AutoResize = True
-      Text = ("Editor")
       Picture = Picture["icon:/32/edit"]
+    }
+    { ButtonFiltradoPorPalabra Button
+      MoveScaled(55,0,7,5)
+      Font = Font["-2"]
+      ToolTip = ("FILTRADO")
+      AutoResize = True
+      Picture = Picture["icon:/32/filter"]
     }
     { ButtonCalculadora Button
       MoveScaled(61,0,16,5)
@@ -171,6 +178,7 @@
     }
     { GridViewLugares GridView
       MoveScaled(1,0,40,78)
+      Font = Font["+1"]
     }
     { ButtonDesactivar Button
       MoveScaled(0,0,4,3)
@@ -186,6 +194,7 @@
     MoveScaled(42,6,88,60)
     { GridViewEnJuego GridView
       MoveScaled(0,0,87,60)
+      Font = Font["+1"]
       ToolTip = ("Pulse boton derecho para abrir Hoja de Calculo relacionada con la ID")
     }
     { ButtonApuestasEnJuego Button
