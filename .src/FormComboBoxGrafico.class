@@ -39,6 +39,7 @@ Public Sub abrir(procede As Variant)
             Endif
 
             btmp.Tag = l
+            btmp.Tooltip = l
 
         Next
 
@@ -67,7 +68,7 @@ Public Sub abrir(procede As Variant)
                 Endif
 
                 btmp.Tag = l
-
+                btmp.Tooltip = l
             Next
         Endif
 
