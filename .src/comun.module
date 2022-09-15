@@ -276,7 +276,8 @@ Public Function similar(casa As String) As String
     If contiene(casa, "max") Then Return "winamax"
     If contiene(casa, "win") Then Return "winamax"
 
-    If contiene(casa, "Sisa") Then Return "sisal"
+    If contiene(casa, "sisa") Then Return "sisal"
+    If contiene(casa, "sisal") Then Return "sisal"
     If contiene(casa, "mrgre") Then Return "mrgreen"
 
     If contiene(casa, "vers") Then Return "versus"
