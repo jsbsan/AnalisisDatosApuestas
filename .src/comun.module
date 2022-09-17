@@ -267,6 +267,10 @@ Public Function similar(casa As String) As String
         Return ""
     Endif
 
+    If contiene(casa, "dafa") Then Return "DAFABET"
+    If contiene(casa, "efb") Then Return "EFBET"
+    If contiene(casa, "hard") Then Return "BETHARD"
+
     If contiene(casa, "madrid") Then Return "CGM"
     If contiene(casa, "gran") Then Return "CGM"
     If contiene(casa, "cgm") Then Return "CGM"

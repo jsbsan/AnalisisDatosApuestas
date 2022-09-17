@@ -57,3 +57,9 @@ winamax
 zen winamax
 cgm
 zen cgm
+dafabet
+efbet
+bethard
+zen dafabet
+zen efbet
+zen bethard

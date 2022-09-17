@@ -70,7 +70,7 @@ Public Sub agregaIcono(texto As String)
 
     Dim CASAS As New String[]
 
-    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA", "1xbet", "VERSUS", "JUEGGGING", "MRGREEN", "SISAL", "ADMIRALBET", "ZEBET", "WINAMAX", "CGM"]
+    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA", "1xbet", "VERSUS", "JUEGGGING", "MRGREEN", "SISAL", "ADMIRALBET", "ZEBET", "WINAMAX", "CGM", "DAFABET", "EFBET", "BETHARD"]
 
     Dim valor As Integer = -1
     Dim a As Integer
@@ -102,7 +102,7 @@ Public Sub agregaIcono(texto As String)
     ' casavalor = 15 ' "BETWAY"
     ' casavalor = 16 ' "MONDOBETS"
     ' casavalor = 17 ' "ENRACHA"
-    'casavalor=18 '1xbet
+    ' casavalor=18 '1xbet
 
     Dim hpic As New PictureBox(HBoxCasas)
     Select Case valor
@@ -303,6 +303,36 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/CGM.png"]
                 HBoxCasas.Tag &= ",CGM.png"
             Endif
+        Case 27
+
+            If comun.contiene(HBoxCasas.Tag, "dafabet.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/dafabet.png"]
+                HBoxCasas.Tag &= ",dafabet.png"
+            Endif
+
+        Case 28
+
+            If comun.contiene(HBoxCasas.Tag, "efbet.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/efbet.png"]
+                HBoxCasas.Tag &= ",efbet.png"
+            Endif
+
+        Case 29
+
+            If comun.contiene(HBoxCasas.Tag, "bethard.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/bethard.png"]
+                HBoxCasas.Tag &= ",bethard.png"
+            Endif
+
     End Select
 
 End
