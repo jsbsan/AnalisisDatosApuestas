@@ -33,6 +33,8 @@ bwin
 mbet
 williamhill
 botemania
+betsson
+marca
 0 caixa
 0 openbank eva
 0 openbank julio
