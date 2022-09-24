@@ -156,6 +156,7 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/codere.png"]
                 HBoxCasas.Tag &= ",codere.png"
             Endif
+
         Case 0
             If comun.contiene(HBoxCasas.Tag, "bet365.png") Then
             Else
