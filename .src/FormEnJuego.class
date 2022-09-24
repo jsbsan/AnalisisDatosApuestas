@@ -3,21 +3,21 @@
 Public contenido As String[]
 
 Public Sub Form_Open()
-    
+
     TextArea1.text = contenido[0]
-    
+
     comun.DefinirGridSinFormato(GridView1, contenido[0])
-    
+
 End
 
 Public Sub GridView1_DblClick()
-    
+
     Dim fila As Integer
     Dim tmplista As New String[]
     Dim FormFiltroTmp As New FormFiltro
-    
+
     fila = GridView1.Rows.Selection[0]
-    
+
     If FMain.ContenidoFichero <> "" Then
         tmplista.Add(Upper(FMain.ContenidoFichero))
         FormFiltroTmp.listado = tmplista
@@ -27,5 +27,5 @@ Public Sub GridView1_DblClick()
     Else
         Message.Info("no hay cargada información")
     Endif
-    
+
 End

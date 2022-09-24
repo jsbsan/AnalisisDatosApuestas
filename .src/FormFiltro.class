@@ -164,6 +164,14 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/bet365.png"]
                 HBoxCasas.Tag &= ",bet365.png"
             Endif
+        Case 1
+            If comun.contiene(HBoxCasas.Tag, "betfair.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/betfair.png"]
+                HBoxCasas.Tag &= ",betfair.png"
+            Endif
         Case 2
             If comun.contiene(HBoxCasas.Tag, "betstars.png") Then
             Else
@@ -332,15 +340,15 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/bethard.png"]
                 HBoxCasas.Tag &= ",bethard.png"
             Endif
-Case 30
-        If comun.contiene(HBoxCasas.Tag, "marca.png") Then
+        Case 30
+            If comun.contiene(HBoxCasas.Tag, "marca.png") Then
             Else
                 hpic.h = 40
                 hpic.w = 80
                 hpic.Picture = Picture["iconos/marca.png"]
                 HBoxCasas.Tag &= ",marca.png"
             Endif
-    Case 31
+        Case 31
             If comun.contiene(HBoxCasas.Tag, "betsson.png") Then
             Else
                 hpic.h = 40

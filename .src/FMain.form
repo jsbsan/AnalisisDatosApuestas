@@ -239,17 +239,18 @@
       Wrap = True
     }
     { ButtonRecargar Button
-      MoveScaled(0,0,5,3)
+      MoveScaled(36,0,5,3)
       Picture = Picture["icon:/16/refresh"]
     }
     { Label6 Label
-      MoveScaled(4,0,48,3)
+      MoveScaled(6,0,30,3)
       Background = &HE0E000&
       Alignment = Align.Center
       Text = ("Anotaciones")
     }
     { ButtonGuardarAnotaciones Button
-      MoveScaled(53,0,5,3)
+      MoveScaled(0,0,5,3)
+      ToolTip = ("Guardar notas")
       Picture = Picture["icon:/16/save"]
     }
   }
@@ -335,16 +336,18 @@
       }
     }
   }
-  { SidePanel1 SidePanel
-    MoveScaled(86,6,118,113)
+  { ButtonExplandir Button
+    MoveScaled(198,10,13,35)
+    Picture = Picture["icon:/32/border-right"]
+  }
+  { SidePanel1 Expander
+    MoveScaled(85,6,112,113)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
     Arrangement = Arrange.Fill
     Centered = True
-    Orientation = Align.Left
-    Border = True
     { HBoxContenedorSlider HBox
-      MoveScaled(2,1,115,109)
+      MoveScaled(-5,1,115,109)
       Expand = True
       AutoResize = True
     }

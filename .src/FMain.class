@@ -1097,3 +1097,13 @@ Public Sub ButtonFiltradoPorPalabra_Click()
     ControlVentanas.agrega(p)
 
 End
+
+Public Sub ButtonExplandir_Click()
+
+    If SidePanel1.visible = True Then
+        SidePanel1.visible = False
+    Else
+        SidePanel1.visible = True
+    Endif
+
+End

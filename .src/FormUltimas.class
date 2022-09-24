@@ -3,31 +3,31 @@
 Private contenidoUltimo As String
 
 Public Sub Form_Open()
-    
+
     Shell ("tail -26 " & User.Home & "/informacion.csv > /tmp/ultimas.txt")
     Wait 0.1
     contenidoUltimo = File.Load("/tmp/ultimas.txt")
-    
+
     TextAreaUltimas.text = contenidoUltimo
-    
+
     rellenaGridview()
     Me.Title = "últimas lineas del fichero de datos"
-    
+
     Shell ("tail -56 " & User.Home & "/informacion.csv > /tmp/ultimas.txt")
     Wait 0.1
     contenidoUltimo = File.Load("/tmp/ultimas.txt")
-    
+
     TextAreaUltimas2.text = contenidoUltimo
-    
+
     rellenaGridview2()
     Me.Title = "últimas lineas del fichero de datos"
-    
+
     FMain.ControlVentanas.agrega(Me)
-    
+
 End
 
 Public Sub rellenaGridview()
-    
+
     With GridViewUltimas
         .Header = 3
         .Columns.count = 1
@@ -36,45 +36,45 @@ Public Sub rellenaGridview()
         .Font.size = 8
         .Mode = Select.Single
     End With
-    
+
     'descompone informacion
     Dim listaCadenas As String[]
     Dim a As Integer
     listaCadenas = Split(contenidoUltimo, "\n")
-    
+
     For a = 0 To listaCadenas.count - 1
-        
+
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("comentario")) Then
             'poner fondo verde
             GridViewUltimas[a, 0].Background = Color.Green
-            
+
         Endif
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("ajuste")) Then
             'poner fondo naranja: ajuste
             GridViewUltimas[a, 0].Background = Color.Orange
-            
+
         Endif
-        
+
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("transferencia")) Then
             'poner fondo rosa: transferencia
             GridViewUltimas[a, 0].Background = Color.Pink
-            
+
         Endif
-        
+
         If Mid$(listaCadenas[a], 1, 1) = "\t" Then
             'poner fondo rosa: transferencia
             GridViewUltimas[a, 0].Background = Color.Pink
-            
+
         Endif
-        
+
         GridViewUltimas[a, 0].text = listaCadenas[a]
-        
+
     Next
-    
+
 End
 
 Public Sub rellenaGridview2()
-    
+
     With GridViewUltimas2
         .Header = 3
         .Columns.count = 1
@@ -83,89 +83,89 @@ Public Sub rellenaGridview2()
         .Font.size = 8
         .Mode = Select.Single
     End With
-    
+
     'descompone informacion
     Dim listaCadenas As String[]
     Dim a As Integer
     listaCadenas = Split(contenidoUltimo, "\n")
-    
+
     For a = 0 To listaCadenas.count - 1
-        
+
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("comentario")) Then
             'poner fondo verde
             GridViewUltimas2[a, 0].Background = Color.Green
-            
+
         Endif
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("ajuste")) Then
             'poner fondo naranja: ajuste
             GridViewUltimas2[a, 0].Background = Color.Orange
-            
+
         Endif
-        
+
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("transferencia")) Then
             'poner fondo rosa: transferencia
             GridViewUltimas2[a, 0].Background = Color.Pink
-            
+
         Endif
-        
+
         If Mid$(listaCadenas[a], 1, 1) = "\t" Then
             'poner fondo rosa: transferencia
             GridViewUltimas2[a, 0].Background = Color.Pink
-            
+
         Endif
-        
+
         GridViewUltimas2[a, 0].text = listaCadenas[a]
-        
+
     Next
-    
+
 End
 
 Public Sub ButtonFiltrar_Click()
-    
+
     Me.mouse = Mouse.Wait
     LabelBuscando.visible = True
     Wait 0.01
     Shell ("grep \"" & TextBoxFiltrar.text & "\" " & User.Home & "/informacion.csv > /tmp/ultimas.txt") Wait
-    
+
     TextAreaFiltrado.text = File.Load("/tmp/ultimas.txt")
-    
+
     TextAreaFiltrado.text = "ID" & "\t" & "fecha" & "\t" & "Movimiento" & "\t" & "Importe" & "\t" & "Nota" & "\n" & TextAreaFiltrado.text
     comun.DefinirGridSinFormato(GridViewDatosFiltrado, TextAreaFiltrado.text)
-    
+
     GridViewDatosFiltrado.Columns[0].width = 110 'nombre del id de apuesta
     GridViewDatosFiltrado.Columns[1].width = 100
     GridViewDatosFiltrado.Columns[2].width = 110
     Me.Mouse = Mouse.Default
     LabelBuscando.visible = False
-    
+
 End
 
 Public Sub TextBoxFiltrar_KeyPress()
-    
+
     If Key.code = Key.Return Or Key.code = Key.enter Then
         ButtonFiltrar_Click()
     Endif
-    
+
 End
 
 Public Sub ButtonCopiar_Click()
-    
+
     Clipboard.Copy(TextAreaFiltrado.Text)
-    
+
 End
 
 Public Sub GridViewUltimas_DblClick()
-    
+
 End
 
 Public Sub GridViewDatosFiltrado_DblClick()
-    
+
     Dim fila As Integer
     Dim tmplista As New String[]
     Dim FormFiltroTmp As New FormFiltro
-    
+
     fila = GridViewDatosFiltrado.Rows.Selection[0]
-    
+
     If FMain.ContenidoFichero <> "" Then
         tmplista.Add(Upper(FMain.ContenidoFichero))
         FormFiltroTmp.listado = tmplista
@@ -175,5 +175,5 @@ Public Sub GridViewDatosFiltrado_DblClick()
     Else
         Message.Info("no hay cargada información")
     Endif
-    
+
 End

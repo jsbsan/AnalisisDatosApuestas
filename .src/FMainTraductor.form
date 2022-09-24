@@ -281,7 +281,7 @@
     }
     { LabelSlot Label
       MoveScaled(81,18,11,4)
-      Tag = "slot "
+      Tag = " slot "
       ToolTip = ("añade la palabra ajuste al comentario")
       Alignment = Align.Center
       Border = Border.Raised
@@ -289,7 +289,7 @@
     }
     { LabelSemana Label
       MoveScaled(93,18,11,4)
-      Tag = "semana del __ al __"
+      Tag = " semana del __ al __ "
       ToolTip = ("añade la palabra ajuste al comentario")
       Alignment = Align.Center
       Border = Border.Raised

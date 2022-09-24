@@ -4,38 +4,38 @@ Public ListaEnJuego As ClaseZEnJuego[]
 Public informacion As String[]
 
 Public Sub _new(listaId As String[])
-    
+
     Dim id As String
     Dim contenido As String
     Dim LINEAS As String[]
     Dim L As String
     Dim casa As ClaseZEnJuego
     Dim lbusqueda As String
-    
+
     ListaEnJuego = New ClaseZEnJuego[]
-    
+
     'crear cuentas...
     LINEAS = Split(File.Load("CuentasM.txt"), "\n")
-    
+
     For Each l In lineas
         If comun.contiene(l, Upper$("zen juego")) Then
             Dim tmpClaseZEnjuego As ClaseZEnJuego
             tmpClaseZEnjuego = New ClaseZEnJuego(l)
             ListaEnJuego.Add(tmpClaseZEnjuego)
-            
+
         Endif
     Next
-    
+
     'Informacion
     informacion = Split(Upper$(File.Load(User.home & "/informacion.csv")), "\n")
-    
+
     'leer los datos que nos pasas (lista de Id pendiente)
-    
+
     For Each id In ListaID
         'por cada apuesta, buscar en archivo lineas que aparecen
-        
+
         lineas = BuscarLineas(id & "\t")
-        
+
         'procesar las lineas que aparecen -> "enjuego" -> paso a "enjuego XXX " -> paso id y cantidad
         For Each l In lineas
             If comun.contiene(l, "ZEN JUEGO") Then
@@ -43,26 +43,26 @@ Public Sub _new(listaId As String[])
                 For Each CASA In ListaEnJuego
                     If CASA.Casa = lbusqueda Then
                         'procesar las lineas que aparecen -> "enjuego" -> paso a "enjuego XXX " -> paso id y cantidad
-                        
+
                         casa.agrega(id, Val(Split(l, "\t")[3]), Split(l, "\t")[1])
                     Endif
                 Next
             Endif
-            
+
         Next
     Next
-    
+
     ' una vez procesadas todas, obtener informacion: columnas: en juego, y filas : Idapuestas, contenido: importes
     'rellenar gridview de datos
     Dim a As Integer
     Dim texto As String
     Dim AreaEnJuego As New FormWorkSpaceEnJuego
-    
+
     For a = 0 To ListaEnJuego.count - 1
         texto &= "En juego: " & ListaEnJuego[a].Casa & "\t" & "Importe" & "\t" & "Fecha" & "\n"
         texto &= ListaEnJuego[a].Contenido() & "\n"
         'Paso la información al formulario
-        
+
         Dim t As New String[]
         If Split(texto, "\n").count > 4 Then
             t.Add(texto)
@@ -74,24 +74,24 @@ Public Sub _new(listaId As String[])
         Endif
         texto = ""
     Next
-    
+
     FMain.ControlVentanas.agrega(AreaEnJuego)
-    
+
     AreaEnJuego.Show()
-    
+
 End
 
 Public Sub BuscarLineas(texto As String) As String[]
-    
+
     Dim l As String
     Dim devolucion As New String[]
-    
+
     For Each l In informacion
         If comun.contiene(l, texto) Then
             devolucion.Add(l)
-            
+
         Endif
     Next
     Return devolucion
-    
+
 End

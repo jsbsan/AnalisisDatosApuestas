@@ -3,31 +3,35 @@
 Public contador As Integer
 
 Public Sub Form_Open()
-    
+
     FMain.ControlVentanas.agrega(Me)
-    
+
 End
 
 Public Sub agrega(formulario As Form)
-    
+
     contador += 1
-    
+
     If EsPar(contador) Then
-        
+
         Workspace1.Add(formulario)
     Else
         Workspace2.Add(formulario)
-        
+
     Endif
-    
+
 End
 
 Public Function EsPar(n As Integer) As Boolean
-    
+
     If Round(n / 2, 0) * 2 = n Then
         Return True
     Else
         Return False
     Endif
-    
+
+End
+
+Public Sub VSplit1_Resize()
+
 End
