@@ -337,10 +337,10 @@
     }
   }
   { ButtonExplandir Button
-    MoveScaled(198,10,13,35)
+    MoveScaled(198,6,10,113)
     Picture = Picture["icon:/32/border-right"]
   }
-  { SidePanel1 Expander
+  { SidePanel1 Panel
     MoveScaled(85,6,112,113)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
