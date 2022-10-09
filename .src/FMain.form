@@ -169,15 +169,15 @@
   { PanelCasasyResumen Panel
     MoveScaled(0,6,41,114)
     { GridViewResumen GridView
-      MoveScaled(1,79,40,34)
+      MoveScaled(1,87,40,26)
       Font = Font["-1"]
     }
     { ButtonCopiaResumenCompactado Button
-      MoveScaled(36,108,4,4)
+      MoveScaled(37,109,4,4)
       Picture = Picture["icon:/16/copy"]
     }
     { GridViewLugares GridView
-      MoveScaled(1,0,40,78)
+      MoveScaled(1,0,40,86)
       Font = Font["+1"]
     }
     { ButtonDesactivar Button
@@ -186,7 +186,7 @@
       Picture = Picture["interrogacion20x20.png"]
     }
     { ButtonCopiaResumen Button
-      MoveScaled(36,74,4,4)
+      MoveScaled(37,82,4,4)
       Picture = Picture["icon:/16/copy"]
     }
   }
@@ -198,7 +198,7 @@
       ToolTip = ("Pulse boton derecho para abrir Hoja de Calculo relacionada con la ID")
     }
     { ButtonApuestasEnJuego Button
-      MoveScaled(83,57,3,3)
+      MoveScaled(0,57,3,3)
       Picture = Picture["icon:/16/copy"]
     }
   }
@@ -344,10 +344,9 @@
     MoveScaled(85,6,112,113)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
-    Arrangement = Arrange.Fill
     Centered = True
     { HBoxContenedorSlider HBox
-      MoveScaled(-5,1,115,109)
+      MoveScaled(-5,1,116,109)
       Expand = True
       AutoResize = True
     }

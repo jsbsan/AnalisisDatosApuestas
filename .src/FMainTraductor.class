@@ -521,14 +521,19 @@ Public Sub ButtonRealizarTransferencia_Click()
     TextAreaBalance.text = ""
 
     If Not Replace(ComboBoxDE.text, " ", "") = "" Then
-        TextAreaBalance.text &= TextBoxComentarioTransferencia.text & "\t"
+        TextAreaBalance.text &= "[Retirada]-" & TextBoxComentarioTransferencia.text & "\t"
         TextAreaBalance.text &= Format(Now, "dd/mm/yyyy") & "\t"
         TextAreaBalance.text &= ComboBoxDE.text & "\t"
         TextAreaBalance.text &= Str$(-ValueBox1.value) & "\n"
     Endif
 
     If Not ComboBoxA.text = "" Then
-        TextAreaBalance.text &= TextBoxComentarioTransferencia.text & "\t"
+        If Not Replace(ComboBoxDE.text, " ", "") = "" Then
+            TextAreaBalance.text &= "[Ingreso]-" & TextBoxComentarioTransferencia.text & "\t"
+        Else
+            TextAreaBalance.text &= TextBoxComentarioTransferencia.text & "\t"
+        Endif
+
         TextAreaBalance.text &= Format(Now, "dd/mm/yyyy") & "\t"
         TextAreaBalance.text &= ComboBoxA.text & "\t"
         TextAreaBalance.text &= Str$(ValueBox1.value) & "\n"
