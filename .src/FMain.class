@@ -1083,12 +1083,12 @@ Public Sub ButtonFiltradoPorPalabra_Click()
     Dim salida As String
     Dim mensaje As String
 
-    mensaje = InputBox("Palabra a Buscar:", "Filtrado por palabra")
+    mensaje = InputBox("Palabra a Buscar:", "Filtrado por palabra", "Retirada-\\|Ingreso-")
 
     If mensaje = "" Then Return
 
-    Shell "grep -i " & mensaje & " " & User.home & "/informacion.csv" To salida
-
+    Shell "grep -i '" & mensaje & "' " & User.home & "/informacion.csv" To salida
+    salida = "id	fecha	Cuenta	Saldo	comentario	fuente	VARIOS\n" & salida
     Wait 0.1
     File.Save(User.Home & "/filtrado.txt", salida)
     Wait 0.1
