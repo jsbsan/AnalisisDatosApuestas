@@ -674,9 +674,10 @@ Public Sub BotonAlmacen_Click()
         Dim contenidoPaso As New String[]
         contenidoPaso.add(TextAreaBalance.Text)
         FormTraspaso.contenido = contenidoPaso
-        FormTraspaso.Show()
+        FormTraspaso.Showmodal()
         BotonAlmacen.Picture = Picture["flechaazul16x16.png"]
         BotonAlmacen.tag = "flechaAzul"
+        FMain.ButtonAnalizar_Click()
     Else
         Message.Info("No hay contido a almacenar")
     Endif

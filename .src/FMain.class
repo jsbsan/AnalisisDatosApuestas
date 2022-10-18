@@ -997,7 +997,12 @@ Public Sub ButtonBuscadorArchivos_Click()
 
     Dim p As Process
 
-    p = Exec ["abrirAnalisis"]
+    If TextBoxidBuscar.Text = "" Then
+        p = Exec ["abrirAnalisis"]
+
+    Else
+        p = Exec ["abrirAnalisis", TextBoxidBuscar.Text]
+    Endif
     ControlVentanas.agrega(p)
 
 End
@@ -1104,6 +1109,14 @@ Public Sub ButtonExplandir_Click()
         SidePanel1.visible = False
     Else
         SidePanel1.visible = True
+    Endif
+
+End
+
+Public Sub TextBoxidBuscar_KeyPress()
+
+    If Key.code = Key.enter Or Key.code = Key.return Then
+        ButtonBuscadorArchivos_Click()
     Endif
 
 End

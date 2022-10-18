@@ -1,10 +1,76 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,387,121)
+  MoveScaled(0,0,217,121)
   Background = &H6F8BE0&
   Expand = True
   Icon = Picture["analisis.png"]
+  { Panel4 Panel
+    MoveScaled(131,6,31,43)
+    { DateChooser1 DateChooser
+      MoveScaled(1,0,29,26)
+    }
+    { Panel1 Panel
+      MoveScaled(0,26,31,12)
+      { ProgressBarBanco ProgressBar
+        MoveScaled(9,1,21,2)
+        Background = &H5FAFFF&
+        Foreground = Color.Blue
+      }
+      { ProgressBarPaypal ProgressBar
+        MoveScaled(9,3,21,2)
+        Background = &HE08B37&
+        Foreground = &HE08B37&
+      }
+      { ProgressBarCasas ProgressBar
+        MoveScaled(9,5,21,2)
+        Background = &HE0E000&
+        Foreground = &HFFFF5F&
+      }
+      { ProgressBarBenef ProgressBar
+        MoveScaled(9,7,21,2)
+        Background = &HE03761&
+        Foreground = &HFF8F1F&
+      }
+      { Label1 Label
+        MoveScaled(-2,1,11,2)
+        Alignment = Align.Right
+        Text = ("En Banco:")
+      }
+      { Label2 Label
+        MoveScaled(-2,3,11,2)
+        Alignment = Align.Right
+        Text = ("En PayPal:")
+      }
+      { Label3 Label
+        MoveScaled(-2,5,11,2)
+        Alignment = Align.Right
+        Text = ("En Casas:")
+      }
+      { Label4 Label
+        MoveScaled(-2,7,11,2)
+        Font = Font["-2"]
+        Alignment = Align.Right
+        Text = ("Benef. Esper:")
+      }
+      { ProgressBarEnJuego ProgressBar
+        MoveScaled(9,9,21,2)
+        Background = &H00E000&
+        Foreground = &H00C000&
+      }
+      { Label5 Label
+        MoveScaled(5,30,13,2)
+        Alignment = Align.Right
+        Text = ("En Juego:")
+      }
+      { Label7 Label
+        MoveScaled(-2,9,11,2)
+        Font = Font["-2"]
+        Alignment = Align.Right
+        Text = ("En Juego:")
+      }
+    }
+  }
   { ScrollView2 ScrollView
     MoveScaled(222,2,37,38)
     Visible = False
@@ -147,15 +213,18 @@
       Text = ("Traductor")
       Picture = Picture["balanza.png"]
     }
+    { TextBoxidBuscar TextBox
+      MoveScaled(161,1,8,3)
+    }
     { ButtonBuscadorArchivos Button
-      MoveScaled(163,0,12,5)
+      MoveScaled(169,0,12,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Buscar")
       Picture = Picture["buscar en analisis.png"]
     }
     { ButtonCopiaSeguridad Button
-      MoveScaled(176,0,23,5)
+      MoveScaled(182,0,20,5)
       Font = Font["-2"]
       ToolTip = ("Hacer Copia de Seguridad")
       AutoResize = True
@@ -167,7 +236,7 @@
     }
   }
   { PanelCasasyResumen Panel
-    MoveScaled(0,6,41,114)
+    MoveScaled(0,6,42,114)
     { GridViewResumen GridView
       MoveScaled(1,87,40,26)
       Font = Font["-1"]
@@ -177,7 +246,7 @@
       Picture = Picture["icon:/16/copy"]
     }
     { GridViewLugares GridView
-      MoveScaled(1,0,40,86)
+      MoveScaled(0,0,42,86)
       Font = Font["+1"]
     }
     { ButtonDesactivar Button
@@ -230,9 +299,10 @@
     Padding = 2
   }
   { PanelAnotaciones Panel
-    MoveScaled(42,67,59,53)
+    MoveScaled(42,67,120,53)
     { TextAreaNotas TextArea
-      MoveScaled(0,3,58,49)
+      MoveScaled(0,3,120,49)
+      Font = Font["-2"]
       Background = &HFFFF9F&
       Foreground = &H000000&
       Expand = True
@@ -254,72 +324,6 @@
       Picture = Picture["icon:/16/save"]
     }
   }
-  { Panel2 Panel
-    MoveScaled(101,67,29,52)
-    { Panel1 Panel
-      MoveScaled(0,40,31,12)
-      { ProgressBarBanco ProgressBar
-        MoveScaled(9,1,21,2)
-        Background = &H5FAFFF&
-        Foreground = Color.Blue
-      }
-      { ProgressBarPaypal ProgressBar
-        MoveScaled(9,3,21,2)
-        Background = &HE08B37&
-        Foreground = &HE08B37&
-      }
-      { ProgressBarCasas ProgressBar
-        MoveScaled(9,5,21,2)
-        Background = &HE0E000&
-        Foreground = &HFFFF5F&
-      }
-      { ProgressBarBenef ProgressBar
-        MoveScaled(9,7,21,2)
-        Background = &HE03761&
-        Foreground = &HFF8F1F&
-      }
-      { Label1 Label
-        MoveScaled(-2,1,11,2)
-        Alignment = Align.Right
-        Text = ("En Banco:")
-      }
-      { Label2 Label
-        MoveScaled(-2,3,11,2)
-        Alignment = Align.Right
-        Text = ("En PayPal:")
-      }
-      { Label3 Label
-        MoveScaled(-2,5,11,2)
-        Alignment = Align.Right
-        Text = ("En Casas:")
-      }
-      { Label4 Label
-        MoveScaled(-2,7,11,2)
-        Font = Font["-2"]
-        Alignment = Align.Right
-        Text = ("Benef. Esper:")
-      }
-      { ProgressBarEnJuego ProgressBar
-        MoveScaled(9,9,21,2)
-        Background = &H00E000&
-        Foreground = &H00C000&
-      }
-      { Label5 Label
-        MoveScaled(5,30,13,2)
-        Alignment = Align.Right
-        Text = ("En Juego:")
-      }
-      { Label7 Label
-        MoveScaled(-2,9,11,2)
-        Font = Font["-2"]
-        Alignment = Align.Right
-        Text = ("En Juego:")
-      }
-    }
-    { DateChooser1 DateChooser
-      MoveScaled(0,0,29,26)
-    }
-  }
   { VSplit1 HBox
     MoveScaled(169,48,58,17)
     Visible = False
@@ -337,16 +341,17 @@
     }
   }
   { ButtonExplandir Button
-    MoveScaled(198,6,10,113)
+    MoveScaled(204,6,10,113)
     Picture = Picture["icon:/32/border-right"]
   }
   { SidePanel1 Panel
-    MoveScaled(85,6,112,113)
+    MoveScaled(91,6,113,113)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
+    Arrangement = Arrange.Fill
     Centered = True
     { HBoxContenedorSlider HBox
-      MoveScaled(-5,1,116,109)
+      MoveScaled(1,9,109,109)
       Expand = True
       AutoResize = True
     }
