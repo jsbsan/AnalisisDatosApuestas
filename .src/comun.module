@@ -266,6 +266,8 @@ Public Function similar(casa As String) As String
         Return "ERROR_CASA"
         Return ""
     Endif
+    If contiene(casa, "dazn") Then Return "DAZNBET"
+
     If contiene(CASA, "zeb") Then Return "ZEBET"
 
     If contiene(casa, "marc") Then Return "MARCA"
