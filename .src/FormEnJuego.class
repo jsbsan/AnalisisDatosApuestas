@@ -29,3 +29,9 @@ Public Sub GridView1_DblClick()
     Endif
 
 End
+
+Public Sub ButtonCopiar_Click()
+
+    Clipboard.Copy(Replace(TextArea1.Text, ".", ","))
+
+End

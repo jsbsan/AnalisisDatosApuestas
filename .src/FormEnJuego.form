@@ -1,16 +1,27 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,139,64)
+  Expand = True
   Icon = Picture["enjuego.png"]
   Arrangement = Arrange.Fill
-  { GridView1 GridView
-    MoveScaled(3,10,55,42)
-    Mode = Select.Multiple
-  }
   { TextArea1 TextArea
     MoveScaled(6,1,49,7)
     Visible = False
     Wrap = True
+  }
+  { VBox1 VBox
+    MoveScaled(0,10,135,51)
+    AutoResize = True
+    { GridView1 GridView
+      MoveScaled(2,1,130,22)
+      Expand = True
+      Mode = Select.Multiple
+    }
+    { ButtonCopiar Button
+      MoveScaled(34,25,92,4)
+      Text = ("Copiar al Portapapeles")
+      Picture = Picture["icon:/24/copy"]
+    }
   }
 }
