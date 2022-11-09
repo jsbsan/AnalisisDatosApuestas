@@ -44,6 +44,12 @@ Public Sub rellenaGridview()
 
     For a = 0 To listaCadenas.count - 1
 
+        If comun.contiene(Upper$(listaCadenas[a]), Upper$("ingreso-")) Or comun.contiene(Upper$(listaCadenas[a]), Upper$("retirada-")) Then
+            'poner fondo verde
+            GridViewUltimas[a, 0].Background = Color.Yellow
+
+        Endif
+
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("comentario")) Then
             'poner fondo verde
             GridViewUltimas[a, 0].Background = Color.Green
@@ -91,6 +97,12 @@ Public Sub rellenaGridview2()
 
     For a = 0 To listaCadenas.count - 1
 
+        If comun.contiene(Upper$(listaCadenas[a]), Upper$("ingreso-")) Or comun.contiene(Upper$(listaCadenas[a]), Upper$("retirada-")) Then
+            'poner fondo verde
+            GridViewUltimas2[a, 0].Background = Color.Yellow
+
+        Endif
+
         If comun.contiene(Upper$(listaCadenas[a]), Upper$("comentario")) Then
             'poner fondo verde
             GridViewUltimas2[a, 0].Background = Color.Green
@@ -125,7 +137,7 @@ Public Sub ButtonFiltrar_Click()
     Me.mouse = Mouse.Wait
     LabelBuscando.visible = True
     Wait 0.01
-    Shell ("grep \"" & TextBoxFiltrar.text & "\" " & User.Home & "/informacion.csv > /tmp/ultimas.txt") Wait
+    Shell ("grep -i \"" & TextBoxFiltrar.text & "\" " & User.Home & "/informacion.csv > /tmp/ultimas.txt") Wait
 
     TextAreaFiltrado.text = File.Load("/tmp/ultimas.txt")
 

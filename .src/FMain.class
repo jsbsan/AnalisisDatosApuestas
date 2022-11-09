@@ -272,6 +272,7 @@ Public Sub sumasi(textocuenta As String, valor As Float)
             ' If t.nombre = "WILLIAMHILL" Then
             '     Print "WILLIAMHILL", T.SUMA
             ' Endif
+            '  TextAreaListaOperacionesCasas.Text &= t.nombre & "," & Str$(valor) & gb.CrLf
         Endif
     Next
 

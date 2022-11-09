@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,217,121)
+  MoveScaled(0,0,305,121)
   Background = &H6F8BE0&
   Expand = True
   Icon = Picture["analisis.png"]
@@ -225,6 +225,7 @@
     }
     { ButtonCopiaSeguridad Button
       MoveScaled(182,0,20,5)
+      Visible = False
       Font = Font["-2"]
       ToolTip = ("Hacer Copia de Seguridad")
       AutoResize = True
@@ -355,5 +356,8 @@
       Expand = True
       AutoResize = True
     }
+  }
+  { TextAreaListaOperacionesCasas TextArea
+    MoveScaled(222,1,54,91)
   }
 }
