@@ -72,7 +72,7 @@
     }
   }
   { ScrollView2 ScrollView
-    MoveScaled(222,2,37,38)
+    MoveScaled(236,3,37,38)
     Visible = False
     Arrangement = Arrange.Horizontal
     { TextAreaAgenda TextArea
@@ -273,7 +273,7 @@
     }
   }
   { PanelGraficaEvolucion Panel
-    MoveScaled(229,57,87,52)
+    MoveScaled(236,57,87,52)
     { WebView1 WebView
       MoveScaled(1,4,87,56)
     }
@@ -326,7 +326,7 @@
     }
   }
   { VSplit1 HBox
-    MoveScaled(169,48,58,17)
+    MoveScaled(236,43,58,17)
     Visible = False
     { ScrollView1 ScrollView
       MoveScaled(1,50,56,23)
@@ -358,6 +358,6 @@
     }
   }
   { TextAreaListaOperacionesCasas TextArea
-    MoveScaled(222,1,54,91)
+    MoveScaled(260,3,54,91)
   }
 }
