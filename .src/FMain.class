@@ -1121,3 +1121,21 @@ Public Sub TextBoxidBuscar_KeyPress()
     Endif
 
 End
+
+Public Sub ButtoncALCULAR_Click()
+
+    If Replace(TextBoxCalculo.Text, "\n", "") = "" Then TextBoxCalculo.Text = "0"
+    TextBoxCalculo.Text = Replace(TextBoxCalculo.Text, "+.", "+0.")
+    TextBoxCalculo.Text = Replace(TextBoxCalculo.Text, "-.", "-0.")
+    TextBoxCalculo.Text = Replace(TextBoxCalculo.Text, "*.", "*0.")
+    TextBoxCalculo.Text = Replace(TextBoxCalculo.Text, "/.", "/0.")
+
+    Labelresultado.Text = Eval(TextBoxCalculo.text)
+
+End
+
+Public Sub TextBoxCalculo_KeyRelease()
+
+    If Key.Code = Key.ENTER Or Key.Code = Key.RETURN Then ButtoncALCULAR_Click()
+
+End

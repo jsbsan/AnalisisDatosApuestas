@@ -302,7 +302,7 @@
   { PanelAnotaciones Panel
     MoveScaled(42,67,120,53)
     { TextAreaNotas TextArea
-      MoveScaled(0,3,120,49)
+      MoveScaled(1,4,109,41)
       Font = Font["-2"]
       Background = &HFFFF9F&
       Foreground = &H000000&
@@ -323,6 +323,26 @@
       MoveScaled(0,0,5,3)
       ToolTip = ("Guardar notas")
       Picture = Picture["icon:/16/save"]
+    }
+    { HBox1 HBox
+      MoveScaled(0,46,108,6)
+      Background = &HE0E0E0&
+      { Label8 Label
+        MoveScaled(1,1,14,5)
+        Text = ("CALCULADORA:")
+      }
+      { TextBoxCalculo TextBox
+        MoveScaled(15,1,55,5)
+      }
+      { ButtoncALCULAR Button
+        MoveScaled(70,1,12,5)
+        Text = ("RESULTADO:")
+      }
+      { Labelresultado Label
+        MoveScaled(82,1,26,5)
+        Alignment = Align.Center
+        Border = Border.Sunken
+      }
     }
   }
   { VSplit1 HBox
@@ -346,13 +366,13 @@
     Picture = Picture["icon:/32/border-right"]
   }
   { SidePanel1 Panel
-    MoveScaled(91,6,113,113)
+    MoveScaled(91,6,113,105)
     Background = &HE0E0E0&
     Direction = Direction.RightToLeft
     Arrangement = Arrange.Fill
     Centered = True
     { HBoxContenedorSlider HBox
-      MoveScaled(1,9,109,109)
+      MoveScaled(3,4,109,101)
       Expand = True
       AutoResize = True
     }
