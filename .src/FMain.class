@@ -1139,3 +1139,9 @@ Public Sub TextBoxCalculo_KeyRelease()
     If Key.Code = Key.ENTER Or Key.Code = Key.RETURN Then ButtoncALCULAR_Click()
 
 End
+
+Public Sub ButtonLimpiar_Click()
+
+    TextBoxCalculo.Text = ""
+
+End

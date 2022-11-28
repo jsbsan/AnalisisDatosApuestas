@@ -329,17 +329,23 @@
       Background = &HE0E0E0&
       { Label8 Label
         MoveScaled(1,1,14,5)
-        Text = ("CALCULADORA:")
+        ToolTip = ("expresion matematica (suma, resta, division, multiplicacion, parentesis, etc)")
+        Alignment = Align.Right
+        Text = ("  Expresión:")
       }
       { TextBoxCalculo TextBox
         MoveScaled(15,1,55,5)
       }
+      { ButtonLimpiar Button
+        MoveScaled(70,1,5,5)
+        Picture = Picture["icon:/24/clear"]
+      }
       { ButtoncALCULAR Button
-        MoveScaled(70,1,12,5)
-        Text = ("RESULTADO:")
+        MoveScaled(75,1,12,5)
+        Text = ("calcular") & "..."
       }
       { Labelresultado Label
-        MoveScaled(82,1,26,5)
+        MoveScaled(86,1,22,5)
         Alignment = Align.Center
         Border = Border.Sunken
       }
@@ -362,7 +368,7 @@
     }
   }
   { ButtonExplandir Button
-    MoveScaled(204,6,10,113)
+    MoveScaled(204,6,10,105)
     Picture = Picture["icon:/32/border-right"]
   }
   { SidePanel1 Panel
