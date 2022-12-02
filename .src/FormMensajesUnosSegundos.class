@@ -1,14 +1,14 @@
 ' Gambas class file
 
 Public Sub Form_Open()
-    
+
     Me.Center
     Timer1.Start
-    
+
 End
 
 Public Sub Timer1_Timer()
-    
+
     Me.Close()
-    
+
 End

@@ -4,18 +4,18 @@ Public listaId As ClassIDEnJuego[]
 Public listagrafica As New DatosGraficos[]
 
 Public Sub _new()
-    
+
     'creo array donde voy a acumular los datos de las apustas
     listaId = New ClassIDEnJuego[]
-    
+
 End
 
 Public Sub agrega(id As String, cantidad As Float, fecha As String)
-    
+
     'aqui  agrego a la lista  los valores
     'compruebo si existe, en caso de existir solo tengo que sumar el valor
     Dim tempIdEnJuego As ClassIDEnJuego
-    
+
     For Each tempIdEnJuego In listaId
         If tempIdEnJuego.id = id Then
             tempIdEnJuego.zzBeneficio += Round(cantidad, -2) 'redondeo a 2 decimales
@@ -23,38 +23,38 @@ Public Sub agrega(id As String, cantidad As Float, fecha As String)
             Return 'ya he terminado de agregar la información a una id existente
         Endif
     Next
-    
+
     'en caso contrario creo una nueva classIdEnJuego y se lo agrego a la listaId
     Dim nuevaId As ClassIDEnJuego
     nuevaId = New ClassIDEnJuego(id, Round(cantidad, -2))
     nuevaId.fecha = fecha
     listaId.Add(NUEVAid)
-    
+
 End
 
 Public Sub agregaInversion(id As String, cantidad As Float) ''en juego
-    
+
     'aqui  agrego a la lista  los valores
     'compruebo si existe, en caso de existir solo tengo que sumar el valor
     Dim tempIdEnJuego As ClassIDEnJuego
-    
+
     For Each tempIdEnJuego In listaId
         If tempIdEnJuego.id = id Then
             tempIdEnJuego.enjuego += Round(cantidad, -2) 'redondeo a 2 decimales
             Return 'ya he terminado de agregar la información a una id existente
         Endif
     Next
-    
+
     'en caso contrario creo una nueva classIdEnJuego y se lo agrego a la listaId
     Dim nuevaId As ClassIDEnJuego
     nuevaId = New ClassIDEnJuego(id, 0)
     nuevaId.enjuego = Round(cantidad, -2)
     listaId.Add(NUEVAid)
-    
+
 End
 
 Public Sub ObtenerOrdenId() As Integer[] 'por ide
-    
+
     Dim ordenIndice As New Integer[]
     Dim tempIdEnJuego As ClassIDEnJuego
     Dim temCadena As String
@@ -63,16 +63,16 @@ Public Sub ObtenerOrdenId() As Integer[] 'por ide
     Dim temFecha As String[]
     Dim contador As Integer = 0
     'ordenar....
-    
+
     For Each tempIdEnJuego In listaId
-        
+
         temFecha = Split(tempIdEnJuego.fecha, "/")
         temCadena = tempIdEnJuego.id & temfecha[2] & "/" & temFecha[1] & "/" & temfecha[0] & "/" & "@" & Str$(contador) 'al final añado el contador para luego rescatarlo
         ArrayTemCadena.Add(temCadena)
         contador += 1
-        
+
     Next
-    
+
     ArrayTemCadena = ArrayTemCadena.Sort() 'ordeno
     Dim valores As String[]
     For Each temCadena In ArrayTemCadena
@@ -81,43 +81,43 @@ Public Sub ObtenerOrdenId() As Integer[] 'por ide
             ordenIndice.Add(Val(valores[1]))
         Endif
     Next
-    
+
     Return ordenIndice
-    
+
 End
 
 Public Function IdexistentesPendientes() As String[]
-    
+
     Dim a As Integer
     Dim listado As New String[]
-    
+
     For a = 0 To listaId.Count - 1
         If listaId[a].pendiente = True Then
             listado.Add(listaId[a].id)
         Endif
     Next
-    
+
     Return listado
-    
+
 End
 
 Public Function ImportesExistentesPendientes() As String[]
-    
+
     Dim a As Integer
     Dim listado As New String[]
-    
+
     For a = 0 To listaId.Count - 1
         If listaId[a].pendiente = True Then
             listado.Add(listaId[a].enjuego)
         Endif
     Next
-    
+
     Return listado
-    
+
 End
 
 Public Function listarOrdenID() As String
-    
+
     Dim listaOrden As Integer[]
     Dim cadena As String
     Dim tempIdEnJuego As ClassIDEnJuego
@@ -126,34 +126,34 @@ Public Function listarOrdenID() As String
     Dim a As Integer
     Dim suma As Float
     Dim sumaEnJuego As Float
-    
+
     listaOrden = ObtenerOrdenId()
-    
+
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
-    
+
     For a = 0 To listaId.count - 1
-        
+
         tempIdEnJuego = listaId[listaOrden[a]]
-        
+
         If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
-            
+
             cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & "\n"
             suma += cantidad
             sumaEnJuego += cantidadEnjuego
         Endif
-        
+
     Next
-    
+
     cadena &= "---------------------\n"
     cadena &= "Sumas: " & "\n" & "Beneficio Esperado: " & Str$(suma) & gb.CrLf & "En juego: " & Str$(sumaEnJuego)
     Return cadena
-    
+
 End
 
 Public Sub obtenerOrden() As Integer[] 'por fecha
-    
+
     Dim ordenIndice As New Integer[]
     Dim tempIdEnJuego As ClassIDEnJuego
     Dim temCadena As String
@@ -162,16 +162,16 @@ Public Sub obtenerOrden() As Integer[] 'por fecha
     Dim temFecha As String[]
     Dim contador As Integer = 0
     'ordenar....
-    
+
     For Each tempIdEnJuego In listaId
-        
+
         temFecha = Split(tempIdEnJuego.fecha, "/")
         temCadena = temfecha[2] & "/" & temFecha[1] & "/" & temfecha[0] & "/" & tempIdEnJuego.id & "@" & Str$(contador) 'al final añado el contador para luego rescatarlo
         ArrayTemCadena.Add(temCadena)
         contador += 1
-        
+
     Next
-    
+
     ArrayTemCadena = ArrayTemCadena.Sort() 'ordeno
     Dim valores As String[]
     For Each temCadena In ArrayTemCadena
@@ -180,13 +180,13 @@ Public Sub obtenerOrden() As Integer[] 'por fecha
             ordenIndice.Add(Val(valores[1]))
         Endif
     Next
-    
+
     Return ordenIndice
-    
+
 End
 
 Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As Float, GlobalTotal As Float) As String
-    
+
     Dim listaOrden As Integer[]
     Dim cadena As String
     Dim tempIdEnJuego As ClassIDEnJuego
@@ -195,79 +195,79 @@ Public Function listarOrdenFecha(GlobalEnJuego As Float, GlobalCajaPayPalBene As
     Dim a As Integer
     Dim suma As Float
     Dim sumaEnJuego As Float
-    
+
     Dim tmpAreaDrawing As DrawingArea
     Dim p As Pie
-    
+
     Dim fechaAnterior As String
-    
+
     listaOrden = obtenerOrden()
-    
+
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.tab & "TotalEnJuego" & gb.tab & "Caja" & gb.tab & "Total" & gb.CrLf
-    
+
     listaGrafica.Clear() 'borro los datos de las anteriores graficas
     For a = 0 To listaId.count - 1
-        
+
         tempIdEnJuego = listaId[listaOrden[a]]
-        
+
         If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2) 'beneficio apuesta
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2) ' en juego
             GlobalEnJuego = GlobalEnJuego - cantidadEnjuego - cantidad
             GlobalCajaPayPalBene = GlobalTotal - GlobalEnJuego
-            
+
             cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & gb.tab & Str$(Format(GlobalEnJuego, "0###.#0")) & gb.tab & Str$(Format(GlobalCajaPayPalBene, "0###.#0")) & gb.tab & Str$(Format(GlobalTotal, "0###.#0")) & "\n"
             'indico que es una apuesta pendiente
             tempIdEnJuego.pendiente = True
-            
+
             '-----------------------------
             'añadir grafico
             '-----------------------------
             Dim grafica1 As New DatosGraficos
-            
+
             grafica1.enjuego = GlobalEnJuego
             grafica1.caja = GlobalCajaPayPalBene
             grafica1.texto = "Fecha:" & tempIdEnJuego.fecha & "\n" & "Id: " & tempIdEnJuego.id & "\n" & "En juego: " & Str$(Format(grafica1.enjuego, "###.#0")) & "\n" & "Diponible: " & Str$(Format(grafica1.caja, "###.#0"))
             grafica1.fecha = tempIdEnJuego.fecha
             listaGrafica.Add(grafica1)
-            
+
             suma += cantidad
             sumaEnJuego += cantidadEnjuego
         Endif
-        
+
     Next
-    
+
     cadena &= "---------------------\n"
     cadena &= "Sumas: " & "\n" & "Beneficio Esperado: " & Str$(suma) & gb.CrLf & "En juego: " & Str$(sumaEnJuego)
     Return cadena
-    
+
 End
 
 Public Function listar() As String
-    
+
     Dim tempIdEnJuego As ClassIDEnJuego
     Dim cadena As String
     Dim suma As Float
     Dim cantidad As Float
     Dim cantidadEnjuego As Float
     Dim sumaEnJuego As Float
-    
+
     cadena &= "ID" & gb.tab & "Beneficio" & gb.tab & "EnJuego" & gb.tab & "Fecha" & gb.CrLf
-    
+
     For Each tempIdEnJuego In listaId
         If tempIdEnJuego.zzBeneficio > 0.001 Or tempIdEnJuego.zzBeneficio < -0.001 Then
             cantidad = Round(tempIdEnJuego.zzBeneficio, -2)
             cantidadEnjuego = Round(tempIdEnJuego.enjuego, -2)
-            
+
             cadena &= tempIdEnJuego.id & gb.tab & Str$(Format(cantidad, "0#.#0")) & gb.tab & Str$(Format(cantidadEnjuego, "0##.#0")) & gb.tab & tempIdEnJuego.fecha & "\n"
             suma += cantidad
             sumaEnJuego += cantidadEnjuego
         Endif
-        
+
     Next
-    
+
     cadena &= "---------------------\n"
     cadena &= "Sumas: " & "\n" & "Beneficio Esperado: " & Str$(suma) & gb.CrLf & "En juego: " & Str$(sumaEnJuego)
     Return cadena
-    
+
 End

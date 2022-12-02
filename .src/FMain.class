@@ -1145,3 +1145,24 @@ Public Sub ButtonLimpiar_Click()
     TextBoxCalculo.Text = ""
 
 End
+
+Public Sub ButtonNuevaHojaDeCalculo_Click()
+
+    Dim nombreFicheroNuevo As String
+    Dim contador As Integer
+    'crear fichero de hoja de calculo
+    'contador
+    ' Settings["ContadorFicheros"] = ""
+    ' Return
+    contador = Settings["ContadorFicheros", 499]
+
+    contador += 1
+
+    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/02 " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.ods"
+    Copy "/home/minino/Plantillas/02 N.ods" To nombreFicheroNuevo
+    Settings["ContadorFicheros"] = contador
+
+    Wait 0.1
+    Desktop.Open(nombreFicheroNuevo)
+
+End
