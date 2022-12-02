@@ -354,11 +354,18 @@
       MoveScaled(110,44,9,9)
       Picture = Picture["calc y blaance48x48.png"]
     }
-    { TextBoxNombreFichero TextBox
-      MoveScaled(121,47,40,6)
-    }
     { SeparatorNombreFichero Separator
       MoveScaled(109,47,1,7)
+    }
+    { VBox1 VBox
+      MoveScaled(121,45,34,8)
+      { Label9 Label
+        MoveScaled(5,0,22,3)
+        Text = ("Nombre fichero:")
+      }
+      { TextBoxNombreFichero TextBox
+        MoveScaled(0,3,40,6)
+      }
     }
   }
   { VSplit1 HBox
