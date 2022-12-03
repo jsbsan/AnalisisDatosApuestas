@@ -541,6 +541,8 @@ Public Sub ButtonRealizarTransferencia_Click()
     Clipboard.Copy(TextAreaBalance.text)
     BotonAlmacen.Picture = Picture["flechaRojo16x16.png"]
     BotonAlmacen.tag = "flechaRojo"
+    Wait 0.05
+    BotonAlmacen_Click()
 
 End
 

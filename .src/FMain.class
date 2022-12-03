@@ -1166,3 +1166,17 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
     Desktop.Open(nombreFicheroNuevo)
 
 End
+
+Public Sub ButtonbORRARnoMBRE_Click()
+
+    TextBoxNombreFichero.Text = ""
+
+End
+
+Public Sub TextBoxNombreFichero_KeyPress()
+
+    If Key.Code = Key.ENTER Or Key.Code = Key.RETURN Then
+        ButtonNuevaHojaDeCalculo_Click()
+    Endif
+
+End

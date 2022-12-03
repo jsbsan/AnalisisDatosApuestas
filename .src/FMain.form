@@ -367,6 +367,10 @@
         MoveScaled(0,3,40,6)
       }
     }
+    { ButtonbORRARnoMBRE Button
+      MoveScaled(156,46,5,7)
+      Picture = Picture["icon:/24/clear"]
+    }
   }
   { VSplit1 HBox
     MoveScaled(236,43,58,17)
