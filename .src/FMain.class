@@ -55,6 +55,7 @@ End
 Public Sub Form_Show()
 
     ButtonCopiaSeguridad.text = Settings["CopiaSeguridad", "N/A"]
+    TextBoxidBuscar.SetFocus()
 
 End
 
@@ -1170,6 +1171,7 @@ End
 Public Sub ButtonbORRARnoMBRE_Click()
 
     TextBoxNombreFichero.Text = ""
+    TextBoxNombreFichero.SetFocus()
 
 End
 
