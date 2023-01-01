@@ -70,7 +70,7 @@ Public Sub agregaIcono(texto As String)
 
     Dim CASAS As New String[]
 
-    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA", "1xbet", "VERSUS", "JUEGGGING", "MRGREEN", "SISAL", "ADMIRALBET", "ZEBET", "WINAMAX", "CGM", "DAFABET", "EFBET", "BETHARD", "MARCA", "BETSSON", "888", "DAZNBET"]
+    CASAS = ["BET365", "BETFAIR", "BETSTARS", "BOTEMANIA", "BWIN", "CIRCUS", "CODERE", "GOLDENPARK", "LUCKIA", "MBET", "PAF", "PASTON", "SPORTIUM", "WANABET", "WILLIAMHILL", "BETWAY", "MONDOBETS", "ENRACHA", "1xbet", "VERSUS", "JUEGGGING", "MRGREEN", "SISAL", "ADMIRALBET", "ZEBET", "WINAMAX", "CGM", "DAFABET", "EFBET", "BETHARD", "MARCA", "BETSSON", "888", "DAZNBET", "EBINGO"]
 
     Dim valor As Integer = -1
     Dim a As Integer
@@ -83,26 +83,6 @@ Public Sub agregaIcono(texto As String)
 
     Next
     If valor = -1 Then Return 'no encontrado
-
-    ' casavalor = 0 '"BET365"
-    ' casavalor = 1 ' "BETFAIR"
-    ' casavalor = 2 ' "BETSTARS"
-    ' casavalor = 3 ' "BOTEMANIA"
-    ' casavalor = 4 ' "BWIN"
-    ' casavalor = 5 ' "CIRCUS"
-    ' casavalor = 6 ' "CODERE"
-    ' casavalor = 7 ' "GOLDENPARK"
-    ' casavalor = 8 ' "LUCKIA"
-    ' casavalor = 9 ' "MBET"
-    ' casavalor = 10 ' "PAF"
-    ' casavalor = 11 ' "PASTON"
-    ' casavalor = 12 ' "SPORTIUM"
-    ' casavalor = 13 ' "WANABET"
-    ' casavalor = 14 ' "WILLIAMHILL"
-    ' casavalor = 15 ' "BETWAY"
-    ' casavalor = 16 ' "MONDOBETS"
-    ' casavalor = 17 ' "ENRACHA"
-    ' casavalor=18 '1xbet
 
     Dim hpic As New PictureBox(HBoxCasas)
     Select Case valor
@@ -374,7 +354,15 @@ Public Sub agregaIcono(texto As String)
                 hpic.Picture = Picture["iconos/daznbet.png"]
                 HBoxCasas.Tag &= ",daznbet.png"
             Endif
+        Case 34
 
+            If comun.contiene(HBoxCasas.Tag, "ebingo.png") Then
+            Else
+                hpic.h = 40
+                hpic.w = 80
+                hpic.Picture = Picture["iconos/ebingo.png"]
+                HBoxCasas.Tag &= ",ebingo.png"
+            Endif
     End Select
 
 End

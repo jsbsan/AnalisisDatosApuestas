@@ -1155,11 +1155,11 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
     'contador
     ' Settings["ContadorFicheros"] = ""
     ' Return
-    contador = Settings["ContadorFicheros", 499]
+    contador = Settings["ContadorFicheros", 99]
 
     contador += 1
 
-    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/02 " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.ods"
+    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/03 " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.ods"
     Copy "/home/minino/Plantillas/02 N.ods" To nombreFicheroNuevo
     Settings["ContadorFicheros"] = contador
 
