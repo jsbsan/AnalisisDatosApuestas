@@ -300,7 +300,7 @@
     Padding = 2
   }
   { PanelAnotaciones Panel
-    MoveScaled(42,67,163,54)
+    MoveScaled(42,67,195,54)
     { TextAreaNotas TextArea
       MoveScaled(1,4,109,41)
       Font = Font["-2"]
@@ -370,6 +370,14 @@
     { ButtonbORRARnoMBRE Button
       MoveScaled(156,46,5,7)
       Picture = Picture["icon:/24/clear"]
+    }
+    { LabeluLTIMO Label
+      MoveScaled(163,48,29,5)
+      Font = Font["Sans,-1"]
+    }
+    { Label10 Label
+      MoveScaled(163,46,16,3)
+      Text = ("Ultimo creado:")
     }
   }
   { VSplit1 HBox
