@@ -8,10 +8,12 @@
   Resizable = False
   { ButtonCopiaralPortapapeles Button
     MoveScaled(102,57,7,7)
+    Visible = False
     Picture = Picture["icon:/16/copy"]
   }
   { ButtonLimpiar Button
     MoveScaled(102,48,7,7)
+    Visible = False
     ToolTip = ("LIMPIAR")
     Picture = Picture["icon:/16/clear"]
   }
@@ -43,6 +45,7 @@
     }
     { Frame2 Frame
       MoveScaled(30,30,32,7)
+      Visible = False
       Enabled = False
       Font = Font["-2"]
       Text = ("Estado")
@@ -105,17 +108,19 @@
       }
     }
     { TextLabel5 TextLabel
-      MoveScaled(2.8571,38.8571,72,3)
+      MoveScaled(2.8333,38.8333,72,3)
       Text = ("Nota: en la columna de resultado el signo ← indica que apuesta gano.")
     }
     { ButtonLimpiarInicio Button
       MoveScaled(101,5,6,6)
+      Visible = False
       ToolTip = ("LIMPIAR")
       Text = Shortcut(("c"), "c")
       Picture = Picture["icon:/16/clear"]
     }
     { ButtonPegar2 Button
       MoveScaled(95,5,5,6)
+      Visible = False
       Enabled = False
       ToolTip = ("pega el contenido original antes de traduccion")
       Text = ("2")
@@ -123,6 +128,7 @@
     }
     { Frame1 Frame
       MoveScaled(7,30,19,7)
+      Visible = False
       Enabled = False
       Font = Font["-2"]
       Text = ("Tipo")
