@@ -164,6 +164,7 @@
       }
       { ButtonCalcula Button
         MoveScaled(36,1,5,6)
+        Visible = False
         ToolTip = ("calcula lo pegado")
         Picture = Picture["icon:/16/calculator"]
       }

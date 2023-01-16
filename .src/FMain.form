@@ -185,6 +185,7 @@
     }
     { ButtonComparaListaId Button
       MoveScaled(91,0,16,5)
+      Visible = False
       Font = Font["-2"]
       ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
       AutoResize = True
@@ -193,6 +194,7 @@
     }
     { ButtonComparaListaImportes Button
       MoveScaled(108,0,19,5)
+      Visible = False
       Font = Font["-2"]
       ToolTip = ("Compara lista de ID del portapapeles con los apuestas pendientes")
       AutoResize = True
