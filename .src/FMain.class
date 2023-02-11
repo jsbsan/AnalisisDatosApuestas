@@ -1003,6 +1003,9 @@ Public Sub ButtonBuscadorArchivos_Click()
         p = Exec ["abrirAnalisis"]
 
     Else
+        TextBoxidBuscar.Text = Replace(TextBoxidBuscar.Text, " ", "")
+        TextBoxidBuscar.Text = Replace(TextBoxidBuscar.Text, "Id:", "")
+
         p = Exec ["abrirAnalisis", TextBoxidBuscar.Text]
     Endif
     ControlVentanas.agrega(p)
@@ -1181,6 +1184,19 @@ Public Sub TextBoxNombreFichero_KeyPress()
         ButtonNuevaHojaDeCalculo_Click()
 
         TextBoxNombreFichero.Text = ""
+    Endif
+
+End
+
+Public Sub Button1_Click()
+
+    If PanelCasasyResumen.Visible = True Then
+        PanelCasasyResumen.Visible = False
+
+        FrameApuestas.X = 30
+    Else
+        FrameApuestas.X = PanelCasasyResumen.X + PanelCasasyResumen.W
+        PanelCasasyResumen.Visible = True
     Endif
 
 End
