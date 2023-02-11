@@ -184,7 +184,7 @@
     }
   }
   { HBoxBarraBotones HBox
-    MoveScaled(1,0,215,5)
+    MoveScaled(1,0,230,5)
     Spacing = True
     Padding = 2
     { PictureBox1 PictureBox
@@ -274,17 +274,22 @@
       Picture = Picture["balanza.png"]
     }
     { TextBoxidBuscar TextBox
-      MoveScaled(161,1,8,3)
+      MoveScaled(161,0,21,5)
+      Alignment = Align.Center
+    }
+    { ButtonPegarId Button
+      MoveScaled(182,0,3,5)
+      Picture = Picture["icon:/16/paste"]
     }
     { ButtonBuscadorArchivos Button
-      MoveScaled(169,0,12,5)
+      MoveScaled(185,0,12,5)
       Font = Font["-2"]
       AutoResize = True
       Text = ("Buscar")
       Picture = Picture["buscar en analisis.png"]
     }
     { ButtonCopiaSeguridad Button
-      MoveScaled(182,0,20,5)
+      MoveScaled(190,0,20,5)
       Visible = False
       Font = Font["-2"]
       ToolTip = ("Hacer Copia de Seguridad")
@@ -293,7 +298,7 @@
       Picture = Picture["caja fuerte.png"]
     }
     { LabelVersion Label
-      MoveScaled(204,2,23,3)
+      MoveScaled(211,1,19,4)
     }
   }
   { FrameNOVISIBLE Frame
