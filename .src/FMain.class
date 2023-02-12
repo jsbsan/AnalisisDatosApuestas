@@ -41,6 +41,7 @@ Public Sub Form_Open()
     Dim ftraductor As Form
     ftraductor = New FMainTraductor(HBoxContenedorSlider)
     ftraductor.Show()
+    ButtonOcutarMostrarCasas_Click()
 
 End
 
@@ -1188,15 +1189,17 @@ Public Sub TextBoxNombreFichero_KeyPress()
 
 End
 
-Public Sub Button1_Click()
+Public Sub ButtonOcutarMostrarCasas_Click()
 
     If PanelCasasyResumen.Visible = True Then
         PanelCasasyResumen.Visible = False
 
         FrameApuestas.X = 30
+        SidePanel1.X = 360 + PanelCasasyResumen.W
     Else
         FrameApuestas.X = PanelCasasyResumen.X + PanelCasasyResumen.W
         PanelCasasyResumen.Visible = True
+        SidePanel1.X = 360
     Endif
 
 End
