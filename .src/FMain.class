@@ -1163,11 +1163,25 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
 
     contador += 1
 
-    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/03 " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.ods"
-    Copy "/home/minino/Plantillas/02 N.ods" To nombreFicheroNuevo
+    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/03 " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.fods"
+    Try Copy "./plantilla/02 N.fods" To nombreFicheroNuevo
+    If Error Then
+        contador += 1
+        Copy "./plantilla/02 N.fods" To nombreFicheroNuevo
+    Endif
     Settings["ContadorFicheros"] = contador
     LabeluLTIMO.Text = Replace(nombreFicheroNuevo, "/home/minino/Documentos/00 analisis apuestas/", "")
     Wait 0.1
+    'hacer cambios:
+    Dim contenido As String
+    'mes
+    contenido = File.Load(nombreFicheroNuevo)
+    contenido = Replace(contenido, "#MES#", Str$(Month(Now)))
+    contenido = Replace(contenido, "#DIA#", Str$(Day(Now)))
+    contenido = Replace(contenido, "#Idapuesta#", Str$(contador))
+    File.Save(nombreFicheroNuevo, contenido)
+    Wait 0.1
+
     Desktop.Open(nombreFicheroNuevo)
 
 End
@@ -1207,5 +1221,6 @@ End
 Public Sub ButtonPegarId_Click()
 
     TextBoxidBuscar.Text = Clipboard.Paste("text/plain")
+    ButtonBuscadorArchivos_Click()
 
 End
