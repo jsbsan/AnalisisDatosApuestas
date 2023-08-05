@@ -2,7 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,305,121)
-  Background = &H6F8BE0&
+  Background = &H6F8BE0
   Expand = True
   Icon = Picture["analisis.png"]
   { FrameApuestas Frame
@@ -24,8 +24,8 @@
       { TextAreaNotas TextArea
         MoveScaled(0,3,59,43)
         Font = Font["-2"]
-        Background = &HFFFF9F&
-        Foreground = &H000000&
+        Background = &HFFFF9F
+        Foreground = &H000000
         Expand = True
         Wrap = True
       }
@@ -35,7 +35,7 @@
       }
       { Label6 Label
         MoveScaled(6,0,30,3)
-        Background = &HE0E000&
+        Background = &HE0E000
         Alignment = Align.Center
         Text = ("Anotaciones")
       }
@@ -46,7 +46,7 @@
       }
       { HBox1 HBox
         MoveScaled(0,46,108,6)
-        Background = &HE0E0E0&
+        Background = &HE0E0E0
         { Label8 Label
           MoveScaled(1,1,14,5)
           ToolTip = ("expresion matematica (suma, resta, division, multiplicacion, parentesis, etc)")
@@ -109,23 +109,23 @@
           MoveScaled(0,26,31,12)
           { ProgressBarBanco ProgressBar
             MoveScaled(9,1,21,2)
-            Background = &H5FAFFF&
+            Background = &H5FAFFF
             Foreground = Color.Blue
           }
           { ProgressBarPaypal ProgressBar
             MoveScaled(9,3,21,2)
-            Background = &HE08B37&
-            Foreground = &HE08B37&
+            Background = &HE08B37
+            Foreground = &HE08B37
           }
           { ProgressBarCasas ProgressBar
             MoveScaled(9,5,21,2)
-            Background = &HE0E000&
-            Foreground = &HFFFF5F&
+            Background = &HE0E000
+            Foreground = &HFFFF5F
           }
           { ProgressBarBenef ProgressBar
             MoveScaled(9,7,21,2)
-            Background = &HE03761&
-            Foreground = &HFF8F1F&
+            Background = &HE03761
+            Foreground = &HFF8F1F
           }
           { Label1 Label
             MoveScaled(-2,1,11,2)
@@ -150,8 +150,8 @@
           }
           { ProgressBarEnJuego ProgressBar
             MoveScaled(9,9,21,2)
-            Background = &H00E000&
-            Foreground = &H00C000&
+            Background = &H00E000
+            Foreground = &H00C000
           }
           { Label5 Label
             MoveScaled(5,30,13,2)
@@ -169,7 +169,7 @@
     }
     { SidePanel1 Panel
       MoveScaled(90,0,119,101)
-      Background = &HE0E0E0&
+      Background = &HE0E0E0
       Direction = Direction.RightToLeft
       Arrangement = Arrange.Fill
       Centered = True
@@ -186,18 +186,18 @@
     }
   }
   { HBoxBarraBotones HBox
-    MoveScaled(1,0,230,5)
+    MoveScaled(1,0,289,5)
     Spacing = True
     Padding = 2
     { PictureBox1 PictureBox
       MoveScaled(1,0,5,5)
-      Background = &HFFFFFF&
+      Background = &HFFFFFF
       Picture = Picture.Load("homepage-scales-min.png")
       Stretch = True
     }
     { ButtonAnalizar Button
       MoveScaled(7,0,12,5)
-      Background = &H00FFFF&
+      Background = &H00FFFF
       ToolTip = ("Actualizar datos, importe apostado")
       AutoResize = True
       Text = ("Resfrescar")
@@ -263,6 +263,7 @@
     }
     { ButtonCompactar Button
       MoveScaled(128,0,17,5)
+      Visible = False
       Font = Font["-2"]
       AutoResize = True
       Text = ("Compactar")
@@ -301,6 +302,17 @@
     }
     { LabelVersion Label
       MoveScaled(211,1,19,4)
+    }
+    { HBox2 HBox
+      MoveScaled(233,1,8,4)
+    }
+    { ButtonAnalizar2 Button
+      MoveScaled(243,0,16,5)
+      Background = &H00FFFF
+      ToolTip = ("Actualizar datos, importe apostado")
+      AutoResize = True
+      Text = ("Resfrescar")
+      Picture = Picture["icon:/16/refresh"]
     }
   }
   { FrameNOVISIBLE Frame

@@ -452,6 +452,7 @@ Public Sub RellenarAvanceAgenda()
 
     'actualizo boton Actualizar (refrescar)
     ButtonAnalizar.text = GridViewResumen[5, 1].text & " €"
+    ButtonAnalizar2.Text = ButtonAnalizar.text
     Me.Title = "En juego: " & ButtonAnalizar.text
 
     ImporteCaja = Val(GridViewResumen[0, 1].text) + Val(GridViewResumen[1, 1].text) + Val(GridViewResumen[2, 1].text)
