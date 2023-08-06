@@ -1006,7 +1006,8 @@ Public Sub ButtonBuscadorArchivos_Click()
 
     Else
         TextBoxidBuscar.Text = Replace(TextBoxidBuscar.Text, " ", "")
-        TextBoxidBuscar.Text = Replace(TextBoxidBuscar.Text, "Id:", "")
+        TextBoxidBuscar.Text = Replace(Upper$(TextBoxidBuscar.Text), Upper$("Id:"), "")
+        If TextBoxidBuscar.Text.Len = 4 Then TextBoxidBuscar.Text = "0" & TextBoxidBuscar.Text
 
         p = Exec ["abrirAnalisis", TextBoxidBuscar.Text]
     Endif
