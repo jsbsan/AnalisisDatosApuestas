@@ -1,16 +1,47 @@
 ' Gambas class file
 
 Public id As String
-Public zzBeneficio As Float 'contador de la cantidad en juego 'suma de ZZbeneficio -> si es 0, ya se ha jugado
-Public enjuego As Float 'cantidad dinero que se invierte en la apuesta
+'Public zzBeneficio As Float 'contador de la cantidad en juego 'suma de ZZbeneficio -> si es 0, ya se ha jugado
+'Public enjuego As Float 'cantidad dinero que se invierte en la apuesta
 Public fecha As String ' se guarda la fecha de ZZ beneficio / comentario ="enjuego"
 Public pendiente As Boolean
 
 Public Sub _new(hid As String, cantidad As Float)
-    
+
     id = hid
-    zzBeneficio = cantidad
-    enjuego = 0
+    hzzBeneficio = Round(cantidad, -2)
+    henjuego = 0
     pendiente = False
-    
+
+End
+
+Property enjuego As Float 'cantidad dinero que se invierte en la apuesta
+Private henjuego As Float
+
+Property zzBeneficio As Float'contador de la cantidad en juego 'suma de ZZbeneficio -> si es 0, ya se ha jugado
+Private hzzBeneficio As Float
+'
+
+Private Function zzBeneficio_Read() As Float
+
+    Return Round(hzzBeneficio, -2)
+
+End
+
+Private Sub zzBeneficio_Write(Value As Float)
+
+    hzzBeneficio = Round(value, -2)
+
+End
+
+Private Function enjuego_Read() As Float
+
+    Return Round(henjuego, -2)
+
+End
+
+Private Sub enjuego_Write(Value As Float)
+
+    henjuego = Round(value, -2)
+
 End
