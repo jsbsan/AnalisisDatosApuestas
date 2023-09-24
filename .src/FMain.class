@@ -1181,10 +1181,19 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
     contenido = Replace(contenido, "#MES#", Str$(Month(Now)))
     contenido = Replace(contenido, "#DIA#", Str$(Day(Now)))
     contenido = Replace(contenido, "#Idapuesta#", Str$(contador))
+    contenido = Replace(contenido, "#casa#", buscarCasaNombreFichero(TextBoxNombreFichero.text))
     File.Save(nombreFicheroNuevo, contenido)
     Wait 0.1
 
     Desktop.Open(nombreFicheroNuevo)
+
+End
+
+Public Function buscarCasaNombreFichero(n As String) As String
+    ''TODO: sustituir nombre de la casa de apuesta
+
+    Return Upper(comun.similar(n))
+    'no encuentro casa similar
 
 End
 
