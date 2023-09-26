@@ -1192,7 +1192,11 @@ End
 Public Function buscarCasaNombreFichero(n As String) As String
     ''TODO: sustituir nombre de la casa de apuesta
 
-    Return Upper(comun.similar(n))
+    Dim lista As String[]
+
+    lista = Split(n, " ")
+
+    Return Upper(comun.similar(lista[0])) 'para que coja el primer elementeo que suele ser el nombre de la casa
     'no encuentro casa similar
 
 End
