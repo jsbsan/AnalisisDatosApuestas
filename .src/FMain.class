@@ -27,6 +27,9 @@ Public Sub Form_Open()
         Return
     Endif
 
+    TextBoxPREN.Text = Settings["PREN", "03"]
+    LabeluLTIMO.Text = Settings["ULTIMO_CREADO", ""]
+
     LabelVersion.Text = "Version " & Application.Version
     Me.Title = "Analisis de Datos. Version " & Application.Version
     'inicio los datos cuando abro el formulario (y no cuando cada vez que lo mostraba)
@@ -1165,7 +1168,7 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
 
     contador += 1
 
-    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/03 " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.fods"
+    nombreFicheroNuevo = "/home/minino/Documentos/00 analisis apuestas/" & TextBoxPREN.Text & " " & Str$(contador) & " " & TextBoxNombreFichero.text & "_.fods"
     Try Copy "./plantilla/02 N.fods" To nombreFicheroNuevo
     If Error Then
         contador += 1
@@ -1173,6 +1176,7 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
     Endif
     Settings["ContadorFicheros"] = contador
     LabeluLTIMO.Text = Replace(nombreFicheroNuevo, "/home/minino/Documentos/00 analisis apuestas/", "")
+    Settings["ULTIMO_CREADO"] = LabeluLTIMO.Text
     Wait 0.1
     'hacer cambios:
     Dim contenido As String
@@ -1237,5 +1241,11 @@ Public Sub ButtonPegarId_Click()
 
     TextBoxidBuscar.Text = Clipboard.Paste("text/plain")
     ButtonBuscadorArchivos_Click()
+
+End
+
+Public Sub ButtonpREn_Click()
+
+    Settings["PREN"] = TextBoxPREN.TEXT
 
 End

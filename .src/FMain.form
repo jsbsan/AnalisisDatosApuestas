@@ -89,11 +89,12 @@
         }
       }
       { ButtonbORRARnoMBRE Button
-        MoveScaled(156,46,5,7)
-        Picture = Picture["icon:/24/clear"]
+        MoveScaled(156,46,7,7)
+        ToolTip = ("BORRAR TEXTO")
+        Picture = Picture["LIMPIAR.png"]
       }
       { LabeluLTIMO Label
-        MoveScaled(163,48,29,5)
+        MoveScaled(163,48,30,5)
         Font = Font["Sans,-1"]
       }
       { Label10 Label
@@ -165,6 +166,18 @@
             Text = ("En Juego:")
           }
         }
+      }
+      { TextBoxPREN TextBox
+        MoveScaled(186,45,6,4)
+      }
+      { Label11 Label
+        MoveScaled(178,45,8,4)
+        Text = ("PRE_Nº:")
+      }
+      { ButtonpREn Button
+        MoveScaled(192,45,3,4)
+        ToolTip = ("NUMERAR")
+        Text = ("N")
       }
     }
     { SidePanel1 Panel
