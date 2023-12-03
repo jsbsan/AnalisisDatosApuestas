@@ -1249,3 +1249,16 @@ Public Sub ButtonpREn_Click()
     Settings["PREN"] = TextBoxPREN.TEXT
 
 End
+
+Public Sub ButtonContador_Click()
+
+    ''    contador = Settings["ContadorFicheros", 99]
+    Dim CONTADOR As Integer
+
+    Try contador = InputBox("Contador", "Numeral", Settings["ContadorFicheros", 99])
+
+    If contador <> 0 Then
+        Settings["ContadorFicheros"] = contador
+    Endif
+
+End

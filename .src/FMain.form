@@ -20,7 +20,7 @@
       }
     }
     { PanelAnotaciones Panel
-      MoveScaled(1,60,195,54)
+      MoveScaled(1,60,213,55)
       { TextAreaNotas TextArea
         MoveScaled(0,3,59,43)
         Font = Font["-2"]
@@ -94,11 +94,11 @@
         Picture = Picture["LIMPIAR.png"]
       }
       { LabeluLTIMO Label
-        MoveScaled(163,48,30,5)
+        MoveScaled(164,48,47,5)
         Font = Font["Sans,-1"]
       }
       { Label10 Label
-        MoveScaled(163,46,16,3)
+        MoveScaled(164,46,13,3)
         Text = ("Ultimo creado:")
       }
       { Panel4 Panel
@@ -168,16 +168,21 @@
         }
       }
       { TextBoxPREN TextBox
-        MoveScaled(186,45,6,4)
+        MoveScaled(195,45,6,4)
       }
       { Label11 Label
-        MoveScaled(178,45,8,4)
+        MoveScaled(186,45,8,4)
         Text = ("PRE_Nº:")
       }
       { ButtonpREn Button
-        MoveScaled(192,45,3,4)
+        MoveScaled(201,45,3,4)
         ToolTip = ("NUMERAR")
         Text = ("N")
+      }
+      { ButtonContador Button
+        MoveScaled(207,45,6,4)
+        ToolTip = ("contador")
+        Text = ("CONT")
       }
     }
     { SidePanel1 Panel
