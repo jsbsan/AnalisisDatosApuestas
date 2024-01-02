@@ -281,7 +281,6 @@
     }
     { ButtonCompactar Button
       MoveScaled(128,0,17,5)
-      Visible = False
       Font = Font["-2"]
       AutoResize = True
       Text = ("Compactar")

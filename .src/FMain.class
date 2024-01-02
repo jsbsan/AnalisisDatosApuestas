@@ -1061,6 +1061,12 @@ Public Sub ButtonCompactar_Click()
 
     Dim nombre As String 'nombre del archivo de datos
     Dim copia As String 'variable donde se almacena el contenido del archivo
+    Dim respuesta As Integer
+
+    respuesta = Message.Question("¿seguro que quiere compactar?\nSe perderan los datos anteriores", "Aceptar", "Cancelar")
+
+    If respuesta = 2 Then Return
+
     'hacer copia de seguridad del fichero de datos...
     nombre = User.home & "/informacion.csv"
     copia = File.Load(nombre)
@@ -1186,6 +1192,7 @@ Public Sub ButtonNuevaHojaDeCalculo_Click()
     contenido = Replace(contenido, "#DIA#", Str$(Day(Now)))
     contenido = Replace(contenido, "#Idapuesta#", Str$(contador))
     contenido = Replace(contenido, "#casa#", buscarCasaNombreFichero(TextBoxNombreFichero.text))
+    contenido = Replace(contenido, "#AcodigoA#", Settings["PREN"])
     File.Save(nombreFicheroNuevo, contenido)
     Wait 0.1
 
@@ -1259,6 +1266,14 @@ Public Sub ButtonContador_Click()
 
     If contador <> 0 Then
         Settings["ContadorFicheros"] = contador
+    Endif
+
+End
+
+Public Sub TextBoxPREN_KeyPress()
+
+    If TextBoxPREN.Key = Key.enter Or TextBoxPREN.Key = Key.return Then
+        ButtonpREn_Click()
     Endif
 
 End
