@@ -3,7 +3,6 @@
 { Form Form
   MoveScaled(0,0,305,121)
   Background = &H6F8BE0
-  Expand = True
   Icon = Picture["analisis.png"]
   { FrameApuestas Frame
     MoveScaled(47,6,220,115)
@@ -186,18 +185,18 @@
       }
     }
     { SidePanel1 Panel
-      MoveScaled(90,0,119,101)
+      MoveScaled(90,0,133,101)
       Background = &HE0E0E0
       Direction = Direction.RightToLeft
       Arrangement = Arrange.Fill
       Centered = True
       { HBoxContenedorSlider HBox
-        MoveScaled(0,0,109,101)
+        MoveScaled(7,0,113,101)
         Expand = True
         AutoResize = True
       }
       { ButtonExplandir Button
-        MoveScaled(109,0,10,47)
+        MoveScaled(100,6,10,47)
         Visible = False
         Picture = Picture["icon:/32/border-right"]
       }

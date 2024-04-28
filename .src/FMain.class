@@ -60,6 +60,10 @@ Public Sub Form_Show()
 
     ButtonCopiaSeguridad.text = Settings["CopiaSeguridad", "N/A"]
     TextBoxidBuscar.SetFocus()
+    'para que se vea mejor en windows usando putty y xming
+    Me.Border = True
+    Me.W = 1400
+    Me.H = 650
 
 End
 
