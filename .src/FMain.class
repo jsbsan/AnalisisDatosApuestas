@@ -1276,7 +1276,7 @@ End
 
 Public Sub TextBoxPREN_KeyPress()
 
-    If TextBoxPREN.Key = Key.enter Or TextBoxPREN.Key = Key.return Then
+    If Key.text = Key.enter Or Key.text = Key.return Then
         ButtonpREn_Click()
     Endif
 
